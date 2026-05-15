@@ -1,0 +1,5 @@
+symbol,direction,timeframe,entry,stop_loss,take_profits,tp_weights,trendline_break,sr_flip,above_key_ma,market_structure_shift,not_catching_knife,stop_type,liquidity_tier,signal_move_pct,btc_4h_risk,concurrent_alt_longs,has_clear_tp,has_clear_sl,note
+XRPUSDT,long,4H,1.4601,1.418,"1.5288,1.6190,1.7423,1.8665","0.30,0.30,0.25,0.15",True,True,True,True,True,structure_failure,major,0.0,neutral,1,True,True,Trendline break + SR flip sample from screenshot.
+AVNTUSDT,long,4H,0.1554,0.1428,"0.2291,0.3117","0.60,0.40",True,True,True,False,True,prior_low_or_support,small,0.0,neutral,2,True,True,Small-cap 4H setup; liquidity and volatility capped.
+CETUSUSDT,long,4H,0.0253,0.0246,"0.0290,0.0340,0.0410","0.40,0.35,0.25",False,True,False,True,True,prior_low_or_support,small,0.0,neutral,3,True,True,Breakout/DCA style call; needs paper-trade validation.
+INITUSDT,long,1H,0.091,0.0883,"0.0965,0.1113,0.1333","0.50,0.30,0.20",False,False,False,True,False,short_term_low,small,0.0,neutral,1,True,True,1H scalp; should be penalized even if RR is acceptable.

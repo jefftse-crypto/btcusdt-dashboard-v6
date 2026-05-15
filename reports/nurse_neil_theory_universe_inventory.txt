@@ -1,0 +1,319 @@
+--- data files ---
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-05.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-06.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-07.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-08.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-09.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-10.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-11.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-12.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-01.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-02.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-03.csv
+/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/XRPUSDT/XRPUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/DOGEUSDT/DOGEUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/LINKUSDT/LINKUSDT-15m-2026-04.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-05.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-06.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-07.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-08.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-09.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-10.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-11.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2025-12.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2026-01.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2026-02.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2026-03.csv
+/data/binance_um_15m_1y_multi/AVAXUSDT/AVAXUSDT-15m-2026-04.csv
+/data/nurse_neil_backtest_15m/INITUSDT_15m_1777370580000_1778594580000.csv
+/data/nurse_neil_backtest_15m/AVNTUSDT_15m_1778070240000_1779294240000.csv
+/data/nurse_neil_backtest_15m/BIOUSDT_15m_1778243340000_1779467340000.csv
+/data/nurse_neil_backtest_15m/XRPUSDT_15m_1778448480000_1779672480000.csv
+/reports/htr_1d_daily_backtest_1y.json
+/reports/htr_1d_trades_threshold_7_5.csv
+/reports/htr_1d_trades_threshold_9.csv
+/reports/htr_v2_regime_backtest_1y.json
+/reports/htr_v2_best_v2_trend_quality_70_trades.csv
+/reports/htr_v3_multisymbol_backtest_1y.json
+/reports/htr_v3_best_v3_pool8_quality_trades.csv
+/reports/htr_v4_tpv_multisymbol_backtest_1y.json
+/reports/htr_v5_real_data_meta_model.json
+/reports/htr_v5_realdata_model_backtest_1y.json
+/reports/v6_real_data_inventory.csv
+/reports/htr_v6_live_cost_stress_trades.csv
+/reports/htr_v6_live_cost_stress_summary.csv
+/reports/htr_v6_live_cost_stress_results.json
+/reports/htr_v6_oos_validation_summary.csv
+/reports/htr_v6_oos_monthly_metrics.csv
+/reports/htr_v6_oos_rolling_3m_metrics.csv
+/reports/htr_v6_oos_validation_results.json
+/reports/nurse_neil_signal_input_template.csv
+/reports/nurse_neil_signal_scored.csv
+/reports/nurse_neil_signal_scoring_results.json
+/reports/nurse_neil_backtest_events.csv
+/reports/nurse_neil_backtest_fills.csv
+/reports/nurse_neil_backtest_thresholds.csv
+/reports/nurse_neil_backtest_summary.json
+--- likely ohlcv csv heads ---
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-05.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1746057600000,94125.20,94299.30,94086.70,94223.60,851.111,1746058499999,80174904.32760,16403,400.216,37699596.46270,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-06.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1748736000000,104544.60,104599.60,104400.00,104427.50,985.063,1748736899999,102926425.44620,20470,432.304,45168338.20400,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-07.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1751328000000,107087.30,107314.30,107036.70,107277.50,763.164,1751328899999,81780130.90000,16880,474.458,50844749.32540,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-08.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1754006400000,115697.30,115772.60,115244.30,115248.30,3101.630,1754007299999,358233960.57710,56575,1407.337,162608712.70280,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-09.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1756684800000,108208.40,108295.80,107926.20,107927.30,2581.474,1756685699999,278886774.83740,45686,1004.188,108490830.09080,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-10.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1759276800000,113988.70,114246.00,113988.70,114098.10,1631.600,1759277699999,186228493.59480,26047,859.815,98131240.69030,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-11.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1761955200000,109557.20,109600.00,109368.40,109430.00,534.276,1761956099999,58467800.26770,21267,205.998,22543260.72350,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-12.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1764547200000,90320.50,90396.90,88807.20,88887.70,15090.853,1764548099999,1349315788.62130,274426,5979.450,534558165.02220,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-01.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1767225600000,87608.30,87791.90,87600.00,87705.00,752.615,1767226499999,65994654.30960,15400,447.032,39204593.95500,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-02.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1769904000000,78706.70,79356.70,78600.20,79305.80,2705.443,1769904899999,213913353.53460,97448,1617.684,127900367.91220,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-03.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1772323200000,66937.00,67089.60,66763.30,66883.40,1694.569,1772324099999,113380081.57900,54119,665.851,44564904.70960,0
+### data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-04.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1775001600000,68241.40,68241.50,67975.30,68004.70,1492.124,1775002499999,101611391.49220,45797,541.589,36879245.14220,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-05.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1746057600000,94125.20,94299.30,94086.70,94223.60,851.111,1746058499999,80174904.32760,16403,400.216,37699596.46270,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-06.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1748736000000,104544.60,104599.60,104400.00,104427.50,985.063,1748736899999,102926425.44620,20470,432.304,45168338.20400,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-07.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1751328000000,107087.30,107314.30,107036.70,107277.50,763.164,1751328899999,81780130.90000,16880,474.458,50844749.32540,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-08.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1754006400000,115697.30,115772.60,115244.30,115248.30,3101.630,1754007299999,358233960.57710,56575,1407.337,162608712.70280,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-09.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1756684800000,108208.40,108295.80,107926.20,107927.30,2581.474,1756685699999,278886774.83740,45686,1004.188,108490830.09080,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-10.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1759276800000,113988.70,114246.00,113988.70,114098.10,1631.600,1759277699999,186228493.59480,26047,859.815,98131240.69030,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-11.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1761955200000,109557.20,109600.00,109368.40,109430.00,534.276,1761956099999,58467800.26770,21267,205.998,22543260.72350,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2025-12.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1764547200000,90320.50,90396.90,88807.20,88887.70,15090.853,1764548099999,1349315788.62130,274426,5979.450,534558165.02220,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-01.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1767225600000,87608.30,87791.90,87600.00,87705.00,752.615,1767226499999,65994654.30960,15400,447.032,39204593.95500,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-02.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1769904000000,78706.70,79356.70,78600.20,79305.80,2705.443,1769904899999,213913353.53460,97448,1617.684,127900367.91220,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-03.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1772323200000,66937.00,67089.60,66763.30,66883.40,1694.569,1772324099999,113380081.57900,54119,665.851,44564904.70960,0
+### data/binance_um_15m_1y_multi/BTCUSDT/BTCUSDT-15m-2026-04.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1775001600000,68241.40,68241.50,67975.30,68004.70,1492.124,1775002499999,101611391.49220,45797,541.589,36879245.14220,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-05.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1746057600000,1792.71,1798.15,1791.55,1794.69,33181.311,1746058499999,59568095.38435,24848,16810.612,30177905.91693,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-06.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1748736000000,2527.08,2527.98,2517.00,2519.73,58287.921,1748736899999,146987484.60649,53054,25003.177,63058960.62318,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-07.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1751328000000,2484.30,2493.61,2483.50,2491.61,28166.862,1751328899999,70095824.24962,27959,15339.924,38178141.28715,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-08.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1754006400000,3696.57,3697.00,3655.76,3656.88,179983.048,1754007299999,661062847.89401,160835,63418.320,233038344.95265,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-09.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1756684800000,4389.58,4394.16,4368.00,4384.50,68027.192,1756685699999,298150836.03854,89577,33101.208,145133639.42704,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-10.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1759276800000,4142.75,4150.00,4141.40,4143.68,22591.063,1759277699999,93669269.22449,38499,11176.381,46343329.86117,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-11.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1761955200000,3846.42,3848.41,3840.28,3841.75,13393.562,1761956099999,51477360.87158,32090,6641.424,25524173.52924,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2025-12.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1764547200000,2990.02,2998.84,2900.00,2915.16,395135.536,1764548099999,1163429389.22292,513950,155108.109,456587191.14694,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-01.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1767225600000,2970.40,2979.34,2970.00,2975.00,18843.126,1767226499999,56069701.55508,28533,11398.812,33916461.82912,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-02.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1769904000000,2450.38,2466.23,2444.26,2463.57,63341.894,1769904899999,155647407.78783,162729,36984.339,90869329.49642,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-03.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1772323200000,1963.48,1968.60,1958.45,1961.34,35621.947,1772324099999,69943435.18870,67243,16411.521,32229773.34687,0
+### data/binance_um_15m_1y_multi/ETHUSDT/ETHUSDT-15m-2026-04.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1775001600000,2104.48,2105.91,2099.19,2101.47,32155.133,1775002499999,67621198.22053,62117,13810.693,29046427.90162,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-05.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1746057600000,147.4700,148.3900,147.4700,148.1000,228517.24,1746058499999,33812400.868200,29126,110343.74,16331545.847000,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-06.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1748736000000,156.3600,156.5900,156.1600,156.3200,102602.34,1748736899999,16041084.657600,16053,45385.41,7095530.637400,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-07.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1751328000000,154.7400,155.0200,154.3400,154.7500,250177.44,1751328899999,38693133.393600,25026,142679.16,22066140.495500,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-08.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1754006400000,172.1500,172.1900,170.5200,170.8900,609244.21,1754007299999,104391578.370420,57212,241162.49,41337345.686900,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-09.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1756684800000,200.5700,200.8100,199.1000,199.9500,716651.21,1756685699999,143337520.428200,64222,306042.06,61225952.600800,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-10.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1759276800000,208.6100,209.3400,208.4200,208.4700,195368.58,1759277699999,40820453.742400,24885,109688.41,22920415.945400,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-11.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1761955200000,187.1200,187.2700,186.4000,186.4400,116019.93,1761956099999,21666485.078100,17967,38821.88,7251687.614900,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2025-12.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1764547200000,133.3700,133.6600,130.5200,130.7900,1900668.61,1764548099999,250574949.567180,191070,861558.44,113572287.836100,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-01.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1767225600000,124.5800,124.9500,124.5200,124.8200,95163.28,1767226499999,11875944.128200,10705,54628.14,6816100.037300,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-02.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1769904000000,105.4400,105.9200,105.1600,105.8900,314676.55,1769904899999,33227066.088000,36931,190107.16,20075984.886600,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-03.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1772323200000,84.2900,84.7400,84.2900,84.6500,264454.62,1772324099999,22356794.259200,22953,132898.12,11235216.072000,0
+### data/binance_um_15m_1y_multi/SOLUSDT/SOLUSDT-15m-2026-04.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1775001600000,83.1600,83.2100,82.9300,83.0600,170397.29,1775002499999,14158893.480600,15804,61395.21,5102183.237500,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-05.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1746057600000,599.210,600.130,598.880,600.020,5362.64,1746058499999,3215580.65880,6840,2767.36,1659484.72670,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-06.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1748736000000,657.920,657.930,656.850,657.110,3709.45,1748736899999,2438428.41370,6967,1681.66,1105232.40550,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-07.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1751328000000,656.990,658.550,656.990,658.450,2499.24,1751328899999,1643964.75090,4560,1291.36,849421.89260,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-08.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1754006400000,783.670,785.870,780.450,781.750,16829.79,1754007299999,13178300.38860,20138,8055.72,6310757.42530,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-09.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1756684800000,858.090,858.630,855.360,856.400,10562.03,1756685699999,9053561.25820,15035,3778.27,3238754.71060,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-10.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1759276800000,1008.770,1013.010,1008.410,1012.070,13040.87,1759277699999,13189845.00400,15916,8625.46,8723433.64910,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-11.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1761955200000,1088.120,1088.740,1086.190,1088.450,7257.37,1761956099999,7893154.48650,11158,3976.53,4324801.45300,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2025-12.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1764547200000,875.210,877.230,851.000,855.110,92842.59,1764548099999,80063044.90320,115603,39460.89,34052600.60890,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-01.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1767225600000,864.710,865.780,864.230,865.570,4049.56,1767226499999,3502503.89350,6603,2496.11,2158885.57170,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-02.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1769904000000,781.330,785.000,779.530,784.660,13270.92,1769904899999,10386730.27500,25901,7072.83,5537136.27090,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-03.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1772323200000,617.130,618.250,616.370,617.090,5778.78,1772324099999,3567346.22800,13374,2836.69,1751337.88440,0
+### data/binance_um_15m_1y_multi/BNBUSDT/BNBUSDT-15m-2026-04.csv
+open_time,open,high,low,close,volume,close_time,quote_volume,count,taker_buy_volume,taker_buy_quote_volume,ignore
+1775001600000,617.640,617.850,616.530,616.910,5012.18,1775002499999,3093379.75400,11336,2610.98,1611452.40510,0

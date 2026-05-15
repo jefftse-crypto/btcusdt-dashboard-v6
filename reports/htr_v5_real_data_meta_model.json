@@ -1,0 +1,1877 @@
+{
+  "data_basis": "Binance Data Vision USDT-M Futures monthly klines 15m, local CSV, 2025-05-01 to 2026-04-30, 8 symbols",
+  "train_period_utc": "2025-05-01 to 2025-12-31",
+  "test_period_utc": "2026-01-01 to 2026-04-30",
+  "candidate_count": 36225,
+  "selected_by_train_only": {
+    "rule": {
+      "config": "v3_core4_quality",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "SOLUSDT"
+      ],
+      "dirs": [
+        "short"
+      ],
+      "min_score": 6.8,
+      "max_risk_pct": 0.9,
+      "session": "all",
+      "keyword_mode": "require",
+      "keyword": "CVD"
+    },
+    "train": {
+      "trades": 27,
+      "winRate": 81.48148148148148,
+      "profitFactor": 4.528052908516995,
+      "totalR": 20.77175959038644,
+      "accountReturnPct": 7.270115856635257,
+      "maxDrawdownPct": 0.6676740483725787,
+      "expectancyR": 0.7693244292735719,
+      "avgRiskPct": 0.7084351877948191,
+      "wins": 22,
+      "losses": 5
+    },
+    "test": {
+      "trades": 16,
+      "winRate": 50.0,
+      "profitFactor": 1.0437700293595331,
+      "totalR": 0.39122287933977706,
+      "accountReturnPct": 0.13692800776892233,
+      "maxDrawdownPct": 1.8103690861285109,
+      "expectancyR": 0.024451429958736066,
+      "avgRiskPct": 0.7139462988876419,
+      "wins": 8,
+      "losses": 8
+    },
+    "full": {
+      "trades": 43,
+      "winRate": 69.76744186046511,
+      "profitFactor": 2.427448269344709,
+      "totalR": 21.162982469726224,
+      "accountReturnPct": 7.40704386440418,
+      "maxDrawdownPct": 1.8103690861285093,
+      "expectancyR": 0.4921623830168889,
+      "avgRiskPct": 0.710485833782846,
+      "wins": 30,
+      "losses": 13
+    },
+    "trainScore": 0.7542330316226489
+  },
+  "exploratory_best_oos_among_train_passed": {
+    "rule": {
+      "config": "v3_pool8_quality",
+      "symbols": [
+        "BNBUSDT",
+        "BTCUSDT",
+        "ETHUSDT",
+        "XRPUSDT"
+      ],
+      "dirs": [
+        "long",
+        "short"
+      ],
+      "min_score": 7.5,
+      "max_risk_pct": 0.9,
+      "session": "eu_us",
+      "keyword_mode": "none",
+      "keyword": ""
+    },
+    "train": {
+      "trades": 29,
+      "winRate": 68.96551724137932,
+      "profitFactor": 2.2564614892659858,
+      "totalR": 12.72830758829588,
+      "accountReturnPct": 4.454907655903559,
+      "maxDrawdownPct": 1.5674666867422364,
+      "expectancyR": 0.4389071582170993,
+      "avgRiskPct": 0.6839713283576387,
+      "wins": 20,
+      "losses": 9
+    },
+    "test": {
+      "trades": 15,
+      "winRate": 86.66666666666667,
+      "profitFactor": 6.994401518185514,
+      "totalR": 13.106425810927858,
+      "accountReturnPct": 4.58724903382475,
+      "maxDrawdownPct": 0.3837197101479948,
+      "expectancyR": 0.8737617207285239,
+      "avgRiskPct": 0.7846789099046123,
+      "wins": 13,
+      "losses": 2
+    },
+    "full": {
+      "trades": 44,
+      "winRate": 75.0,
+      "profitFactor": 3.0975326723823287,
+      "totalR": 25.834733399223737,
+      "accountReturnPct": 9.042156689728309,
+      "maxDrawdownPct": 1.5674666867422364,
+      "expectancyR": 0.5871530318005395,
+      "avgRiskPct": 0.7183034584304706,
+      "wins": 33,
+      "losses": 11
+    },
+    "trainScore": 0.47020325799967655
+  },
+  "top_train": [
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 6.8,
+        "max_risk_pct": 0.9,
+        "session": "all",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 6.8,
+        "max_risk_pct": 0.9,
+        "session": "asia_eu_us",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 6.8,
+        "max_risk_pct": 1.1,
+        "session": "all",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 6.8,
+        "max_risk_pct": 1.1,
+        "session": "asia_eu_us",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 7.0,
+        "max_risk_pct": 0.9,
+        "session": "all",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 7.0,
+        "max_risk_pct": 0.9,
+        "session": "asia_eu_us",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 7.0,
+        "max_risk_pct": 1.1,
+        "session": "all",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 7.0,
+        "max_risk_pct": 1.1,
+        "session": "asia_eu_us",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 7.2,
+        "max_risk_pct": 0.9,
+        "session": "all",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    },
+    {
+      "rule": {
+        "config": "v3_core4_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "SOLUSDT"
+        ],
+        "dirs": [
+          "short"
+        ],
+        "min_score": 7.2,
+        "max_risk_pct": 0.9,
+        "session": "asia_eu_us",
+        "keyword_mode": "require",
+        "keyword": "CVD"
+      },
+      "train": {
+        "trades": 27,
+        "winRate": 81.48148148148148,
+        "profitFactor": 4.528052908516995,
+        "totalR": 20.77175959038644,
+        "accountReturnPct": 7.270115856635257,
+        "maxDrawdownPct": 0.6676740483725787,
+        "expectancyR": 0.7693244292735719,
+        "avgRiskPct": 0.7084351877948191,
+        "wins": 22,
+        "losses": 5
+      },
+      "test": {
+        "trades": 16,
+        "winRate": 50.0,
+        "profitFactor": 1.0437700293595331,
+        "totalR": 0.39122287933977706,
+        "accountReturnPct": 0.13692800776892233,
+        "maxDrawdownPct": 1.8103690861285109,
+        "expectancyR": 0.024451429958736066,
+        "avgRiskPct": 0.7139462988876419,
+        "wins": 8,
+        "losses": 8
+      },
+      "full": {
+        "trades": 43,
+        "winRate": 69.76744186046511,
+        "profitFactor": 2.427448269344709,
+        "totalR": 21.162982469726224,
+        "accountReturnPct": 7.40704386440418,
+        "maxDrawdownPct": 1.8103690861285093,
+        "expectancyR": 0.4921623830168889,
+        "avgRiskPct": 0.710485833782846,
+        "wins": 30,
+        "losses": 13
+      },
+      "trainScore": 0.7542330316226489
+    }
+  ],
+  "top_oos_valid": [
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 0.9,
+        "session": "eu_us",
+        "keyword_mode": "none",
+        "keyword": ""
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 0.9,
+        "session": "eu_us",
+        "keyword_mode": "require",
+        "keyword": "VWAP"
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 0.9,
+        "session": "eu_us",
+        "keyword_mode": "exclude",
+        "keyword": "反弹无力"
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 0.9,
+        "session": "eu_us",
+        "keyword_mode": "exclude",
+        "keyword": "抛压"
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 1.1,
+        "session": "eu_us",
+        "keyword_mode": "none",
+        "keyword": ""
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 1.1,
+        "session": "eu_us",
+        "keyword_mode": "require",
+        "keyword": "VWAP"
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 1.1,
+        "session": "eu_us",
+        "keyword_mode": "exclude",
+        "keyword": "反弹无力"
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT",
+          "XRPUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 1.1,
+        "session": "eu_us",
+        "keyword_mode": "exclude",
+        "keyword": "抛压"
+      },
+      "train": {
+        "trades": 29,
+        "winRate": 68.96551724137932,
+        "profitFactor": 2.2564614892659858,
+        "totalR": 12.72830758829588,
+        "accountReturnPct": 4.454907655903559,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.4389071582170993,
+        "avgRiskPct": 0.6839713283576387,
+        "wins": 20,
+        "losses": 9
+      },
+      "test": {
+        "trades": 15,
+        "winRate": 86.66666666666667,
+        "profitFactor": 6.994401518185514,
+        "totalR": 13.106425810927858,
+        "accountReturnPct": 4.58724903382475,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8737617207285239,
+        "avgRiskPct": 0.7846789099046123,
+        "wins": 13,
+        "losses": 2
+      },
+      "full": {
+        "trades": 44,
+        "winRate": 75.0,
+        "profitFactor": 3.0975326723823287,
+        "totalR": 25.834733399223737,
+        "accountReturnPct": 9.042156689728309,
+        "maxDrawdownPct": 1.5674666867422364,
+        "expectancyR": 0.5871530318005395,
+        "avgRiskPct": 0.7183034584304706,
+        "wins": 33,
+        "losses": 11
+      },
+      "trainScore": 0.47020325799967655
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 0.9,
+        "session": "eu_us",
+        "keyword_mode": "none",
+        "keyword": ""
+      },
+      "train": {
+        "trades": 28,
+        "winRate": 71.42857142857143,
+        "profitFactor": 2.5296518134397683,
+        "totalR": 13.82232956262094,
+        "accountReturnPct": 4.8378153469173295,
+        "maxDrawdownPct": 1.1845589957284661,
+        "expectancyR": 0.49365462723646214,
+        "avgRiskPct": 0.6780108428135768,
+        "wins": 20,
+        "losses": 8
+      },
+      "test": {
+        "trades": 14,
+        "winRate": 85.71428571428571,
+        "profitFactor": 6.200292563913425,
+        "totalR": 11.370150711005778,
+        "accountReturnPct": 3.9795527488520217,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8121536222146984,
+        "avgRiskPct": 0.7797586992131005,
+        "wins": 12,
+        "losses": 2
+      },
+      "full": {
+        "trades": 42,
+        "winRate": 76.19047619047619,
+        "profitFactor": 3.244778276704778,
+        "totalR": 25.192480273626714,
+        "accountReturnPct": 8.817368095769353,
+        "maxDrawdownPct": 1.1845589957284661,
+        "expectancyR": 0.5998209588958742,
+        "avgRiskPct": 0.7119267949467513,
+        "wins": 32,
+        "losses": 10
+      },
+      "trainScore": 0.5145389759377182
+    },
+    {
+      "rule": {
+        "config": "v3_pool8_quality",
+        "symbols": [
+          "BNBUSDT",
+          "BTCUSDT",
+          "ETHUSDT"
+        ],
+        "dirs": [
+          "long",
+          "short"
+        ],
+        "min_score": 7.5,
+        "max_risk_pct": 0.9,
+        "session": "eu_us",
+        "keyword_mode": "require",
+        "keyword": "VWAP"
+      },
+      "train": {
+        "trades": 28,
+        "winRate": 71.42857142857143,
+        "profitFactor": 2.5296518134397683,
+        "totalR": 13.82232956262094,
+        "accountReturnPct": 4.8378153469173295,
+        "maxDrawdownPct": 1.1845589957284661,
+        "expectancyR": 0.49365462723646214,
+        "avgRiskPct": 0.6780108428135768,
+        "wins": 20,
+        "losses": 8
+      },
+      "test": {
+        "trades": 14,
+        "winRate": 85.71428571428571,
+        "profitFactor": 6.200292563913425,
+        "totalR": 11.370150711005778,
+        "accountReturnPct": 3.9795527488520217,
+        "maxDrawdownPct": 0.3837197101479948,
+        "expectancyR": 0.8121536222146984,
+        "avgRiskPct": 0.7797586992131005,
+        "wins": 12,
+        "losses": 2
+      },
+      "full": {
+        "trades": 42,
+        "winRate": 76.19047619047619,
+        "profitFactor": 3.244778276704778,
+        "totalR": 25.192480273626714,
+        "accountReturnPct": 8.817368095769353,
+        "maxDrawdownPct": 1.1845589957284661,
+        "expectancyR": 0.5998209588958742,
+        "avgRiskPct": 0.7119267949467513,
+        "wins": 32,
+        "losses": 10
+      },
+      "trainScore": 0.5145389759377182
+    }
+  ],
+  "baselines": [
+    {
+      "config": "v3_pool8_quality",
+      "full": {
+        "trades": 154,
+        "winRate": 64.93506493506493,
+        "profitFactor": 1.8152032142622587,
+        "totalR": 49.57682253716544,
+        "accountReturnPct": 17.351887888007894,
+        "maxDrawdownPct": 3.021252966493529,
+        "expectancyR": 0.3219274190725029,
+        "avgRiskPct": 0.7057714541056485,
+        "wins": 100,
+        "losses": 54
+      },
+      "train": {
+        "trades": 99,
+        "winRate": 65.65656565656566,
+        "profitFactor": 1.8720440523883197,
+        "totalR": 33.67795356875896,
+        "accountReturnPct": 11.787283749065631,
+        "maxDrawdownPct": 3.021252966493529,
+        "expectancyR": 0.3401813491793834,
+        "avgRiskPct": 0.685976294987976,
+        "wins": 65,
+        "losses": 34
+      },
+      "test": {
+        "trades": 55,
+        "winRate": 63.63636363636363,
+        "profitFactor": 1.7163027899026169,
+        "totalR": 15.898868968406457,
+        "accountReturnPct": 5.5646041389422605,
+        "maxDrawdownPct": 1.8025995965539066,
+        "expectancyR": 0.2890703448801174,
+        "avgRiskPct": 0.7414027405174587,
+        "wins": 35,
+        "losses": 20
+      }
+    },
+    {
+      "config": "v3_core4_quality",
+      "full": {
+        "trades": 135,
+        "winRate": 62.96296296296296,
+        "profitFactor": 1.6075136496989306,
+        "totalR": 34.31683731997259,
+        "accountReturnPct": 12.0108930619904,
+        "maxDrawdownPct": 3.461090622155252,
+        "expectancyR": 0.25419879496275993,
+        "avgRiskPct": 0.6863329050204732,
+        "wins": 85,
+        "losses": 50
+      },
+      "train": {
+        "trades": 89,
+        "winRate": 67.41573033707866,
+        "profitFactor": 1.956564023732597,
+        "totalR": 31.697955149990342,
+        "accountReturnPct": 11.094284302496618,
+        "maxDrawdownPct": 1.6283607044633268,
+        "expectancyR": 0.35615679943809375,
+        "avgRiskPct": 0.6630218771414575,
+        "wins": 60,
+        "losses": 29
+      },
+      "test": {
+        "trades": 46,
+        "winRate": 54.347826086956516,
+        "profitFactor": 1.1121574760742712,
+        "totalR": 2.618882169982233,
+        "accountReturnPct": 0.9166087594937815,
+        "maxDrawdownPct": 3.461090622155252,
+        "expectancyR": 0.05693222108657028,
+        "avgRiskPct": 0.7314346763516123,
+        "wins": 25,
+        "losses": 21
+      }
+    },
+    {
+      "config": "v4_tpv_best4_quality",
+      "full": {
+        "trades": 120,
+        "winRate": 61.66666666666667,
+        "profitFactor": 1.4916855413832637,
+        "totalR": 25.249532890272466,
+        "accountReturnPct": 8.837336511595367,
+        "maxDrawdownPct": 2.7075164429272967,
+        "expectancyR": 0.21041277408560388,
+        "avgRiskPct": 0.6800730028497427,
+        "wins": 74,
+        "losses": 46
+      },
+      "train": {
+        "trades": 81,
+        "winRate": 62.96296296296296,
+        "profitFactor": 1.6287249402368416,
+        "totalR": 21.0481611148669,
+        "accountReturnPct": 7.366856390203412,
+        "maxDrawdownPct": 1.7539125362427423,
+        "expectancyR": 0.2598538409242827,
+        "avgRiskPct": 0.662483948023694,
+        "wins": 51,
+        "losses": 30
+      },
+      "test": {
+        "trades": 39,
+        "winRate": 58.97435897435898,
+        "profitFactor": 1.2350355205215264,
+        "totalR": 4.201371775405573,
+        "accountReturnPct": 1.4704801213919498,
+        "maxDrawdownPct": 2.7075164429273006,
+        "expectancyR": 0.1077274814206557,
+        "avgRiskPct": 0.716604116719229,
+        "wins": 23,
+        "losses": 16
+      }
+    },
+    {
+      "config": "v4_tpv_pool8_elite",
+      "full": {
+        "trades": 82,
+        "winRate": 63.41463414634146,
+        "profitFactor": 1.6606951188571732,
+        "totalR": 21.983124026444596,
+        "accountReturnPct": 7.694093409255609,
+        "maxDrawdownPct": 2.3987098203035364,
+        "expectancyR": 0.26808687837127554,
+        "avgRiskPct": 0.6205859881444946,
+        "wins": 52,
+        "losses": 30
+      },
+      "train": {
+        "trades": 58,
+        "winRate": 60.3448275862069,
+        "profitFactor": 1.5552173896125192,
+        "totalR": 14.113624239714754,
+        "accountReturnPct": 4.939768483900163,
+        "maxDrawdownPct": 2.3987098203035364,
+        "expectancyR": 0.24333834896059922,
+        "avgRiskPct": 0.6094794004412432,
+        "wins": 35,
+        "losses": 23
+      },
+      "test": {
+        "trades": 24,
+        "winRate": 70.83333333333334,
+        "profitFactor": 2.0021363333478663,
+        "totalR": 7.869499786729837,
+        "accountReturnPct": 2.7543249253554434,
+        "maxDrawdownPct": 0.9432345862215312,
+        "expectancyR": 0.32789582444707654,
+        "avgRiskPct": 0.6474269084273523,
+        "wins": 17,
+        "losses": 7
+      }
+    },
+    {
+      "config": "v4_tpv_pool8_strict",
+      "full": {
+        "trades": 98,
+        "winRate": 62.244897959183675,
+        "profitFactor": 1.5382346461196066,
+        "totalR": 21.97351154026354,
+        "accountReturnPct": 7.690729039092242,
+        "maxDrawdownPct": 1.8930942854563584,
+        "expectancyR": 0.22421950551289327,
+        "avgRiskPct": 0.6853259990196495,
+        "wins": 61,
+        "losses": 37
+      },
+      "train": {
+        "trades": 66,
+        "winRate": 62.121212121212125,
+        "profitFactor": 1.620757971992687,
+        "totalR": 17.094264300264662,
+        "accountReturnPct": 5.982992505092634,
+        "maxDrawdownPct": 1.8930942854563584,
+        "expectancyR": 0.2590040045494646,
+        "avgRiskPct": 0.6529683833969471,
+        "wins": 41,
+        "losses": 25
+      },
+      "test": {
+        "trades": 32,
+        "winRate": 62.5,
+        "profitFactor": 1.3672079029059294,
+        "totalR": 4.87924723999888,
+        "accountReturnPct": 1.707736533999608,
+        "maxDrawdownPct": 0.790244861082098,
+        "expectancyR": 0.152476476249965,
+        "avgRiskPct": 0.7520635812414734,
+        "wins": 20,
+        "losses": 12
+      }
+    },
+    {
+      "config": "v3_pool8_frequency",
+      "full": {
+        "trades": 178,
+        "winRate": 55.61797752808989,
+        "profitFactor": 1.2292774721686455,
+        "totalR": 20.445648126811673,
+        "accountReturnPct": 7.1559768443840825,
+        "maxDrawdownPct": 4.0850569814217215,
+        "expectancyR": 0.11486319172366108,
+        "avgRiskPct": 0.6907893593688658,
+        "wins": 99,
+        "losses": 79
+      },
+      "train": {
+        "trades": 116,
+        "winRate": 56.03448275862068,
+        "profitFactor": 1.2998757487139592,
+        "totalR": 17.369942851617953,
+        "accountReturnPct": 6.079479998066284,
+        "maxDrawdownPct": 4.0850569814217215,
+        "expectancyR": 0.1497408866518789,
+        "avgRiskPct": 0.675801046189491,
+        "wins": 65,
+        "losses": 51
+      },
+      "test": {
+        "trades": 62,
+        "winRate": 54.83870967741935,
+        "profitFactor": 1.0984211304400069,
+        "totalR": 3.0757052751937204,
+        "accountReturnPct": 1.0764968463178022,
+        "maxDrawdownPct": 3.729942665267185,
+        "expectancyR": 0.04960814959989872,
+        "avgRiskPct": 0.718832009833502,
+        "wins": 34,
+        "losses": 28
+      }
+    },
+    {
+      "config": "v4_tpv_best3_quality",
+      "full": {
+        "trades": 111,
+        "winRate": 60.36036036036037,
+        "profitFactor": 1.4141082948645292,
+        "totalR": 20.42358604110854,
+        "accountReturnPct": 7.148255114387988,
+        "maxDrawdownPct": 2.422693859109713,
+        "expectancyR": 0.18399627064061747,
+        "avgRiskPct": 0.6684170198036078,
+        "wins": 67,
+        "losses": 44
+      },
+      "train": {
+        "trades": 76,
+        "winRate": 61.8421052631579,
+        "profitFactor": 1.547302467532204,
+        "totalR": 17.751248827755575,
+        "accountReturnPct": 6.212937089714448,
+        "maxDrawdownPct": 2.422693859109713,
+        "expectancyR": 0.23356906352309967,
+        "avgRiskPct": 0.655552091886806,
+        "wins": 47,
+        "losses": 29
+      },
+      "test": {
+        "trades": 35,
+        "winRate": 57.14285714285714,
+        "profitFactor": 1.1582635785925242,
+        "totalR": 2.6723372133529706,
+        "accountReturnPct": 0.9353180246735375,
+        "maxDrawdownPct": 2.1294034353180127,
+        "expectancyR": 0.07635249181008487,
+        "avgRiskPct": 0.6963522918515209,
+        "wins": 20,
+        "losses": 15
+      }
+    },
+    {
+      "config": "v4_tpv_best3_elite",
+      "full": {
+        "trades": 78,
+        "winRate": 61.53846153846154,
+        "profitFactor": 1.6090975757231316,
+        "totalR": 20.137686880695714,
+        "accountReturnPct": 7.048190408243497,
+        "maxDrawdownPct": 1.9044065131340973,
+        "expectancyR": 0.2581754728294322,
+        "avgRiskPct": 0.6620159575215667,
+        "wins": 48,
+        "losses": 30
+      },
+      "train": {
+        "trades": 56,
+        "winRate": 62.5,
+        "profitFactor": 1.7137954349982043,
+        "totalR": 16.486051716588953,
+        "accountReturnPct": 5.770118100806134,
+        "maxDrawdownPct": 1.9044065131340973,
+        "expectancyR": 0.2943937806533742,
+        "avgRiskPct": 0.626875809376891,
+        "wins": 35,
+        "losses": 21
+      },
+      "test": {
+        "trades": 22,
+        "winRate": 59.09090909090909,
+        "profitFactor": 1.3664392157430383,
+        "totalR": 3.6516351641067573,
+        "accountReturnPct": 1.2780723074373648,
+        "maxDrawdownPct": 0.8116601494668487,
+        "expectancyR": 0.16598341655030716,
+        "avgRiskPct": 0.7514636073443771,
+        "wins": 13,
+        "losses": 9
+      }
+    },
+    {
+      "config": "v4_tpv_best2_quality",
+      "full": {
+        "trades": 80,
+        "winRate": 62.5,
+        "profitFactor": 1.5016768129689362,
+        "totalR": 17.03143183758209,
+        "accountReturnPct": 5.961001143153733,
+        "maxDrawdownPct": 2.5299733576179686,
+        "expectancyR": 0.21289289796977612,
+        "avgRiskPct": 0.6758970824099138,
+        "wins": 50,
+        "losses": 30
+      },
+      "train": {
+        "trades": 55,
+        "winRate": 65.45454545454545,
+        "profitFactor": 1.7496926225303138,
+        "totalR": 16.112119749558946,
+        "accountReturnPct": 5.639241912345631,
+        "maxDrawdownPct": 2.5299733576179686,
+        "expectancyR": 0.29294763181016265,
+        "avgRiskPct": 0.6763235030787935,
+        "wins": 36,
+        "losses": 19
+      },
+      "test": {
+        "trades": 25,
+        "winRate": 56.00000000000001,
+        "profitFactor": 1.0737966016559335,
+        "totalR": 0.9193120880231511,
+        "accountReturnPct": 0.32175923080810326,
+        "maxDrawdownPct": 1.7227882834159287,
+        "expectancyR": 0.03677248352092605,
+        "avgRiskPct": 0.6749589569383787,
+        "wins": 14,
+        "losses": 11
+      }
+    },
+    {
+      "config": "v3_core4_frequency",
+      "full": {
+        "trades": 155,
+        "winRate": 56.12903225806451,
+        "profitFactor": 1.1886968366564308,
+        "totalR": 14.536289353233766,
+        "accountReturnPct": 5.087701273631818,
+        "maxDrawdownPct": 3.787347125446078,
+        "expectancyR": 0.09378251195634688,
+        "avgRiskPct": 0.6764633405041925,
+        "wins": 87,
+        "losses": 68
+      },
+      "train": {
+        "trades": 103,
+        "winRate": 57.28155339805825,
+        "profitFactor": 1.2717272339817907,
+        "totalR": 13.651399045716921,
+        "accountReturnPct": 4.777989666000923,
+        "maxDrawdownPct": 3.787347125446078,
+        "expectancyR": 0.13253785481278565,
+        "avgRiskPct": 0.6604373599371711,
+        "wins": 59,
+        "losses": 44
+      },
+      "test": {
+        "trades": 52,
+        "winRate": 53.84615384615385,
+        "profitFactor": 1.0330234662586517,
+        "totalR": 0.8848903075168473,
+        "accountReturnPct": 0.309711607630897,
+        "maxDrawdownPct": 3.0776746969381863,
+        "expectancyR": 0.017017121298400908,
+        "avgRiskPct": 0.7082071097042545,
+        "wins": 28,
+        "losses": 24
+      }
+    },
+    {
+      "config": "v4_tpv_pool8_quality",
+      "full": {
+        "trades": 135,
+        "winRate": 57.77777777777777,
+        "profitFactor": 1.2119752489698252,
+        "totalR": 13.496653874695697,
+        "accountReturnPct": 4.723828856143492,
+        "maxDrawdownPct": 2.9139237094819324,
+        "expectancyR": 0.0999752138866348,
+        "avgRiskPct": 0.6841381873234045,
+        "wins": 78,
+        "losses": 57
+      },
+      "train": {
+        "trades": 91,
+        "winRate": 57.14285714285714,
+        "profitFactor": 1.319091820554195,
+        "totalR": 13.840129036518235,
+        "accountReturnPct": 4.844045162781379,
+        "maxDrawdownPct": 2.8725503371699785,
+        "expectancyR": 0.15208933007162895,
+        "avgRiskPct": 0.6777904667730014,
+        "wins": 52,
+        "losses": 39
+      },
+      "test": {
+        "trades": 44,
+        "winRate": 59.09090909090909,
+        "profitFactor": 0.9830778700816525,
+        "totalR": -0.34347516182253157,
+        "accountReturnPct": -0.1202163066378867,
+        "maxDrawdownPct": 2.9139237094819324,
+        "expectancyR": -0.007806253677784808,
+        "avgRiskPct": 0.6972664275526477,
+        "wins": 26,
+        "losses": 18
+      }
+    },
+    {
+      "config": "v4_tpv_best2_elite",
+      "full": {
+        "trades": 55,
+        "winRate": 60.0,
+        "profitFactor": 1.498497996927383,
+        "totalR": 12.497112174147276,
+        "accountReturnPct": 4.373989260951546,
+        "maxDrawdownPct": 1.919265446258621,
+        "expectancyR": 0.22722022134813227,
+        "avgRiskPct": 0.6373402983166634,
+        "wins": 33,
+        "losses": 22
+      },
+      "train": {
+        "trades": 41,
+        "winRate": 60.97560975609756,
+        "profitFactor": 1.62970640966465,
+        "totalR": 11.551556927909843,
+        "accountReturnPct": 4.043044924768446,
+        "maxDrawdownPct": 1.919265446258621,
+        "expectancyR": 0.2817452909246303,
+        "avgRiskPct": 0.6201877724347932,
+        "wins": 25,
+        "losses": 16
+      },
+      "test": {
+        "trades": 14,
+        "winRate": 57.14285714285714,
+        "profitFactor": 1.1405992481044696,
+        "totalR": 0.9455552462374319,
+        "accountReturnPct": 0.3309443361831009,
+        "maxDrawdownPct": 1.213850640838635,
+        "expectancyR": 0.06753966044553085,
+        "avgRiskPct": 0.6875726955421408,
+        "wins": 8,
+        "losses": 6
+      }
+    },
+    {
+      "config": "v4_tpv_core4_strict",
+      "full": {
+        "trades": 82,
+        "winRate": 57.3170731707317,
+        "profitFactor": 1.252227427798625,
+        "totalR": 9.753264208912247,
+        "accountReturnPct": 3.413642473119286,
+        "maxDrawdownPct": 2.154461404549903,
+        "expectancyR": 0.11894224645014935,
+        "avgRiskPct": 0.6750466551558039,
+        "wins": 47,
+        "losses": 35
+      },
+      "train": {
+        "trades": 58,
+        "winRate": 56.896551724137936,
+        "profitFactor": 1.2747658837821616,
+        "totalR": 7.576565066185657,
+        "accountReturnPct": 2.6517977731649793,
+        "maxDrawdownPct": 2.154461404549903,
+        "expectancyR": 0.1306304321756148,
+        "avgRiskPct": 0.6368946249568788,
+        "wins": 33,
+        "losses": 25
+      },
+      "test": {
+        "trades": 24,
+        "winRate": 58.333333333333336,
+        "profitFactor": 1.196206660760644,
+        "totalR": 2.176699142726588,
+        "accountReturnPct": 0.7618446999543051,
+        "maxDrawdownPct": 1.0814328747288486,
+        "expectancyR": 0.09069579761360784,
+        "avgRiskPct": 0.767247394803206,
+        "wins": 14,
+        "losses": 10
+      }
+    },
+    {
+      "config": "v4_tpv_core4_quality",
+      "full": {
+        "trades": 114,
+        "winRate": 56.14035087719298,
+        "profitFactor": 1.1504682624038174,
+        "totalR": 8.434124386671696,
+        "accountReturnPct": 2.951943535335094,
+        "maxDrawdownPct": 3.7014195491194815,
+        "expectancyR": 0.0739835472515061,
+        "avgRiskPct": 0.6682897257867818,
+        "wins": 64,
+        "losses": 50
+      },
+      "train": {
+        "trades": 76,
+        "winRate": 57.89473684210527,
+        "profitFactor": 1.3432661102283383,
+        "totalR": 12.25072032300989,
+        "accountReturnPct": 4.287752113053461,
+        "maxDrawdownPct": 2.2765180751115572,
+        "expectancyR": 0.16119368846065646,
+        "avgRiskPct": 0.6577740630672807,
+        "wins": 44,
+        "losses": 32
+      },
+      "test": {
+        "trades": 38,
+        "winRate": 52.63157894736842,
+        "profitFactor": 0.8125795374082099,
+        "totalR": -3.8165959363381923,
+        "accountReturnPct": -1.3358085777183673,
+        "maxDrawdownPct": 3.415940406939977,
+        "expectancyR": -0.10043673516679454,
+        "avgRiskPct": 0.6893210512257841,
+        "wins": 20,
+        "losses": 18
+      }
+    },
+    {
+      "config": "v3_core4_strict",
+      "full": {
+        "trades": 89,
+        "winRate": 57.30337078651685,
+        "profitFactor": 1.1368020509448817,
+        "totalR": 5.900221642989495,
+        "accountReturnPct": 2.065077575046327,
+        "maxDrawdownPct": 2.4089614923314056,
+        "expectancyR": 0.06629462520212916,
+        "avgRiskPct": 0.6245189597175255,
+        "wins": 51,
+        "losses": 38
+      },
+      "train": {
+        "trades": 58,
+        "winRate": 62.06896551724138,
+        "profitFactor": 1.446262153976215,
+        "totalR": 11.270007199752165,
+        "accountReturnPct": 3.944502519913259,
+        "maxDrawdownPct": 2.4089614923314056,
+        "expectancyR": 0.1943104689612442,
+        "avgRiskPct": 0.6102657144086142,
+        "wins": 36,
+        "losses": 22
+      },
+      "test": {
+        "trades": 31,
+        "winRate": 48.38709677419355,
+        "profitFactor": 0.6995991097700471,
+        "totalR": -5.369785556762663,
+        "accountReturnPct": -1.8794249448669331,
+        "maxDrawdownPct": 2.027244743759333,
+        "expectancyR": -0.17321888892782783,
+        "avgRiskPct": 0.6511863219083908,
+        "wins": 15,
+        "losses": 16
+      }
+    },
+    {
+      "config": "v3_pool8_strict",
+      "full": {
+        "trades": 103,
+        "winRate": 57.28155339805825,
+        "profitFactor": 1.09791971310677,
+        "totalR": 4.909359501548263,
+        "accountReturnPct": 1.71827582554189,
+        "maxDrawdownPct": 3.2606839771297684,
+        "expectancyR": 0.04766368448105109,
+        "avgRiskPct": 0.6312261926976429,
+        "wins": 59,
+        "losses": 44
+      },
+      "train": {
+        "trades": 63,
+        "winRate": 63.49206349206349,
+        "profitFactor": 1.5255258022782865,
+        "totalR": 13.867292386629533,
+        "accountReturnPct": 4.853552335320336,
+        "maxDrawdownPct": 2.4089614923314056,
+        "expectancyR": 0.22011575216872276,
+        "avgRiskPct": 0.6212679071136471,
+        "wins": 40,
+        "losses": 23
+      },
+      "test": {
+        "trades": 40,
+        "winRate": 47.5,
+        "profitFactor": 0.6228098587726897,
+        "totalR": -8.957932885081267,
+        "accountReturnPct": -3.1352765097784436,
+        "maxDrawdownPct": 3.2606839771297667,
+        "expectancyR": -0.22394832212703167,
+        "avgRiskPct": 0.6469104924924358,
+        "wins": 19,
+        "losses": 21
+      }
+    }
+  ]
+}

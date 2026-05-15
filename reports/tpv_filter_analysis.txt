@@ -1,0 +1,57 @@
+BASELINE V3 BEST
+v3_pool8_quality                        154  64.94% PF  1.82 Exp  0.322R Total   49.58R AvgScore  8.05
+
+V4 CONFIGS
+v4_tpv_core4_quality                    114  56.14% PF  1.15 Exp  0.074R Total    8.43R AvgScore 10.62
+v4_tpv_core4_strict                      82  57.32% PF  1.25 Exp  0.119R Total    9.75R AvgScore 10.50
+v4_tpv_pool8_quality                    135  57.78% PF  1.21 Exp  0.100R Total   13.50R AvgScore 10.53
+v4_tpv_pool8_strict                      98  62.24% PF  1.54 Exp  0.224R Total   21.97R AvgScore 10.50
+v4_tpv_pool8_elite                       82  63.41% PF  1.66 Exp  0.268R Total   21.98R AvgScore 10.48
+
+V4 pool8_quality BY SYMBOL
+AVAXUSDT                                 10  60.00% PF  1.12 Exp  0.052R Total    0.52R AvgScore 10.21
+BNBUSDT                                  42  64.29% PF  1.64 Exp  0.258R Total   10.85R AvgScore 10.63
+BTCUSDT                                  34  61.76% PF  1.56 Exp  0.235R Total    7.99R AvgScore 10.73
+DOGEUSDT                                  8  37.50% PF  0.45 Exp -0.383R Total   -3.07R AvgScore 10.23
+ETHUSDT                                  16  50.00% PF  0.88 Exp -0.065R Total   -1.04R AvgScore 10.57
+LINKUSDT                                  2   0.00% PF  0.00 Exp -1.105R Total   -2.21R AvgScore 10.82
+SOLUSDT                                   8  25.00% PF  0.09 Exp -0.783R Total   -6.27R AvgScore 10.24
+XRPUSDT                                  15  73.33% PF  2.53 Exp  0.448R Total    6.71R AvgScore 10.23
+
+V4 pool8_quality BY DIRECTION
+long                                     63  61.90% PF  1.43 Exp  0.181R Total   11.37R AvgScore 10.62
+short                                    72  54.17% PF  1.06 Exp  0.030R Total    2.12R AvgScore 10.45
+
+V4 pool8_quality SCORE/RISK FILTERS
+score>=8.2                              135  57.78% PF  1.21 Exp  0.100R Total   13.50R AvgScore 10.53
+score>=8.6                              135  57.78% PF  1.21 Exp  0.100R Total   13.50R AvgScore 10.53
+score>=9.0                              127  57.48% PF  1.23 Exp  0.109R Total   13.90R AvgScore 10.65
+score>=9.4                              106  56.60% PF  1.20 Exp  0.098R Total   10.40R AvgScore 10.91
+score>=9.8                              105  57.14% PF  1.23 Exp  0.110R Total   11.52R AvgScore 10.93
+score>=10.2                              89  57.30% PF  1.24 Exp  0.118R Total   10.48R AvgScore 11.12
+risk<=0.50%                              21  42.86% PF  0.78 Exp -0.151R Total   -3.18R AvgScore 10.64
+risk<=0.60%                              37  54.05% PF  1.09 Exp  0.052R Total    1.91R AvgScore 10.58
+risk<=0.70%                              61  55.74% PF  1.20 Exp  0.101R Total    6.19R AvgScore 10.45
+risk<=0.80%                              99  58.59% PF  1.23 Exp  0.108R Total   10.68R AvgScore 10.46
+
+SYMBOL SUBSET SEARCH ON EXECUTED V4 pool8_quality TRADES
+BNBUSDT,XRPUSDT                          57  66.67% PF  1.82 Exp  0.308R Total   17.56R AvgScore 10.53
+AVAXUSDT,BNBUSDT,XRPUSDT                 67  65.67% PF  1.70 Exp  0.270R Total   18.08R AvgScore 10.48
+BTCUSDT,XRPUSDT                          49  65.31% PF  1.79 Exp  0.300R Total   14.70R AvgScore 10.57
+BNBUSDT,BTCUSDT,XRPUSDT                  91  64.84% PF  1.72 Exp  0.281R Total   25.55R AvgScore 10.60
+AVAXUSDT,BTCUSDT,XRPUSDT                 59  64.41% PF  1.66 Exp  0.258R Total   15.23R AvgScore 10.51
+BNBUSDT,LINKUSDT,XRPUSDT                 59  64.41% PF  1.65 Exp  0.260R Total   15.35R AvgScore 10.54
+AVAXUSDT,BNBUSDT,BTCUSDT,XRPUSDT        101  64.36% PF  1.65 Exp  0.258R Total   26.08R AvgScore 10.56
+BNBUSDT                                  42  64.29% PF  1.64 Exp  0.258R Total   10.85R AvgScore 10.63
+AVAXUSDT,BNBUSDT,LINKUSDT,XRPUSDT        69  63.77% PF  1.56 Exp  0.230R Total   15.87R AvgScore 10.49
+AVAXUSDT,BNBUSDT                         52  63.46% PF  1.53 Exp  0.219R Total   11.37R AvgScore 10.55
+BNBUSDT,BTCUSDT,LINKUSDT,XRPUSDT         93  63.44% PF  1.62 Exp  0.251R Total   23.34R AvgScore 10.60
+BNBUSDT,BTCUSDT                          76  63.16% PF  1.60 Exp  0.248R Total   18.84R AvgScore 10.67
+AVAXUSDT,BNBUSDT,BTCUSDT,LINKUSDT,XRPUSDT  103  63.11% PF  1.56 Exp  0.232R Total   23.86R AvgScore 10.57
+BNBUSDT,DOGEUSDT,XRPUSDT                 65  63.08% PF  1.54 Exp  0.223R Total   14.50R AvgScore 10.49
+BNBUSDT,ETHUSDT,XRPUSDT                  73  63.01% PF  1.54 Exp  0.226R Total   16.53R AvgScore 10.54
+AVAXUSDT,BNBUSDT,BTCUSDT                 86  62.79% PF  1.54 Exp  0.225R Total   19.36R AvgScore 10.62
+BTCUSDT,LINKUSDT,XRPUSDT                 51  62.75% PF  1.60 Exp  0.245R Total   12.49R AvgScore 10.58
+AVAXUSDT,BNBUSDT,DOGEUSDT,XRPUSDT        75  62.67% PF  1.48 Exp  0.200R Total   15.02R AvgScore 10.45
+AVAXUSDT,BNBUSDT,ETHUSDT,XRPUSDT         83  62.65% PF  1.49 Exp  0.205R Total   17.05R AvgScore 10.50
+BNBUSDT,BTCUSDT,DOGEUSDT,XRPUSDT         99  62.63% PF  1.55 Exp  0.227R Total   22.49R AvgScore 10.57

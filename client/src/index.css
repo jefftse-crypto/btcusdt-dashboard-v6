@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-bull: var(--bull);
+  --color-bear: var(--bear);
+  /* 柔和護眼主題 - 深藍灰底色 */
+  --color-tv-bg: #141820;
+  --color-tv-panel: #1c2030;
+  --color-tv-border: #252b3a;
+  --color-tv-text: #c8cdd8;
+  --color-tv-accent: #4f7cff;
+}
+
+:root {
+  --primary: #4f7cff;
+  --primary-foreground: #f0f2ff;
+  --radius: 0.5rem;
+
+  /* 柔和護眼深色主題 - 深藍灰調，降低藍光與對比度 */
+  --background: #141820;
+  --foreground: #c8cdd8;
+  --card: #1c2030;
+  --card-foreground: #c8cdd8;
+  --popover: #1c2030;
+  --popover-foreground: #c8cdd8;
+  --secondary: #252b3a;
+  --secondary-foreground: #9ba3b5;
+  --muted: #1c2030;
+  --muted-foreground: #6b7385;
+  --accent: #4f7cff;
+  --accent-foreground: #f0f2ff;
+  --destructive: #d9534f;
+  --destructive-foreground: #fff5f5;
+  --border: #252b3a;
+  --input: #252b3a;
+  --ring: #4f7cff;
+
+  /* 柔和 K 線顏色 - 降低飽和度，減少視覺疲勞 */
+  --bull: #2ecc8a;
+  --bear: #e05c6a;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .tv-panel {
+    @apply bg-tv-panel border border-tv-border;
+  }
+
+  .tv-sidebar-item {
+    @apply flex items-center justify-center w-12 h-12 text-muted-foreground hover:text-tv-text hover:bg-secondary transition-colors cursor-pointer;
+  }
+
+  .tv-sidebar-item.active {
+    @apply text-tv-accent border-r-2 border-tv-accent bg-tv-accent/10;
+  }
+
+  /* 柔和捲軸 */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #141820;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2e3548;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3d4560;
+  }
+
+  /* 柔和面板樣式 */
+  .crypto-panel {
+    @apply bg-[#1c2030] border border-[#252b3a] rounded-lg;
+  }
+  .crypto-panel-header {
+    @apply text-[11px] font-bold text-[#9ba3b5] uppercase tracking-wider px-3 py-2 border-b border-[#252b3a];
+  }
+}
+
+/* Tab Active State */
+.tv-tab-active {
+  color: #4f7cff !important;
+  border-bottom: 2px solid #4f7cff !important;
+}
+
+/* 柔和價格閃爍動畫 */
+@keyframes priceFlashBull {
+  0%   { background: rgba(46, 204, 138, 0.15); }
+  100% { background: transparent; }
+}
+@keyframes priceFlashBear {
+  0%   { background: rgba(224, 92, 106, 0.15); }
+  100% { background: transparent; }
+}
+.price-flash-bull { animation: priceFlashBull 0.8s ease-out; }
+.price-flash-bear { animation: priceFlashBear 0.8s ease-out; }
+
+/* 等寬數字字體 */
+.font-numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* 手機觸控優化 */
+@media (max-width: 768px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}

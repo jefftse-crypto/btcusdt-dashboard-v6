@@ -1,0 +1,267 @@
+PROJECT TREE
+/btcusdt_dashboard_v6/.env
+/btcusdt_dashboard_v6/.env.local
+/btcusdt_dashboard_v6/.manus-logs/browserConsole.log
+/btcusdt_dashboard_v6/.manus-logs/networkRequests.log
+/btcusdt_dashboard_v6/.manus-logs/sessionReplay.log
+/btcusdt_dashboard_v6/BTCUSDT_Dashboard_v5_Final_Guide.md
+/btcusdt_dashboard_v6/DASHBOARD_FULL_REVIEW_NOTES.md
+/btcusdt_dashboard_v6/DEPLOY_README.md
+/btcusdt_dashboard_v6/Dashboard_v5_Upgrade_Report.md
+/btcusdt_dashboard_v6/HIGHWINRATE_ANALYSIS.md
+/btcusdt_dashboard_v6/IMPROVEMENT_DESIGN.md
+/btcusdt_dashboard_v6/README_NEW_ENV.md
+/btcusdt_dashboard_v6/RELEASE_NOTES_LIGHT_MOBILE_INDICATORS.md
+/btcusdt_dashboard_v6/Strategy_High_Win_Rate_Report_v4.5.md
+/btcusdt_dashboard_v6/Strategy_Win_Rate_Analysis.md
+/btcusdt_dashboard_v6/Strategy_Win_Rate_Booster_Report.md
+/btcusdt_dashboard_v6/UNIFIED_STRATEGY_INTEGRATION_NOTES.md
+/btcusdt_dashboard_v6/backtest_result.txt
+/btcusdt_dashboard_v6/client/index.html
+/btcusdt_dashboard_v6/client/public/.gitkeep
+/btcusdt_dashboard_v6/client/public/icon-192.png
+/btcusdt_dashboard_v6/client/public/icon-512.png
+/btcusdt_dashboard_v6/client/public/manifest.json
+/btcusdt_dashboard_v6/client/public/sw.js
+/btcusdt_dashboard_v6/client/src/App.tsx
+/btcusdt_dashboard_v6/client/src/const.ts
+/btcusdt_dashboard_v6/client/src/index.css
+/btcusdt_dashboard_v6/client/src/main.tsx
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-05.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-05.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-06.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-06.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-07.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-07.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-08.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-08.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-09.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-09.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-10.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-10.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-11.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-11.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-12.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2025-12.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-01.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-01.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-02.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-02.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-03.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-03.zip
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-04.csv
+/btcusdt_dashboard_v6/data/binance_btcusdt_15m_1y/BTCUSDT-15m-2026-04.zip
+/btcusdt_dashboard_v6/dev_server.log
+/btcusdt_dashboard_v6/dev_server.pid
+/btcusdt_dashboard_v6/dist/public/.gitkeep
+/btcusdt_dashboard_v6/dist/public/icon-192.png
+/btcusdt_dashboard_v6/dist/public/icon-512.png
+/btcusdt_dashboard_v6/dist/public/index.html
+/btcusdt_dashboard_v6/dist/public/manifest.json
+/btcusdt_dashboard_v6/dist/public/sw.js
+/btcusdt_dashboard_v6/drizzle/schema.ts
+/btcusdt_dashboard_v6/ecosystem.config.cjs
+/btcusdt_dashboard_v6/multi_backtest_result.txt
+/btcusdt_dashboard_v6/node_modules/.bin/autoprefixer
+/btcusdt_dashboard_v6/node_modules/.bin/drizzle-kit
+/btcusdt_dashboard_v6/node_modules/.bin/esbuild
+/btcusdt_dashboard_v6/node_modules/.bin/intent
+/btcusdt_dashboard_v6/node_modules/.bin/nanoid
+/btcusdt_dashboard_v6/node_modules/.bin/pnpm
+/btcusdt_dashboard_v6/node_modules/.bin/pnpx
+/btcusdt_dashboard_v6/node_modules/.bin/prettier
+/btcusdt_dashboard_v6/node_modules/.bin/tsc
+/btcusdt_dashboard_v6/node_modules/.bin/tsserver
+/btcusdt_dashboard_v6/node_modules/.bin/tsx
+/btcusdt_dashboard_v6/node_modules/.bin/vite
+/btcusdt_dashboard_v6/node_modules/.bin/vitest
+/btcusdt_dashboard_v6/node_modules/.modules.yaml
+/btcusdt_dashboard_v6/node_modules/.pnpm-workspace-state.json
+/btcusdt_dashboard_v6/node_modules/.pnpm/lock.yaml
+/btcusdt_dashboard_v6/package.json
+/btcusdt_dashboard_v6/pnpm-lock.yaml
+/btcusdt_dashboard_v6/project_structure.txt
+/btcusdt_dashboard_v6/reports/build_htr_backtest_report.py
+/btcusdt_dashboard_v6/reports/build_htr_v2_report.py
+/btcusdt_dashboard_v6/reports/build_htr_v3_report.py
+/btcusdt_dashboard_v6/reports/htr_1d_daily_backtest_1y.json
+/btcusdt_dashboard_v6/reports/htr_1d_daily_backtest_1y.md
+/btcusdt_dashboard_v6/reports/htr_1d_daily_backtest_1y_full_report.md
+/btcusdt_dashboard_v6/reports/htr_1d_daily_equity_curve.png
+/btcusdt_dashboard_v6/reports/htr_1d_trades_threshold_7_5.csv
+/btcusdt_dashboard_v6/reports/htr_1d_trades_threshold_9.csv
+/btcusdt_dashboard_v6/reports/htr_v2_best_v2_trend_quality_70_trades.csv
+/btcusdt_dashboard_v6/reports/htr_v2_regime_backtest_1y.json
+/btcusdt_dashboard_v6/reports/htr_v2_regime_backtest_1y.md
+/btcusdt_dashboard_v6/reports/htr_v2_regime_backtest_1y_full_report.md
+/btcusdt_dashboard_v6/reports/htr_v2_vs_v1_equity_curve.png
+/btcusdt_dashboard_v6/reports/htr_v3_best_v3_pool8_quality_trades.csv
+/btcusdt_dashboard_v6/reports/htr_v3_config_comparison.png
+/btcusdt_dashboard_v6/reports/htr_v3_multisymbol_backtest_1y.json
+/btcusdt_dashboard_v6/reports/htr_v3_multisymbol_backtest_1y.md
+/btcusdt_dashboard_v6/reports/htr_v3_multisymbol_backtest_1y_full_report.md
+/btcusdt_dashboard_v6/reports/htr_v3_vs_v2_equity_curve.png
+/btcusdt_dashboard_v6/reports/migration_inventory.txt
+/btcusdt_dashboard_v6/reports/v3_chart_quality_check_notes.md
+/btcusdt_dashboard_v6/scripts/simulate_telegram_format.js
+/btcusdt_dashboard_v6/server/_core/context.ts
+/btcusdt_dashboard_v6/server/_core/cookies.ts
+/btcusdt_dashboard_v6/server/_core/dataApi.ts
+/btcusdt_dashboard_v6/server/_core/env.ts
+/btcusdt_dashboard_v6/server/_core/imageGeneration.ts
+/btcusdt_dashboard_v6/server/_core/index.ts
+/btcusdt_dashboard_v6/server/_core/llm.ts
+/btcusdt_dashboard_v6/server/_core/llm.ts.bak.20260404051136
+/btcusdt_dashboard_v6/server/_core/llm.ts.bak2
+/btcusdt_dashboard_v6/server/_core/map.ts
+/btcusdt_dashboard_v6/server/_core/notification.ts
+/btcusdt_dashboard_v6/server/_core/oauth.ts
+/btcusdt_dashboard_v6/server/_core/sdk.ts
+/btcusdt_dashboard_v6/server/_core/systemRouter.ts
+/btcusdt_dashboard_v6/server/_core/trpc.ts
+/btcusdt_dashboard_v6/server/_core/vite.ts
+/btcusdt_dashboard_v6/server/_core/voiceTranscription.ts
+/btcusdt_dashboard_v6/server/analysis.test.helper.ts
+/btcusdt_dashboard_v6/server/analysis.ts
+/btcusdt_dashboard_v6/server/auth.logout.test.ts
+/btcusdt_dashboard_v6/server/backtest.ts
+/btcusdt_dashboard_v6/server/backtest_comparison.ts
+/btcusdt_dashboard_v6/server/backtest_expanded_sweep.ts
+/btcusdt_dashboard_v6/server/backtest_frequency_sweep.ts
+/btcusdt_dashboard_v6/server/backtest_highwinrate.ts
+/btcusdt_dashboard_v6/server/backtest_highwinrate_v2.ts
+/btcusdt_dashboard_v6/server/backtest_htr_1d_daily.ts
+/btcusdt_dashboard_v6/server/backtest_htr_v2_regime.ts
+/btcusdt_dashboard_v6/server/backtest_htr_v3_multisymbol.ts
+/btcusdt_dashboard_v6/server/backtest_manus_scalper.ts
+/btcusdt_dashboard_v6/server/backtest_multi_symbol_strict.ts
+/btcusdt_dashboard_v6/server/backtest_tiered_sweep.ts
+/btcusdt_dashboard_v6/server/backtest_ultra_sweep.ts
+/btcusdt_dashboard_v6/server/backtest_year_binance.ts
+/btcusdt_dashboard_v6/server/backtest_year_diagnostic.ts
+/btcusdt_dashboard_v6/server/cannonballService.test.ts
+/btcusdt_dashboard_v6/server/crypto.dashboard.test.ts
+/btcusdt_dashboard_v6/server/db.ts
+/btcusdt_dashboard_v6/server/deep_backtest_180d.ts
+/btcusdt_dashboard_v6/server/diagnostics_engine.ts
+/btcusdt_dashboard_v6/server/fetch_and_backtest.ts
+/btcusdt_dashboard_v6/server/final_validate.ts
+/btcusdt_dashboard_v6/server/live_btcusdt_strategy_presets.ts
+/btcusdt_dashboard_v6/server/live_strategy_governance.ts
+/btcusdt_dashboard_v6/server/manus_scalper_strategy.ts
+/btcusdt_dashboard_v6/server/multi_asset_backtest_180d.ts
+/btcusdt_dashboard_v6/server/routers.ts
+/btcusdt_dashboard_v6/server/run_1d_scan.ts
+/btcusdt_dashboard_v6/server/run_adv_scan.ts
+/btcusdt_dashboard_v6/server/run_all_strategy_binance.ts
+/btcusdt_dashboard_v6/server/run_all_strategy_upgrade_scan.ts
+/btcusdt_dashboard_v6/server/run_backtest_from_json.ts
+/btcusdt_dashboard_v6/server/run_btcusdt_live_telegram.ts
+/btcusdt_dashboard_v6/server/run_fast_search.ts
+/btcusdt_dashboard_v6/server/run_filtered_backtest.ts
+/btcusdt_dashboard_v6/server/run_five_strategy_backtest.ts
+/btcusdt_dashboard_v6/server/run_full_param_search.ts
+/btcusdt_dashboard_v6/server/run_profitable_scan.ts
+/btcusdt_dashboard_v6/server/run_score_tp_scan.ts
+/btcusdt_dashboard_v6/server/run_search_groupA.ts
+/btcusdt_dashboard_v6/server/run_search_groupB.ts
+/btcusdt_dashboard_v6/server/run_search_groupC.ts
+/btcusdt_dashboard_v6/server/run_smart_param_search.ts
+/btcusdt_dashboard_v6/server/run_v2v3v4_live.ts
+/btcusdt_dashboard_v6/server/run_v4_five_strategy_live.ts
+/btcusdt_dashboard_v6/server/services/advancedAnalysis.ts
+/btcusdt_dashboard_v6/server/services/bayesianMtfFusion.ts
+/btcusdt_dashboard_v6/server/services/bayesianResonance.ts
+/btcusdt_dashboard_v6/server/services/cache.ts
+/btcusdt_dashboard_v6/server/services/cannonballService.ts
+/btcusdt_dashboard_v6/server/services/dynamicExitPlanner.ts
+/btcusdt_dashboard_v6/server/services/dynamicFeatures.ts
+/btcusdt_dashboard_v6/server/services/ensembleVeto.ts
+/btcusdt_dashboard_v6/server/services/highWinRateService.ts
+/btcusdt_dashboard_v6/server/services/indicators.ts
+/btcusdt_dashboard_v6/server/services/kellyCalibration.ts
+/btcusdt_dashboard_v6/server/services/kellyCalibrationService.ts
+/btcusdt_dashboard_v6/server/services/macroDataFusion.ts
+/btcusdt_dashboard_v6/server/services/marketRegimeClassifier.ts
+/btcusdt_dashboard_v6/server/services/paSetupClassifier.ts
+/btcusdt_dashboard_v6/server/services/signalQualityFilter.ts
+/btcusdt_dashboard_v6/server/services/sweepQualityV2.ts
+/btcusdt_dashboard_v6/server/signalScanner.test.ts
+/btcusdt_dashboard_v6/server/signalScanner.ts
+/btcusdt_dashboard_v6/server/storage.ts
+/btcusdt_dashboard_v6/server/strategies_archive/manus_scalper_v5_1_atr.ts
+/btcusdt_dashboard_v6/server/strategies_archive/manus_scalper_v6_institutional.ts
+/btcusdt_dashboard_v6/server/utils/advancedAnalysis.ts
+/btcusdt_dashboard_v6/server/utils/backtestCostModel.ts
+/btcusdt_dashboard_v6/server/utils/bayesianMtfFusion.ts
+/btcusdt_dashboard_v6/server/utils/bayesianResonance.ts
+/btcusdt_dashboard_v6/server/utils/cache.ts
+/btcusdt_dashboard_v6/server/utils/dynamicExitPlanner.ts
+/btcusdt_dashboard_v6/server/utils/dynamicFeatures.ts
+/btcusdt_dashboard_v6/server/utils/ensembleVeto.ts
+/btcusdt_dashboard_v6/server/utils/indicators.test.ts
+/btcusdt_dashboard_v6/server/utils/indicators.ts
+/btcusdt_dashboard_v6/server/utils/indicators.ts.bak
+/btcusdt_dashboard_v6/server/utils/kellyCalibration.ts
+/btcusdt_dashboard_v6/server/utils/macroDataFusion.ts
+/btcusdt_dashboard_v6/server/utils/marketRegimeClassifier.ts
+/btcusdt_dashboard_v6/server/utils/paSetupClassifier.ts
+/btcusdt_dashboard_v6/server/utils/pandaStrategy.ts
+/btcusdt_dashboard_v6/server/utils/signalQualityFilter.ts
+/btcusdt_dashboard_v6/server/utils/strategyRouter.ts
+/btcusdt_dashboard_v6/server/utils/sweepQualityV2.ts
+/btcusdt_dashboard_v6/server/verify_presets_backtest.ts
+/btcusdt_dashboard_v6/server/verify_presets_v2.ts
+/btcusdt_dashboard_v6/server/walkforward.test.ts
+/btcusdt_dashboard_v6/server/walkforward.ts
+/btcusdt_dashboard_v6/server/win_rate_booster.ts
+/btcusdt_dashboard_v6/server/wsServer.ts
+/btcusdt_dashboard_v6/shared/_core/errors.ts
+/btcusdt_dashboard_v6/shared/const.ts
+/btcusdt_dashboard_v6/shared/cryptoTypes.ts
+/btcusdt_dashboard_v6/shared/schemas.ts
+/btcusdt_dashboard_v6/shared/types.ts
+/btcusdt_dashboard_v6/strategy_equity_curves.png
+/btcusdt_dashboard_v6/strategy_radar_chart.png
+/btcusdt_dashboard_v6/strategy_win_rate_analysis.png
+/btcusdt_dashboard_v6/tools/run_all_strategies_multimtf_1y.ts
+/btcusdt_dashboard_v6/tools/run_all_strategies_multimtf_1y_1h.ts
+/btcusdt_dashboard_v6/tools/run_all_strategies_winrate_optimization_1y.ts
+/btcusdt_dashboard_v6/tools/run_recommended_combos_multimtf_1y.ts
+/btcusdt_dashboard_v6/tsconfig.json
+/btcusdt_dashboard_v6/v47_year_diagnostic_report.md
+/btcusdt_dashboard_v6/v6_backtest_result.txt
+/btcusdt_dashboard_v6/verification_notes.md
+/btcusdt_dashboard_v6/vite.config.ts
+/btcusdt_dashboard_v6/year_diagnostic_binance.json
+
+UPLOADS
+total 33M
+-rw-r--r-- 1 ubuntu ubuntu 1.9K May 13 11:17 BTCUSDT_Dashboard_v6_整合版_-_新環境遷移指南.md
+-rw-r--r-- 1 ubuntu ubuntu 572K May 13 11:50 Screenshot_20260513_234703.jpg
+-rw-r--r-- 1 ubuntu ubuntu  33M May 13 13:21 btcusdt_dashboard_v6_unified_suite.zip
+
+REPORTS
+total 3.0M
+-rw-r--r-- 1 ubuntu ubuntu 6.3K May 13 12:36 build_htr_backtest_report.py
+-rw-r--r-- 1 ubuntu ubuntu 7.4K May 13 12:47 build_htr_v2_report.py
+-rw-r--r-- 1 ubuntu ubuntu  14K May 13 13:20 build_htr_v3_report.py
+-rw-rw-r-- 1 ubuntu ubuntu 479K May 13 12:35 htr_1d_daily_backtest_1y.json
+-rw-rw-r-- 1 ubuntu ubuntu 1.9K May 13 12:35 htr_1d_daily_backtest_1y.md
+-rw-rw-r-- 1 ubuntu ubuntu 3.6K May 13 12:36 htr_1d_daily_backtest_1y_full_report.md
+-rw-rw-r-- 1 ubuntu ubuntu 141K May 13 12:36 htr_1d_daily_equity_curve.png
+-rw-rw-r-- 1 ubuntu ubuntu  61K May 13 12:36 htr_1d_trades_threshold_7_5.csv
+-rw-rw-r-- 1 ubuntu ubuntu  14K May 13 12:36 htr_1d_trades_threshold_9.csv
+-rw-rw-r-- 1 ubuntu ubuntu  25K May 13 12:47 htr_v2_best_v2_trend_quality_70_trades.csv
+-rw-rw-r-- 1 ubuntu ubuntu 932K May 13 12:46 htr_v2_regime_backtest_1y.json
+-rw-rw-r-- 1 ubuntu ubuntu 1.7K May 13 12:46 htr_v2_regime_backtest_1y.md
+-rw-rw-r-- 1 ubuntu ubuntu 4.6K May 13 12:47 htr_v2_regime_backtest_1y_full_report.md
+-rw-rw-r-- 1 ubuntu ubuntu 188K May 13 12:47 htr_v2_vs_v1_equity_curve.png
+-rw-rw-r-- 1 ubuntu ubuntu  59K May 13 13:21 htr_v3_best_v3_pool8_quality_trades.csv
+-rw-rw-r-- 1 ubuntu ubuntu  84K May 13 13:21 htr_v3_config_comparison.png
+-rw-rw-r-- 1 ubuntu ubuntu 800K May 13 13:08 htr_v3_multisymbol_backtest_1y.json
+-rw-rw-r-- 1 ubuntu ubuntu 1.3K May 13 13:08 htr_v3_multisymbol_backtest_1y.md
+-rw-rw-r-- 1 ubuntu ubuntu 6.8K May 13 13:21 htr_v3_multisymbol_backtest_1y_full_report.md
+-rw-rw-r-- 1 ubuntu ubuntu 129K May 13 13:21 htr_v3_vs_v2_equity_curve.png
+-rw-rw-r-- 1 ubuntu ubuntu  13K May 13 13:26 migration_inventory.txt
+-rw-r--r-- 1 ubuntu ubuntu  688 May 13 13:21 v3_chart_quality_check_notes.md
