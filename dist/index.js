@@ -10604,7 +10604,10 @@ var BINANCE_POLL_INTERVAL = 15e3;
 var MARKET_STALE_MS = 45e3;
 var clients = /* @__PURE__ */ new Map();
 var BINANCE_TICKER_BASE = "https://api.binance.com/api/v3/ticker/24hr";
-var BYBIT_TICKER_BASE = "https://api.bybit.com/v5/market/tickers";
+var CRYPTOCOMPARE_BASE = "https://min-api.cryptocompare.com/data/pricemultifull";
+function toCryptoCompareSymbol(symbol) {
+  return symbol.toUpperCase().replace(/USDT$/, "").replace(/BUSD$/, "").replace(/USD$/, "");
+}
 var marketDataState = {
   refreshTimer: null,
   isRefreshing: false,
@@ -10690,26 +10693,26 @@ async function fetchBinanceTicker(symbol) {
     ts: Date.now()
   };
 }
-async function fetchBybitTicker(symbol) {
-  const url = `${BYBIT_TICKER_BASE}?category=spot&symbol=${symbol.toUpperCase()}`;
+async function fetchCryptoCompareTicker(symbol) {
+  const fsym = toCryptoCompareSymbol(symbol);
+  const url = `${CRYPTOCOMPARE_BASE}?fsyms=${fsym}&tsyms=USDT`;
   const response = await fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
     signal: AbortSignal.timeout(12e3)
   });
   if (!response.ok) {
-    throw new Error(`Bybit HTTP ${response.status} ${response.statusText}`);
+    throw new Error(`CryptoCompare HTTP ${response.status} ${response.statusText}`);
   }
   const payload = await response.json();
-  if (payload.retCode !== 0) throw new Error(`Bybit API \u932F\u8AA4\uFF1AretCode ${payload.retCode}`);
-  const item = payload.result?.list?.[0];
-  if (!item) throw new Error(`Bybit ticker \u7121\u8CC7\u6599\uFF1A${symbol}`);
-  const price = Number(item.lastPrice);
-  const change24h = Number(item.price24hPcnt) * 100;
-  const high24h = Number(item.highPrice24h);
-  const low24h = Number(item.lowPrice24h);
-  const volume24h = Number(item.volume24h);
+  const raw = payload.RAW?.[fsym]?.["USDT"];
+  if (!raw) throw new Error(`CryptoCompare \u7121\u8CC7\u6599\uFF1A${symbol}`);
+  const price = raw.PRICE;
+  const change24h = raw.CHANGEPCT24HOUR;
+  const high24h = raw.HIGH24HOUR;
+  const low24h = raw.LOW24HOUR;
+  const volume24h = raw.VOLUME24HOURTO;
   if (!Number.isFinite(price) || price <= 0) {
-    throw new Error(`Bybit ticker \u50F9\u683C\u7121\u6548\uFF1A${symbol}`);
+    throw new Error(`CryptoCompare ticker \u50F9\u683C\u7121\u6548\uFF1A${symbol}`);
   }
   return {
     type: "ticker",
@@ -10724,10 +10727,10 @@ async function fetchBybitTicker(symbol) {
 }
 async function fetchTickerWithFallback(symbol) {
   try {
+    return await fetchCryptoCompareTicker(symbol);
+  } catch (ccErr) {
+    console.warn(`[WS] CryptoCompare ticker \u5931\u6557\uFF0C\u5617\u8A66 Binance\uFF1A${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
     return await fetchBinanceTicker(symbol);
-  } catch (binanceErr) {
-    console.warn(`[WS] Binance ticker \u5931\u6557\uFF0C\u5617\u8A66 Bybit\uFF1A${binanceErr instanceof Error ? binanceErr.message : String(binanceErr)}`);
-    return await fetchBybitTicker(symbol);
   }
 }
 async function refreshMarketData(symbols) {
