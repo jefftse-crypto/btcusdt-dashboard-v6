@@ -55,6 +55,7 @@ const BINANCE_FUTURES_BASE = "https://fapi.binance.com";
 const FEAR_GREED_BASE = "https://api.alternative.me/fng/";
 const COINGECKO_COIN_BASE = "https://api.coingecko.com/api/v3/coins";
 const OKX_BASE = "https://www.okx.com/api/v5/market/history-candles";
+const CRYPTOCOMPARE_HISTO_BASE = "https://min-api.cryptocompare.com/data/v2";
 const CANDLE_CACHE_TTL_MS = 30_000;
 const SNAPSHOT_CACHE_TTL_MS = 45_000;
 
@@ -188,6 +189,43 @@ async function fetchOkxCandles(symbol: string, timeframe: string, limit: number)
   return sanitizeCandles(all).slice(-target);
 }
 
+// ── CryptoCompare OHLCV fallback ──
+const CC_INTERVAL_MAP: Record<string, { endpoint: string; aggregate?: number }> = {
+  "5m":  { endpoint: "histominute", aggregate: 5 },
+  "15m": { endpoint: "histominute", aggregate: 15 },
+  "1h":  { endpoint: "histohour",   aggregate: 1 },
+  "1H":  { endpoint: "histohour",   aggregate: 1 },
+  "4h":  { endpoint: "histohour",   aggregate: 4 },
+  "4H":  { endpoint: "histohour",   aggregate: 4 },
+  "1d":  { endpoint: "histoday",    aggregate: 1 },
+  "1D":  { endpoint: "histoday",    aggregate: 1 },
+};
+
+async function fetchCryptoCompareCandles(symbol: string, timeframe: string, limit: number): Promise<Candle[]> {
+  const fsym = symbol.replace(/USDT$/i, "").toUpperCase();
+  const cfg = CC_INTERVAL_MAP[timeframe] ?? { endpoint: "histohour", aggregate: 1 };
+  const safeLimit = Math.min(limit, 2000);
+  const url = `${CRYPTOCOMPARE_HISTO_BASE}/${cfg.endpoint}?fsym=${fsym}&tsym=USDT&limit=${safeLimit}${cfg.aggregate && cfg.aggregate > 1 ? `&aggregate=${cfg.aggregate}` : ""}`;
+  const res = await fetch(url, { signal: AbortSignal.timeout(15_000) });
+  if (!res.ok) throw new Error(`CryptoCompare OHLCV ${res.status}`);
+  const payload = (await res.json()) as { Data?: { Data?: unknown[] } };
+  const rows = payload.Data?.Data;
+  if (!Array.isArray(rows) || rows.length === 0) throw new Error("CryptoCompare OHLCV empty");
+  return sanitizeCandles(
+    rows.map((r) => {
+      const row = r as Record<string, number>;
+      return {
+        time: row["time"] * 1000,
+        open: row["open"],
+        high: row["high"],
+        low: row["low"],
+        close: row["close"],
+        volume: row["volumeto"] ?? row["volumefrom"] ?? 0,
+      } as Candle;
+    })
+  ).slice(-safeLimit);
+}
+
 export async function fetchCandles(symbol: string, timeframe: string, limit = 200): Promise<Candle[]> {
   const normalized = normalizeSymbol(symbol);
   const interval = INTERVAL_MAP[timeframe] ?? timeframe;
@@ -196,6 +234,7 @@ export async function fetchCandles(symbol: string, timeframe: string, limit = 20
   const cached = serverCache.get<Candle[]>(cacheKey);
   if (cached?.length) return cached;
 
+  // 1st: Binance
   try {
     const candles = await fetchBinanceCandles(normalized, interval, safeLimit);
     if (candles.length > 0) {
@@ -205,15 +244,33 @@ export async function fetchCandles(symbol: string, timeframe: string, limit = 20
     throw new Error("Binance returned empty candle set");
   } catch (binanceError) {
     console.warn(`[fetchCandles] Binance 失敗，嘗試 OKX：${binanceError instanceof Error ? binanceError.message : String(binanceError)}`);
-    try {
-      const candles = await fetchOkxCandles(normalized, interval, safeLimit);
+  }
+
+  // 2nd: OKX
+  try {
+    const candles = await fetchOkxCandles(normalized, interval, safeLimit);
+    if (candles.length > 0) {
       serverCache.set(cacheKey, candles, CANDLE_CACHE_TTL_MS);
       return candles;
-    } catch (okxError) {
-      console.error(`[fetchCandles] OKX 也失敗：${okxError instanceof Error ? okxError.message : String(okxError)}`);
-      return [];
     }
+    throw new Error("OKX returned empty candle set");
+  } catch (okxError) {
+    console.warn(`[fetchCandles] OKX 失敗，嘗試 CryptoCompare：${okxError instanceof Error ? okxError.message : String(okxError)}`);
   }
+
+  // 3rd: CryptoCompare OHLCV (no IP restrictions)
+  try {
+    const candles = await fetchCryptoCompareCandles(normalized, interval, safeLimit);
+    if (candles.length > 0) {
+      serverCache.set(cacheKey, candles, CANDLE_CACHE_TTL_MS);
+      console.log(`[fetchCandles] CryptoCompare OHLCV 成功：${normalized} ${interval} ${candles.length} 根`);
+      return candles;
+    }
+  } catch (ccError) {
+    console.error(`[fetchCandles] CryptoCompare 也失敗：${ccError instanceof Error ? ccError.message : String(ccError)}`);
+  }
+
+  return [];
 }
 
 export async function fetchCandlesPaged(symbol: string, timeframe: string, limit = 200): Promise<Candle[]> {

@@ -63,15 +63,7 @@ interface ClientState {
   lastPing: number;
 }
 
-interface BinanceTicker24h {
-  symbol: string;
-  lastPrice: string;
-  priceChangePercent: string;
-  highPrice: string;
-  lowPrice: string;
-  volume: string;
-  openPrice: string;
-}
+// BinanceTicker24h interface removed — Binance REST blocked on Render
 
 interface CryptoCompareRaw {
   PRICE: number;
@@ -96,8 +88,14 @@ const HEARTBEAT_INTERVAL = 30_000;
 const BINANCE_POLL_INTERVAL = 15_000;
 const MARKET_STALE_MS = 45_000;
 const clients = new Map<string, ClientState>();
-const BINANCE_TICKER_BASE = "https://api.binance.com/api/v3/ticker/24hr";
 const CRYPTOCOMPARE_BASE = "https://min-api.cryptocompare.com/data/pricemultifull";
+const COINGECKO_BASE = "https://api.coingecko.com/api/v3/simple/price";
+const COINGECKO_COIN_MAP: Record<string, string> = {
+  BTCUSDT: "bitcoin", ETHUSDT: "ethereum", BNBUSDT: "binancecoin",
+  SOLUSDT: "solana", XRPUSDT: "ripple", ADAUSDT: "cardano",
+  DOGEUSDT: "dogecoin", AVAXUSDT: "avalanche-2", DOTUSDT: "polkadot",
+  LINKUSDT: "chainlink",
+};
 
 // CryptoCompare symbol map: BTCUSDT -> BTC
 function toCryptoCompareSymbol(symbol: string): string {
@@ -171,39 +169,8 @@ function broadcastTicker(msg: WsTickerMsg) {
   });
 }
 
-async function fetchBinanceTicker(symbol: string): Promise<WsTickerMsg> {
-  const url = `${BINANCE_TICKER_BASE}?symbol=${symbol.toUpperCase()}`;
-  const response = await fetch(url, {
-    headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
-    signal: AbortSignal.timeout(12_000),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Binance HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const ticker = (await response.json()) as BinanceTicker24h;
-  const price = Number(ticker.lastPrice);
-  const change24h = Number(ticker.priceChangePercent);
-  const high24h = Number(ticker.highPrice);
-  const low24h = Number(ticker.lowPrice);
-  const volume24h = Number(ticker.volume);
-
-  if (!Number.isFinite(price) || price <= 0) {
-    throw new Error(`Binance ticker 價格無效：${symbol}`);
-  }
-
-  return {
-    type: "ticker",
-    symbol,
-    price,
-    change24h: Number.isFinite(change24h) ? change24h : 0,
-    high24h: Number.isFinite(high24h) ? high24h : price,
-    low24h: Number.isFinite(low24h) ? low24h : price,
-    volume24h: Number.isFinite(volume24h) ? volume24h : 0,
-    ts: Date.now(),
-  };
-}
+// Binance ticker removed — blocked on Render (HTTP 451/403)
+// Using CryptoCompare (primary) + CoinGecko (fallback) instead
 
 async function fetchCryptoCompareTicker(symbol: string): Promise<WsTickerMsg> {
   const fsym = toCryptoCompareSymbol(symbol);
@@ -243,12 +210,41 @@ async function fetchCryptoCompareTicker(symbol: string): Promise<WsTickerMsg> {
   };
 }
 
+async function fetchCoinGeckoTicker(symbol: string): Promise<WsTickerMsg> {
+  const coinId = COINGECKO_COIN_MAP[symbol.toUpperCase()] ?? "bitcoin";
+  const url = `${COINGECKO_BASE}?ids=${coinId}&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_high_low_24h=true`;
+  const response = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
+    signal: AbortSignal.timeout(12_000),
+  });
+  if (!response.ok) throw new Error(`CoinGecko HTTP ${response.status}`);
+  const data = (await response.json()) as Record<string, Record<string, number>>;
+  const coin = data[coinId];
+  if (!coin) throw new Error(`CoinGecko 無資料：${symbol}`);
+  const price = coin["usd"];
+  if (!Number.isFinite(price) || price <= 0) throw new Error(`CoinGecko 價格無效：${symbol}`);
+  return {
+    type: "ticker",
+    symbol,
+    price,
+    change24h: coin["usd_24h_change"] ?? 0,
+    high24h: coin["usd_24h_high"] ?? price,
+    low24h: coin["usd_24h_low"] ?? price,
+    volume24h: coin["usd_24h_vol"] ?? 0,
+    ts: Date.now(),
+  };
+}
+
 async function fetchTickerWithFallback(symbol: string): Promise<WsTickerMsg> {
   try {
     return await fetchCryptoCompareTicker(symbol);
   } catch (ccErr) {
-    console.warn(`[WS] CryptoCompare ticker 失敗，嘗試 Binance：${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
-    return await fetchBinanceTicker(symbol);
+    console.warn(`[WS] CryptoCompare 失敗，嘗試 CoinGecko：${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
+    try {
+      return await fetchCoinGeckoTicker(symbol);
+    } catch (cgErr) {
+      throw new Error(`所有 ticker 來源均失敗 - CC: ${ccErr instanceof Error ? ccErr.message : ccErr} | CG: ${cgErr instanceof Error ? cgErr.message : cgErr}`);
+    }
   }
 }
 

@@ -1164,6 +1164,30 @@ async function fetchOkxCandles(symbol, timeframe, limit) {
   }
   return sanitizeCandles(all).slice(-target);
 }
+async function fetchCryptoCompareCandles(symbol, timeframe, limit) {
+  const fsym = symbol.replace(/USDT$/i, "").toUpperCase();
+  const cfg = CC_INTERVAL_MAP[timeframe] ?? { endpoint: "histohour", aggregate: 1 };
+  const safeLimit = Math.min(limit, 2e3);
+  const url = `${CRYPTOCOMPARE_HISTO_BASE}/${cfg.endpoint}?fsym=${fsym}&tsym=USDT&limit=${safeLimit}${cfg.aggregate && cfg.aggregate > 1 ? `&aggregate=${cfg.aggregate}` : ""}`;
+  const res = await fetch(url, { signal: AbortSignal.timeout(15e3) });
+  if (!res.ok) throw new Error(`CryptoCompare OHLCV ${res.status}`);
+  const payload = await res.json();
+  const rows = payload.Data?.Data;
+  if (!Array.isArray(rows) || rows.length === 0) throw new Error("CryptoCompare OHLCV empty");
+  return sanitizeCandles(
+    rows.map((r) => {
+      const row = r;
+      return {
+        time: row["time"] * 1e3,
+        open: row["open"],
+        high: row["high"],
+        low: row["low"],
+        close: row["close"],
+        volume: row["volumeto"] ?? row["volumefrom"] ?? 0
+      };
+    })
+  ).slice(-safeLimit);
+}
 async function fetchCandles(symbol, timeframe, limit = 200) {
   const normalized = normalizeSymbol(symbol);
   const interval = INTERVAL_MAP[timeframe] ?? timeframe;
@@ -1180,15 +1204,28 @@ async function fetchCandles(symbol, timeframe, limit = 200) {
     throw new Error("Binance returned empty candle set");
   } catch (binanceError) {
     console.warn(`[fetchCandles] Binance \u5931\u6557\uFF0C\u5617\u8A66 OKX\uFF1A${binanceError instanceof Error ? binanceError.message : String(binanceError)}`);
-    try {
-      const candles = await fetchOkxCandles(normalized, interval, safeLimit);
+  }
+  try {
+    const candles = await fetchOkxCandles(normalized, interval, safeLimit);
+    if (candles.length > 0) {
       serverCache.set(cacheKey, candles, CANDLE_CACHE_TTL_MS);
       return candles;
-    } catch (okxError) {
-      console.error(`[fetchCandles] OKX \u4E5F\u5931\u6557\uFF1A${okxError instanceof Error ? okxError.message : String(okxError)}`);
-      return [];
     }
+    throw new Error("OKX returned empty candle set");
+  } catch (okxError) {
+    console.warn(`[fetchCandles] OKX \u5931\u6557\uFF0C\u5617\u8A66 CryptoCompare\uFF1A${okxError instanceof Error ? okxError.message : String(okxError)}`);
   }
+  try {
+    const candles = await fetchCryptoCompareCandles(normalized, interval, safeLimit);
+    if (candles.length > 0) {
+      serverCache.set(cacheKey, candles, CANDLE_CACHE_TTL_MS);
+      console.log(`[fetchCandles] CryptoCompare OHLCV \u6210\u529F\uFF1A${normalized} ${interval} ${candles.length} \u6839`);
+      return candles;
+    }
+  } catch (ccError) {
+    console.error(`[fetchCandles] CryptoCompare \u4E5F\u5931\u6557\uFF1A${ccError instanceof Error ? ccError.message : String(ccError)}`);
+  }
+  return [];
 }
 async function fetchCandlesPaged(symbol, timeframe, limit = 200) {
   return fetchCandles(symbol, timeframe, limit);
@@ -1895,7 +1932,7 @@ async function analyzeSymbol(symbol, timeframe = "1h") {
 async function runAnalysis(symbol, timeframe = "1h") {
   return analyzeSymbol(symbol, timeframe);
 }
-var ANALYSIS_THRESHOLDS, BINANCE_BASE, BINANCE_FUTURES_BASE, FEAR_GREED_BASE, COINGECKO_COIN_BASE, OKX_BASE, CANDLE_CACHE_TTL_MS, SNAPSHOT_CACHE_TTL_MS, INTERVAL_MAP, OKX_BAR_MAP;
+var ANALYSIS_THRESHOLDS, BINANCE_BASE, BINANCE_FUTURES_BASE, FEAR_GREED_BASE, COINGECKO_COIN_BASE, OKX_BASE, CRYPTOCOMPARE_HISTO_BASE, CANDLE_CACHE_TTL_MS, SNAPSHOT_CACHE_TTL_MS, INTERVAL_MAP, OKX_BAR_MAP, CC_INTERVAL_MAP;
 var init_analysis = __esm({
   "server/analysis.ts"() {
     "use strict";
@@ -1911,6 +1948,7 @@ var init_analysis = __esm({
     FEAR_GREED_BASE = "https://api.alternative.me/fng/";
     COINGECKO_COIN_BASE = "https://api.coingecko.com/api/v3/coins";
     OKX_BASE = "https://www.okx.com/api/v5/market/history-candles";
+    CRYPTOCOMPARE_HISTO_BASE = "https://min-api.cryptocompare.com/data/v2";
     CANDLE_CACHE_TTL_MS = 3e4;
     SNAPSHOT_CACHE_TTL_MS = 45e3;
     INTERVAL_MAP = {
@@ -1939,6 +1977,16 @@ var init_analysis = __esm({
       "4H": "4H",
       "1d": "1D",
       "1D": "1D"
+    };
+    CC_INTERVAL_MAP = {
+      "5m": { endpoint: "histominute", aggregate: 5 },
+      "15m": { endpoint: "histominute", aggregate: 15 },
+      "1h": { endpoint: "histohour", aggregate: 1 },
+      "1H": { endpoint: "histohour", aggregate: 1 },
+      "4h": { endpoint: "histohour", aggregate: 4 },
+      "4H": { endpoint: "histohour", aggregate: 4 },
+      "1d": { endpoint: "histoday", aggregate: 1 },
+      "1D": { endpoint: "histoday", aggregate: 1 }
     };
   }
 });
@@ -10603,8 +10651,20 @@ var HEARTBEAT_INTERVAL = 3e4;
 var BINANCE_POLL_INTERVAL = 15e3;
 var MARKET_STALE_MS = 45e3;
 var clients = /* @__PURE__ */ new Map();
-var BINANCE_TICKER_BASE = "https://api.binance.com/api/v3/ticker/24hr";
 var CRYPTOCOMPARE_BASE = "https://min-api.cryptocompare.com/data/pricemultifull";
+var COINGECKO_BASE = "https://api.coingecko.com/api/v3/simple/price";
+var COINGECKO_COIN_MAP = {
+  BTCUSDT: "bitcoin",
+  ETHUSDT: "ethereum",
+  BNBUSDT: "binancecoin",
+  SOLUSDT: "solana",
+  XRPUSDT: "ripple",
+  ADAUSDT: "cardano",
+  DOGEUSDT: "dogecoin",
+  AVAXUSDT: "avalanche-2",
+  DOTUSDT: "polkadot",
+  LINKUSDT: "chainlink"
+};
 function toCryptoCompareSymbol(symbol) {
   return symbol.toUpperCase().replace(/USDT$/, "").replace(/BUSD$/, "").replace(/USD$/, "");
 }
@@ -10664,35 +10724,6 @@ function broadcastTicker(msg) {
     }
   });
 }
-async function fetchBinanceTicker(symbol) {
-  const url = `${BINANCE_TICKER_BASE}?symbol=${symbol.toUpperCase()}`;
-  const response = await fetch(url, {
-    headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
-    signal: AbortSignal.timeout(12e3)
-  });
-  if (!response.ok) {
-    throw new Error(`Binance HTTP ${response.status} ${response.statusText}`);
-  }
-  const ticker = await response.json();
-  const price = Number(ticker.lastPrice);
-  const change24h = Number(ticker.priceChangePercent);
-  const high24h = Number(ticker.highPrice);
-  const low24h = Number(ticker.lowPrice);
-  const volume24h = Number(ticker.volume);
-  if (!Number.isFinite(price) || price <= 0) {
-    throw new Error(`Binance ticker \u50F9\u683C\u7121\u6548\uFF1A${symbol}`);
-  }
-  return {
-    type: "ticker",
-    symbol,
-    price,
-    change24h: Number.isFinite(change24h) ? change24h : 0,
-    high24h: Number.isFinite(high24h) ? high24h : price,
-    low24h: Number.isFinite(low24h) ? low24h : price,
-    volume24h: Number.isFinite(volume24h) ? volume24h : 0,
-    ts: Date.now()
-  };
-}
 async function fetchCryptoCompareTicker(symbol) {
   const fsym = toCryptoCompareSymbol(symbol);
   const url = `${CRYPTOCOMPARE_BASE}?fsyms=${fsym}&tsyms=USDT`;
@@ -10725,12 +10756,40 @@ async function fetchCryptoCompareTicker(symbol) {
     ts: Date.now()
   };
 }
+async function fetchCoinGeckoTicker(symbol) {
+  const coinId = COINGECKO_COIN_MAP[symbol.toUpperCase()] ?? "bitcoin";
+  const url = `${COINGECKO_BASE}?ids=${coinId}&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_high_low_24h=true`;
+  const response = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
+    signal: AbortSignal.timeout(12e3)
+  });
+  if (!response.ok) throw new Error(`CoinGecko HTTP ${response.status}`);
+  const data = await response.json();
+  const coin = data[coinId];
+  if (!coin) throw new Error(`CoinGecko \u7121\u8CC7\u6599\uFF1A${symbol}`);
+  const price = coin["usd"];
+  if (!Number.isFinite(price) || price <= 0) throw new Error(`CoinGecko \u50F9\u683C\u7121\u6548\uFF1A${symbol}`);
+  return {
+    type: "ticker",
+    symbol,
+    price,
+    change24h: coin["usd_24h_change"] ?? 0,
+    high24h: coin["usd_24h_high"] ?? price,
+    low24h: coin["usd_24h_low"] ?? price,
+    volume24h: coin["usd_24h_vol"] ?? 0,
+    ts: Date.now()
+  };
+}
 async function fetchTickerWithFallback(symbol) {
   try {
     return await fetchCryptoCompareTicker(symbol);
   } catch (ccErr) {
-    console.warn(`[WS] CryptoCompare ticker \u5931\u6557\uFF0C\u5617\u8A66 Binance\uFF1A${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
-    return await fetchBinanceTicker(symbol);
+    console.warn(`[WS] CryptoCompare \u5931\u6557\uFF0C\u5617\u8A66 CoinGecko\uFF1A${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
+    try {
+      return await fetchCoinGeckoTicker(symbol);
+    } catch (cgErr) {
+      throw new Error(`\u6240\u6709 ticker \u4F86\u6E90\u5747\u5931\u6557 - CC: ${ccErr instanceof Error ? ccErr.message : ccErr} | CG: ${cgErr instanceof Error ? cgErr.message : cgErr}`);
+    }
   }
 }
 async function refreshMarketData(symbols) {
