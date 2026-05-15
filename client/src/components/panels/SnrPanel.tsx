@@ -152,7 +152,7 @@ function SRZoneCard({
             {isSupport ? "支撐" : "阻力"}
           </span>
           {level.label && (
-            <span className="text-[9px] text-[#666]">{level.label}</span>
+            <span className="text-[9px] text-[#7a8aaa]">{level.label}</span>
           )}
         </div>
         <FreshnessBar touches={level.touches} />
@@ -171,7 +171,7 @@ function SRZoneCard({
           <div className="text-[10px] font-mono" style={{ color: isSupport ? "#4caf50" : "#ef5350" }}>
             {dist}
           </div>
-          <div className="text-[9px] text-[#555]">
+          <div className="text-[9px] text-[#6b7a99]">
             觸碰 {level.touches} 次 · 強度 {level.strength}/5
           </div>
         </div>
@@ -283,7 +283,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-40 text-[#555] text-sm">
+      <div className="flex items-center justify-center h-40 text-[#6b7a99] text-sm">
         <div className="text-center">
           <div className="text-2xl mb-2">📐</div>
           <div>SNR 分析中...</div>
@@ -294,7 +294,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
 
   if (!snapshot?.pa) {
     return (
-      <div className="flex items-center justify-center h-40 text-[#555] text-sm">
+      <div className="flex items-center justify-center h-40 text-[#6b7a99] text-sm">
         <div className="text-center">
           <div className="text-2xl mb-2">📐</div>
           <div>請先執行分析以載入 SNR 資料</div>
@@ -308,13 +308,13 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
   const atr = tf4h?.atr ?? 0;
 
   return (
-    <div className="text-[#ccc] text-xs space-y-3">
+    <div className="text-[#d0daea] text-xs space-y-3">
 
       {/* ── 標題 ── */}
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-sm font-bold text-[#ccc]">📐 SNR 支撐阻力分析</div>
-          <div className="text-[9px] text-[#555] mt-0.5">
+          <div className="text-sm font-bold text-[#d0daea]">📐 SNR 支撐阻力分析</div>
+          <div className="text-[9px] text-[#6b7a99] mt-0.5">
             基於 JiaSheng 機構畫法 · 訂單消耗原理 · 故事線策略
           </div>
         </div>
@@ -335,7 +335,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
       {/* ── 故事線視覺化 ── */}
       {storyline && (
         <div className="rounded p-3" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
-          <div className="text-[10px] text-[#888] mb-2 font-semibold uppercase tracking-wider">
+          <div className="text-[10px] text-[#8896b0] mb-2 font-semibold uppercase tracking-wider">
             📖 故事線（Storyline）
           </div>
 
@@ -359,7 +359,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
             {/* 路障 */}
             {storyline.roadblocks.length > 0 && (
               <div className="ml-3 mb-1.5">
-                <div className="text-[9px] text-[#555] mb-1">路障（Roadblocks）— 部分止盈位</div>
+                <div className="text-[9px] text-[#6b7a99] mb-1">路障（Roadblocks）— 部分止盈位</div>
                 {storyline.roadblocks.map((rb, i) => (
                   <div key={i} className="flex items-center justify-between p-1.5 rounded mb-1"
                     style={{ background: "rgba(255,152,0,0.05)", border: "1px solid rgba(255,152,0,0.15)" }}>
@@ -403,7 +403,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
           </div>
 
           {/* 故事線描述 */}
-          <div className="mt-2 p-2 rounded text-[9px] text-[#666]"
+          <div className="mt-2 p-2 rounded text-[9px] text-[#7a8aaa]"
             style={{ background: "#111", border: "1px solid #1a1a1a" }}>
             {storyline.isBullish
               ? `📗 看多劇本：價格從下方支撐 ${storyline.nearestSup.price.toFixed(2)} 反彈，目標上方阻力 ${storyline.nearestRes.price.toFixed(2)}。途中注意路障處的回調。`
@@ -419,7 +419,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
       {storyline && (
         <div className="rounded p-3" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
           <div className="flex items-center justify-between mb-2">
-            <div className="text-[10px] text-[#888] font-semibold uppercase tracking-wider">
+            <div className="text-[10px] text-[#8896b0] font-semibold uppercase tracking-wider">
               ✅ 三重確認進場（The Trading Channel）
             </div>
             <div
@@ -515,7 +515,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
 
       {/* ── SNR 區域清單（帶新鮮度評分） ── */}
       <div className="rounded p-3" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
-        <div className="text-[10px] text-[#888] mb-2 font-semibold uppercase tracking-wider">
+        <div className="text-[10px] text-[#8896b0] mb-2 font-semibold uppercase tracking-wider">
           🗺 SNR 區域清單（4H · 訂單消耗評分）
         </div>
 
@@ -568,7 +568,7 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
 
       {/* ── 多時間框架 SNR 彙整 ── */}
       <div className="rounded p-3" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
-        <div className="text-[10px] text-[#888] mb-2 font-semibold uppercase tracking-wider">
+        <div className="text-[10px] text-[#8896b0] mb-2 font-semibold uppercase tracking-wider">
           🕐 多時間框架 SNR 彙整（MTFA）
         </div>
         <div className="text-[9px] text-[#444] mb-2">
@@ -579,16 +579,16 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
           <table className="w-full text-[9px]" style={{ borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid #1e1e1e" }}>
-                <th className="text-left py-1 pr-2 text-[#555]">時間框架</th>
+                <th className="text-left py-1 pr-2 text-[#6b7a99]">時間框架</th>
                 <th className="text-right py-1 px-2 text-[#ef5350]">最近阻力</th>
                 <th className="text-right py-1 px-2 text-[#4caf50]">最近支撐</th>
-                <th className="text-right py-1 pl-2 text-[#888]">RSI</th>
+                <th className="text-right py-1 pl-2 text-[#8896b0]">RSI</th>
               </tr>
             </thead>
             <tbody>
               {mtfSrSummary.map((row, i) => row && (
                 <tr key={i} style={{ borderBottom: "1px solid #111" }}>
-                  <td className="py-1 pr-2 font-mono text-[#666]">{row.tf.toUpperCase()}</td>
+                  <td className="py-1 pr-2 font-mono text-[#7a8aaa]">{row.tf.toUpperCase()}</td>
                   <td className="py-1 px-2 text-right font-mono" style={{ color: "#ef5350" }}>
                     {row.nearRes ? row.nearRes.price.toFixed(2) : "—"}
                     {row.nearRes && <span className="text-[#444] ml-1">({pctFromPrice(currentPrice, row.nearRes.price)})</span>}
@@ -611,15 +611,15 @@ export function SnrPanel({ snapshot, currentPrice, isLoading }: Props) {
 
       {/* ── 常見錯誤提醒 ── */}
       <div className="rounded p-3" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
-        <div className="text-[10px] text-[#888] mb-2 font-semibold uppercase tracking-wider">
+        <div className="text-[10px] text-[#8896b0] mb-2 font-semibold uppercase tracking-wider">
           ⚠ SNR 常見錯誤提醒
         </div>
-        <div className="space-y-1 text-[9px] text-[#555]">
-          <div>❌ <span className="text-[#666]">只畫一條線</span>：SNR 必須是「區域（Zone）」，用矩形框出插針到實體密集處</div>
-          <div>❌ <span className="text-[#666]">觸碰次數越多越好</span>：實際上觸碰越多 → 訂單消耗越多 → 越容易突破</div>
-          <div>❌ <span className="text-[#666]">盲目進場</span>：必須等待 K 線型態（吞沒/晨星）+ EMA 交叉 + RSI 確認</div>
-          <div>❌ <span className="text-[#666]">止損過緊</span>：止損要設在 SNR 區域最外側插針再加呼吸空間，避免被假突破掃出</div>
-          <div>❌ <span className="text-[#666]">逆勢交易</span>：強趨勢中不要在支撐接飛刀，順勢找阻力做空才是正確方向</div>
+        <div className="space-y-1 text-[9px] text-[#6b7a99]">
+          <div>❌ <span className="text-[#7a8aaa]">只畫一條線</span>：SNR 必須是「區域（Zone）」，用矩形框出插針到實體密集處</div>
+          <div>❌ <span className="text-[#7a8aaa]">觸碰次數越多越好</span>：實際上觸碰越多 → 訂單消耗越多 → 越容易突破</div>
+          <div>❌ <span className="text-[#7a8aaa]">盲目進場</span>：必須等待 K 線型態（吞沒/晨星）+ EMA 交叉 + RSI 確認</div>
+          <div>❌ <span className="text-[#7a8aaa]">止損過緊</span>：止損要設在 SNR 區域最外側插針再加呼吸空間，避免被假突破掃出</div>
+          <div>❌ <span className="text-[#7a8aaa]">逆勢交易</span>：強趨勢中不要在支撐接飛刀，順勢找阻力做空才是正確方向</div>
         </div>
       </div>
 

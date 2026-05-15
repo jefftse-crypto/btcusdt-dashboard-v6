@@ -35,7 +35,7 @@ function StrengthBadge({ strength }: { strength: string }) {
   const colors: Record<string, string> = {
     strong: "bg-[#f44336]/20 text-[#f44336] border border-[#f44336]/30",
     medium: "bg-[#ff9800]/20 text-[#ff9800] border border-[#ff9800]/30",
-    weak:   "bg-[#888]/20 text-[#888] border border-[#888]/30",
+    weak:   "bg-[#888]/20 text-[#8896b0] border border-[#888]/30",
   };
   const labels: Record<string, string> = { strong: "強", medium: "中", weak: "弱" };
   return (
@@ -73,25 +73,25 @@ function DivergenceCard({ div }: { div: PaDivergence }) {
           <span className="text-xs font-semibold" style={{ color }}>
             {typeLabel}{dirLabel}
           </span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e1e1e] text-[#888]">
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#161b27] text-[#8896b0]">
             {indicatorLabel}
           </span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e1e1e] text-[#888]">
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#161b27] text-[#8896b0]">
             {div.timeframe}
           </span>
         </div>
         <StrengthBadge strength={div.strength} />
       </div>
 
-      <p className="text-xs text-[#bbb] leading-relaxed">{div.description}</p>
+      <p className="text-xs text-[#b8c4d8] leading-relaxed">{div.description}</p>
 
-      <div className="flex gap-4 text-[10px] text-[#666]">
+      <div className="flex gap-4 text-[10px] text-[#7a8aaa]">
         <span>價格：{priceLabel}</span>
         <span>{indicatorLabel}：{indicatorLabel2}</span>
       </div>
 
       {isHidden && (
-        <div className="text-[10px] text-[#888] bg-[#1a1a1a] rounded px-2 py-1">
+        <div className="text-[10px] text-[#8896b0] bg-[#161b27] rounded px-2 py-1">
           💡 隱藏背離代表趨勢延續，而非反轉。{isBullish ? "上漲" : "下跌"}趨勢中的回調機會。
         </div>
       )}
@@ -116,7 +116,7 @@ export function DivergencePanel({ advanced, isLoading }: Props) {
     return (
       <div className="space-y-3">
         {[1, 2, 3].map(i => (
-          <div key={i} className="h-24 rounded-lg bg-[#1a1a1a] animate-pulse" />
+          <div key={i} className="h-24 rounded-lg bg-[#161b27] animate-pulse" />
         ))}
       </div>
     );
@@ -124,7 +124,7 @@ export function DivergencePanel({ advanced, isLoading }: Props) {
 
   if (!advanced) {
     return (
-      <div className="text-center py-12 text-[#555] text-sm">
+      <div className="text-center py-12 text-[#6b7a99] text-sm">
         請先選擇幣種並執行分析
       </div>
     );
@@ -136,16 +136,16 @@ export function DivergencePanel({ advanced, isLoading }: Props) {
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-lg p-3 text-center" style={{ background: "rgba(0,230,118,0.05)", border: "1px solid rgba(0,230,118,0.2)" }}>
           <div className="text-2xl font-bold text-[#00e676]">{bullish.length}</div>
-          <div className="text-xs text-[#888] mt-1">底背離信號</div>
-          <div className="text-[10px] text-[#555] mt-0.5">
+          <div className="text-xs text-[#8896b0] mt-1">底背離信號</div>
+          <div className="text-[10px] text-[#6b7a99] mt-0.5">
             強：{bullish.filter(d => d.strength === "strong").length} ｜
             中：{bullish.filter(d => d.strength === "medium").length}
           </div>
         </div>
         <div className="rounded-lg p-3 text-center" style={{ background: "rgba(244,67,54,0.05)", border: "1px solid rgba(244,67,54,0.2)" }}>
           <div className="text-2xl font-bold text-[#f44336]">{bearish.length}</div>
-          <div className="text-xs text-[#888] mt-1">頂背離信號</div>
-          <div className="text-[10px] text-[#555] mt-0.5">
+          <div className="text-xs text-[#8896b0] mt-1">頂背離信號</div>
+          <div className="text-[10px] text-[#6b7a99] mt-0.5">
             強：{bearish.filter(d => d.strength === "strong").length} ｜
             中：{bearish.filter(d => d.strength === "medium").length}
           </div>
@@ -153,8 +153,8 @@ export function DivergencePanel({ advanced, isLoading }: Props) {
       </div>
 
       {/* Theory explanation */}
-      <div className="rounded-lg p-3 text-xs text-[#777]" style={{ background: "#111", border: "1px solid #222" }}>
-        <div className="font-semibold text-[#999] mb-1">📖 背離理論說明</div>
+      <div className="rounded-lg p-3 text-xs text-[#8896b0]" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="font-semibold text-[#9aaac0] mb-1">📖 背離理論說明</div>
         <div className="space-y-1">
           <div><span className="text-[#00e676]">常規底背離</span>：價格創新低，RSI/MACD 未跟隨 → 趨勢反轉向上</div>
           <div><span className="text-[#f44336]">常規頂背離</span>：價格創新高，RSI/MACD 未跟隨 → 趨勢反轉向下</div>
@@ -165,7 +165,7 @@ export function DivergencePanel({ advanced, isLoading }: Props) {
 
       {/* Divergence list */}
       {allDivergences.length === 0 ? (
-        <div className="text-center py-8 text-[#555] text-sm">
+        <div className="text-center py-8 text-[#6b7a99] text-sm">
           <div className="text-3xl mb-2">🔍</div>
           <div>目前無明顯背離信號</div>
           <div className="text-xs mt-1 text-[#444]">市場動能與價格方向一致</div>

@@ -88,11 +88,11 @@ function ScoreRing({ score }: { score: number }) {
           boxShadow: `0 0 8px ${color}40`,
         }}
       >
-        <div className="w-9 h-9 rounded-full bg-[#0d0d0d] flex items-center justify-center">
+        <div className="w-9 h-9 rounded-full bg-[#0e1117] flex items-center justify-center">
           <span style={{ color }}>{score}</span>
         </div>
       </div>
-      <div className="text-[9px] text-[#555] mt-1">評分</div>
+      <div className="text-[9px] text-[#6b7a99] mt-1">評分</div>
     </div>
   );
 }
@@ -117,7 +117,7 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
             </span>
             <StatusBadge status={setup.status} />
           </div>
-          <div className="flex items-center gap-2 text-[10px] text-[#666]">
+          <div className="flex items-center gap-2 text-[10px] text-[#7a8aaa]">
             {setup.htf_aligned && (
               <span className="text-[#4fc3f7]">✓ 高時框對齊</span>
             )}
@@ -129,7 +129,7 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
 
       {/* 3-step confirmation */}
       <div className="space-y-2">
-        <div className="text-[10px] text-[#666] font-semibold">三步確認流程</div>
+        <div className="text-[10px] text-[#7a8aaa] font-semibold">三步確認流程</div>
 
         {/* Step 1: Sweep — 加入清掃品質評估 */}
         <div className="flex items-start gap-2 rounded p-2" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
@@ -137,10 +137,10 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
             1
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-xs font-semibold text-[#ccc]">
+            <div className="text-xs font-semibold text-[#d0daea]">
               流動性清掃 ({setup.sweep.type})
             </div>
-            <div className="text-[10px] text-[#777] mt-0.5">
+            <div className="text-[10px] text-[#8896b0] mt-0.5">
               清掃 {setup.sweep.type === "SSL" ? "賣方止損流動性（SSL）" : "買方止損流動性（BSL）"} @ {setup.sweep.swept_level.toFixed(2)}
             </div>
             <div className="text-[9px] mt-1" style={{ color: setup.ob.tested ? "#ffd740" : "#00e676" }}>
@@ -158,10 +158,10 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
             2
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-xs font-semibold text-[#ccc]">
+            <div className="text-xs font-semibold text-[#d0daea]">
               FVG 位移 ({setup.fvg.type === "bullish" ? "看多" : "看空"})
             </div>
-            <div className="text-[10px] text-[#777] mt-0.5">
+            <div className="text-[10px] text-[#8896b0] mt-0.5">
               {setup.fvg.bottom.toFixed(2)} – {setup.fvg.top.toFixed(2)}
               {setup.fvg.filled && " (已填補)"}
               {!setup.fvg.filled && ` (大小 ${(setup.fvg.size * 100).toFixed(2)}%)`}
@@ -182,10 +182,10 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
             3
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-xs font-semibold text-[#ccc]">
+            <div className="text-xs font-semibold text-[#d0daea]">
               OB 回踩 ({setup.ob.strength === "strong" ? "強" : "普通"} OB)
             </div>
-            <div className="text-[10px] text-[#777] mt-0.5">
+            <div className="text-[10px] text-[#8896b0] mt-0.5">
               {setup.ob.bottom.toFixed(2)} – {setup.ob.top.toFixed(2)}
               {setup.ob.tested ? " ✓ 已測試" : " ◐ 等待回踩"}
             </div>
@@ -200,7 +200,7 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
       {setup.ob.tested && (
         <div className="rounded p-2" style={{ background: "rgba(255,215,64,0.05)", border: "1px solid rgba(255,215,64,0.2)" }}>
           <div className="text-[10px] text-[#ffd740] font-semibold">⚠️ LIT Inducement 注意</div>
-          <div className="text-[9px] text-[#888] mt-0.5">
+          <div className="text-[9px] text-[#8896b0] mt-0.5">
             此 OB 已被測試，強度降低。根據 Waqar Asim LIT 理論，已測試的 OB 可能是機構誘騙散戶的 Inducement 陷阱。建議搭配更高時間框架確認後再入場。
           </div>
         </div>
@@ -208,11 +208,11 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
 
       {/* Entry zone */}
       <div className="rounded-lg p-3" style={{ background: "#0a0a0a", border: "1px solid #1a1a1a" }}>
-        <div className="text-[10px] text-[#666] mb-2 font-semibold">進場參數</div>
+        <div className="text-[10px] text-[#7a8aaa] mb-2 font-semibold">進場參數</div>
         <div className="grid grid-cols-2 gap-2 text-[10px]">
           <div>
-            <div className="text-[#555]">進場區間</div>
-            <div className="text-[#ccc] font-mono">
+            <div className="text-[#6b7a99]">進場區間</div>
+            <div className="text-[#d0daea] font-mono">
               {setup.entry_zone.bottom.toFixed(2)} – {setup.entry_zone.top.toFixed(2)}
             </div>
           </div>
@@ -230,7 +230,7 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
           </div>
         </div>
         <div className="mt-2 pt-2 border-t border-[#1a1a1a] flex items-center justify-between">
-          <span className="text-[10px] text-[#555]">風報比</span>
+          <span className="text-[10px] text-[#6b7a99]">風報比</span>
           <span className="text-xs font-bold text-[#ffd740]">1:{setup.rr_ratio}</span>
         </div>
       </div>
@@ -247,7 +247,7 @@ export function SmcUltimatePanel({ advanced, isLoading }: Props) {
     return (
       <div className="space-y-3">
         {[1, 2].map(i => (
-          <div key={i} className="h-64 rounded-lg bg-[#1a1a1a] animate-pulse" />
+          <div key={i} className="h-64 rounded-lg bg-[#161b27] animate-pulse" />
         ))}
       </div>
     );
@@ -255,7 +255,7 @@ export function SmcUltimatePanel({ advanced, isLoading }: Props) {
 
   if (!advanced) {
     return (
-      <div className="text-center py-12 text-[#555] text-sm">
+      <div className="text-center py-12 text-[#6b7a99] text-sm">
         請先選擇幣種並執行分析
       </div>
     );
@@ -264,23 +264,23 @@ export function SmcUltimatePanel({ advanced, isLoading }: Props) {
   return (
     <div className="space-y-4">
       {/* Theory — 強化版：加入 LIT Inducement 概念 */}
-      <div className="rounded-lg p-3 text-xs text-[#777]" style={{ background: "#111", border: "1px solid #222" }}>
-        <div className="font-semibold text-[#999] mb-2">📖 SMC 終極確認模型（三步法）+ LIT Inducement 理論</div>
+      <div className="rounded-lg p-3 text-xs text-[#8896b0]" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="font-semibold text-[#9aaac0] mb-2">📖 SMC 終極確認模型（三步法）+ LIT Inducement 理論</div>
         <div className="space-y-1.5">
           <div className="flex items-start gap-2">
             <span className="text-[#f44336] font-bold flex-shrink-0">1.</span>
-            <span><span className="text-[#ccc]">流動性清掃（Liquidity Sweep）</span>：價格突破近期高/低點，清掃止損訂單（SSL/BSL）。<span className="text-[#ffd740]">關鍵：需區分「真實清掃」vs「誘騙清掃（Inducement）」</span></span>
+            <span><span className="text-[#d0daea]">流動性清掃（Liquidity Sweep）</span>：價格突破近期高/低點，清掃止損訂單（SSL/BSL）。<span className="text-[#ffd740]">關鍵：需區分「真實清掃」vs「誘騙清掃（Inducement）」</span></span>
           </div>
           <div className="flex items-start gap-2">
             <span className="text-[#ffd740] font-bold flex-shrink-0">2.</span>
-            <span><span className="text-[#ccc]">位移 + FVG</span>：清掃後強勢反轉，留下公平價值缺口（Fair Value Gap），確認機構真實參與</span>
+            <span><span className="text-[#d0daea]">位移 + FVG</span>：清掃後強勢反轉，留下公平價值缺口（Fair Value Gap），確認機構真實參與</span>
           </div>
           <div className="flex items-start gap-2">
             <span className="text-[#4fc3f7] font-bold flex-shrink-0">3.</span>
-            <span><span className="text-[#ccc]">OB 回踩</span>：價格回踩訂單塊（Order Block）+ FVG 重疊區。<span className="text-[#ffd740]">注意：已被多次測試的 OB 強度降低，可能是 Inducement 陷阱</span></span>
+            <span><span className="text-[#d0daea]">OB 回踩</span>：價格回踩訂單塊（Order Block）+ FVG 重疊區。<span className="text-[#ffd740]">注意：已被多次測試的 OB 強度降低，可能是 Inducement 陷阱</span></span>
           </div>
-          <div className="mt-1 pt-1.5 border-t border-[#1e1e1e] text-[#555]">
-            <span className="text-[#888]">LIT 核心（Waqar Asim）：</span>機構常製造「看起來完美的 OB」誘騙散戶，真實清掃 = 乾淨的 SSL/BSL 獵取 + 未測試 OB + 隨後出現 CHoCH
+          <div className="mt-1 pt-1.5 border-t border-[#2a3148] text-[#6b7a99]">
+            <span className="text-[#8896b0]">LIT 核心（Waqar Asim）：</span>機構常製造「看起來完美的 OB」誘騙散戶，真實清掃 = 乾淨的 SSL/BSL 獵取 + 未測試 OB + 隨後出現 CHoCH
           </div>
         </div>
       </div>
@@ -289,17 +289,17 @@ export function SmcUltimatePanel({ advanced, isLoading }: Props) {
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-lg p-3 text-center" style={{ background: "rgba(0,230,118,0.05)", border: "1px solid rgba(0,230,118,0.2)" }}>
           <div className="text-xl font-bold text-[#00e676]">{activeSetups.length}</div>
-          <div className="text-xs text-[#888] mt-1">進場中機會</div>
+          <div className="text-xs text-[#8896b0] mt-1">進場中機會</div>
         </div>
         <div className="rounded-lg p-3 text-center" style={{ background: "rgba(255,215,64,0.05)", border: "1px solid rgba(255,215,64,0.2)" }}>
           <div className="text-xl font-bold text-[#ffd740]">{waitingSetups.length}</div>
-          <div className="text-xs text-[#888] mt-1">等待回踩</div>
+          <div className="text-xs text-[#8896b0] mt-1">等待回踩</div>
         </div>
       </div>
 
       {/* Setups */}
       {setups.length === 0 ? (
-        <div className="text-center py-8 text-[#555] text-sm">
+        <div className="text-center py-8 text-[#6b7a99] text-sm">
           <div className="text-3xl mb-2">🎯</div>
           <div>目前無完整的三步確認機會</div>
           <div className="text-xs mt-1 text-[#444]">等待流動性清掃 → FVG → OB 三步依序完成</div>

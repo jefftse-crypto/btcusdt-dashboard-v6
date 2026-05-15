@@ -474,7 +474,7 @@ export function SmcPanel({ smc, isLoading, currentPrice }: Props) {
                   const obCount  = smc.ob_count;
                   return (
                     <div key={tf} className="bg-secondary/30 rounded p-2 space-y-1.5">
-                      <div className="text-xs font-bold text-center text-[#ccc]">{tf}</div>
+                      <div className="text-xs font-bold text-center text-[#d0daea]">{tf}</div>
                       <div className={`text-center text-[10px] font-bold px-1 py-0.5 rounded ${
                         struct === "bullish" ? "bg-emerald-500/20 text-emerald-400"
                         : struct === "bearish" ? "bg-red-500/20 text-red-400"

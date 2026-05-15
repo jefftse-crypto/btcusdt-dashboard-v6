@@ -47,7 +47,7 @@ function ScoreBar({ score }: { score: number }) {
   const color = score >= 70 ? "#00e676" : score >= 50 ? "#ffd740" : "#ff9800";
   return (
     <div className="flex items-center gap-2">
-      <div className="flex-1 h-1.5 rounded-full bg-[#222]">
+      <div className="flex-1 h-1.5 rounded-full bg-[#161b27]">
         <div
           className="h-full rounded-full transition-all"
           style={{ width: `${score}%`, background: color }}
@@ -76,7 +76,7 @@ function PatternCard({ item }: { item: PaPatternWithLevel }) {
           <span className="text-xs font-semibold" style={{ color }}>
             {isBullish ? "↑" : "↓"} {item.pattern.name}
           </span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e1e1e] text-[#888]">
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#161b27] text-[#8896b0]">
             {item.timeframe}
           </span>
           {item.at_key_level && (
@@ -94,18 +94,18 @@ function PatternCard({ item }: { item: PaPatternWithLevel }) {
 
       {/* Confluence score */}
       <div>
-        <div className="text-[10px] text-[#666] mb-1">共振評分</div>
+        <div className="text-[10px] text-[#7a8aaa] mb-1">共振評分</div>
         <ScoreBar score={item.confluence_score} />
       </div>
 
       {/* Pattern description */}
-      <p className="text-xs text-[#bbb]">{item.pattern.desc}</p>
+      <p className="text-xs text-[#b8c4d8]">{item.pattern.desc}</p>
 
       {/* Nearest level */}
       {item.nearest_level && (
-        <div className="text-[10px] text-[#777] bg-[#111] rounded px-2 py-1">
+        <div className="text-[10px] text-[#8896b0] bg-[#0e1117] rounded px-2 py-1">
           最近{item.nearest_level.type === "support" ? "支撐" : "阻力"}位：
-          <span className="text-[#aaa] font-mono">{item.nearest_level.price.toFixed(2)}</span>
+          <span className="text-[#b0bcd4] font-mono">{item.nearest_level.price.toFixed(2)}</span>
           （距離 {item.distance_to_level_pct.toFixed(2)}%，強度 {item.nearest_level.strength}）
         </div>
       )}
@@ -113,8 +113,8 @@ function PatternCard({ item }: { item: PaPatternWithLevel }) {
       {/* Entry params */}
       <div className="grid grid-cols-3 gap-2 text-[10px]">
         <div className="rounded p-1.5 text-center" style={{ background: "#1a1a1a" }}>
-          <div className="text-[#555] mb-0.5">進場</div>
-          <div className="text-[#ccc] font-mono">{item.entry.toFixed(2)}</div>
+          <div className="text-[#6b7a99] mb-0.5">進場</div>
+          <div className="text-[#d0daea] font-mono">{item.entry.toFixed(2)}</div>
         </div>
         <div className="rounded p-1.5 text-center" style={{ background: "#1a1a1a" }}>
           <div className="text-[#f44336]/70 mb-0.5">止損</div>
@@ -125,7 +125,7 @@ function PatternCard({ item }: { item: PaPatternWithLevel }) {
           <div className="text-[#00e676] font-mono">{item.tp.toFixed(2)}</div>
         </div>
       </div>
-      <div className="text-[10px] text-[#666] text-right">
+      <div className="text-[10px] text-[#7a8aaa] text-right">
         風報比：<span className="text-[#ffd740] font-semibold">1:{rrRatio.toFixed(1)}</span>
       </div>
     </div>
@@ -146,7 +146,7 @@ export function PaLevelPanel({ advanced, isLoading }: Props) {
     return (
       <div className="space-y-3">
         {[1, 2, 3].map(i => (
-          <div key={i} className="h-36 rounded-lg bg-[#1a1a1a] animate-pulse" />
+          <div key={i} className="h-36 rounded-lg bg-[#161b27] animate-pulse" />
         ))}
       </div>
     );
@@ -154,7 +154,7 @@ export function PaLevelPanel({ advanced, isLoading }: Props) {
 
   if (!advanced) {
     return (
-      <div className="text-center py-12 text-[#555] text-sm">
+      <div className="text-center py-12 text-[#6b7a99] text-sm">
         請先選擇幣種並執行分析
       </div>
     );
@@ -166,21 +166,21 @@ export function PaLevelPanel({ advanced, isLoading }: Props) {
       <div className="grid grid-cols-3 gap-3">
         <div className="rounded-lg p-3 text-center" style={{ background: "rgba(0,230,118,0.05)", border: "1px solid rgba(0,230,118,0.2)" }}>
           <div className="text-xl font-bold text-[#00e676]">{bullish.length}</div>
-          <div className="text-[10px] text-[#888] mt-1">看多形態</div>
+          <div className="text-[10px] text-[#8896b0] mt-1">看多形態</div>
         </div>
         <div className="rounded-lg p-3 text-center" style={{ background: "rgba(244,67,54,0.05)", border: "1px solid rgba(244,67,54,0.2)" }}>
           <div className="text-xl font-bold text-[#f44336]">{bearish.length}</div>
-          <div className="text-[10px] text-[#888] mt-1">看空形態</div>
+          <div className="text-[10px] text-[#8896b0] mt-1">看空形態</div>
         </div>
         <div className="rounded-lg p-3 text-center" style={{ background: "rgba(255,215,64,0.05)", border: "1px solid rgba(255,215,64,0.2)" }}>
           <div className="text-xl font-bold text-[#ffd740]">{highConf.length}</div>
-          <div className="text-[10px] text-[#888] mt-1">高共振 (≥70)</div>
+          <div className="text-[10px] text-[#8896b0] mt-1">高共振 (≥70)</div>
         </div>
       </div>
 
       {/* Theory */}
-      <div className="rounded-lg p-3 text-xs text-[#777]" style={{ background: "#111", border: "1px solid #222" }}>
-        <div className="font-semibold text-[#999] mb-1">📖 PA 水位共振理論</div>
+      <div className="rounded-lg p-3 text-xs text-[#8896b0]" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="font-semibold text-[#9aaac0] mb-1">📖 PA 水位共振理論</div>
         <div className="space-y-0.5">
           <div>• 單純的 K 線形態勝率約 40-55%，結合關鍵水位後可提升至 65-75%</div>
           <div>• 共振評分越高（≥70），代表形態、水位、流動性三重確認</div>
@@ -191,7 +191,7 @@ export function PaLevelPanel({ advanced, isLoading }: Props) {
 
       {/* Pattern list */}
       {allPatterns.length === 0 ? (
-        <div className="text-center py-8 text-[#555] text-sm">
+        <div className="text-center py-8 text-[#6b7a99] text-sm">
           <div className="text-3xl mb-2">📊</div>
           <div>目前無高共振 PA 形態</div>
           <div className="text-xs mt-1 text-[#444]">等待形態在關鍵水位附近出現</div>
@@ -208,7 +208,7 @@ export function PaLevelPanel({ advanced, isLoading }: Props) {
           )}
           {allPatterns.filter(p => p.confluence_score < 70).length > 0 && (
             <div>
-              <div className="text-xs font-semibold text-[#888] mb-2">其他形態</div>
+              <div className="text-xs font-semibold text-[#8896b0] mb-2">其他形態</div>
               <div className="space-y-2">
                 {allPatterns.filter(p => p.confluence_score < 70).map((item, i) => (
                   <PatternCard key={i} item={item} />

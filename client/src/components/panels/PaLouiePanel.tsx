@@ -51,11 +51,11 @@ function MetricRow({ label, value, sub, color }: {
   label: string; value: string; sub?: string; color?: string;
 }) {
   return (
-    <div className="flex items-center justify-between py-1.5 border-b border-[#1e1e1e]">
-      <span className="text-[11px] text-[#888]">{label}</span>
+    <div className="flex items-center justify-between py-1.5 border-b border-[#2a3148]">
+      <span className="text-[11px] text-[#8896b0]">{label}</span>
       <div className="text-right">
         <span className="text-[11px] font-mono" style={{ color: color ?? "#ccc" }}>{value}</span>
-        {sub && <div className="text-[9px] text-[#555]">{sub}</div>}
+        {sub && <div className="text-[9px] text-[#6b7a99]">{sub}</div>}
       </div>
     </div>
   );
@@ -63,10 +63,10 @@ function MetricRow({ label, value, sub, color }: {
 
 function SectionTitle({ icon, title, badge }: { icon: string; title: string; badge?: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-2 px-3 py-2 border-b border-[#1e1e1e]"
+    <div className="flex items-center gap-2 px-3 py-2 border-b border-[#2a3148]"
       style={{ background: "#0d0d0d" }}>
       <span className="text-sm">{icon}</span>
-      <span className="text-[11px] font-semibold text-[#ccc] uppercase tracking-wider">{title}</span>
+      <span className="text-[11px] font-semibold text-[#d0daea] uppercase tracking-wider">{title}</span>
       {badge && <div className="ml-auto">{badge}</div>}
     </div>
   );
@@ -377,7 +377,7 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-16 text-[#555] text-sm">
+      <div className="flex items-center justify-center py-16 text-[#6b7a99] text-sm">
         分析中...
       </div>
     );
@@ -387,8 +387,8 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
         <div className="text-3xl mb-3">📊</div>
-        <div className="text-[#888] text-sm mb-1">尚未執行分析</div>
-        <div className="text-[#555] text-xs">請先點擊「分析」按鈕取得 PA 資料</div>
+        <div className="text-[#8896b0] text-sm mb-1">尚未執行分析</div>
+        <div className="text-[#6b7a99] text-xs">請先點擊「分析」按鈕取得 PA 資料</div>
       </div>
     );
   }
@@ -402,11 +402,11 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
       <div className="px-3 py-3" style={{ background: "#0a0a0a" }}>
         <div className="flex items-center justify-between mb-2">
           <div>
-            <div className="text-[13px] font-bold text-[#ccc]">方方土 Price Action 分析</div>
-            <div className="text-[10px] text-[#555]">Al Brooks 體系 · 80-20 規則 · Measured Move</div>
+            <div className="text-[13px] font-bold text-[#d0daea]">方方土 Price Action 分析</div>
+            <div className="text-[10px] text-[#6b7a99]">Al Brooks 體系 · 80-20 規則 · Measured Move</div>
           </div>
           <div className="text-right">
-            <div className="text-[10px] text-[#555]">PA 共識</div>
+            <div className="text-[10px] text-[#6b7a99]">PA 共識</div>
             <div className="text-[12px] font-bold" style={{
               color: snapshot.pa.consensus.includes("bullish") ? "#4caf50"
                 : snapshot.pa.consensus.includes("bearish") ? "#ef5350" : "#ffd740"
@@ -431,10 +431,10 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
               }}>
                 {pa4h.trend_context === "strong_trend" ? "強趨勢" : pa4h.trend_context === "ranging" ? "震盪區間" : "弱趨勢"}
               </span>
-              <span className="text-[9px] px-2 py-0.5 rounded border border-[#2a2a2a] text-[#666]">
+              <span className="text-[9px] px-2 py-0.5 rounded border border-[#2a2a2a] text-[#7a8aaa]">
                 4H ADX: {pa4h.adx?.toFixed(1) ?? "—"}
               </span>
-              <span className="text-[9px] px-2 py-0.5 rounded border border-[#2a2a2a] text-[#666]">
+              <span className="text-[9px] px-2 py-0.5 rounded border border-[#2a2a2a] text-[#7a8aaa]">
                 MTF 對齊: {pa4h.mtf_alignment?.toFixed(0) ?? "—"}%
               </span>
             </>
@@ -472,19 +472,19 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
                 value={falseBreakAnalysis.followThrough}
                 color={falseBreakAnalysis.followThrough === "強" ? "#4caf50" : falseBreakAnalysis.followThrough === "弱" ? "#ffd740" : "#ef5350"}
               />
-              <div className="mt-2 p-2 rounded text-[10px] text-[#aaa] leading-relaxed"
+              <div className="mt-2 p-2 rounded text-[10px] text-[#b0bcd4] leading-relaxed"
                 style={{ background: "#111", border: "1px solid #1e1e1e" }}>
                 <span className="text-[#ffd740] font-bold">{falseBreakAnalysis.ruleApplied}：</span>
                 {falseBreakAnalysis.interpretation}
               </div>
               {/* 方方土核心提示 */}
-              <div className="mt-1 p-2 rounded text-[9px] text-[#555]"
+              <div className="mt-1 p-2 rounded text-[9px] text-[#6b7a99]"
                 style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
                 💡 方方土：真突破特徵 = 體積大 + 收在極值（無影線）+ 遠離前期區間 + 有「急迫感」（無回調）
               </div>
             </>
           ) : (
-            <div className="py-3 text-center text-[#555] text-xs">無資料</div>
+            <div className="py-3 text-center text-[#6b7a99] text-xs">無資料</div>
           )}
         </div>
       </div>
@@ -512,32 +512,32 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
                 secondLegTrap.trapRisk === "high" ? "#ef5350"
                   : secondLegTrap.trapRisk === "medium" ? "#ffd740" : "#888"
               } />
-              <div className="mt-2 p-2 rounded text-[10px] text-[#aaa] leading-relaxed"
+              <div className="mt-2 p-2 rounded text-[10px] text-[#b0bcd4] leading-relaxed"
                 style={{ background: "#111", border: "1px solid #1e1e1e" }}>
                 {secondLegTrap.trapMessage}
               </div>
               {/* 強 SR 水位 */}
               {secondLegTrap.strongLevels.length > 0 && (
                 <div className="mt-1">
-                  <div className="text-[9px] text-[#555] mb-1">強力 S/R 水位（觸碰次數 ≥ 3）：</div>
+                  <div className="text-[9px] text-[#6b7a99] mb-1">強力 S/R 水位（觸碰次數 ≥ 3）：</div>
                   {secondLegTrap.strongLevels.map((l, i) => (
                     <div key={i} className="flex justify-between text-[10px] py-0.5">
                       <span style={{ color: l.type === "support" ? "#4caf50" : "#ef5350" }}>
                         {l.type === "support" ? "▲ 支撐" : "▼ 阻力"} × {l.touches}
                       </span>
-                      <span className="font-mono text-[#ccc]">{l.price.toFixed(2)}</span>
-                      <span className="text-[#555]">{pctDist(currentPrice, l.price)}</span>
+                      <span className="font-mono text-[#d0daea]">{l.price.toFixed(2)}</span>
+                      <span className="text-[#6b7a99]">{pctDist(currentPrice, l.price)}</span>
                     </div>
                   ))}
                 </div>
               )}
-              <div className="mt-1 p-2 rounded text-[9px] text-[#555]"
+              <div className="mt-1 p-2 rounded text-[9px] text-[#6b7a99]"
                 style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
                 💡 方方土：震盪區間中，第二段越強勢，陷阱越深。「Big Up, Big Down, Big Confusion」是 TR 的核心特徵。
               </div>
             </>
           ) : (
-            <div className="py-3 text-center text-[#555] text-xs">無資料</div>
+            <div className="py-3 text-center text-[#6b7a99] text-xs">無資料</div>
           )}
         </div>
       </div>
@@ -550,17 +550,17 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
             <>
               {/* 方法一：TR 高度突破 */}
               <div className="mb-2">
-                <div className="text-[9px] text-[#555] mb-1 uppercase tracking-wider">方法一：TR 高度突破（最常用）</div>
+                <div className="text-[9px] text-[#6b7a99] mb-1 uppercase tracking-wider">方法一：TR 高度突破（最常用）</div>
                 <div className="grid grid-cols-2 gap-1">
                   <div className="p-2 rounded text-center" style={{ background: "#0d1a0d", border: "1px solid #1a2a1a" }}>
                     <div className="text-[9px] text-[#4caf50] mb-0.5">看多目標 ↑</div>
                     <div className="text-[11px] font-mono text-[#4caf50]">{measuredMoves.mmTrBull.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">{pctDist(currentPrice, measuredMoves.mmTrBull)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">{pctDist(currentPrice, measuredMoves.mmTrBull)}</div>
                   </div>
                   <div className="p-2 rounded text-center" style={{ background: "#1a0d0d", border: "1px solid #2a1a1a" }}>
                     <div className="text-[9px] text-[#ef5350] mb-0.5">看空目標 ↓</div>
                     <div className="text-[11px] font-mono text-[#ef5350]">{measuredMoves.mmTrBear.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">{pctDist(currentPrice, measuredMoves.mmTrBear)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">{pctDist(currentPrice, measuredMoves.mmTrBear)}</div>
                   </div>
                 </div>
                 <div className="text-[9px] text-[#444] mt-0.5">TR 高度：{measuredMoves.trHeight.toFixed(2)}</div>
@@ -568,17 +568,17 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
 
               {/* 方法二：Leg1=Leg2 */}
               <div className="mb-2">
-                <div className="text-[9px] text-[#555] mb-1 uppercase tracking-wider">方法二：Leg1 = Leg2（N 字形）</div>
+                <div className="text-[9px] text-[#6b7a99] mb-1 uppercase tracking-wider">方法二：Leg1 = Leg2（N 字形）</div>
                 <div className="grid grid-cols-2 gap-1">
                   <div className="p-2 rounded text-center" style={{ background: "#0d1a0d", border: "1px solid #1a2a1a" }}>
                     <div className="text-[9px] text-[#4caf50] mb-0.5">看多目標 ↑</div>
                     <div className="text-[11px] font-mono text-[#4caf50]">{measuredMoves.mmLeg2Bull.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">{pctDist(currentPrice, measuredMoves.mmLeg2Bull)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">{pctDist(currentPrice, measuredMoves.mmLeg2Bull)}</div>
                   </div>
                   <div className="p-2 rounded text-center" style={{ background: "#1a0d0d", border: "1px solid #2a1a1a" }}>
                     <div className="text-[9px] text-[#ef5350] mb-0.5">看空目標 ↓</div>
                     <div className="text-[11px] font-mono text-[#ef5350]">{measuredMoves.mmLeg2Bear.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">{pctDist(currentPrice, measuredMoves.mmLeg2Bear)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">{pctDist(currentPrice, measuredMoves.mmLeg2Bear)}</div>
                   </div>
                 </div>
                 <div className="text-[9px] text-[#444] mt-0.5">第一段估算高度：{measuredMoves.leg1Height.toFixed(2)}</div>
@@ -586,17 +586,17 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
 
               {/* 方法三：突破 K 線實體 */}
               <div className="mb-2">
-                <div className="text-[9px] text-[#555] mb-1 uppercase tracking-wider">方法三：突破 K 線實體（ATR × 2）</div>
+                <div className="text-[9px] text-[#6b7a99] mb-1 uppercase tracking-wider">方法三：突破 K 線實體（ATR × 2）</div>
                 <div className="grid grid-cols-2 gap-1">
                   <div className="p-2 rounded text-center" style={{ background: "#0d1a0d", border: "1px solid #1a2a1a" }}>
                     <div className="text-[9px] text-[#4caf50] mb-0.5">看多目標 ↑</div>
                     <div className="text-[11px] font-mono text-[#4caf50]">{measuredMoves.mmBarBull.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">{pctDist(currentPrice, measuredMoves.mmBarBull)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">{pctDist(currentPrice, measuredMoves.mmBarBull)}</div>
                   </div>
                   <div className="p-2 rounded text-center" style={{ background: "#1a0d0d", border: "1px solid #2a1a1a" }}>
                     <div className="text-[9px] text-[#ef5350] mb-0.5">看空目標 ↓</div>
                     <div className="text-[11px] font-mono text-[#ef5350]">{measuredMoves.mmBarBear.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">{pctDist(currentPrice, measuredMoves.mmBarBear)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">{pctDist(currentPrice, measuredMoves.mmBarBear)}</div>
                   </div>
                 </div>
               </div>
@@ -604,7 +604,7 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
               {/* 主要目標 */}
               {measuredMoves.primaryTarget && (
                 <div className="mt-2 p-2 rounded" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-                  <div className="text-[9px] text-[#555] mb-1">當前偏向主要目標（{measuredMoves.primaryMethod}）</div>
+                  <div className="text-[9px] text-[#6b7a99] mb-1">當前偏向主要目標（{measuredMoves.primaryMethod}）</div>
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold" style={{
                       color: measuredMoves.isBullish ? "#4caf50" : "#ef5350"
@@ -620,13 +620,13 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
                 </div>
               )}
 
-              <div className="mt-1 p-2 rounded text-[9px] text-[#555]"
+              <div className="mt-1 p-2 rounded text-[9px] text-[#6b7a99]"
                 style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
                 💡 方方土：MM 只有 60% 達成率。為防止 Tick Failure，止盈單應掛在目標位稍微靠近現價的位置。
               </div>
             </>
           ) : (
-            <div className="py-3 text-center text-[#555] text-xs">無資料</div>
+            <div className="py-3 text-center text-[#6b7a99] text-xs">無資料</div>
           )}
         </div>
       </div>
@@ -663,22 +663,22 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
                       <span style={{ color: p.type === "bullish" ? "#4caf50" : "#ef5350" }}>
                         {p.type === "bullish" ? "▲" : "▼"} {p.name}
                       </span>
-                      <span className="text-[#666]">{p.strength === "strong" ? "強" : p.strength === "medium" ? "中" : "弱"}</span>
+                      <span className="text-[#7a8aaa]">{p.strength === "strong" ? "強" : p.strength === "medium" ? "中" : "弱"}</span>
                     </div>
                   ))}
                 </div>
               )}
-              <div className="mt-2 p-2 rounded text-[10px] text-[#aaa] leading-relaxed"
+              <div className="mt-2 p-2 rounded text-[10px] text-[#b0bcd4] leading-relaxed"
                 style={{ background: "#111", border: "1px solid #1e1e1e" }}>
                 {wedgeAnalysis.wedgeMessage}
               </div>
-              <div className="mt-1 p-2 rounded text-[9px] text-[#555]"
+              <div className="mt-1 p-2 rounded text-[9px] text-[#6b7a99]"
                 style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
                 💡 方方土：Overshoot = 第三推刺破趨勢通道線後迅速拉回，是楔形中最強的反轉信號。好的楔形特徵是推動與回調之間有較深的「重疊（Overlap）」。
               </div>
             </>
           ) : (
-            <div className="py-3 text-center text-[#555] text-xs">無資料</div>
+            <div className="py-3 text-center text-[#6b7a99] text-xs">無資料</div>
           )}
         </div>
       </div>
@@ -736,7 +736,7 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
                 color={signalBarAnalysis.hasTbtl ? "#ffd740" : "#555"}
               />
               <div className="mt-2 p-2 rounded" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-                <div className="text-[9px] text-[#555] mb-1">建議入場方式</div>
+                <div className="text-[9px] text-[#6b7a99] mb-1">建議入場方式</div>
                 <div className="text-[10px] font-bold" style={{
                   color: signalBarAnalysis.signalGrade === "A+" ? "#4caf50"
                     : signalBarAnalysis.signalGrade === "A" ? "#66bb6a"
@@ -744,17 +744,17 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
                 }}>
                   {signalBarAnalysis.entryMethod}
                 </div>
-                <div className="text-[10px] text-[#aaa] mt-1 leading-relaxed">
+                <div className="text-[10px] text-[#b0bcd4] mt-1 leading-relaxed">
                   {signalBarAnalysis.signalDesc}
                 </div>
               </div>
-              <div className="mt-1 p-2 rounded text-[9px] text-[#555]"
+              <div className="mt-1 p-2 rounded text-[9px] text-[#6b7a99]"
                 style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
                 💡 方方土：信號 K 線 = 實體大 + 收在極值 + 突破單在外側掛單。TBTL（兩段回調）後的第二入場點勝率更高。
               </div>
             </>
           ) : (
-            <div className="py-3 text-center text-[#555] text-xs">無資料</div>
+            <div className="py-3 text-center text-[#6b7a99] text-xs">無資料</div>
           )}
         </div>
       </div>
@@ -778,7 +778,7 @@ export function PaLouiePanel({ snapshot, currentPrice, isLoading }: Props) {
               value={`1 : ${snapshot.pa.entry_params.rr_ratio.toFixed(1)}`}
               color={snapshot.pa.entry_params.rr_ratio >= 2 ? "#4caf50" : snapshot.pa.entry_params.rr_ratio >= 1.5 ? "#ffd740" : "#ef5350"}
             />
-            <div className="mt-1 p-2 rounded text-[9px] text-[#555]"
+            <div className="mt-1 p-2 rounded text-[9px] text-[#6b7a99]"
               style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
               💡 方方土止損鐵律：止損設在信號 K 線另一端；絕不加倉攤平虧損；固定每筆風險 1-2%。
             </div>

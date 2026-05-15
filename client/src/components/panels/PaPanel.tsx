@@ -132,7 +132,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
       {/* Header */}
       <div className="px-3 py-2 border-b flex items-center justify-between"
         style={{ borderColor: "#1e1e1e", background: `${trend.bg}` }}>
-        <span className="text-xs font-bold text-[#ccc]">{tf}</span>
+        <span className="text-xs font-bold text-[#d0daea]">{tf}</span>
         <TagBadge label={trend.label} color={trend.color} />
       </div>
 
@@ -140,7 +140,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {/* Trend Strength Bar */}
         <div className="py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] text-[#666]">趨勢強度</span>
+            <span className="text-[10px] text-[#7a8aaa]">趨勢強度</span>
             <span className="text-[11px] font-mono font-bold" style={{ color: sc }}>{data.score.toFixed(2)}</span>
           </div>
           <ScoreBar score={data.score} />
@@ -148,7 +148,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
 
         {/* RSI */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">RSI</span>
+          <span className="text-[11px] text-[#8896b0]">RSI</span>
           <div className="flex items-center gap-1.5">
             <span className="text-[11px] font-mono font-semibold" style={{
               color: data.rsi > 70 ? "#ef5350" : data.rsi < 30 ? "#4caf50" : "#aaa"
@@ -162,7 +162,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
 
         {/* MACD */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">MACD 柱</span>
+          <span className="text-[11px] text-[#8896b0]">MACD 柱</span>
           <span className="text-[11px] font-mono font-semibold" style={{ color: macdBull ? "#4caf50" : "#ef5350" }}>
             {(data.macd_hist ?? 0) > 0 ? "+" : ""}{(data.macd_hist ?? 0).toFixed(4)}
           </span>
@@ -170,25 +170,25 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
 
         {/* EMA */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">EMA 20</span>
+          <span className="text-[11px] text-[#8896b0]">EMA 20</span>
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] font-mono text-[#888]">{fmt(data.ema20)}</span>
+            <span className="text-[11px] font-mono text-[#8896b0]">{fmt(data.ema20)}</span>
             <TagBadge label={aboveEma20 ? "上方" : "下方"} color={aboveEma20 ? "#4caf50" : "#ef5350"} />
           </div>
         </div>
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">EMA 50</span>
+          <span className="text-[11px] text-[#8896b0]">EMA 50</span>
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] font-mono text-[#888]">{fmt(data.ema50)}</span>
+            <span className="text-[11px] font-mono text-[#8896b0]">{fmt(data.ema50)}</span>
             <TagBadge label={aboveEma50 ? "上方" : "下方"} color={aboveEma50 ? "#4caf50" : "#ef5350"} />
           </div>
         </div>
 
         {/* EMA 200 */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">EMA 200</span>
+          <span className="text-[11px] text-[#8896b0]">EMA 200</span>
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] font-mono text-[#888]">{fmt(data.ema200)}</span>
+            <span className="text-[11px] font-mono text-[#8896b0]">{fmt(data.ema200)}</span>
             <TagBadge label={data.close > data.ema200 ? "上方" : "下方"} color={data.close > data.ema200 ? "#4caf50" : "#ef5350"} />
           </div>
         </div>
@@ -197,7 +197,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {data.adx != null && (
           <div className="py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-[11px] text-[#888]">ADX</span>
+              <span className="text-[11px] text-[#8896b0]">ADX</span>
               <div className="flex items-center gap-1.5">
                 <span className="text-[11px] font-mono" style={{ color: (typeof data.adx === 'number' ? data.adx : 0) > 25 ? "#ffd740" : "#555" }}>
                   {typeof data.adx === 'number' ? data.adx.toFixed(1) : (typeof (data.adx as any)?.adx === 'number' ? (data.adx as any).adx.toFixed(1) : '—')}
@@ -221,14 +221,14 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {data.bollinger != null && (
           <div className="py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-[11px] text-[#888]">布林帶</span>
+              <span className="text-[11px] text-[#8896b0]">布林帶</span>
               <div className="flex items-center gap-1.5">
-                <span className="text-[11px] text-[#888]">{bbLabel}</span>
-                <span className="text-[10px] font-mono text-[#555]">%B {data.bollinger.percent_b?.toFixed(2)}</span>
+                <span className="text-[11px] text-[#8896b0]">{bbLabel}</span>
+                <span className="text-[10px] font-mono text-[#6b7a99]">%B {data.bollinger.percent_b?.toFixed(2)}</span>
                 {data.bb_squeeze && <TagBadge label="收口" color="#ce93d8" />}
               </div>
             </div>
-            <div className="flex gap-2 text-[10px] text-[#555]">
+            <div className="flex gap-2 text-[10px] text-[#6b7a99]">
               <span style={{ color: "#ef5350" }}>上軌 {fmt(data.bollinger.upper)}</span>
               <span>中軌 {fmt(data.bollinger.middle)}</span>
               <span style={{ color: "#4caf50" }}>下軌 {fmt(data.bollinger.lower)}</span>
@@ -239,9 +239,9 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {/* VWAP */}
         {data.vwap != null && (
           <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-            <span className="text-[11px] text-[#888]">VWAP</span>
+            <span className="text-[11px] text-[#8896b0]">VWAP</span>
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-mono text-[#888]">{fmt(data.vwap)}</span>
+              <span className="text-[11px] font-mono text-[#8896b0]">{fmt(data.vwap)}</span>
               <TagBadge label={data.close > data.vwap ? "價格在上" : "價格在下"} color={data.close > data.vwap ? "#4caf50" : "#ef5350"} />
             </div>
           </div>
@@ -250,7 +250,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {/* CMF */}
         {data.cmf != null && (
           <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-            <span className="text-[11px] text-[#888]">CMF 資金流向</span>
+            <span className="text-[11px] text-[#8896b0]">CMF 資金流向</span>
             <div className="flex items-center gap-1.5">
               <span className="text-[11px] font-mono" style={{ color: data.cmf > 0.1 ? "#4caf50" : data.cmf < -0.1 ? "#ef5350" : "#888" }}>
                 {data.cmf > 0 ? "+" : ""}{data.cmf.toFixed(3)}
@@ -265,14 +265,14 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
 
         {/* ATR */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">ATR (波動度)</span>
-          <span className="text-[11px] font-mono text-[#888]">{fmt(data.atr)}</span>
+          <span className="text-[11px] text-[#8896b0]">ATR (波動度)</span>
+          <span className="text-[11px] font-mono text-[#8896b0]">{fmt(data.atr)}</span>
         </div>
 
         {/* 假突破分數 */}
         {data.false_break_score != null && data.false_break_score > 30 && (
           <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-            <span className="text-[11px] text-[#888]">假突破風險</span>
+            <span className="text-[11px] text-[#8896b0]">假突破風險</span>
             <div className="flex items-center gap-1.5">
               <span className="text-[11px] font-mono" style={{ color: data.false_break_score > 60 ? "#ef5350" : "#ffd740" }}>
                 {data.false_break_score.toFixed(0)}/100
@@ -289,7 +289,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {data.mtf_alignment != null && (
           <div className="py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-[11px] text-[#888]">多時段對齊</span>
+              <span className="text-[11px] text-[#8896b0]">多時段對齊</span>
               <span className="text-[11px] font-mono" style={{ color: data.mtf_alignment > 70 ? "#4caf50" : data.mtf_alignment < 30 ? "#ef5350" : "#ffd740" }}>
                 {data.mtf_alignment.toFixed(0)}%
               </span>
@@ -305,11 +305,11 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
 
         {/* S/R */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">支撐</span>
+          <span className="text-[11px] text-[#8896b0]">支撐</span>
           <span className="text-[11px] font-mono text-[#4caf50]">{fmt(data.support)}</span>
         </div>
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">阻力</span>
+          <span className="text-[11px] text-[#8896b0]">阻力</span>
           <span className="text-[11px] font-mono text-[#ef5350]">{fmt(data.resistance)}</span>
         </div>
 
@@ -317,14 +317,14 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {breakout && (
           <div className="py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
             <div className="flex items-center gap-1.5 mb-0.5">
-              <span className="text-[10px] text-[#666]">突破分析</span>
+              <span className="text-[10px] text-[#7a8aaa]">突破分析</span>
               <TagBadge
                 label={breakout.genuine ? "真突破" : "疑似假突破"}
                 color={breakout.genuine ? (breakout.direction === "up" ? "#4caf50" : "#ef5350") : "#ffd740"}
               />
-              <span className="text-[10px] text-[#555] ml-auto">{breakout.score}/100</span>
+              <span className="text-[10px] text-[#6b7a99] ml-auto">{breakout.score}/100</span>
             </div>
-            <div className="flex gap-2 text-[10px] text-[#555]">
+            <div className="flex gap-2 text-[10px] text-[#6b7a99]">
               <span style={{ color: breakout.volume_confirm ? "#4caf50" : "#555" }}>
                 {breakout.volume_confirm ? "✓" : "✗"} 成交量
               </span>
@@ -338,7 +338,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {/* S/R Levels (multi-touch) */}
         {srLevels.length > 0 && (
           <div className="py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-            <div className="text-[10px] text-[#555] mb-1">多觸確認位</div>
+            <div className="text-[10px] text-[#6b7a99] mb-1">多觸確認位</div>
             <div className="space-y-0.5">
               {srLevels.slice(0, 3).map((sr, i) => (
                 <div key={i} className="flex items-center justify-between text-[10px]">
@@ -346,10 +346,10 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
                     <span style={{ color: sr.type === "resistance" ? "#ef5350" : "#4caf50" }}>
                       {sr.type === "resistance" ? "阻" : "撐"}
                     </span>
-                    <span className="text-[#555]">×{sr.touches}</span>
+                    <span className="text-[#6b7a99]">×{sr.touches}</span>
                     {(sr.strength as unknown as string) === "strong" && <span style={{ color: "#ffd740" }}>★</span>}
                   </div>
-                  <span className="font-mono text-[#aaa]">{fmt(sr.price)}</span>
+                  <span className="font-mono text-[#b0bcd4]">{fmt(sr.price)}</span>
                 </div>
               ))}
             </div>
@@ -359,7 +359,7 @@ function TfCard({ tf, data }: { tf: string; data: TimeframePaResult }) {
         {/* Candle Patterns */}
         {(candlePatterns.length > 0 || data.patterns.length > 0) && (
           <div className="py-2">
-            <div className="text-[10px] text-[#555] mb-1.5">K 線形態</div>
+            <div className="text-[10px] text-[#6b7a99] mb-1.5">K 線形態</div>
             <div className="flex flex-wrap gap-1">
               {candlePatterns.slice(0, 3).map((p, i) => (
                 <TagBadge key={`cp${i}`} label={p.pattern}
@@ -411,9 +411,9 @@ function FangFangTuPanel({ pa }: { pa: PaData }) {
     <div className="space-y-3">
       {/* 當前位置 */}
       <div className="rounded-lg p-3" style={{ background: "#111", border: `1px solid ${zoneStatus.color}30` }}>
-        <div className="text-[10px] text-[#666] mb-1">當前價格位置（方方土供需框架）</div>
+        <div className="text-[10px] text-[#7a8aaa] mb-1">當前價格位置（方方土供需框架）</div>
         <div className="flex items-center gap-3">
-          <span className="text-base font-bold font-mono text-[#ccc]">{fmt(close)}</span>
+          <span className="text-base font-bold font-mono text-[#d0daea]">{fmt(close)}</span>
           <TagBadge label={zoneStatus.label} color={zoneStatus.color} />
         </div>
       </div>
@@ -427,15 +427,15 @@ function FangFangTuPanel({ pa }: { pa: PaData }) {
           </div>
           <div className="p-2 space-y-1.5">
             {demandZones.length === 0 ? (
-              <div className="text-[11px] text-[#555] text-center py-2">暫無識別到需求區</div>
+              <div className="text-[11px] text-[#6b7a99] text-center py-2">暫無識別到需求區</div>
             ) : demandZones.map((z, i) => (
               <div key={i} className="rounded p-2" style={{ background: "#161616", border: "1px solid #4caf5020" }}>
                 <div className="flex items-center justify-between mb-0.5">
-                  <span className="text-[10px] text-[#555]">需求區 {i + 1}</span>
+                  <span className="text-[10px] text-[#6b7a99]">需求區 {i + 1}</span>
                   <TagBadge label={z.touches >= 3 ? "強力" : "普通"} color={z.touches >= 3 ? "#00e676" : "#4caf50"} />
                 </div>
                 <div className="text-[11px] font-mono text-[#4caf50]">{fmt(z.bottom)} – {fmt(z.top)}</div>
-                <div className="text-[10px] text-[#555] mt-0.5">觸碰 {z.touches} 次 | 中心 {fmt(z.price)}</div>
+                <div className="text-[10px] text-[#6b7a99] mt-0.5">觸碰 {z.touches} 次 | 中心 {fmt(z.price)}</div>
               </div>
             ))}
           </div>
@@ -448,15 +448,15 @@ function FangFangTuPanel({ pa }: { pa: PaData }) {
           </div>
           <div className="p-2 space-y-1.5">
             {supplyZones.length === 0 ? (
-              <div className="text-[11px] text-[#555] text-center py-2">暫無識別到供給區</div>
+              <div className="text-[11px] text-[#6b7a99] text-center py-2">暫無識別到供給區</div>
             ) : supplyZones.map((z, i) => (
               <div key={i} className="rounded p-2" style={{ background: "#161616", border: "1px solid #ef535020" }}>
                 <div className="flex items-center justify-between mb-0.5">
-                  <span className="text-[10px] text-[#555]">供給區 {i + 1}</span>
+                  <span className="text-[10px] text-[#6b7a99]">供給區 {i + 1}</span>
                   <TagBadge label={z.touches >= 3 ? "強力" : "普通"} color={z.touches >= 3 ? "#f44336" : "#ef5350"} />
                 </div>
                 <div className="text-[11px] font-mono text-[#ef5350]">{fmt(z.bottom)} – {fmt(z.top)}</div>
-                <div className="text-[10px] text-[#555] mt-0.5">觸碰 {z.touches} 次 | 中心 {fmt(z.price)}</div>
+                <div className="text-[10px] text-[#6b7a99] mt-0.5">觸碰 {z.touches} 次 | 中心 {fmt(z.price)}</div>
               </div>
             ))}
           </div>
@@ -465,7 +465,7 @@ function FangFangTuPanel({ pa }: { pa: PaData }) {
 
       {/* 方方土理論說明 */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-        <div className="px-3 py-2 border-b text-xs font-semibold text-[#ccc]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
+        <div className="px-3 py-2 border-b text-xs font-semibold text-[#d0daea]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
           方方土供需區域理論（Supply & Demand）
         </div>
         <div className="p-3 space-y-2 text-xs">
@@ -493,7 +493,7 @@ function FangFangTuPanel({ pa }: { pa: PaData }) {
           ].map(({ title, desc, color }) => (
             <div key={title} className="rounded p-2.5" style={{ background: "#161616", border: `1px solid ${color}20` }}>
               <div className="font-semibold mb-1" style={{ color }}>{title}</div>
-              <p className="text-[#888] leading-relaxed">{desc}</p>
+              <p className="text-[#8896b0] leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
@@ -568,15 +568,15 @@ function LuoShengPanel({ pa }: { pa: PaData }) {
     <div className="space-y-3">
       {/* 當前週期階段 */}
       <div className="rounded-lg p-4" style={{ background: "#111", border: `1px solid ${phase.color}40` }}>
-        <div className="text-[10px] text-[#666] mb-1">當前市場週期（羅晟四階段框架）</div>
+        <div className="text-[10px] text-[#7a8aaa] mb-1">當前市場週期（羅晟四階段框架）</div>
         <div className="flex items-center gap-3 mb-2">
           <span className="text-lg font-bold" style={{ color: phase.color }}>{phase.name}</span>
           <TagBadge label={phase.nameEn} color={phase.color} />
         </div>
-        <p className="text-xs text-[#888] leading-relaxed mb-3">{phase.desc}</p>
+        <p className="text-xs text-[#8896b0] leading-relaxed mb-3">{phase.desc}</p>
         <div className="rounded p-2.5 text-xs" style={{ background: `${phase.color}10`, border: `1px solid ${phase.color}30` }}>
           <span className="font-semibold" style={{ color: phase.color }}>操作建議：</span>
-          <span className="text-[#aaa] ml-1">{phase.action}</span>
+          <span className="text-[#b0bcd4] ml-1">{phase.action}</span>
         </div>
       </div>
 
@@ -584,7 +584,7 @@ function LuoShengPanel({ pa }: { pa: PaData }) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {cycleIndicators.map(({ name, value, color }) => (
           <div key={name} className="rounded p-2.5 text-center" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-            <div className="text-[10px] text-[#555] mb-1">{name}</div>
+            <div className="text-[10px] text-[#6b7a99] mb-1">{name}</div>
             <div className="text-xs font-semibold" style={{ color }}>{value}</div>
           </div>
         ))}
@@ -592,7 +592,7 @@ function LuoShengPanel({ pa }: { pa: PaData }) {
 
       {/* 四階段週期說明 */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-        <div className="px-3 py-2 border-b text-xs font-semibold text-[#ccc]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
+        <div className="px-3 py-2 border-b text-xs font-semibold text-[#d0daea]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
           羅晟市場週期四階段理論（Wyckoff + 羅晟改良版）
         </div>
         <div className="p-3 space-y-2 text-xs">
@@ -626,7 +626,7 @@ function LuoShengPanel({ pa }: { pa: PaData }) {
               <div className="font-semibold mb-1.5" style={{ color }}>{p}</div>
               <ul className="space-y-0.5 mb-2">
                 {signs.map((s, i) => (
-                  <li key={i} className="flex gap-1.5 text-[#888]">
+                  <li key={i} className="flex gap-1.5 text-[#8896b0]">
                     <span style={{ color }}>•</span>
                     <span>{s}</span>
                   </li>
@@ -656,23 +656,23 @@ function PatternCard({ item }: { item: PaPatternWithLevel }) {
       style={{ background: isBullish ? "rgba(0,230,118,0.05)" : "rgba(244,67,54,0.05)", border: `1px solid ${isBullish ? "rgba(0,230,118,0.2)" : "rgba(244,67,54,0.2)"}` }}>
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-xs font-semibold" style={{ color }}>{isBullish ? "↑" : "↓"} {item.pattern.name}</span>
-        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1e1e1e] text-[#888]">{item.timeframe}</span>
+        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#161b27] text-[#8896b0]">{item.timeframe}</span>
         {item.at_key_level && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#ffd740]/20 text-[#ffd740] border border-[#ffd740]/30">⚡ 關鍵水位</span>}
         {item.liquidity_nearby && <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#4fc3f7]/20 text-[#4fc3f7] border border-[#4fc3f7]/30">💧 流動性</span>}
       </div>
       <div>
-        <div className="text-[10px] text-[#666] mb-1">共振評分</div>
+        <div className="text-[10px] text-[#7a8aaa] mb-1">共振評分</div>
         <div className="flex items-center gap-2">
-          <div className="flex-1 h-1.5 rounded-full bg-[#222]">
+          <div className="flex-1 h-1.5 rounded-full bg-[#161b27]">
             <div className="h-full rounded-full" style={{ width: `${item.confluence_score}%`, background: item.confluence_score >= 70 ? "#00e676" : item.confluence_score >= 50 ? "#ffd740" : "#ff9800" }} />
           </div>
           <span className="text-[10px] font-bold" style={{ color: item.confluence_score >= 70 ? "#00e676" : "#ffd740" }}>{item.confluence_score}</span>
         </div>
       </div>
-      <p className="text-xs text-[#bbb]">{item.pattern.desc}</p>
+      <p className="text-xs text-[#b8c4d8]">{item.pattern.desc}</p>
       {item.nearest_level && (
-        <div className="text-[10px] text-[#777] bg-[#111] rounded px-2 py-1">
-          最近{item.nearest_level.type === "support" ? "支撐" : "阻力"}位：<span className="text-[#aaa] font-mono">{item.nearest_level.price.toFixed(2)}</span>（距離 {item.distance_to_level_pct.toFixed(2)}%）
+        <div className="text-[10px] text-[#8896b0] bg-[#0e1117] rounded px-2 py-1">
+          最近{item.nearest_level.type === "support" ? "支撐" : "阻力"}位：<span className="text-[#b0bcd4] font-mono">{item.nearest_level.price.toFixed(2)}</span>（距離 {item.distance_to_level_pct.toFixed(2)}%）
         </div>
       )}
       <div className="grid grid-cols-3 gap-2 text-[10px]">
@@ -683,7 +683,7 @@ function PatternCard({ item }: { item: PaPatternWithLevel }) {
           </div>
         ))}
       </div>
-      <div className="text-[10px] text-[#666] text-right">風報比：<span className="text-[#ffd740] font-semibold">1:{rrRatio.toFixed(1)}</span></div>
+      <div className="text-[10px] text-[#7a8aaa] text-right">風報比：<span className="text-[#ffd740] font-semibold">1:{rrRatio.toFixed(1)}</span></div>
     </div>
   );
 }
@@ -691,7 +691,7 @@ function PatternCard({ item }: { item: PaPatternWithLevel }) {
 export function PaPanel({ pa, isLoading, advanced }: Props) {
   if (isLoading && !pa) {
     return (
-      <div className="flex items-center justify-center py-16 text-[#555] text-sm">
+      <div className="flex items-center justify-center py-16 text-[#6b7a99] text-sm">
         正在計算 PA 分析...
       </div>
     );
@@ -700,7 +700,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
   if (!pa) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
-        <div className="text-sm text-[#555]">請點擊「分析」按鈕取得 PA 分析數據</div>
+        <div className="text-sm text-[#6b7a99]">請點擊「分析」按鈕取得 PA 分析數據</div>
       </div>
     );
   }
@@ -713,7 +713,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
       <div className="rounded-lg p-4" style={{ background: "#111", border: `1px solid ${consensus.border}` }}>
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div>
-            <div className="text-[10px] text-[#666] mb-1">PA 多時間框架共識（Rayner Teo 方法）</div>
+            <div className="text-[10px] text-[#7a8aaa] mb-1">PA 多時間框架共識（Rayner Teo 方法）</div>
             <div className="flex items-center gap-3">
               <span className="text-xl font-bold" style={{ color: consensus.color }}>{consensus.label}</span>
               <span className="text-sm font-mono" style={{ color: consensus.color }}>
@@ -721,7 +721,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
               </span>
             </div>
             {/* Al Brooks Trend Context */}
-            <p className="text-xs text-[#888] mt-2 leading-relaxed max-w-md">
+            <p className="text-xs text-[#8896b0] mt-2 leading-relaxed max-w-md">
               {(pa.consensus as string) === "strong_bullish" || (pa.consensus as string) === "strong_up"
                 ? "Al Brooks：強勢多頭趨勢，每次回調都是買入機會，不要做空，等待旗形整理後的突破入場"
                 : (pa.consensus as string) === "bullish" || (pa.consensus as string) === "up"
@@ -744,7 +744,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
                 { k: "目標", v: fmt(pa.entry_params.tp1 as number), c: "#4caf50" },
               ].map(({ k, v, c }) => (
                 <div key={k} className="rounded p-2" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
-                  <div className="text-[10px] text-[#666]">{k}</div>
+                  <div className="text-[10px] text-[#7a8aaa]">{k}</div>
                   <div className="text-xs font-bold font-mono" style={{ color: c }}>{v}</div>
                 </div>
               ))}
@@ -753,7 +753,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
         </div>
 
         {pa.suggestion && (
-          <div className="mt-3 text-xs text-[#aaa] leading-relaxed border-t pt-3" style={{ borderColor: "#1e1e1e" }}>
+          <div className="mt-3 text-xs text-[#b0bcd4] leading-relaxed border-t pt-3" style={{ borderColor: "#1e1e1e" }}>
             {pa.suggestion}
           </div>
         )}
@@ -783,16 +783,16 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
         {/* ── Multi-TF Compare ── */}
         <TabsContent value="compare" className="mt-3">
           <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-            <div className="px-3 py-2 border-b text-xs font-semibold text-[#ccc]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
+            <div className="px-3 py-2 border-b text-xs font-semibold text-[#d0daea]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
               多時段 PA 評分對比表
             </div>
             <div className="p-3 overflow-x-auto">
               <table className="w-full text-[11px]">
                 <thead>
                   <tr className="border-b" style={{ borderColor: "#1e1e1e" }}>
-                    <th className="text-left py-2 pr-3 text-[#555] font-semibold">指標</th>
+                    <th className="text-left py-2 pr-3 text-[#6b7a99] font-semibold">指標</th>
                     {Object.keys(pa.timeframes).map(tf => (
-                      <th key={tf} className="text-center py-2 px-2 text-[#888] font-bold">{tf}</th>
+                      <th key={tf} className="text-center py-2 px-2 text-[#8896b0] font-bold">{tf}</th>
                     ))}
                   </tr>
                 </thead>
@@ -815,7 +815,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
                       return (
                         <span className="text-[10px]">
                           <span style={{ color: "#4caf50" }}>{distS != null ? `+${distS.toFixed(1)}%` : "—"}</span>
-                          <span className="text-[#555]"> / </span>
+                          <span className="text-[#6b7a99]"> / </span>
                           <span style={{ color: "#ef5350" }}>{distR != null ? `-${distR.toFixed(1)}%` : "—"}</span>
                         </span>
                       );
@@ -828,7 +828,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
                     }},
                   ].map(({ key, label, render }) => (
                     <tr key={key} className="border-b" style={{ borderColor: "#1a1a1a" }}>
-                      <td className="py-2 pr-3 text-[#666]">{label}</td>
+                      <td className="py-2 pr-3 text-[#7a8aaa]">{label}</td>
                       {Object.values(pa.timeframes).map((d, i) => (
                         <td key={i} className="text-center py-2 px-2">{render(d as TimeframePaResult)}</td>
                       ))}
@@ -840,7 +840,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
           </div>
           {/* Signal strength legend */}
           <div className="mt-3 rounded-lg p-3" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-            <div className="text-[10px] text-[#555] mb-2">訊號強度說明（基於 PA 評分 0–5）</div>
+            <div className="text-[10px] text-[#6b7a99] mb-2">訊號強度說明（基於 PA 評分 0–5）</div>
             <div className="flex flex-wrap gap-2">
               {[
                 { label: "強烈看多 (≥ 4.0)", color: "#00e676", desc: "RSI+EMA+MACD+ADX 全部對齊，高確信度多頭訊號" },
@@ -851,7 +851,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
               ].map(({ label, color, desc }) => (
                 <div key={label} className="flex items-start gap-1.5 text-[10px]">
                   <span className="font-bold shrink-0" style={{ color }}>{label}:</span>
-                  <span className="text-[#555]">{desc}</span>
+                  <span className="text-[#6b7a99]">{desc}</span>
                 </div>
               ))}
             </div>
@@ -861,7 +861,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
         {/* ── S/R Theory ── */}
         <TabsContent value="sr_theory" className="mt-3">
           <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-            <div className="px-3 py-2 border-b text-xs font-semibold text-[#ccc]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
+            <div className="px-3 py-2 border-b text-xs font-semibold text-[#d0daea]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
               Rayner Teo 支撐阻力識別方法
             </div>
             <div className="p-3 space-y-2 text-xs">
@@ -873,7 +873,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
               ].map(({ title, desc, color }) => (
                 <div key={title} className="rounded p-2.5" style={{ background: "#161616", border: `1px solid ${color}20` }}>
                   <div className="font-semibold mb-1" style={{ color }}>{title}</div>
-                  <p className="text-[#888] leading-relaxed">{desc}</p>
+                  <p className="text-[#8896b0] leading-relaxed">{desc}</p>
                 </div>
               ))}
             </div>
@@ -883,7 +883,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
         {/* ── Breakout Theory ── */}
         <TabsContent value="breakout_theory" className="mt-3">
           <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-            <div className="px-3 py-2 border-b text-xs font-semibold text-[#ccc]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
+            <div className="px-3 py-2 border-b text-xs font-semibold text-[#d0daea]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
               Rayner Teo / 太妃 PA 真假突破判斷框架
             </div>
             <div className="p-3 space-y-2 text-xs">
@@ -908,7 +908,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
                   <div className="font-semibold mb-1.5" style={{ color }}>{title}</div>
                   <ul className="space-y-0.5">
                     {items.map((item, i) => (
-                      <li key={i} className="flex gap-1.5 text-[#888]">
+                      <li key={i} className="flex gap-1.5 text-[#8896b0]">
                         <span style={{ color }}>•</span>
                         <span>{item}</span>
                       </li>
@@ -923,7 +923,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
         {/* ── Candle Theory ── */}
         <TabsContent value="candle_theory" className="mt-3">
           <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-            <div className="px-3 py-2 border-b text-xs font-semibold text-[#ccc]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
+            <div className="px-3 py-2 border-b text-xs font-semibold text-[#d0daea]" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
               Al Brooks / 太妃 PA 重要 K 線形態
             </div>
             <div className="p-3 space-y-2 text-xs">
@@ -939,7 +939,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
                     <span className="font-semibold" style={{ color }}>{name}</span>
                     <TagBadge label={type} color={color} />
                   </div>
-                  <p className="text-[#888] leading-relaxed">{desc}</p>
+                  <p className="text-[#8896b0] leading-relaxed">{desc}</p>
                 </div>
               ))}
             </div>
@@ -971,24 +971,24 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
                 <div className="grid grid-cols-3 gap-3">
                   <div className="rounded-lg p-3 text-center" style={{ background: "rgba(0,230,118,0.05)", border: "1px solid rgba(0,230,118,0.2)" }}>
                     <div className="text-xl font-bold text-[#00e676]">{bullish.length}</div>
-                    <div className="text-[10px] text-[#888] mt-1">看多形態</div>
+                    <div className="text-[10px] text-[#8896b0] mt-1">看多形態</div>
                   </div>
                   <div className="rounded-lg p-3 text-center" style={{ background: "rgba(244,67,54,0.05)", border: "1px solid rgba(244,67,54,0.2)" }}>
                     <div className="text-xl font-bold text-[#f44336]">{bearish.length}</div>
-                    <div className="text-[10px] text-[#888] mt-1">看空形態</div>
+                    <div className="text-[10px] text-[#8896b0] mt-1">看空形態</div>
                   </div>
                   <div className="rounded-lg p-3 text-center" style={{ background: "rgba(255,215,64,0.05)", border: "1px solid rgba(255,215,64,0.2)" }}>
                     <div className="text-xl font-bold text-[#ffd740]">{highConf.length}</div>
-                    <div className="text-[10px] text-[#888] mt-1">高共振 (≥70)</div>
+                    <div className="text-[10px] text-[#8896b0] mt-1">高共振 (≥70)</div>
                   </div>
                 </div>
-                <div className="rounded-lg p-3 text-xs text-[#777]" style={{ background: "#111", border: "1px solid #222" }}>
-                  <div className="font-semibold text-[#999] mb-1">📖 PA 水位共振理論</div>
+                <div className="rounded-lg p-3 text-xs text-[#8896b0]" style={{ background: "#111", border: "1px solid #222" }}>
+                  <div className="font-semibold text-[#9aaac0] mb-1">📖 PA 水位共振理論</div>
                   <div>• 單純的 K 線形態勝率約 40-55%，結合關鍵水位後可提升至 65-75%</div>
                   <div>• 共振評分越高（≥70），代表形態、水位、流動性三重確認</div>
                 </div>
                 {allPatterns.length === 0 ? (
-                  <div className="text-center py-8 text-[#555] text-sm">目前無高共振 PA 形態，等待形態在關鍵水位附近出現</div>
+                  <div className="text-center py-8 text-[#6b7a99] text-sm">目前無高共振 PA 形態，等待形態在關鍵水位附近出現</div>
                 ) : (
                   <div className="space-y-3">
                     {highConf.length > 0 && (
@@ -999,7 +999,7 @@ export function PaPanel({ pa, isLoading, advanced }: Props) {
                     )}
                     {allPatterns.filter(p => p.confluence_score < 70).length > 0 && (
                       <div>
-                        <div className="text-xs font-semibold text-[#888] mb-2">其他形態</div>
+                        <div className="text-xs font-semibold text-[#8896b0] mb-2">其他形態</div>
                         <div className="space-y-2">{allPatterns.filter(p => p.confluence_score < 70).map((item, i) => <PatternCard key={i} item={item} />)}</div>
                       </div>
                     )}

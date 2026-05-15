@@ -113,14 +113,14 @@ function BuyPointCard({ point }: { point: ChanBuyPoint }) {
           >
             {point.level === 1 ? "一" : point.level === 2 ? "二" : "三"}類{isBuy ? "買" : "賣"}點
           </span>
-          <span className="text-[10px] text-[#888]">{levelDescs[point.level]}</span>
+          <span className="text-[10px] text-[#8896b0]">{levelDescs[point.level]}</span>
         </div>
         <span className="text-sm font-bold font-mono" style={{ color }}>
           {point.price.toFixed(2)}
         </span>
       </div>
 
-      <p className="text-xs text-[#bbb] leading-relaxed">{point.description}</p>
+      <p className="text-xs text-[#b8c4d8] leading-relaxed">{point.description}</p>
 
       <div className="flex gap-2 flex-wrap">
         {point.divergence_confirmed && (
@@ -153,20 +153,20 @@ function ZhongshuCard({ z, isCurrent }: { z: ChanZhongshu; isCurrent: boolean })
       }}
     >
       <div className="flex items-center justify-between mb-1">
-        <span className="text-[#888]">走勢中樞</span>
+        <span className="text-[#8896b0]">走勢中樞</span>
         {isCurrent && <span className="text-[10px] text-[#ffd740] font-semibold">● 當前</span>}
       </div>
       <div className="grid grid-cols-3 gap-1 text-[10px]">
         <div>
-          <div className="text-[#555]">頂</div>
+          <div className="text-[#6b7a99]">頂</div>
           <div className="text-[#f44336] font-mono">{z.top.toFixed(2)}</div>
         </div>
         <div className="text-center">
-          <div className="text-[#555]">中</div>
+          <div className="text-[#6b7a99]">中</div>
           <div className="text-[#ffd740] font-mono">{z.mid.toFixed(2)}</div>
         </div>
         <div className="text-right">
-          <div className="text-[#555]">底</div>
+          <div className="text-[#6b7a99]">底</div>
           <div className="text-[#00e676] font-mono">{z.bottom.toFixed(2)}</div>
         </div>
       </div>
@@ -185,7 +185,7 @@ function TimeframeSection({ label, data }: { label: string; data: ChanEnhancedRe
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-[#ccc]">{label}</span>
+          <span className="text-xs font-bold text-[#d0daea]">{label}</span>
           <TrendBadge trend={data.trend} />
           {data.in_zhongshu && (
             <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#ffd740]/10 text-[#ffd740]">
@@ -193,7 +193,7 @@ function TimeframeSection({ label, data }: { label: string; data: ChanEnhancedRe
             </span>
           )}
         </div>
-        <div className="text-[10px] text-[#555]">
+        <div className="text-[10px] text-[#6b7a99]">
           筆 {data.bi_count} ｜ 段 {data.duan_count} ｜ 中樞 {data.zhongshus.length}
         </div>
       </div>
@@ -202,7 +202,7 @@ function TimeframeSection({ label, data }: { label: string; data: ChanEnhancedRe
       {data.macd_area_ratio > 0 && (
         <div className="rounded p-2 text-xs" style={{ background: "#111", border: "1px solid #222" }}>
           <div className="flex items-center justify-between">
-            <span className="text-[#777]">MACD 面積比（背馳指標）</span>
+            <span className="text-[#8896b0]">MACD 面積比（背馳指標）</span>
             <span
               className="font-bold"
               style={{ color: data.macd_area_ratio < 0.7 ? "#f44336" : data.macd_area_ratio < 0.9 ? "#ffd740" : "#00e676" }}
@@ -210,7 +210,7 @@ function TimeframeSection({ label, data }: { label: string; data: ChanEnhancedRe
               {(data.macd_area_ratio * 100).toFixed(0)}%
             </span>
           </div>
-          <div className="mt-1 h-1.5 rounded-full bg-[#222]">
+          <div className="mt-1 h-1.5 rounded-full bg-[#161b27]">
             <div
               className="h-full rounded-full"
               style={{
@@ -219,7 +219,7 @@ function TimeframeSection({ label, data }: { label: string; data: ChanEnhancedRe
               }}
             />
           </div>
-          <div className="text-[10px] text-[#555] mt-1">
+          <div className="text-[10px] text-[#6b7a99] mt-1">
             {data.macd_area_ratio < 0.7 ? "⚠️ 面積縮小 < 70%，背馳確認" : data.macd_area_ratio < 0.9 ? "注意：面積縮小中" : "動能正常"}
           </div>
         </div>
@@ -238,14 +238,14 @@ function TimeframeSection({ label, data }: { label: string; data: ChanEnhancedRe
             {beichi.type === "bottom" ? "🔔 底背馳信號" : "🔔 頂背馳信號"}
             <span className="ml-2 text-[10px] opacity-70">強度：{beichi.strength}</span>
           </div>
-          <div className="text-[#bbb]">{beichi.description}</div>
+          <div className="text-[#b8c4d8]">{beichi.description}</div>
         </div>
       )}
 
       {/* Zhongshus */}
       {data.zhongshus.length > 0 && (
         <div className="space-y-1.5">
-          <div className="text-[10px] text-[#666] font-semibold">走勢中樞</div>
+          <div className="text-[10px] text-[#7a8aaa] font-semibold">走勢中樞</div>
           {data.zhongshus.slice(-3).map((z, i) => (
             <ZhongshuCard
               key={i}
@@ -259,7 +259,7 @@ function TimeframeSection({ label, data }: { label: string; data: ChanEnhancedRe
       {/* Buy/Sell points */}
       {(buyPoints.length > 0 || sellPoints.length > 0) && (
         <div className="space-y-2">
-          <div className="text-[10px] text-[#666] font-semibold">買賣點</div>
+          <div className="text-[10px] text-[#7a8aaa] font-semibold">買賣點</div>
           {buyPoints.map((p, i) => <BuyPointCard key={i} point={p} />)}
           {sellPoints.map((p, i) => <BuyPointCard key={i} point={p} />)}
         </div>
@@ -279,7 +279,7 @@ export function ChanEnhancedPanel({ advanced, isLoading }: Props) {
     return (
       <div className="space-y-3">
         {[1, 2, 3].map(i => (
-          <div key={i} className="h-32 rounded-lg bg-[#1a1a1a] animate-pulse" />
+          <div key={i} className="h-32 rounded-lg bg-[#161b27] animate-pulse" />
         ))}
       </div>
     );
@@ -287,7 +287,7 @@ export function ChanEnhancedPanel({ advanced, isLoading }: Props) {
 
   if (!advanced) {
     return (
-      <div className="text-center py-12 text-[#555] text-sm">
+      <div className="text-center py-12 text-[#6b7a99] text-sm">
         請先選擇幣種並執行分析
       </div>
     );
@@ -299,17 +299,17 @@ export function ChanEnhancedPanel({ advanced, isLoading }: Props) {
   return (
     <div className="space-y-4">
       {/* Theory explanation */}
-      <div className="rounded-lg p-3 text-xs text-[#777]" style={{ background: "#111", border: "1px solid #222" }}>
-        <div className="font-semibold text-[#999] mb-2">📖 纏論核心概念</div>
+      <div className="rounded-lg p-3 text-xs text-[#8896b0]" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="font-semibold text-[#9aaac0] mb-2">📖 纏論核心概念</div>
         <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-          <div><span className="text-[#ccc]">筆 (Bi)</span>：相鄰頂底分型之間的走勢</div>
-          <div><span className="text-[#ccc]">線段 (Duan)</span>：至少三筆組成的方向走勢</div>
-          <div><span className="text-[#ccc]">中樞 (Hub)</span>：三筆重疊區域，震盪核心</div>
-          <div><span className="text-[#ccc]">背馳 (Beichi)</span>：MACD 面積縮小，動能衰竭</div>
+          <div><span className="text-[#d0daea]">筆 (Bi)</span>：相鄰頂底分型之間的走勢</div>
+          <div><span className="text-[#d0daea]">線段 (Duan)</span>：至少三筆組成的方向走勢</div>
+          <div><span className="text-[#d0daea]">中樞 (Hub)</span>：三筆重疊區域，震盪核心</div>
+          <div><span className="text-[#d0daea]">背馳 (Beichi)</span>：MACD 面積縮小，動能衰竭</div>
           <div><span className="text-[#ff6b6b]">一類買點</span>：背馳後的最低風險進場</div>
           <div><span className="text-[#ffd740]">二類買點</span>：中樞突破後的回踩確認</div>
           <div><span className="text-[#4fc3f7]">三類買點</span>：趨勢延續的中樞頂部確認</div>
-          <div><span className="text-[#ccc]">包含處理</span>：合併包含K線，消除噪音</div>
+          <div><span className="text-[#d0daea]">包含處理</span>：合併包含K線，消除噪音</div>
         </div>
       </div>
 

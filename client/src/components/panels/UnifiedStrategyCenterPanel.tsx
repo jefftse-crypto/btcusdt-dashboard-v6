@@ -36,7 +36,7 @@ function Section({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <section className="rounded-lg overflow-hidden bg-[#1e222d] border border-[#2a2e39] mb-4">
+    <section className="rounded-lg overflow-hidden bg-[#1e222d] border border-[#2a3148] mb-4">
       <button
         type="button"
         onClick={() => setOpen(v => !v)}
@@ -48,12 +48,12 @@ function Section({
           </div>
           <div className="min-w-0">
             <div className="text-xs font-bold text-[#d1d4dc] uppercase tracking-wider">{title}</div>
-            <div className="text-[10px] text-[#787b86] mt-0.5 truncate">{subtitle}</div>
+            <div className="text-[10px] text-[#8896b0] mt-0.5 truncate">{subtitle}</div>
           </div>
         </div>
-        {open ? <ChevronUp size={14} className="text-[#787b86]" /> : <ChevronDown size={14} className="text-[#787b86]" />}
+        {open ? <ChevronUp size={14} className="text-[#8896b0]" /> : <ChevronDown size={14} className="text-[#8896b0]" />}
       </button>
-      {open && <div className="p-3 md:p-4 space-y-4 border-t border-[#2a2e39] bg-[#131722]/30">{children}</div>}
+      {open && <div className="p-3 md:p-4 space-y-4 border-t border-[#2a3148] bg-[#0e1117]/30">{children}</div>}
     </section>
   );
 }
@@ -65,7 +65,7 @@ function SummaryCard({ label, value, tone = "neutral" }: { label: string; value:
 
   return (
     <div className="rounded border p-2.5 transition-all hover:border-[#2962ff]/30" style={{ background: bgColor, borderColor: borderColor }}>
-      <div className="text-[9px] text-[#787b86] mb-1 uppercase font-bold tracking-tighter">{label}</div>
+      <div className="text-[9px] text-[#8896b0] mb-1 uppercase font-bold tracking-tighter">{label}</div>
       <div className="text-xs font-bold font-mono" style={{ color }}>{value}</div>
     </div>
   );
@@ -90,7 +90,7 @@ export function UnifiedStrategyCenterPanel({
 
   return (
     <div className="space-y-4 animate-in fade-in duration-500">
-      <div className="rounded-lg p-4 bg-[#1e222d] border border-[#2a2e39] shadow-lg">
+      <div className="rounded-lg p-4 bg-[#1e222d] border border-[#2a3148] shadow-lg">
         <div className="flex flex-col gap-3 mb-4">
           <div className="flex items-center gap-2">
             <div className="p-1 bg-[#2962ff] rounded shadow-lg shadow-[#2962ff]/20">
@@ -98,7 +98,7 @@ export function UnifiedStrategyCenterPanel({
             </div>
             <div className="text-sm font-bold text-white uppercase tracking-tight">統一策略中心</div>
           </div>
-          <div className="text-[10px] text-[#787b86] leading-relaxed">
+          <div className="text-[10px] text-[#8896b0] leading-relaxed">
             整合策略建議、高勝率模型、CannonBall 與回測模組，提供全方位的交易決策支援。
           </div>
         </div>
@@ -155,7 +155,7 @@ export function UnifiedStrategyCenterPanel({
         <BacktestPanel symbol={symbol} />
       </Section>
 
-      <div className="rounded-lg p-3 text-[10px] flex items-start gap-2 bg-[#2962ff]/5 border border-[#2962ff]/20 text-[#787b86]">
+      <div className="rounded-lg p-3 text-[10px] flex items-start gap-2 bg-[#2962ff]/5 border border-[#2962ff]/20 text-[#8896b0]">
         <Activity size={14} className="mt-0.5 shrink-0 text-[#2962ff]" />
         <div>
           策略數據已與 V8 引擎同步。所有分析均基於當前市場結構與多時間框架共識。

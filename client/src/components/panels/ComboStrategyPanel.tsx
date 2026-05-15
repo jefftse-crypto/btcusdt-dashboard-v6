@@ -131,10 +131,10 @@ export function ComboStrategyPanel({ symbol }: Props) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-[#ffd740]" />
-          <span className="text-sm font-bold text-[#ccc]">組合策略即時信號</span>
+          <span className="text-sm font-bold text-[#d0daea]">組合策略即時信號</span>
         </div>
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-1 text-[10px] text-[#666] cursor-pointer">
+          <label className="flex items-center gap-1 text-[10px] text-[#7a8aaa] cursor-pointer">
             <input
               type="checkbox"
               checked={useTripleMtf}
@@ -148,7 +148,7 @@ export function ComboStrategyPanel({ symbol }: Props) {
 
       {/* 推薦組合選擇 */}
       <div className="space-y-2">
-        <div className="text-[10px] text-[#555] uppercase tracking-wider">推薦組合（已對齊最新 CannonBall 結構確認）</div>
+        <div className="text-[10px] text-[#6b7a99] uppercase tracking-wider">推薦組合（已對齊最新 CannonBall 結構確認）</div>
         <div className="grid grid-cols-2 gap-2">
           {RECOMMENDED_COMBOS.map((combo, idx) => (
             <button
@@ -163,7 +163,7 @@ export function ComboStrategyPanel({ symbol }: Props) {
               <div className="text-[11px] font-bold mb-0.5" style={{ color: !useCustom && selectedCombo === idx ? combo.color : "#888" }}>
                 {combo.name}
               </div>
-              <div className="text-[9px] text-[#555] leading-tight">{combo.note}</div>
+              <div className="text-[9px] text-[#6b7a99] leading-tight">{combo.note}</div>
               <div className="flex flex-wrap gap-1 mt-1.5">
                 {combo.strategies.map(s => (
                   <span key={s} className="text-[8px] px-1 py-0.5 rounded" style={{ background: "#1a1a1a", color: "#666" }}>
@@ -179,8 +179,8 @@ export function ComboStrategyPanel({ symbol }: Props) {
       {/* 自訂策略 */}
       <div className="rounded-lg p-3" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] text-[#555] uppercase tracking-wider">自訂組合</span>
-          <label className="flex items-center gap-1 text-[10px] text-[#666] cursor-pointer">
+          <span className="text-[10px] text-[#6b7a99] uppercase tracking-wider">自訂組合</span>
+          <label className="flex items-center gap-1 text-[10px] text-[#7a8aaa] cursor-pointer">
             <input
               type="checkbox"
               checked={useCustom}
@@ -246,7 +246,7 @@ export function ComboStrategyPanel({ symbol }: Props) {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <Star className="w-4 h-4 text-[#ffd740]" />
-              <span className="text-xs font-bold text-[#ccc]">最佳信號</span>
+              <span className="text-xs font-bold text-[#d0daea]">最佳信號</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-[10px] px-2 py-0.5 rounded font-bold"
@@ -268,7 +268,7 @@ export function ComboStrategyPanel({ symbol }: Props) {
             </div>
             <div>
               <div className="text-lg font-bold" style={{ color: dirColor }}>{dirLabel}</div>
-              <div className="text-[10px] text-[#555]">
+              <div className="text-[10px] text-[#6b7a99]">
                 評分 {bestSignal.signal_score?.toFixed(1) ?? "—"}/10 ·
                 近期勝率 {bestSignal.recent_wr}% ·
                 信號時間 {formatTime(bestSignal.entry_time)}
@@ -279,21 +279,21 @@ export function ComboStrategyPanel({ symbol }: Props) {
           {/* 價格資訊 */}
           <div className="grid grid-cols-3 gap-2">
             <div className="rounded p-2.5 text-center" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
-              <div className="text-[9px] text-[#555] mb-1">進場價</div>
-              <div className="text-xs font-mono font-bold text-[#ccc]">{formatPrice(bestSignal.entry)}</div>
+              <div className="text-[9px] text-[#6b7a99] mb-1">進場價</div>
+              <div className="text-xs font-mono font-bold text-[#d0daea]">{formatPrice(bestSignal.entry)}</div>
             </div>
             <div className="rounded p-2.5 text-center" style={{ background: "#161616", border: "1px solid #ef535030" }}>
-              <div className="text-[9px] text-[#555] mb-1">止損</div>
+              <div className="text-[9px] text-[#6b7a99] mb-1">止損</div>
               <div className="text-xs font-mono font-bold text-[#ef5350]">{formatPrice(bestSignal.sl)}</div>
             </div>
             <div className="rounded p-2.5 text-center" style={{ background: "#161616", border: "1px solid #4caf5030" }}>
-              <div className="text-[9px] text-[#555] mb-1">止盈 1</div>
+              <div className="text-[9px] text-[#6b7a99] mb-1">止盈 1</div>
               <div className="text-xs font-mono font-bold text-[#4caf50]">{formatPrice(bestSignal.tp1)}</div>
             </div>
           </div>
           {bestSignal.tp2 && (
             <div className="mt-2 rounded p-2 text-center" style={{ background: "#161616", border: "1px solid #4caf5020" }}>
-              <div className="text-[9px] text-[#555] mb-0.5">止盈 2（分批平倉）</div>
+              <div className="text-[9px] text-[#6b7a99] mb-0.5">止盈 2（分批平倉）</div>
               <div className="text-xs font-mono font-bold text-[#81c784]">{formatPrice(bestSignal.tp2)}</div>
             </div>
           )}
@@ -305,7 +305,7 @@ export function ComboStrategyPanel({ symbol }: Props) {
         <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
           <div className="px-3 py-2 border-b flex items-center gap-2" style={{ borderColor: "#1e1e1e", background: "#111" }}>
             <Activity className="w-3.5 h-3.5 text-[#4fc3f7]" />
-            <span className="text-[11px] font-semibold text-[#888]">
+            <span className="text-[11px] font-semibold text-[#8896b0]">
               活躍信號（{activeSignals.length} 個）
             </span>
           </div>
@@ -328,10 +328,10 @@ export function ComboStrategyPanel({ symbol }: Props) {
                       {isL ? "多" : isS ? "空" : "觀"}
                     </span>
                   </div>
-                  <div className="flex items-center gap-3 text-[10px] text-[#555]">
+                  <div className="flex items-center gap-3 text-[10px] text-[#6b7a99]">
                     <span>評分 {sig.signal_score?.toFixed(1) ?? "—"}</span>
                     <span>勝率 {sig.recent_wr}%</span>
-                    <span className="font-mono text-[#666]">{formatPrice(sig.entry)}</span>
+                    <span className="font-mono text-[#7a8aaa]">{formatPrice(sig.entry)}</span>
                   </div>
                 </div>
               );
@@ -344,8 +344,8 @@ export function ComboStrategyPanel({ symbol }: Props) {
       {allSignals.length > 0 && (
         <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
           <div className="px-3 py-2 border-b flex items-center gap-2" style={{ borderColor: "#1e1e1e", background: "#111" }}>
-            <Shield className="w-3.5 h-3.5 text-[#888]" />
-            <span className="text-[11px] font-semibold text-[#888]">策略狀態總覽</span>
+            <Shield className="w-3.5 h-3.5 text-[#8896b0]" />
+            <span className="text-[11px] font-semibold text-[#8896b0]">策略狀態總覽</span>
           </div>
           <div className="p-2 grid grid-cols-2 gap-1.5">
             {allSignals.map((sig, idx) => {
@@ -379,7 +379,7 @@ export function ComboStrategyPanel({ symbol }: Props) {
       {data && !bestSignal && (
         <div className="rounded-lg p-4 text-center" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
           <Minus className="w-6 h-6 text-[#333] mx-auto mb-2" />
-          <div className="text-sm text-[#555]">目前無活躍信號</div>
+          <div className="text-sm text-[#6b7a99]">目前無活躍信號</div>
           <div className="text-[10px] text-[#444] mt-1">
             {allSignals.length} 個策略均無最近 8 根 K 線內的信號
           </div>

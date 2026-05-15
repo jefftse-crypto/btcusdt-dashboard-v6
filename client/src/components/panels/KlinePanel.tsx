@@ -96,8 +96,8 @@ type CandleWithIndicators = Record<string, number | null> & {
 // ── SMC / 纏論結構選擇器定義 ──
 type StructureKey = "fvg_bull" | "fvg_bear" | "ob_bull" | "ob_bear" | "bos_choch" | "chan_bi" | "chan_zhongshu";
 const STRUCTURE_DEFS: Record<StructureKey, { label: string; color: string; group: "smc" | "chan" }> = {
-  fvg_bull:     { label: "FVG 多",    color: "#2ecc8a", group: "smc" },
-  fvg_bear:     { label: "FVG 空",    color: "#e05c6a", group: "smc" },
+  fvg_bull:     { label: "FVG 多",    color: "#26d48a", group: "smc" },
+  fvg_bear:     { label: "FVG 空",    color: "#f04f5e", group: "smc" },
   ob_bull:      { label: "OB 多",     color: "#4f9e6a", group: "smc" },
   ob_bear:      { label: "OB 空",     color: "#b04060", group: "smc" },
   bos_choch:    { label: "BOS/CHoCH", color: "#f59e0b", group: "smc" },
@@ -187,9 +187,9 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
       handleScale: { mouseWheel: true, pinch: true, axisPressedMouseMove: true },
     });
     const candleSeries = chart.addSeries(CandlestickSeries, {
-      upColor: "#2ecc8a", downColor: "#e05c6a",
-      borderUpColor: "#2ecc8a", borderDownColor: "#e05c6a",
-      wickUpColor: "#2ecc8a", wickDownColor: "#e05c6a",
+      upColor: "#26d48a", downColor: "#f04f5e",
+      borderUpColor: "#26d48a", borderDownColor: "#f04f5e",
+      wickUpColor: "#26d48a", wickDownColor: "#f04f5e",
     } as Partial<CandlestickSeriesOptions>);
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
@@ -266,22 +266,22 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
     // ── FVG 多（綠色半透明區域）──
     if (activeStructures.has("fvg_bull") && smc?.fvgs_bull) {
       for (const fvg of smc.fvgs_bull) {
-        const s = chart.addSeries(LineSeries, { color: "#2ecc8a", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
+        const s = chart.addSeries(LineSeries, { color: "#26d48a", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
         const t = timeArr[Math.min(fvg.candle_idx, timeArr.length - 1)] ?? timeArr[timeArr.length - 1];
         const tEnd = timeArr[timeArr.length - 1];
         if (t && tEnd) { s.setData([{ time: t, value: fvg.top }, { time: tEnd, value: fvg.top }]); smcSeriesRefs.current.push(s as ISeriesApi<"Line" | "Histogram">); }
-        const s2 = chart.addSeries(LineSeries, { color: "#2ecc8a", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
+        const s2 = chart.addSeries(LineSeries, { color: "#26d48a", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
         if (t && tEnd) { s2.setData([{ time: t, value: fvg.bottom }, { time: tEnd, value: fvg.bottom }]); smcSeriesRefs.current.push(s2 as ISeriesApi<"Line" | "Histogram">); }
       }
     }
     // ── FVG 空（紅色半透明區域）──
     if (activeStructures.has("fvg_bear") && smc?.fvgs_bear) {
       for (const fvg of smc.fvgs_bear) {
-        const s = chart.addSeries(LineSeries, { color: "#e05c6a", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
+        const s = chart.addSeries(LineSeries, { color: "#f04f5e", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
         const t = timeArr[Math.min(fvg.candle_idx, timeArr.length - 1)] ?? timeArr[timeArr.length - 1];
         const tEnd = timeArr[timeArr.length - 1];
         if (t && tEnd) { s.setData([{ time: t, value: fvg.top }, { time: tEnd, value: fvg.top }]); smcSeriesRefs.current.push(s as ISeriesApi<"Line" | "Histogram">); }
-        const s2 = chart.addSeries(LineSeries, { color: "#e05c6a", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
+        const s2 = chart.addSeries(LineSeries, { color: "#f04f5e", lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false } as Partial<LineSeriesOptions>);
         if (t && tEnd) { s2.setData([{ time: t, value: fvg.bottom }, { time: tEnd, value: fvg.bottom }]); smcSeriesRefs.current.push(s2 as ISeriesApi<"Line" | "Histogram">); }
       }
     }
@@ -419,18 +419,18 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
   }, [livePrice, chartCandles]);
 
   return (
-    <div ref={panelRef} className={`relative flex flex-col h-full w-full bg-[#131722] overflow-hidden ${isFullscreen ? "fixed inset-0 z-50" : ""}`}>
+    <div ref={panelRef} className={`relative flex flex-col h-full w-full bg-[#0e1117] overflow-hidden ${isFullscreen ? "fixed inset-0 z-50" : ""}`}>
       {/* ── HUD 頂部 ── */}
       <div className="absolute top-2 left-3 z-10 pointer-events-none flex flex-col gap-1">
-        <div className="flex items-center gap-2 bg-[#1e222d]/80 backdrop-blur-sm px-2 py-1 rounded border border-[#2a2e39] shadow-lg">
+        <div className="flex items-center gap-2 bg-[#1e222d]/80 backdrop-blur-sm px-2 py-1 rounded border border-[#2a3148] shadow-lg">
           <span className="text-[10px] sm:text-[11px] font-bold text-white">{symbol}</span>
-          <span className="text-[9px] sm:text-[10px] text-[#787b86]">{timeframe.toUpperCase()}</span>
+          <span className="text-[9px] sm:text-[10px] text-[#8896b0]">{timeframe.toUpperCase()}</span>
           {hoveredOhlcv && (
             <div className="flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono">
-              <span className="text-[#787b86]">O<span className="text-white ml-0.5">{hoveredOhlcv.o.toFixed(1)}</span></span>
-              <span className="text-[#787b86]">H<span className="text-white ml-0.5">{hoveredOhlcv.h.toFixed(1)}</span></span>
-              <span className="text-[#787b86]">L<span className="text-white ml-0.5">{hoveredOhlcv.l.toFixed(1)}</span></span>
-              <span className="text-[#787b86]">C<span className={`ml-0.5 ${hoveredOhlcv.c >= hoveredOhlcv.o ? "text-[#089981]" : "text-[#f23645]"}`}>{hoveredOhlcv.c.toFixed(1)}</span></span>
+              <span className="text-[#8896b0]">O<span className="text-white ml-0.5">{hoveredOhlcv.o.toFixed(1)}</span></span>
+              <span className="text-[#8896b0]">H<span className="text-white ml-0.5">{hoveredOhlcv.h.toFixed(1)}</span></span>
+              <span className="text-[#8896b0]">L<span className="text-white ml-0.5">{hoveredOhlcv.l.toFixed(1)}</span></span>
+              <span className="text-[#8896b0]">C<span className={`ml-0.5 ${hoveredOhlcv.c >= hoveredOhlcv.o ? "text-[#089981]" : "text-[#f23645]"}`}>{hoveredOhlcv.c.toFixed(1)}</span></span>
             </div>
           )}
         </div>
@@ -441,7 +441,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
               const v = hoveredIndicators[fields[0]];
               if (v == null) return null;
               return (
-                <span key={key} className="text-[9px] font-mono px-1 py-0.5 rounded bg-[#1e222d]/80 border border-[#2a2e39]" style={{ color: INDICATOR_DEFS[key].color }}>
+                <span key={key} className="text-[9px] font-mono px-1 py-0.5 rounded bg-[#1e222d]/80 border border-[#2a3148]" style={{ color: INDICATOR_DEFS[key].color }}>
                   {INDICATOR_DEFS[key].label}: {v.toFixed(2)}
                 </span>
               );
@@ -453,41 +453,41 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
       {/* ── 右上角工具列 ── */}
       <div className="absolute top-2 right-2 z-20 flex items-center gap-1">
         {/* K 線數量快速切換 */}
-        <div className="flex items-center rounded overflow-hidden border border-[#2a2e39] bg-[#1e222d]/80">
+        <div className="flex items-center rounded overflow-hidden border border-[#2a3148] bg-[#1e222d]/80">
           {(isMobile ? [100, 200, 500] : [200, 500, 1000]).map(n => (
             <button key={n} onClick={() => setKlineLimit(n)}
               className={`px-1.5 py-0.5 text-[9px] font-bold transition-colors ${
-                klineLimit === n ? "bg-[#2962ff] text-white" : "text-[#787b86] hover:text-white"
+                klineLimit === n ? "bg-[#2962ff] text-white" : "text-[#8896b0] hover:text-white"
               }`}>
               {n >= 1000 ? "1K" : n}
             </button>
           ))}
         </div>
         <button onClick={() => setIndicatorPanelOpen(p => !p)}
-          className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] font-bold transition-colors border ${indicatorPanelOpen ? "bg-[#2962ff] text-white border-[#2962ff]" : "bg-[#1e222d]/80 text-[#787b86] hover:text-white border-[#2a2e39]"}`}>
+          className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] font-bold transition-colors border ${indicatorPanelOpen ? "bg-[#2962ff] text-white border-[#2962ff]" : "bg-[#1e222d]/80 text-[#8896b0] hover:text-white border-[#2a3148]"}`}>
           <Settings2 size={11} />
           {!isMobile && <span>指標</span>}
           <span className="text-[9px] opacity-70">({activeIndicators.size})</span>
         </button>
-        <button onClick={() => setIsFullscreen(p => !p)} className="p-1.5 rounded bg-[#1e222d]/80 text-[#787b86] hover:text-white border border-[#2a2e39] transition-colors">
+        <button onClick={() => setIsFullscreen(p => !p)} className="p-1.5 rounded bg-[#1e222d]/80 text-[#8896b0] hover:text-white border border-[#2a3148] transition-colors">
           {isFullscreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
         </button>
       </div>
 
       {/* ── 指標選擇面板 ── */}
       {indicatorPanelOpen && (
-        <div className="absolute top-10 right-2 z-30 w-72 bg-[#1e222d] border border-[#2a2e39] rounded-lg shadow-2xl p-3 space-y-3 max-h-[70vh] overflow-y-auto custom-scrollbar">
+        <div className="absolute top-10 right-2 z-30 w-72 bg-[#1e222d] border border-[#2a3148] rounded-lg shadow-2xl p-3 space-y-3 max-h-[70vh] overflow-y-auto custom-scrollbar">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-white uppercase">技術指標選擇器</span>
-            <button onClick={() => setIndicatorPanelOpen(false)} className="text-[#787b86] hover:text-white text-xs">✕</button>
+            <button onClick={() => setIndicatorPanelOpen(false)} className="text-[#8896b0] hover:text-white text-xs">✕</button>
           </div>
           {/* 子圖 */}
           <div>
-            <div className="text-[9px] text-[#787b86] uppercase font-bold mb-1.5">下方子圖</div>
+            <div className="text-[9px] text-[#8896b0] uppercase font-bold mb-1.5">下方子圖</div>
             <div className="flex flex-wrap gap-1">
               {(Object.keys(SUB_LABELS) as SubType[]).map(s => (
                 <button key={s} onClick={() => setSubChart(s)}
-                  className={`text-[9px] px-2 py-0.5 rounded font-bold transition-colors ${subChart === s ? "bg-[#2962ff] text-white" : "text-[#787b86] hover:text-white border border-[#2a2e39]"}`}>
+                  className={`text-[9px] px-2 py-0.5 rounded font-bold transition-colors ${subChart === s ? "bg-[#2962ff] text-white" : "text-[#8896b0] hover:text-white border border-[#2a3148]"}`}>
                   {SUB_LABELS[s]}
                 </button>
               ))}
@@ -498,7 +498,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
             const keys = (Object.keys(INDICATOR_DEFS) as IndicatorKey[]).filter(k => INDICATOR_DEFS[k].group === group);
             return (
               <div key={group}>
-                <div className="text-[9px] text-[#787b86] uppercase font-bold mb-1.5">{GROUP_LABELS[group]}</div>
+                <div className="text-[9px] text-[#8896b0] uppercase font-bold mb-1.5">{GROUP_LABELS[group]}</div>
                 <div className="flex flex-wrap gap-1.5">
                   {keys.map(key => {
                     const def = INDICATOR_DEFS[key];
@@ -517,7 +517,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
             );
           })}
           {/* SMC 結構 */}
-          <div className="pt-2 border-t border-[#252b3a]">
+          <div className="pt-2 border-t border-[#2a3148]">
             <div className="text-[9px] uppercase font-bold mb-1.5" style={{ color: "#f59e0b" }}>SMC 結構</div>
             <div className="flex flex-wrap gap-1.5">
               {(["fvg_bull", "fvg_bear", "ob_bull", "ob_bear", "bos_choch"] as StructureKey[]).map(key => {
@@ -535,7 +535,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
             </div>
           </div>
           {/* 纏論結構 */}
-          <div className="pt-2 border-t border-[#252b3a]">
+          <div className="pt-2 border-t border-[#2a3148]">
             <div className="text-[9px] uppercase font-bold mb-1.5" style={{ color: "#c084fc" }}>纏論結構</div>
             <div className="flex flex-wrap gap-1.5">
               {(["chan_bi", "chan_zhongshu"] as StructureKey[]).map(key => {
@@ -555,7 +555,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
               <div className="mt-1.5 text-[9px] space-y-0.5">
                 <div className="flex gap-2">
                   <span style={{ color: "#6b7385" }}>趨勢：</span>
-                  <span className="font-bold" style={{ color: structureData.chan.trend === "bullish" ? "#2ecc8a" : structureData.chan.trend === "bearish" ? "#e05c6a" : "#9ba3b5" }}>
+                  <span className="font-bold" style={{ color: structureData.chan.trend === "bullish" ? "#26d48a" : structureData.chan.trend === "bearish" ? "#f04f5e" : "#9ba3b5" }}>
                     {structureData.chan.trend === "bullish" ? "偏多" : structureData.chan.trend === "bearish" ? "偏空" : "震盪"}
                   </span>
                   <span style={{ color: "#6b7385" }}>筆數：</span>
@@ -565,7 +565,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
                 {structureData.chan.divergence && (
                   <div className="flex gap-1">
                     <span style={{ color: "#6b7385" }}>背馳：</span>
-                    <span className="font-bold" style={{ color: structureData.chan.divergence === "top" ? "#e05c6a" : "#2ecc8a" }}>
+                    <span className="font-bold" style={{ color: structureData.chan.divergence === "top" ? "#f04f5e" : "#26d48a" }}>
                       {structureData.chan.divergence === "top" ? "頂背馳 ⚠️" : "底背馳 ✅"}
                     </span>
                   </div>
@@ -574,7 +574,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
             )}
           </div>
           {/* 策略建議 */}
-          <div className="pt-2 border-t border-[#252b3a]">
+          <div className="pt-2 border-t border-[#2a3148]">
             <div className="text-[9px] text-[#f59e0b] uppercase font-bold mb-1.5">V8 策略建議指標</div>
             <div className="flex flex-wrap gap-1 mb-2">
               {DEFAULT_STRATEGY_INDICATORS.map(k => (
@@ -597,7 +597,7 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
       <div className="flex-1 relative">
         <div ref={chartContainerRef} className="w-full h-full" />
         {isMobile && !hoveredOhlcv && (
-          <div className="absolute bottom-4 right-4 bg-[#1e222d]/60 p-2 rounded-full border border-[#2a2e39] animate-pulse">
+          <div className="absolute bottom-4 right-4 bg-[#1e222d]/60 p-2 rounded-full border border-[#2a3148] animate-pulse">
             <Fingerprint size={20} className="text-[#2962ff]" />
           </div>
         )}
@@ -605,8 +605,8 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
 
       {/* ── 子圖 ── */}
       {subChart !== "none" && (
-        <div className="border-t border-[#2a2e39] relative">
-          <div className="absolute left-2 top-1 z-10 text-[9px] text-[#787b86] font-bold uppercase">
+        <div className="border-t border-[#2a3148] relative">
+          <div className="absolute left-2 top-1 z-10 text-[9px] text-[#8896b0] font-bold uppercase">
             {SUB_LABELS[subChart]}
             {subChart === "rsi" && <span className="ml-1 opacity-60">· 超買 70 / 超賣 30</span>}
             {subChart === "adx" && <span className="ml-1 opacity-60">· 趨勢強度 25</span>}
@@ -618,14 +618,14 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
 
       {/* ── 底部狀態列 ── */}
       {!isMobile && (
-        <div className="bg-[#1e222d] border-t border-[#2a2e39] px-3 py-1.5 flex items-center justify-between">
+        <div className="bg-[#1e222d] border-t border-[#2a3148] px-3 py-1.5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BarChart2 size={11} className="text-[#2962ff]/60" />
-            <span className="text-[10px] text-[#787b86] truncate max-w-xs">
+            <span className="text-[10px] text-[#8896b0] truncate max-w-xs">
               {Array.from(activeIndicators).map(k => INDICATOR_DEFS[k].label).join(" · ")}
             </span>
           </div>
-          <div className="text-[10px] font-mono text-[#787b86] shrink-0">
+          <div className="text-[10px] font-mono text-[#8896b0] shrink-0">
             {hoveredOhlcv?.time ? new Date(Number(hoveredOhlcv.time) * 1000).toLocaleString("zh-TW", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }) : ""}
           </div>
         </div>

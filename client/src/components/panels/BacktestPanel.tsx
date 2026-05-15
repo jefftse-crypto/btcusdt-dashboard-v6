@@ -169,8 +169,8 @@ function CandleTooltip({ active, payload, activeIndicators }: {
   const time = new Date((d.time as number) * 1000).toLocaleString("zh-TW", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
   const isUp = (d.close as number) >= (d.open as number);
   return (
-    <div className="bg-[#1e222d] border border-[#2a2e39] rounded p-2 text-[10px] space-y-0.5 shadow-xl min-w-[160px] max-w-[220px]">
-      <div className="text-[#787b86] font-mono">{time}</div>
+    <div className="bg-[#1e222d] border border-[#2a3148] rounded p-2 text-[10px] space-y-0.5 shadow-xl min-w-[160px] max-w-[220px]">
+      <div className="text-[#8896b0] font-mono">{time}</div>
       <div className={`font-mono font-bold ${isUp ? "text-[#089981]" : "text-[#f23645]"}`}>
         O:{(d.open as number).toFixed(1)} H:{(d.high as number).toFixed(1)} L:{(d.low as number).toFixed(1)} C:{(d.close as number).toFixed(1)}
       </div>
@@ -184,7 +184,7 @@ function CandleTooltip({ active, payload, activeIndicators }: {
         });
       })}
       {d.tradeEntry && (
-        <div className={`mt-1 pt-1 border-t border-[#2a2e39] font-bold ${(d.tradeEntry as BacktestTrade).direction === "long" ? "text-[#089981]" : "text-[#f23645]"}`}>
+        <div className={`mt-1 pt-1 border-t border-[#2a3148] font-bold ${(d.tradeEntry as BacktestTrade).direction === "long" ? "text-[#089981]" : "text-[#f23645]"}`}>
           ▶ 進場 {(d.tradeEntry as BacktestTrade).direction.toUpperCase()} @ {(d.tradeEntry as BacktestTrade).entry_price.toFixed(1)}
         </div>
       )}
@@ -290,24 +290,24 @@ export function BacktestPanel({ symbol }: Props) {
   const IndicatorSelector = () => {
     const groups = (["trend", "band", "oscillator", "strength", "volume"] as const);
     return (
-      <div className="bg-[#0d0d0d] border border-[#2a2e39] rounded-lg">
+      <div className="bg-[#0e1117] border border-[#2a3148] rounded-lg">
         <button
           onClick={() => setIndicatorPanelOpen(p => !p)}
-          className="w-full flex items-center justify-between px-3 py-2 text-[10px] text-[#787b86] hover:text-white transition-colors"
+          className="w-full flex items-center justify-between px-3 py-2 text-[10px] text-[#8896b0] hover:text-white transition-colors"
         >
           <span className="flex items-center gap-1 font-bold uppercase"><Settings2 size={11} /> 指標選擇器（{activeIndicators.size} 個已啟用）</span>
           {indicatorPanelOpen ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
         </button>
         {indicatorPanelOpen && (
-          <div className="px-3 pb-3 space-y-3 border-t border-[#1e1e1e]">
+          <div className="px-3 pb-3 space-y-3 border-t border-[#2a3148]">
             {/* 子圖選擇 */}
             <div className="pt-2">
-              <div className="text-[9px] text-[#787b86] uppercase font-bold mb-1.5">下方子圖</div>
+              <div className="text-[9px] text-[#8896b0] uppercase font-bold mb-1.5">下方子圖</div>
               <div className="flex flex-wrap gap-1">
                 {(Object.keys(SUB_CHART_LABELS) as SubChartType[]).map(s => (
                   <button key={s} onClick={() => setSubChart(s)}
                     className={`text-[9px] px-2 py-0.5 rounded font-bold transition-colors ${
-                      subChart === s ? "bg-[#2962ff] text-white" : "text-[#787b86] hover:text-white border border-[#2a2e39]"
+                      subChart === s ? "bg-[#2962ff] text-white" : "text-[#8896b0] hover:text-white border border-[#2a3148]"
                     }`}>
                     {SUB_CHART_LABELS[s]}
                   </button>
@@ -319,7 +319,7 @@ export function BacktestPanel({ symbol }: Props) {
               const keys = (Object.keys(INDICATOR_DEFS) as IndicatorKey[]).filter(k => INDICATOR_DEFS[k].group === group);
               return (
                 <div key={group}>
-                  <div className="text-[9px] text-[#787b86] uppercase font-bold mb-1.5">{GROUP_LABELS[group]}</div>
+                  <div className="text-[9px] text-[#8896b0] uppercase font-bold mb-1.5">{GROUP_LABELS[group]}</div>
                   <div className="flex flex-wrap gap-1.5">
                     {keys.map(key => {
                       const def = INDICATOR_DEFS[key];
@@ -558,7 +558,7 @@ export function BacktestPanel({ symbol }: Props) {
   const ChartLegend = () => {
     const priceKeys = Array.from(activeIndicators).filter(k => INDICATOR_DEFS[k].subChart === "price");
     return (
-      <div className="flex flex-wrap items-center gap-2 px-1 text-[9px] text-[#787b86]">
+      <div className="flex flex-wrap items-center gap-2 px-1 text-[9px] text-[#8896b0]">
         <span className="flex items-center gap-1">
           <span className="inline-block w-0 h-0 border-l-[4px] border-r-[4px] border-b-[7px] border-l-transparent border-r-transparent border-b-[#089981]" /> 多單進場
         </span>
@@ -580,33 +580,33 @@ export function BacktestPanel({ symbol }: Props) {
   return (
     <div className="space-y-4">
       {/* ── 設定面板 ── */}
-      <div className="bg-[#141414] border border-[#1e1e1e] rounded-lg p-4">
-        <div className="flex items-center gap-2 mb-4 border-b border-[#1e1e1e] pb-2">
+      <div className="bg-[#161b27] border border-[#2a3148] rounded-lg p-4">
+        <div className="flex items-center gap-2 mb-4 border-b border-[#2a3148] pb-2">
           <Activity size={16} className="text-[#2962ff]" />
           <h3 className="text-sm font-bold text-white/90">策略回測引擎 V8.0</h3>
-          <span className="ml-auto text-[10px] text-[#787b86]">全套指標 + K 線圖表</span>
+          <span className="ml-auto text-[10px] text-[#8896b0]">全套指標 + K 線圖表</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="space-y-1">
-            <label className="text-[10px] text-[#787b86] uppercase font-bold">選擇策略</label>
+            <label className="text-[10px] text-[#8896b0] uppercase font-bold">選擇策略</label>
             <select value={strategy} onChange={e => setStrategy(e.target.value as Strategy)}
-              className="w-full bg-[#0d0d0d] border border-[#2a2e39] rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-[#2962ff]/50">
+              className="w-full bg-[#0e1117] border border-[#2a3148] rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-[#2962ff]/50">
               {(Object.keys(STRATEGY_LABELS) as Strategy[]).map(s => (
                 <option key={s} value={s}>{STRATEGY_LABELS[s]}</option>
               ))}
             </select>
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] text-[#787b86] uppercase font-bold">時間框架</label>
+            <label className="text-[10px] text-[#8896b0] uppercase font-bold">時間框架</label>
             <select value={interval} onChange={e => setInterval(e.target.value)}
-              className="w-full bg-[#0d0d0d] border border-[#2a2e39] rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-[#2962ff]/50">
+              className="w-full bg-[#0e1117] border border-[#2a3148] rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-[#2962ff]/50">
               {["15m", "1H", "4H", "1D"].map(v => <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] text-[#787b86] uppercase font-bold">回測範圍 (K線)</label>
+            <label className="text-[10px] text-[#8896b0] uppercase font-bold">回測範圍 (K線)</label>
             <select value={limit} onChange={e => setLimit(Number(e.target.value))}
-              className="w-full bg-[#0d0d0d] border border-[#2a2e39] rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-[#2962ff]/50">
+              className="w-full bg-[#0e1117] border border-[#2a3148] rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-[#2962ff]/50">
               {[1000, 2000, 4320, 8640].map(v => <option key={v} value={v}>{v} 根</option>)}
             </select>
           </div>
@@ -620,7 +620,7 @@ export function BacktestPanel({ symbol }: Props) {
         <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="p-2 bg-[#2962ff]/5 border border-[#2962ff]/10 rounded flex items-start gap-2">
             <Info size={14} className="text-[#2962ff] mt-0.5 shrink-0" />
-            <p className="text-[10px] text-[#787b86] leading-relaxed">{STRATEGY_DESC[strategy]}</p>
+            <p className="text-[10px] text-[#8896b0] leading-relaxed">{STRATEGY_DESC[strategy]}</p>
           </div>
           <div className="p-2 bg-[#f59e0b]/5 border border-[#f59e0b]/10 rounded">
             <div className="text-[10px] text-[#f59e0b] font-bold mb-1">此策略建議觀察指標</div>
@@ -641,8 +641,8 @@ export function BacktestPanel({ symbol }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {/* 左側：核心指標 */}
           <div className="lg:col-span-1 space-y-4">
-            <div className="bg-[#141414] border border-[#1e1e1e] rounded-lg p-4">
-              <div className="text-[10px] text-[#787b86] uppercase font-bold mb-3">核心績效指標</div>
+            <div className="bg-[#161b27] border border-[#2a3148] rounded-lg p-4">
+              <div className="text-[10px] text-[#8896b0] uppercase font-bold mb-3">核心績效指標</div>
               <div className="space-y-3">
                 {[
                   { label: "總收益率",   val: `${((result.total_return ?? 0) * 100).toFixed(2)}%`,  color: retColor(result.total_return ?? 0) },
@@ -651,8 +651,8 @@ export function BacktestPanel({ symbol }: Props) {
                   { label: "最大回撤",   val: `-${((result.max_drawdown ?? 0) * 100).toFixed(1)}%`, color: "text-[#f23645]" },
                   { label: "總交易數",   val: String(result.total_trades ?? 0),                     color: "text-white/80" },
                 ].map(item => (
-                  <div key={item.label} className="flex justify-between items-end border-b border-[#1e1e1e] pb-2">
-                    <span className="text-xs text-[#787b86]">{item.label}</span>
+                  <div key={item.label} className="flex justify-between items-end border-b border-[#2a3148] pb-2">
+                    <span className="text-xs text-[#8896b0]">{item.label}</span>
                     <span className={`text-base font-mono font-bold ${item.color}`}>{item.val}</span>
                   </div>
                 ))}
@@ -664,20 +664,20 @@ export function BacktestPanel({ symbol }: Props) {
                 )}
               </div>
             </div>
-            <div className="bg-[#141414] border border-[#1e1e1e] rounded-lg p-4">
-              <div className="text-[10px] text-[#787b86] uppercase font-bold mb-3">風險調整收益</div>
+            <div className="bg-[#161b27] border border-[#2a3148] rounded-lg p-4">
+              <div className="text-[10px] text-[#8896b0] uppercase font-bold mb-3">風險調整收益</div>
               <div className="grid grid-cols-2 gap-2">
                 {[{ label: "Sharpe", val: (result.sharpe_ratio ?? 0).toFixed(2) }, { label: "Sortino", val: (result.sortino_ratio ?? 0).toFixed(2) }].map(item => (
-                  <div key={item.label} className="bg-[#0d0d0d] p-2 rounded border border-[#2a2e39]">
-                    <div className="text-[9px] text-[#787b86] uppercase">{item.label}</div>
+                  <div key={item.label} className="bg-[#0e1117] p-2 rounded border border-[#2a3148]">
+                    <div className="text-[9px] text-[#8896b0] uppercase">{item.label}</div>
                     <div className="text-sm font-mono text-white/80">{item.val}</div>
                   </div>
                 ))}
               </div>
             </div>
             {result.monte_carlo && (
-              <div className="bg-[#141414] border border-[#1e1e1e] rounded-lg p-4">
-                <div className="text-[10px] text-[#787b86] uppercase font-bold mb-3">蒙地卡羅模擬</div>
+              <div className="bg-[#161b27] border border-[#2a3148] rounded-lg p-4">
+                <div className="text-[10px] text-[#8896b0] uppercase font-bold mb-3">蒙地卡羅模擬</div>
                 <div className="space-y-1 text-[10px]">
                   {[
                     { label: "P5 (悲觀)",  val: `${(result.monte_carlo.p5_return  * 100).toFixed(1)}%`, color: "text-[#f23645]" },
@@ -686,7 +686,7 @@ export function BacktestPanel({ symbol }: Props) {
                     { label: "破產機率",   val: `${(result.monte_carlo.ruin_probability * 100).toFixed(1)}%`, color: "text-[#f97316]" },
                   ].map(item => (
                     <div key={item.label} className="flex justify-between">
-                      <span className="text-[#787b86]">{item.label}</span>
+                      <span className="text-[#8896b0]">{item.label}</span>
                       <span className={`font-mono font-bold ${item.color}`}>{item.val}</span>
                     </div>
                   ))}
@@ -696,8 +696,8 @@ export function BacktestPanel({ symbol }: Props) {
           </div>
 
           {/* 右側：圖表 */}
-          <div className="lg:col-span-3 bg-[#141414] border border-[#1e1e1e] rounded-lg overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-[#1e1e1e]">
+          <div className="lg:col-span-3 bg-[#161b27] border border-[#2a3148] rounded-lg overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-[#2a3148]">
               <div className="flex gap-4">
                 {[
                   { id: "chart",  label: "K 線圖表" },
@@ -706,14 +706,14 @@ export function BacktestPanel({ symbol }: Props) {
                   { id: "stats",  label: "統計分析" },
                 ].map(tab => (
                   <button key={tab.id} onClick={() => setDetailTab(tab.id as typeof detailTab)}
-                    className={`text-xs font-bold transition-colors ${detailTab === tab.id ? "text-[#2962ff]" : "text-[#787b86] hover:text-white"}`}>
+                    className={`text-xs font-bold transition-colors ${detailTab === tab.id ? "text-[#2962ff]" : "text-[#8896b0] hover:text-white"}`}>
                     {tab.label}
                   </button>
                 ))}
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck size={14} className="text-[#089981]" />
-                <span className="text-[10px] text-[#787b86]">含 0.08% 手續費</span>
+                <span className="text-[10px] text-[#8896b0]">含 0.08% 手續費</span>
               </div>
             </div>
 
@@ -729,7 +729,7 @@ export function BacktestPanel({ symbol }: Props) {
                       <ChartLegend />
                     </>
                   ) : (
-                    <div className="flex items-center justify-center h-48 text-[#787b86] text-sm">圖表資料載入中...</div>
+                    <div className="flex items-center justify-center h-48 text-[#8896b0] text-sm">圖表資料載入中...</div>
                   )}
                 </div>
               )}
@@ -759,7 +759,7 @@ export function BacktestPanel({ symbol }: Props) {
               {detailTab === "trades" && (
                 <div className="overflow-auto max-h-[480px] custom-scrollbar">
                   <table className="w-full text-left border-collapse text-[11px]">
-                    <thead className="sticky top-0 bg-[#141414] border-b border-[#2a2e39] text-[#787b86] uppercase font-bold">
+                    <thead className="sticky top-0 bg-[#161b27] border-b border-[#2a3148] text-[#8896b0] uppercase font-bold">
                       <tr>
                         <th className="py-2 px-2">進場時間</th>
                         <th className="py-2 px-2">方向</th>
@@ -774,7 +774,7 @@ export function BacktestPanel({ symbol }: Props) {
                     <tbody className="divide-y divide-[#1e1e1e]">
                       {result.trades?.map((t, i) => (
                         <tr key={i} className="hover:bg-[#1e222d]/50 transition-colors">
-                          <td className="py-1.5 px-2 text-[#787b86]">{new Date(t.entry_time * 1000).toLocaleString("zh-TW", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</td>
+                          <td className="py-1.5 px-2 text-[#8896b0]">{new Date(t.entry_time * 1000).toLocaleString("zh-TW", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</td>
                           <td className={`py-1.5 px-2 font-bold ${t.direction === "long" ? "text-[#089981]" : "text-[#f23645]"}`}>
                             {t.direction === "long" ? "▲ LONG" : "▼ SHORT"}
                           </td>
@@ -785,7 +785,7 @@ export function BacktestPanel({ symbol }: Props) {
                           <td className="py-1.5 px-2">
                             <span className={`text-[10px] px-1.5 py-0.5 rounded uppercase ${
                               t.exit_reason === "tp" ? "bg-[#089981]/20 text-[#089981]" :
-                              t.exit_reason === "sl" ? "bg-[#f23645]/20 text-[#f23645]" : "bg-[#2a2e39] text-[#787b86]"
+                              t.exit_reason === "sl" ? "bg-[#f23645]/20 text-[#f23645]" : "bg-[#2a2e39] text-[#8896b0]"
                             }`}>{t.exit_reason}</span>
                           </td>
                           {result.trades?.some(t => t.r_multiple !== undefined) && (
@@ -805,7 +805,7 @@ export function BacktestPanel({ symbol }: Props) {
                 <div className="space-y-4 overflow-auto max-h-[480px] custom-scrollbar">
                   {monthlyData.length > 0 && (
                     <div>
-                      <div className="text-[10px] text-[#787b86] uppercase font-bold mb-2">月度收益率</div>
+                      <div className="text-[10px] text-[#8896b0] uppercase font-bold mb-2">月度收益率</div>
                       <ResponsiveContainer width="100%" height={120}>
                         <BarChart data={monthlyData} margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#1e222d" vertical={false} />
@@ -823,7 +823,7 @@ export function BacktestPanel({ symbol }: Props) {
                   )}
                   {pnlDistData.length > 0 && (
                     <div>
-                      <div className="text-[10px] text-[#787b86] uppercase font-bold mb-2">交易 PnL 分布</div>
+                      <div className="text-[10px] text-[#8896b0] uppercase font-bold mb-2">交易 PnL 分布</div>
                       <ResponsiveContainer width="100%" height={100}>
                         <BarChart data={pnlDistData} margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#1e222d" vertical={false} />
@@ -839,16 +839,16 @@ export function BacktestPanel({ symbol }: Props) {
                   )}
                   {result.trades && result.trades.length > 0 && (
                     <div>
-                      <div className="text-[10px] text-[#787b86] uppercase font-bold mb-2">出場原因統計</div>
+                      <div className="text-[10px] text-[#8896b0] uppercase font-bold mb-2">出場原因統計</div>
                       <div className="grid grid-cols-3 gap-2">
                         {["tp", "sl", "trailing"].map(reason => {
                           const count = result.trades!.filter(t => t.exit_reason === reason).length;
                           const total = result.trades!.length;
                           return (
-                            <div key={reason} className="bg-[#0d0d0d] rounded border border-[#2a2e39] p-2 text-center">
+                            <div key={reason} className="bg-[#0e1117] rounded border border-[#2a3148] p-2 text-center">
                               <div className={`text-xs font-bold uppercase ${reason === "tp" ? "text-[#089981]" : reason === "sl" ? "text-[#f23645]" : "text-[#f97316]"}`}>{reason}</div>
                               <div className="text-base font-mono font-bold text-white/90">{count}</div>
-                              <div className="text-[9px] text-[#787b86]">{total > 0 ? (count / total * 100).toFixed(1) : 0}%</div>
+                              <div className="text-[9px] text-[#8896b0]">{total > 0 ? (count / total * 100).toFixed(1) : 0}%</div>
                             </div>
                           );
                         })}

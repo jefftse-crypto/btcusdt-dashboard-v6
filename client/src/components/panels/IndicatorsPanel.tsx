@@ -125,10 +125,10 @@ function MetricRow({ label, value, sub, color }: {
 }) {
   return (
     <div className="flex items-start justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-      <span className="text-[11px] text-[#888]">{label}</span>
+      <span className="text-[11px] text-[#8896b0]">{label}</span>
       <div className="text-right">
         <span className="text-[11px] font-mono font-semibold" style={{ color: color ?? "#ccc" }}>{value}</span>
-        {sub && <div className="text-[10px] text-[#555]">{sub}</div>}
+        {sub && <div className="text-[10px] text-[#6b7a99]">{sub}</div>}
       </div>
     </div>
   );
@@ -148,7 +148,7 @@ function TagBadge({ label, color }: { label: string; color: string }) {
 function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-      <div className="px-3 py-2 border-b text-[11px] font-semibold text-[#888] uppercase tracking-wider"
+      <div className="px-3 py-2 border-b text-[11px] font-semibold text-[#8896b0] uppercase tracking-wider"
            style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
         {title}
       </div>
@@ -179,14 +179,14 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
       {/* TF header */}
       <div className="px-3 py-2 border-b flex items-center justify-between"
            style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
-        <span className="text-xs font-bold text-[#ccc]">{tf}</span>
+        <span className="text-xs font-bold text-[#d0daea]">{tf}</span>
         <TagBadge label={trendLbl} color={trendColor} />
       </div>
 
       <div className="px-3 py-1">
         {/* RSI */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">RSI</span>
+          <span className="text-[11px] text-[#8896b0]">RSI</span>
           <div className="flex items-center gap-2">
             <div className="w-20 h-1.5 rounded-full overflow-hidden" style={{ background: "#1e1e1e" }}>
               <div className="h-full rounded-full" style={{ width: `${ind.rsi}%`, background: rsiColor(ind.rsi) }} />
@@ -199,7 +199,7 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
 
         {/* MACD with mini bar */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">MACD 柱</span>
+          <span className="text-[11px] text-[#8896b0]">MACD 柱</span>
           <div className="flex items-center gap-2">
             {/* mini bar visualisation */}
             <div className="flex items-end gap-px h-4">
@@ -218,7 +218,7 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
 
         {/* ADX */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">ADX</span>
+          <span className="text-[11px] text-[#8896b0]">ADX</span>
           <div className="text-right">
             <span className="text-[11px] font-mono font-semibold" style={{ color: adxColor }}>
               {typeof adxVal === "number" ? adxVal.toFixed(1) : "—"}
@@ -230,10 +230,10 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
         {/* DI */}
         {plusDi != null && minusDi != null && (
           <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-            <span className="text-[11px] text-[#888]">+DI / -DI</span>
+            <span className="text-[11px] text-[#8896b0]">+DI / -DI</span>
             <span className="text-[11px] font-mono">
               <span className="text-[#4caf50]">{plusDi.toFixed(1)}</span>
-              <span className="text-[#555]"> / </span>
+              <span className="text-[#6b7a99]"> / </span>
               <span className="text-[#ef5350]">{minusDi.toFixed(1)}</span>
             </span>
           </div>
@@ -241,19 +241,19 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
 
         {/* EMA */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">EMA 20</span>
+          <span className="text-[11px] text-[#8896b0]">EMA 20</span>
           <span className="text-[11px] font-mono text-[#3b82f6]">
             {ind.ema.ema20.toLocaleString("en-US", { maximumFractionDigits: 2 })}
           </span>
         </div>
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">EMA 50</span>
+          <span className="text-[11px] text-[#8896b0]">EMA 50</span>
           <span className="text-[11px] font-mono text-[#a855f7]">
             {ind.ema.ema50.toLocaleString("en-US", { maximumFractionDigits: 2 })}
           </span>
         </div>
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">EMA 200</span>
+          <span className="text-[11px] text-[#8896b0]">EMA 200</span>
           <span className="text-[11px] font-mono text-[#ef4444]">
             {ind.ema.ema200.toLocaleString("en-US", { maximumFractionDigits: 2 })}
           </span>
@@ -261,17 +261,17 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
 
         {/* Bollinger */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">布林帶位置</span>
+          <span className="text-[11px] text-[#8896b0]">布林帶位置</span>
           <TagBadge label={bbLbl} color={bbColor} />
         </div>
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">帶寬</span>
-          <span className="text-[11px] font-mono text-[#aaa]">{((ind.bollinger as { bandwidth?: number })?.bandwidth ?? 0).toFixed(2)}%</span>
+          <span className="text-[11px] text-[#8896b0]">帶寬</span>
+          <span className="text-[11px] font-mono text-[#b0bcd4]">{((ind.bollinger as { bandwidth?: number })?.bandwidth ?? 0).toFixed(2)}%</span>
         </div>
 
         {/* VWAP */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">VWAP</span>
+          <span className="text-[11px] text-[#8896b0]">VWAP</span>
           <span className="text-[11px] font-mono text-[#ffd740]">
             {formatPrice(ind.vwap)}
           </span>
@@ -279,7 +279,7 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
 
         {/* CVD */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">CVD</span>
+          <span className="text-[11px] text-[#8896b0]">CVD</span>
           <div className="text-right">
             <span className="text-[11px] font-mono font-semibold" style={{ color: cvdTone(ind.cvd).color }}>
               {formatSignedCompact(ind.cvd?.change)}
@@ -297,13 +297,13 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
           const stColor = stK > 80 ? "#ef5350" : stK < 20 ? "#4caf50" : "#aaa";
           return (
             <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-              <span className="text-[11px] text-[#888]">Stoch K/D</span>
+              <span className="text-[11px] text-[#8896b0]">Stoch K/D</span>
               <div className="flex items-center gap-1.5">
                 {cross && <span className="text-[9px] font-bold px-1 py-0.5 rounded" style={{ color: crossColor, background: `${crossColor}20` }}>{cross}</span>}
                 <span className="text-[11px] font-mono">
                   <span style={{ color: stColor }}>{stK.toFixed(1)}</span>
-                  <span className="text-[#555]"> / </span>
-                  <span className="text-[#888]">{stD.toFixed(1)}</span>
+                  <span className="text-[#6b7a99]"> / </span>
+                  <span className="text-[#8896b0]">{stD.toFixed(1)}</span>
                 </span>
               </div>
             </div>
@@ -312,13 +312,13 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
 
         {/* ATR */}
         <div className="flex items-center justify-between py-1.5 border-b" style={{ borderColor: "#1e1e1e" }}>
-          <span className="text-[11px] text-[#888]">ATR</span>
-          <span className="text-[11px] font-mono text-[#aaa]">{(ind.atr ?? 0).toFixed(2)}</span>
+          <span className="text-[11px] text-[#8896b0]">ATR</span>
+          <span className="text-[11px] font-mono text-[#b0bcd4]">{(ind.atr ?? 0).toFixed(2)}</span>
         </div>
 
         {/* Momentum */}
         <div className="flex items-center justify-between py-2">
-          <span className="text-[11px] text-[#888]">動量</span>
+          <span className="text-[11px] text-[#8896b0]">動量</span>
           <TagBadge label={momLbl} color={momColor} />
         </div>
       </div>
@@ -332,7 +332,7 @@ function TfColumn({ tf, ind }: { tf: string; ind: IndicatorData }) {
 
 function IndicatorComparisonMatrix({ frames }: { frames: Array<{ tf: string; ind: IndicatorData }> }) {
   const cellClass = "min-w-[88px] px-2 py-2 text-right text-[11px] font-mono border-l";
-  const labelClass = "sticky left-0 z-10 min-w-[92px] px-3 py-2 text-[11px] text-[#888] font-semibold";
+  const labelClass = "sticky left-0 z-10 min-w-[92px] px-3 py-2 text-[11px] text-[#8896b0] font-semibold";
   const rowBorder = { borderColor: "#1e1e1e" };
 
   const rows = [
@@ -423,8 +423,8 @@ function IndicatorComparisonMatrix({ frames }: { frames: Array<{ tf: string; ind
     <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
       <div className="px-3 py-2 border-b flex items-center justify-between" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
         <div>
-          <div className="text-[11px] font-semibold text-[#888] uppercase tracking-wider">四時區並排比較</div>
-          <div className="text-[10px] text-[#555] mt-0.5">同一列橫向比較 4H / 1H / 15m / 5M，手機可左右滑動。</div>
+          <div className="text-[11px] font-semibold text-[#8896b0] uppercase tracking-wider">四時區並排比較</div>
+          <div className="text-[10px] text-[#6b7a99] mt-0.5">同一列橫向比較 4H / 1H / 15m / 5M，手機可左右滑動。</div>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -462,7 +462,7 @@ function IndicatorComparisonMatrix({ frames }: { frames: Array<{ tf: string; ind
 export function IndicatorsPanel({ snap, isAnalyzing }: Props) {
   if (isAnalyzing && !snap) {
     return (
-      <div className="flex items-center justify-center py-16 text-[#555] text-sm">
+      <div className="flex items-center justify-center py-16 text-[#6b7a99] text-sm">
         正在計算技術指標...
       </div>
     );
@@ -580,7 +580,7 @@ export function IndicatorsPanel({ snap, isAnalyzing }: Props) {
       </div>
 
       {/* ── 新增指標區塊 ── */}
-      <div className="text-[11px] text-[#555] font-semibold uppercase tracking-wider">進階指標</div>
+      <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider">進階指標</div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {/* Supertrend */}
         <SectionCard title="Supertrend (10, 3)">
@@ -713,7 +713,7 @@ export function IndicatorsPanel({ snap, isAnalyzing }: Props) {
         ]}
       />
 
-      <div className="text-[11px] text-[#555] font-semibold uppercase tracking-wider">各時區詳細卡片</div>
+      <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider">各時區詳細卡片</div>
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-3">
         <TfColumn tf="4H" ind={snap.mtf_indicators?.["4h"] ?? ind} />
         <TfColumn tf="1H" ind={snap.mtf_indicators?.["1h"] ?? ind} />

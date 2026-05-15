@@ -102,18 +102,18 @@ export default function Dashboard() {
     <div className="relative">
       <button
         onClick={() => setSymbolDropdownOpen(p => !p)}
-        className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#252b3a] hover:bg-[#2d3448] border border-[#2e3548] transition-colors"
+        className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#1e2638] hover:bg-[#232d42] border border-[#2e3548] transition-colors"
       >
-        <span className="text-xs font-bold text-[#c8cdd8]">
+        <span className="text-xs font-bold text-[#e2e8f0]">
           {currentSymbolInfo?.label ?? symbol.replace("USDT", "/USDT")}
         </span>
-        <ChevronDown size={12} className={`text-[#6b7385] transition-transform ${symbolDropdownOpen ? "rotate-180" : ""}`} />
+        <ChevronDown size={12} className={`text-[#8896b0] transition-transform ${symbolDropdownOpen ? "rotate-180" : ""}`} />
       </button>
       {symbolDropdownOpen && (
-        <div className="absolute top-full left-0 mt-1 z-50 bg-[#1c2030] border border-[#252b3a] rounded-lg shadow-2xl overflow-hidden min-w-[200px]">
+        <div className="absolute top-full left-0 mt-1 z-50 bg-[#161b27] border border-[#2a3148] rounded-lg shadow-2xl overflow-hidden min-w-[200px]">
           {/* 快速切換 */}
-          <div className="px-3 py-2 border-b border-[#252b3a]">
-            <div className="text-[9px] text-[#6b7385] uppercase font-bold mb-1.5">常用幣種</div>
+          <div className="px-3 py-2 border-b border-[#2a3148]">
+            <div className="text-[9px] text-[#8896b0] uppercase font-bold mb-1.5">常用幣種</div>
             <div className="grid grid-cols-4 gap-1">
               {QUICK_SYMBOLS.map(s => (
                 <button
@@ -122,7 +122,7 @@ export default function Dashboard() {
                   className={`text-[10px] font-bold py-1 px-1.5 rounded transition-all ${
                     symbol === s.value
                       ? "text-white"
-                      : "text-[#9ba3b5] hover:text-white hover:bg-[#252b3a]"
+                      : "text-[#b0bcd4] hover:text-white hover:bg-[#1e2638]"
                   }`}
                   style={symbol === s.value ? { backgroundColor: s.color + "30", color: s.color } : {}}
                 >
@@ -133,22 +133,22 @@ export default function Dashboard() {
           </div>
           {/* 全部幣種 */}
           <div className="px-3 py-2 max-h-48 overflow-y-auto custom-scrollbar">
-            <div className="text-[9px] text-[#6b7385] uppercase font-bold mb-1.5">全部幣種</div>
+            <div className="text-[9px] text-[#8896b0] uppercase font-bold mb-1.5">全部幣種</div>
             {SUPPORTED_SYMBOLS.map(s => (
               <button
                 key={s.value}
                 onClick={() => { setSymbol(s.value); setSymbolDropdownOpen(false); }}
                 className={`w-full flex items-center justify-between px-2 py-1.5 rounded text-xs transition-colors ${
                   symbol === s.value
-                    ? "bg-[#4f7cff]/15 text-[#4f7cff]"
-                    : "text-[#9ba3b5] hover:bg-[#252b3a] hover:text-[#c8cdd8]"
+                    ? "bg-[#5b8af5]/15 text-[#5b8af5]"
+                    : "text-[#b0bcd4] hover:bg-[#1e2638] hover:text-[#e2e8f0]"
                 }`}
               >
                 <span className="flex items-center gap-2">
                   <span className="text-sm">{s.icon}</span>
                   <span className="font-medium">{s.label}</span>
                 </span>
-                {symbol === s.value && <span className="text-[9px] text-[#4f7cff]">●</span>}
+                {symbol === s.value && <span className="text-[9px] text-[#5b8af5]">●</span>}
               </button>
             ))}
           </div>
@@ -172,23 +172,23 @@ export default function Dashboard() {
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Logo */}
           <div className="flex items-center gap-2 font-bold">
-            <div className="bg-[#4f7cff] p-1 rounded shadow-lg shadow-[#4f7cff]/20">
+            <div className="bg-[#5b8af5] p-1 rounded shadow-lg shadow-[#5b8af5]/20">
               <Zap size={15} className="text-white" />
             </div>
-            <span className="tracking-tight hidden xs:inline text-sm text-[#c8cdd8]">MANUS PRO</span>
+            <span className="tracking-tight hidden xs:inline text-sm text-[#e2e8f0]">MANUS PRO</span>
           </div>
 
-          <div className="h-5 w-px bg-[#252b3a] hidden xs:block" />
+          <div className="h-5 w-px bg-[#1e2638] hidden xs:block" />
 
           {/* 幣種選擇器 */}
           <SymbolSelector />
 
           {/* 價格顯示 */}
           <div className="flex flex-col items-end">
-            <span className={`text-xs sm:text-sm font-mono font-bold leading-tight ${isPositive ? "text-[#2ecc8a]" : "text-[#e05c6a]"}`}>
+            <span className={`text-xs sm:text-sm font-mono font-bold leading-tight ${isPositive ? "text-[#26d48a]" : "text-[#f04f5e]"}`}>
               {livePrice?.toLocaleString() ?? "---"}
             </span>
-            <span className={`text-[9px] sm:text-[10px] font-mono leading-tight ${isPositive ? "text-[#2ecc8a]" : "text-[#e05c6a]"}`}>
+            <span className={`text-[9px] sm:text-[10px] font-mono leading-tight ${isPositive ? "text-[#26d48a]" : "text-[#f04f5e]"}`}>
               {change24h !== null ? `${isPositive ? "+" : ""}${change24h.toFixed(2)}%` : "---"}
             </span>
           </div>
@@ -203,8 +203,8 @@ export default function Dashboard() {
                 onClick={() => setTimeframe(tf)}
                 className={`px-2 sm:px-3 py-1 text-[10px] sm:text-xs font-medium rounded transition-all ${
                   timeframe === tf
-                    ? "text-[#4f7cff] shadow-sm"
-                    : "text-[#6b7385] hover:text-[#c8cdd8]"
+                    ? "text-[#5b8af5] shadow-sm"
+                    : "text-[#8896b0] hover:text-[#e2e8f0]"
                 }`}
                 style={timeframe === tf ? { background: "#141820" } : {}}
               >
@@ -213,7 +213,7 @@ export default function Dashboard() {
             ))}
           </div>
           {!isMobile && (
-            <button className="p-1.5 text-[#6b7385] hover:text-[#c8cdd8] transition-colors">
+            <button className="p-1.5 text-[#8896b0] hover:text-[#e2e8f0] transition-colors">
               <Maximize2 size={16} />
             </button>
           )}
@@ -238,20 +238,20 @@ export default function Dashboard() {
                 key={item.id}
                 onClick={() => setActiveSidebarTab(item.id)}
                 className={`group relative flex h-12 w-12 items-center justify-center transition-colors ${
-                  activeSidebarTab === item.id ? "text-[#4f7cff]" : "text-[#6b7385] hover:text-[#c8cdd8]"
+                  activeSidebarTab === item.id ? "text-[#5b8af5]" : "text-[#8896b0] hover:text-[#e2e8f0]"
                 }`}
               >
                 {item.icon}
                 {activeSidebarTab === item.id && (
-                  <div className="absolute right-0 h-full w-0.5 bg-[#4f7cff]" />
+                  <div className="absolute right-0 h-full w-0.5 bg-[#5b8af5]" />
                 )}
-                <div className="absolute left-14 z-50 hidden group-hover:block whitespace-nowrap rounded px-2 py-1 text-[10px] text-[#c8cdd8] shadow-xl" style={{ background: "#2d3448" }}>
+                <div className="absolute left-14 z-50 hidden group-hover:block whitespace-nowrap rounded px-2 py-1 text-[10px] text-[#e2e8f0] shadow-xl" style={{ background: "#2d3448" }}>
                   {item.label}
                 </div>
               </button>
             ))}
             <div className="mt-auto flex flex-col items-center gap-4 pb-4">
-              <button className="text-[#6b7385] hover:text-[#c8cdd8] transition-colors">
+              <button className="text-[#8896b0] hover:text-[#e2e8f0] transition-colors">
                 <Settings size={20} />
               </button>
             </div>
@@ -263,7 +263,7 @@ export default function Dashboard() {
           {isMobile ? (
             <div className="flex-1 flex flex-col overflow-hidden">
               <div className="flex-1 overflow-hidden relative">
-                <Suspense fallback={<div className="flex h-full items-center justify-center text-sm text-[#6b7385]">載入中...</div>}>
+                <Suspense fallback={<div className="flex h-full items-center justify-center text-sm text-[#8896b0]">載入中...</div>}>
                   {mobileActiveTab === "chart" && (
                     <div className="h-full w-full flex flex-col" style={{ background: "#141820" }}>
                       <KlinePanel symbol={symbol} timeframe={timeframe as "1h" | "4h" | "15m" | "5m"} livePrice={livePrice} height={window.innerHeight - 150} snapshot={snapshot} />
@@ -314,10 +314,10 @@ export default function Dashboard() {
                     key={item.id}
                     onClick={() => setMobileActiveTab(item.id)}
                     className={`flex flex-col items-center justify-center gap-0.5 flex-1 h-full transition-all ${
-                      mobileActiveTab === item.id ? "text-[#4f7cff]" : "text-[#6b7385]"
+                      mobileActiveTab === item.id ? "text-[#5b8af5]" : "text-[#8896b0]"
                     }`}
                   >
-                    <div className={`p-1 rounded-md transition-colors ${mobileActiveTab === item.id ? "bg-[#4f7cff]/10" : ""}`}>
+                    <div className={`p-1 rounded-md transition-colors ${mobileActiveTab === item.id ? "bg-[#5b8af5]/10" : ""}`}>
                       {item.icon}
                     </div>
                     <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-tighter">{item.label}</span>
@@ -331,27 +331,27 @@ export default function Dashboard() {
                 <ResizablePanelGroup direction="vertical">
                   <ResizablePanel defaultSize={70} minSize={20}>
                     <div className="h-full w-full relative" style={{ background: "#141820" }}>
-                      <Suspense fallback={<div className="flex h-full items-center justify-center text-sm text-[#6b7385]">圖表載入中...</div>}>
+                      <Suspense fallback={<div className="flex h-full items-center justify-center text-sm text-[#8896b0]">圖表載入中...</div>}>
                         <KlinePanel symbol={symbol} timeframe={timeframe as "1h" | "4h" | "15m" | "5m"} livePrice={livePrice} height={window.innerHeight - 300} snapshot={snapshot} />
                       </Suspense>
                     </div>
                   </ResizablePanel>
 
-                  <ResizableHandle withHandle className="h-1 hover:bg-[#4f7cff]/20 transition-colors" style={{ background: "#252b3a" }} />
+                  <ResizableHandle withHandle className="h-1 hover:bg-[#5b8af5]/20 transition-colors" style={{ background: "#252b3a" }} />
 
                   <ResizablePanel defaultSize={30} minSize={5}>
                     <div className="h-full w-full overflow-hidden flex flex-col" style={{ background: "#1c2030" }}>
                       <div className="flex h-8 items-center border-b px-4 justify-between" style={{ background: "#141820", borderColor: "#252b3a" }}>
                         <div className="flex gap-4 h-full">
-                          <button className="text-[11px] font-bold h-full px-1 border-b-2 border-[#4f7cff] text-[#4f7cff]">策略回測器</button>
-                          <button className="text-[11px] font-bold text-[#6b7385] hover:text-[#c8cdd8] h-full px-1 transition-colors">交易日誌</button>
+                          <button className="text-[11px] font-bold h-full px-1 border-b-2 border-[#5b8af5] text-[#5b8af5]">策略回測器</button>
+                          <button className="text-[11px] font-bold text-[#8896b0] hover:text-[#e2e8f0] h-full px-1 transition-colors">交易日誌</button>
                         </div>
-                        <button onClick={() => setBottomPanelOpen(!bottomPanelOpen)} className="text-[#6b7385] hover:text-[#c8cdd8] transition-colors">
+                        <button onClick={() => setBottomPanelOpen(!bottomPanelOpen)} className="text-[#8896b0] hover:text-[#e2e8f0] transition-colors">
                           <ChevronRight size={14} className={bottomPanelOpen ? "rotate-90" : ""} />
                         </button>
                       </div>
                       <div className="flex-1 overflow-auto p-4 custom-scrollbar">
-                        <Suspense fallback={<div className="text-xs text-[#6b7385]">回測模組加載中...</div>}>
+                        <Suspense fallback={<div className="text-xs text-[#8896b0]">回測模組加載中...</div>}>
                           <BacktestPanel symbol={symbol} />
                         </Suspense>
                       </div>
@@ -360,7 +360,7 @@ export default function Dashboard() {
                 </ResizablePanelGroup>
               </ResizablePanel>
 
-              <ResizableHandle withHandle className="w-1 hover:bg-[#4f7cff]/20 transition-colors" style={{ background: "#252b3a" }} />
+              <ResizableHandle withHandle className="w-1 hover:bg-[#5b8af5]/20 transition-colors" style={{ background: "#252b3a" }} />
 
               <ResizablePanel defaultSize={25} minSize={15}>
                 <div className="h-full w-full border-l flex flex-col" style={{ background: "#1c2030", borderColor: "#252b3a" }}>
@@ -371,8 +371,8 @@ export default function Dashboard() {
                         onClick={() => setRightPanelTab(tab)}
                         className={`min-w-[52px] flex-1 text-[10px] font-bold uppercase tracking-wider h-full transition-all ${
                           rightPanelTab === tab
-                            ? "text-[#c8cdd8] border-b-2 border-[#4f7cff]"
-                            : "text-[#6b7385] hover:text-[#c8cdd8]"
+                            ? "text-[#e2e8f0] border-b-2 border-[#5b8af5]"
+                            : "text-[#8896b0] hover:text-[#e2e8f0]"
                         }`}
                       >
                         {tab === "strategy" ? "策略" : tab === "indicators" ? "指標" : tab === "smc" ? "SMC" : tab === "pa" ? "PA" : tab === "chan" ? "纏論" : "新聞"}
@@ -381,7 +381,7 @@ export default function Dashboard() {
                   </div>
 
                   <div className="flex-1 overflow-y-auto custom-scrollbar p-3">
-                    <Suspense fallback={<div className="p-4 text-xs text-[#6b7385]">加載中...</div>}>
+                    <Suspense fallback={<div className="p-4 text-xs text-[#8896b0]">加載中...</div>}>
                       {rightPanelTab === "strategy" && (
                         <UnifiedStrategyCenterPanel snapshot={snapshot} symbol={symbol} isLoading={isAnalyzing} currentPrice={livePrice ?? null} wsStatus={wsStatus} lastPriceUpdateTs={lastUpdateTs ?? null} />
                       )}
@@ -406,11 +406,11 @@ export default function Dashboard() {
                   {/* 底部狀態列 */}
                   <div className="h-8 border-t px-3 flex items-center justify-between" style={{ background: "#141820", borderColor: "#252b3a" }}>
                     <div className="flex items-center gap-2">
-                      <div className={`h-1.5 w-1.5 rounded-full ${marketDataConnected ? "bg-[#2ecc8a] animate-pulse" : "bg-[#e05c6a]"}`}
-                        style={marketDataConnected ? { boxShadow: "0 0 5px #2ecc8a" } : {}} />
-                      <span className="text-[10px] text-[#6b7385]">{marketDataConnected ? "行情即時" : "行情降級"}</span>
+                      <div className={`h-1.5 w-1.5 rounded-full ${marketDataConnected ? "bg-[#26d48a] animate-pulse" : "bg-[#f04f5e]"}`}
+                        style={marketDataConnected ? { boxShadow: "0 0 5px #26d48a" } : {}} />
+                      <span className="text-[10px] text-[#8896b0]">{marketDataConnected ? "行情即時" : "行情降級"}</span>
                     </div>
-                    <span className="text-[10px] font-mono text-[#6b7385]">
+                    <span className="text-[10px] font-mono text-[#8896b0]">
                       {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                     </span>
                   </div>

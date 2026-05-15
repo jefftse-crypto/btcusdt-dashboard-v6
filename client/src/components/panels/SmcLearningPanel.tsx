@@ -287,16 +287,16 @@ function CollapsibleSection({
     <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #222" }}>
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-[#1a1a1a] transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-[#161b27] transition-colors"
       >
-        <div className="flex items-center gap-2 text-sm font-semibold text-[#ccc]">
+        <div className="flex items-center gap-2 text-sm font-semibold text-[#d0daea]">
           {icon}
           {title}
         </div>
-        {open ? <ChevronDown size={14} className="text-[#555]" /> : <ChevronRight size={14} className="text-[#555]" />}
+        {open ? <ChevronDown size={14} className="text-[#6b7a99]" /> : <ChevronRight size={14} className="text-[#6b7a99]" />}
       </button>
       {open && (
-        <div className="px-4 pb-4 pt-1 border-t border-[#1e1e1e]">
+        <div className="px-4 pb-4 pt-1 border-t border-[#2a3148]">
           {children}
         </div>
       )}
@@ -313,17 +313,17 @@ export function SmcLearningPanel() {
     <div className="space-y-4 pb-6">
 
       {/* ── 標題列 ── */}
-      <div className="flex items-center gap-3 pb-1 border-b border-[#1e1e1e]">
+      <div className="flex items-center gap-3 pb-1 border-b border-[#2a3148]">
         <GraduationCap size={18} className="text-[#3b82f6]" />
         <div>
           <div className="text-sm font-bold text-[#e0e0e0]">SMC 學習資源中心</div>
-          <div className="text-[10px] text-[#555]">根據 Jerry 愛交易頻道推薦整理 · Smart Money Concepts</div>
+          <div className="text-[10px] text-[#6b7a99]">根據 Jerry 愛交易頻道推薦整理 · Smart Money Concepts</div>
         </div>
       </div>
 
       {/* ── 三階段學習路徑視覺化 ── */}
       <div>
-        <div className="text-xs font-semibold text-[#888] mb-3 flex items-center gap-1.5">
+        <div className="text-xs font-semibold text-[#8896b0] mb-3 flex items-center gap-1.5">
           <TrendingUp size={12} />
           三階段學習路徑
         </div>
@@ -346,10 +346,10 @@ export function SmcLearningPanel() {
               <div className="text-[10px] font-bold" style={{ color: stage.color }}>
                 第 {stage.id} 階段
               </div>
-              <div className="text-[11px] font-semibold text-[#ccc] mt-0.5 leading-tight">
+              <div className="text-[11px] font-semibold text-[#d0daea] mt-0.5 leading-tight">
                 {stage.subtitle}
               </div>
-              <div className="text-[9px] text-[#555] mt-1">
+              <div className="text-[9px] text-[#6b7a99] mt-1">
                 {stage.channels.join(" · ")}
               </div>
             </button>
@@ -368,7 +368,7 @@ export function SmcLearningPanel() {
                 <span className="text-base">{stage.icon}</span>
                 <div>
                   <div className="text-sm font-bold" style={{ color: stage.color }}>{stage.title}</div>
-                  <div className="text-[10px] text-[#555]">推薦頻道：{stage.channels.join("、")}</div>
+                  <div className="text-[10px] text-[#6b7a99]">推薦頻道：{stage.channels.join("、")}</div>
                 </div>
               </div>
 
@@ -376,10 +376,10 @@ export function SmcLearningPanel() {
               <div className="space-y-2">
                 {stage.topics.map((topic, ti) => (
                   <div key={ti} className="rounded p-2.5" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-                    <div className="text-[11px] font-semibold text-[#ccc] mb-1.5">{topic.title}</div>
+                    <div className="text-[11px] font-semibold text-[#d0daea] mb-1.5">{topic.title}</div>
                     <ul className="space-y-1">
                       {topic.items.map((item, ii) => (
-                        <li key={ii} className="flex items-start gap-1.5 text-[10px] text-[#777]">
+                        <li key={ii} className="flex items-start gap-1.5 text-[10px] text-[#8896b0]">
                           <span style={{ color: stage.color }} className="mt-0.5 flex-shrink-0">▸</span>
                           {item}
                         </li>
@@ -394,15 +394,15 @@ export function SmcLearningPanel() {
                 <div className="text-[10px] font-semibold mb-1.5" style={{ color: stage.color }}>
                   <Target size={10} className="inline mr-1" />實戰練習
                 </div>
-                <div className="space-y-1 text-[10px] text-[#777]">
-                  <div><span className="text-[#888]">行動：</span>{stage.practice.action}</div>
-                  <div><span className="text-[#888]">練習：</span>{stage.practice.exercise}</div>
-                  <div><span className="text-[#888]">驗證：</span>{stage.practice.verify}</div>
+                <div className="space-y-1 text-[10px] text-[#8896b0]">
+                  <div><span className="text-[#8896b0]">行動：</span>{stage.practice.action}</div>
+                  <div><span className="text-[#8896b0]">練習：</span>{stage.practice.exercise}</div>
+                  <div><span className="text-[#8896b0]">驗證：</span>{stage.practice.verify}</div>
                 </div>
               </div>
 
               {/* 學習建議 */}
-              <div className="text-[10px] text-[#666] leading-relaxed border-l-2 pl-2.5" style={{ borderColor: stage.color + "60" }}>
+              <div className="text-[10px] text-[#7a8aaa] leading-relaxed border-l-2 pl-2.5" style={{ borderColor: stage.color + "60" }}>
                 {stage.advice}
               </div>
             </div>
@@ -424,7 +424,7 @@ export function SmcLearningPanel() {
             >
               <div className="flex items-start justify-between gap-2 mb-1.5">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[12px] font-semibold text-[#ddd]">{ch.name}</span>
+                  <span className="text-[12px] font-semibold text-[#e2e8f0]">{ch.name}</span>
                   <StageBadge stage={ch.stage} />
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
@@ -445,13 +445,13 @@ export function SmcLearningPanel() {
                 <StarRating count={ch.stars} />
                 <div className="flex gap-1 flex-wrap">
                   {ch.tags.map(tag => (
-                    <span key={tag} className="text-[9px] text-[#555] bg-[#1a1a1a] px-1.5 py-0.5 rounded">
+                    <span key={tag} className="text-[9px] text-[#6b7a99] bg-[#161b27] px-1.5 py-0.5 rounded">
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="text-[10px] text-[#666] leading-relaxed">{ch.description}</div>
+              <div className="text-[10px] text-[#7a8aaa] leading-relaxed">{ch.description}</div>
             </div>
           ))}
         </div>
@@ -460,21 +460,21 @@ export function SmcLearningPanel() {
       {/* ── TradingView 設定指南 ── */}
       <CollapsibleSection title="TradingView 設定指南" icon={<Monitor size={14} className="text-[#f59e0b]" />}>
         <div className="mt-3 space-y-3">
-          <div className="text-[10px] text-[#666] leading-relaxed">
+          <div className="text-[10px] text-[#7a8aaa] leading-relaxed">
             SMC 交易者最依賴的工具是圖表分析平台。強烈建議使用{" "}
             <a href="https://www.tradingview.com/" target="_blank" rel="noopener noreferrer"
               className="text-[#3b82f6] hover:underline">TradingView</a>。
             建議隱藏不必要的指標（如 RSI、MACD 等），保持圖表整潔。
           </div>
           <div>
-            <div className="text-[10px] font-semibold text-[#888] mb-2">常用繪圖工具（加入最愛工具列）</div>
+            <div className="text-[10px] font-semibold text-[#8896b0] mb-2">常用繪圖工具（加入最愛工具列）</div>
             <div className="space-y-1.5">
               {TRADINGVIEW_TOOLS.map((tool) => (
                 <div key={tool.name} className="flex items-start gap-2 rounded p-2" style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
                   <Wrench size={10} className="text-[#f59e0b] mt-0.5 flex-shrink-0" />
                   <div>
-                    <div className="text-[10px] font-semibold text-[#ccc]">{tool.name}</div>
-                    <div className="text-[9px] text-[#555]">{tool.use}</div>
+                    <div className="text-[10px] font-semibold text-[#d0daea]">{tool.name}</div>
+                    <div className="text-[9px] text-[#6b7a99]">{tool.use}</div>
                   </div>
                 </div>
               ))}
@@ -486,19 +486,19 @@ export function SmcLearningPanel() {
       {/* ── 學習筆記工具 ── */}
       <CollapsibleSection title="學習筆記與復盤工具" icon={<FileText size={14} className="text-[#10b981]" />}>
         <div className="mt-3 space-y-3">
-          <div className="text-[10px] text-[#666] leading-relaxed">
+          <div className="text-[10px] text-[#7a8aaa] leading-relaxed">
             交易日誌與復盤是 SMC 學習中不可或缺的一環。推薦使用{" "}
             <a href="https://www.notion.so/" target="_blank" rel="noopener noreferrer" className="text-[#3b82f6] hover:underline">Notion</a>、{" "}
             <a href="https://obsidian.md/" target="_blank" rel="noopener noreferrer" className="text-[#3b82f6] hover:underline">Obsidian</a>{" "}
             或 Evernote。這些工具支援 Markdown 語法，且方便插入圖表截圖。
           </div>
           <div>
-            <div className="text-[10px] font-semibold text-[#888] mb-2">建議筆記結構</div>
+            <div className="text-[10px] font-semibold text-[#8896b0] mb-2">建議筆記結構</div>
             <div className="space-y-1.5">
               {NOTE_STRUCTURE.map((note) => (
                 <div key={note.area} className="rounded p-2.5" style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
                   <div className="text-[10px] font-semibold text-[#10b981] mb-0.5">{note.area}</div>
-                  <div className="text-[9px] text-[#555]">{note.desc}</div>
+                  <div className="text-[9px] text-[#6b7a99]">{note.desc}</div>
                 </div>
               ))}
             </div>
@@ -538,14 +538,14 @@ export function SmcLearningPanel() {
           ].map((concept) => (
             <div key={concept.term} className="rounded p-2.5" style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
               <div className="text-[10px] font-bold mb-0.5" style={{ color: concept.color }}>{concept.term}</div>
-              <div className="text-[10px] text-[#666] leading-relaxed">{concept.def}</div>
+              <div className="text-[10px] text-[#7a8aaa] leading-relaxed">{concept.def}</div>
             </div>
           ))}
         </div>
       </CollapsibleSection>
 
       {/* ── 結語 ── */}
-      <div className="rounded-lg p-3 text-[10px] text-[#555] leading-relaxed" style={{ background: "#0a0a0a", border: "1px solid #1a1a1a" }}>
+      <div className="rounded-lg p-3 text-[10px] text-[#6b7a99] leading-relaxed" style={{ background: "#0a0a0a", border: "1px solid #1a1a1a" }}>
         <span className="text-[#3b82f6] font-semibold">SMC 學習心法：</span>{" "}
         SMC 是一段從「見山是山（基礎結構）」到「見山不是山（SMC 陷阱）」，最後「見山又是山（流動性引誘）」的過程。
         請務必按照三個階段循序漸進，並配合大量的圖表復盤（Backtesting），才能真正將這些知識轉化為交易利器。

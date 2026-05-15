@@ -99,9 +99,9 @@ function ConditionForm({
           {conditions.map((c, i) => (
             <div key={i} className="flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded"
               style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-              <span className="text-[#aaa]">{CONDITION_LABELS[c.condition]}</span>
+              <span className="text-[#b0bcd4]">{CONDITION_LABELS[c.condition]}</span>
               {c.value !== undefined && <span className="font-mono text-[#ffd740]">{c.value}</span>}
-              <button onClick={() => removeCond(i)} className="text-[#555] hover:text-[#ef5350] ml-0.5">
+              <button onClick={() => removeCond(i)} className="text-[#6b7a99] hover:text-[#ef5350] ml-0.5">
                 <X className="w-2.5 h-2.5" />
               </button>
             </div>
@@ -114,7 +114,7 @@ function ConditionForm({
           <select
             value={newCond}
             onChange={e => setNewCond(e.target.value as AlertCondition)}
-            className="flex-1 text-xs px-2 py-1 rounded border bg-[#0d0d0d] text-[#ccc] focus:outline-none"
+            className="flex-1 text-xs px-2 py-1 rounded border bg-[#0e1117] text-[#d0daea] focus:outline-none"
             style={{ borderColor: "#2a2a2a" }}
           >
             {Object.entries(CONDITION_LABELS).map(([k, v]) => (
@@ -127,7 +127,7 @@ function ConditionForm({
               value={newVal}
               onChange={e => setNewVal(e.target.value)}
               placeholder={newCond.includes("rsi") ? "如：70" : "如：50000"}
-              className="w-24 text-xs px-2 py-1 rounded border bg-[#0d0d0d] text-[#ccc] focus:outline-none"
+              className="w-24 text-xs px-2 py-1 rounded border bg-[#0e1117] text-[#d0daea] focus:outline-none"
               style={{ borderColor: "#2a2a2a" }}
             />
           )}
@@ -276,9 +276,9 @@ export default function CompositeAlertsPanel() {
           {triggeredCount > 0 ? (
             <BellRing className="w-4 h-4 text-[#ffd740] animate-pulse" />
           ) : (
-            <Layers className="w-4 h-4 text-[#888]" />
+            <Layers className="w-4 h-4 text-[#8896b0]" />
           )}
-          <span className="text-sm font-semibold text-[#ccc]">多條件組合警報</span>
+          <span className="text-sm font-semibold text-[#d0daea]">多條件組合警報</span>
           {triggeredCount > 0 && (
             <span className="px-1.5 py-0.5 rounded-full text-xs font-bold"
               style={{ background: "#ffd74020", color: "#ffd740", border: "1px solid #ffd74030" }}>
@@ -288,7 +288,7 @@ export default function CompositeAlertsPanel() {
         </div>
         <div className="flex items-center gap-2">
           {lastCheckTime && (
-            <div className="flex items-center gap-1 text-[10px] text-[#555]">
+            <div className="flex items-center gap-1 text-[10px] text-[#6b7a99]">
               <Clock className="w-3 h-3" />
               <span>{new Date(lastCheckTime).toLocaleTimeString("zh-TW", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</span>
             </div>
@@ -316,17 +316,17 @@ export default function CompositeAlertsPanel() {
       {/* 新增表單 */}
       {showAddForm && (
         <div className="px-4 py-3 border-b space-y-3" style={{ borderColor: "#1e1e1e", background: "#0a0a0a" }}>
-          <div className="text-xs font-semibold text-[#ccc]">設定組合警報</div>
+          <div className="text-xs font-semibold text-[#d0daea]">設定組合警報</div>
 
           {/* 幣種選擇（含搜索）*/}
           <div>
-            <label className="text-[10px] text-[#666] mb-1 block">幣種</label>
+            <label className="text-[10px] text-[#7a8aaa] mb-1 block">幣種</label>
             <div className="relative">
               <input
                 value={symbolSearch}
                 onChange={e => setSymbolSearch(e.target.value)}
                 placeholder="搜索幣種..."
-                className="w-full text-xs px-2 py-1.5 rounded border bg-[#0d0d0d] text-[#ccc] focus:outline-none mb-1"
+                className="w-full text-xs px-2 py-1.5 rounded border bg-[#0e1117] text-[#d0daea] focus:outline-none mb-1"
                 style={{ borderColor: "#2a2a2a" }}
               />
               <div className="flex flex-wrap gap-1 max-h-20 overflow-y-auto">
@@ -350,19 +350,19 @@ export default function CompositeAlertsPanel() {
 
           {/* 警報名稱 */}
           <div>
-            <label className="text-[10px] text-[#666] mb-1 block">警報名稱</label>
+            <label className="text-[10px] text-[#7a8aaa] mb-1 block">警報名稱</label>
             <input
               value={newLabel}
               onChange={e => setNewLabel(e.target.value)}
               placeholder="如：BTC 超買 + MACD 死叉"
-              className="w-full text-xs px-2 py-1.5 rounded border bg-[#0d0d0d] text-[#ccc] focus:outline-none"
+              className="w-full text-xs px-2 py-1.5 rounded border bg-[#0e1117] text-[#d0daea] focus:outline-none"
               style={{ borderColor: "#2a2a2a" }}
             />
           </div>
 
           {/* 邏輯選擇 */}
           <div>
-            <label className="text-[10px] text-[#666] mb-1 block">觸發邏輯</label>
+            <label className="text-[10px] text-[#7a8aaa] mb-1 block">觸發邏輯</label>
             <div className="flex gap-2">
               {(["AND", "OR"] as const).map(logic => (
                 <button
@@ -388,7 +388,7 @@ export default function CompositeAlertsPanel() {
 
           {/* 條件設定 */}
           <div>
-            <label className="text-[10px] text-[#666] mb-1 block">觸發條件（1-5 個）</label>
+            <label className="text-[10px] text-[#7a8aaa] mb-1 block">觸發條件（1-5 個）</label>
             <ConditionForm conditions={newConditions} onChange={setNewConditions} />
           </div>
 
@@ -424,7 +424,7 @@ export default function CompositeAlertsPanel() {
               <div key={m.id} className="rounded p-2" style={{ background: "#1e1a00", border: "1px solid #3a3000" }}>
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-medium text-[#ffd740]">{m.label}</span>
-                  <span className="text-[9px] text-[#666]">{new Date(m.time).toLocaleTimeString("zh-TW")}</span>
+                  <span className="text-[9px] text-[#7a8aaa]">{new Date(m.time).toLocaleTimeString("zh-TW")}</span>
                 </div>
                 <div className="flex flex-wrap gap-1 mt-1">
                   {m.matchedConditions.map((c, i) => (
@@ -443,7 +443,7 @@ export default function CompositeAlertsPanel() {
       {/* 警報列表 */}
       <div className="divide-y" style={{ borderColor: "#1e1e1e" }}>
         {alerts.length === 0 ? (
-          <div className="text-center py-10 text-[#555]">
+          <div className="text-center py-10 text-[#6b7a99]">
             <Layers className="w-8 h-8 mx-auto mb-2 opacity-30" />
             <p className="text-xs">尚無組合警報</p>
             <p className="text-[10px] mt-1 text-[#444]">點擊「新增組合警報」設定多條件觸發規則</p>
@@ -501,13 +501,13 @@ function AlertRow({
         {isTriggered ? (
           <BellRing className="w-4 h-4 text-[#ffd740] flex-shrink-0 animate-pulse" />
         ) : (
-          <Bell className={`w-4 h-4 flex-shrink-0 ${alert.enabled ? "text-[#555]" : "text-[#333]"}`} />
+          <Bell className={`w-4 h-4 flex-shrink-0 ${alert.enabled ? "text-[#6b7a99]" : "text-[#333]"}`} />
         )}
 
         {/* 主要資訊 */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-[#ccc] truncate">{alert.label}</span>
+            <span className="text-xs font-medium text-[#d0daea] truncate">{alert.label}</span>
             {isTriggered && (
               <span className="text-[9px] px-1.5 py-0.5 rounded-full flex-shrink-0"
                 style={{ background: "#ffd74020", color: "#ffd740", border: "1px solid #ffd74030" }}>
@@ -515,7 +515,7 @@ function AlertRow({
               </span>
             )}
           </div>
-          <div className="flex items-center gap-2 mt-0.5 text-[10px] text-[#555]">
+          <div className="flex items-center gap-2 mt-0.5 text-[10px] text-[#6b7a99]">
             <span>{symbolInfo?.icon ?? ""} {alert.symbol.replace("USDT", "/USDT")}</span>
             <span className="px-1 rounded text-[9px]"
               style={{
@@ -532,7 +532,7 @@ function AlertRow({
         </div>
 
         {/* 展開按鈕 */}
-        <button onClick={() => setExpanded(v => !v)} className="p-1 text-[#444] hover:text-[#888] transition-colors">
+        <button onClick={() => setExpanded(v => !v)} className="p-1 text-[#444] hover:text-[#8896b0] transition-colors">
           {expanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
         </button>
 
@@ -553,7 +553,7 @@ function AlertRow({
       {/* 展開條件詳情 */}
       {expanded && (
         <div className="mt-2 pl-7">
-          <div className="text-[9px] text-[#555] mb-1">觸發條件（{alert.logic} 邏輯）：</div>
+          <div className="text-[9px] text-[#6b7a99] mb-1">觸發條件（{alert.logic} 邏輯）：</div>
           <div className="flex flex-wrap gap-1">
             {alert.conditions.map((c, i) => (
               <ConditionBadge key={i} cond={c} />

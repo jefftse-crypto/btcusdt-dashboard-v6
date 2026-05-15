@@ -300,7 +300,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
   if (!snapshot) {
     return (
       <div className="rounded-lg p-6 text-center" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-        <div className="text-[#555] text-sm">請先選擇幣種並執行分析</div>
+        <div className="text-[#6b7a99] text-sm">請先選擇幣種並執行分析</div>
       </div>
     );
   }
@@ -327,25 +327,25 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
       {/* ── Section 1：iFVG 機械化模型評分（DodgysDD）── */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
         <div className="px-3 py-2 flex items-center justify-between" style={{ background: "#111", borderBottom: "1px solid #1e1e1e" }}>
-          <span className="text-[11px] font-semibold text-[#888]">① iFVG 機械化模型評分</span>
-          <span className="text-[9px] text-[#555]">DodgysDD 方法論</span>
+          <span className="text-[11px] font-semibold text-[#8896b0]">① iFVG 機械化模型評分</span>
+          <span className="text-[9px] text-[#6b7a99]">DodgysDD 方法論</span>
         </div>
         {ifvgScore ? (
           <div className="p-3">
             <div className="flex items-center gap-3 mb-3">
               <div className="text-center">
                 <div className="text-2xl font-bold font-mono" style={{ color: ifvgScore.gradeColor }}>{ifvgScore.grade}</div>
-                <div className="text-[9px] text-[#555]">評級</div>
+                <div className="text-[9px] text-[#6b7a99]">評級</div>
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold font-mono" style={{ color: ifvgScore.gradeColor }}>{ifvgScore.score}</div>
-                <div className="text-[9px] text-[#555]">/ 100</div>
+                <div className="text-[9px] text-[#6b7a99]">/ 100</div>
               </div>
               <div className="flex-1">
                 <div className="w-full rounded-full h-2 overflow-hidden" style={{ background: "#1e1e1e" }}>
                   <div className="h-full rounded-full transition-all" style={{ width: `${ifvgScore.score}%`, background: ifvgScore.gradeColor }} />
                 </div>
-                <div className="text-[9px] text-[#555] mt-1">
+                <div className="text-[9px] text-[#6b7a99] mt-1">
                   {ifvgScore.score >= 80 ? "A+ 級：可考慮進場（流動性清掃 + iFVG + CHoCH 三重確認）"
                     : ifvgScore.score >= 60 ? "A 級：條件基本具備，注意風險管理"
                     : ifvgScore.score >= 40 ? "B 級：部分條件缺失，建議觀望"
@@ -362,34 +362,34 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
             </div>
             {/* iFVG 詳情 */}
             {(bullIfvg || bearIfvg) && (
-              <div className="mt-2 pt-2 border-t border-[#1e1e1e] grid grid-cols-2 gap-2">
+              <div className="mt-2 pt-2 border-t border-[#2a3148] grid grid-cols-2 gap-2">
                 {bullIfvg && (
                   <div className="rounded p-2" style={{ background: "rgba(76,175,80,0.06)", border: "1px solid rgba(76,175,80,0.2)" }}>
                     <div className="text-[9px] font-bold text-green-500 mb-1">iFVG 看漲（支撐）</div>
-                    <div className="text-[9px] font-mono text-[#888]">{bullIfvg.bottom.toFixed(2)} – {bullIfvg.top.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">中點：{bullIfvg.mid.toFixed(2)}</div>
+                    <div className="text-[9px] font-mono text-[#8896b0]">{bullIfvg.bottom.toFixed(2)} – {bullIfvg.top.toFixed(2)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">中點：{bullIfvg.mid.toFixed(2)}</div>
                   </div>
                 )}
                 {bearIfvg && (
                   <div className="rounded p-2" style={{ background: "rgba(239,83,80,0.06)", border: "1px solid rgba(239,83,80,0.2)" }}>
                     <div className="text-[9px] font-bold text-red-400 mb-1">iFVG 看跌（阻力）</div>
-                    <div className="text-[9px] font-mono text-[#888]">{bearIfvg.bottom.toFixed(2)} – {bearIfvg.top.toFixed(2)}</div>
-                    <div className="text-[9px] text-[#555]">中點：{bearIfvg.mid.toFixed(2)}</div>
+                    <div className="text-[9px] font-mono text-[#8896b0]">{bearIfvg.bottom.toFixed(2)} – {bearIfvg.top.toFixed(2)}</div>
+                    <div className="text-[9px] text-[#6b7a99]">中點：{bearIfvg.mid.toFixed(2)}</div>
                   </div>
                 )}
               </div>
             )}
           </div>
         ) : (
-          <div className="p-3 text-[10px] text-[#555]">資料不足，無法評分</div>
+          <div className="p-3 text-[10px] text-[#6b7a99]">資料不足，無法評分</div>
         )}
       </div>
 
       {/* ── Section 2：TTrades I2E / E2I 通用模型 ── */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
         <div className="px-3 py-2 flex items-center justify-between" style={{ background: "#111", borderBottom: "1px solid #1e1e1e" }}>
-          <span className="text-[11px] font-semibold text-[#888]">② TTrades I2E / E2I 通用模型</span>
-          <span className="text-[9px] text-[#555]">GXT 框架</span>
+          <span className="text-[11px] font-semibold text-[#8896b0]">② TTrades I2E / E2I 通用模型</span>
+          <span className="text-[9px] text-[#6b7a99]">GXT 框架</span>
         </div>
         <div className="p-3">
           {i2eE2i ? (
@@ -406,11 +406,11 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
                   信心：{i2eE2i.confidence}
                 </span>
               </div>
-              <div className="text-[10px] text-[#aaa] leading-relaxed mb-2">{i2eE2i.desc}</div>
+              <div className="text-[10px] text-[#b0bcd4] leading-relaxed mb-2">{i2eE2i.desc}</div>
               <div className="text-[10px] font-mono rounded p-2" style={{ background: "#111", color: i2eE2i.direction === "bullish" ? "#4caf50" : "#ef5350" }}>
                 🎯 {i2eE2i.target}
               </div>
-              <div className="mt-2 text-[9px] text-[#555] leading-relaxed">
+              <div className="mt-2 text-[9px] text-[#6b7a99] leading-relaxed">
                 {i2eE2i.model === "I2E"
                   ? "IRL→ERL：從內部流動性（FVG）出發，推向外部流動性（前高/前低）"
                   : "ERL→IRL：從外部流動性（前高/前低）清掃後，回撤至內部流動性（FVG）"}
@@ -418,15 +418,15 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
             </div>
           ) : (
             <div className="space-y-2">
-              <div className="text-[10px] text-[#555]">當前價格未觸及關鍵 IRL/ERL 水位，等待明確訊號</div>
+              <div className="text-[10px] text-[#6b7a99]">當前價格未觸及關鍵 IRL/ERL 水位，等待明確訊號</div>
               <div className="grid grid-cols-2 gap-2 text-[9px]">
                 <div className="rounded p-2" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
                   <div className="text-[#4fc3f7] font-bold mb-1">I2E 觸發條件</div>
-                  <div className="text-[#555]">價格回測 FVG（IRL）後反轉，推向前高/低（ERL）</div>
+                  <div className="text-[#6b7a99]">價格回測 FVG（IRL）後反轉，推向前高/低（ERL）</div>
                 </div>
                 <div className="rounded p-2" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
                   <div className="text-[#ffd740] font-bold mb-1">E2I 觸發條件</div>
-                  <div className="text-[#555]">價格掃過前高/低（ERL）後反轉，回撤至 FVG（IRL）</div>
+                  <div className="text-[#6b7a99]">價格掃過前高/低（ERL）後反轉，回撤至 FVG（IRL）</div>
                 </div>
               </div>
             </div>
@@ -437,8 +437,8 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
       {/* ── Section 3：CRT Model 1 假突破偵測（Romeo）── */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
         <div className="px-3 py-2 flex items-center justify-between" style={{ background: "#111", borderBottom: "1px solid #1e1e1e" }}>
-          <span className="text-[11px] font-semibold text-[#888]">③ CRT Model 1 假突破偵測</span>
-          <span className="text-[9px] text-[#555]">Romeo 蠟燭範圍理論</span>
+          <span className="text-[11px] font-semibold text-[#8896b0]">③ CRT Model 1 假突破偵測</span>
+          <span className="text-[9px] text-[#6b7a99]">Romeo 蠟燭範圍理論</span>
         </div>
         <div className="p-3">
           {crtModel1 ? (
@@ -457,23 +457,23 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
               </div>
               <div className="space-y-1.5 text-[10px]">
                 <div className="flex gap-2">
-                  <span className="text-[#555] w-12 shrink-0">刺穿</span>
-                  <span className="text-[#aaa]">{crtModel1.stab}</span>
+                  <span className="text-[#6b7a99] w-12 shrink-0">刺穿</span>
+                  <span className="text-[#b0bcd4]">{crtModel1.stab}</span>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-[#555] w-12 shrink-0">觸發</span>
+                  <span className="text-[#6b7a99] w-12 shrink-0">觸發</span>
                   <span className="text-[#ffd740]">{crtModel1.trigger}</span>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-[#555] w-12 shrink-0">進場</span>
+                  <span className="text-[#6b7a99] w-12 shrink-0">進場</span>
                   <span className="text-[#4caf50]">{crtModel1.entry}</span>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-[#555] w-12 shrink-0">止損</span>
+                  <span className="text-[#6b7a99] w-12 shrink-0">止損</span>
                   <span className="text-[#ef5350]">{crtModel1.sl}</span>
                 </div>
                 <div className="flex gap-2">
-                  <span className="text-[#555] w-12 shrink-0">目標</span>
+                  <span className="text-[#6b7a99] w-12 shrink-0">目標</span>
                   <span className="text-[#4fc3f7]">{crtModel1.tp}</span>
                 </div>
               </div>
@@ -482,7 +482,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
               </div>
             </div>
           ) : (
-            <div className="text-[10px] text-[#555] space-y-1">
+            <div className="text-[10px] text-[#6b7a99] space-y-1">
               <div>尚未偵測到 CRT Model 1 假突破形態</div>
               <div className="text-[9px] text-[#444]">等待：刺穿舊高/低 → 誘餌蠟燭 → 實體收盤吞沒確認</div>
             </div>
@@ -493,24 +493,24 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
       {/* ── Section 4：MMXM 造市商模型階段（MMXM Trader）── */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
         <div className="px-3 py-2 flex items-center justify-between" style={{ background: "#111", borderBottom: "1px solid #1e1e1e" }}>
-          <span className="text-[11px] font-semibold text-[#888]">④ MMXM 造市商模型階段</span>
-          <span className="text-[9px] text-[#555]">MMXM Trader</span>
+          <span className="text-[11px] font-semibold text-[#8896b0]">④ MMXM 造市商模型階段</span>
+          <span className="text-[9px] text-[#6b7a99]">MMXM Trader</span>
         </div>
         <div className="p-3">
           {mmxm ? (
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-[10px] font-bold font-mono" style={{ color: mmxm.color }}>{mmxm.model}</span>
-                <span className="text-[9px] text-[#888]">{mmxm.phase}</span>
+                <span className="text-[9px] text-[#8896b0]">{mmxm.phase}</span>
               </div>
-              <div className="text-[10px] text-[#aaa] leading-relaxed mb-2">{mmxm.desc}</div>
+              <div className="text-[10px] text-[#b0bcd4] leading-relaxed mb-2">{mmxm.desc}</div>
               <div className="rounded p-2 text-[9px]" style={{ background: "#111", border: `1px solid ${mmxm.color}20`, color: mmxm.color }}>
                 💡 {mmxm.action}
               </div>
               {/* Premium/Discount 視覺化 */}
               {smc?.premium_discount && (
                 <div className="mt-2">
-                  <div className="flex justify-between text-[9px] text-[#555] mb-1">
+                  <div className="flex justify-between text-[9px] text-[#6b7a99] mb-1">
                     <span>SSL（折價）</span>
                     <span>均衡點 50%</span>
                     <span>BSL（溢價）</span>
@@ -527,7 +527,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
               )}
             </div>
           ) : (
-            <div className="text-[10px] text-[#555]">資料不足</div>
+            <div className="text-[10px] text-[#6b7a99]">資料不足</div>
           )}
         </div>
       </div>
@@ -535,8 +535,8 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
       {/* ── Section 5：Zeussy AMD 算法時間窗口 ── */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
         <div className="px-3 py-2 flex items-center justify-between" style={{ background: "#111", borderBottom: "1px solid #1e1e1e" }}>
-          <span className="text-[11px] font-semibold text-[#888]">⑤ Zeussy AMD 算法時間窗口</span>
-          <span className="text-[9px] text-[#555]">時間大於價格</span>
+          <span className="text-[11px] font-semibold text-[#8896b0]">⑤ Zeussy AMD 算法時間窗口</span>
+          <span className="text-[9px] text-[#6b7a99]">時間大於價格</span>
         </div>
         <div className="p-3">
           {amd.current ? (
@@ -544,7 +544,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: amd.current.color }} />
                 <span className="text-sm font-bold" style={{ color: amd.current.color }}>{amd.current.name}</span>
-                <span className="text-[9px] text-[#555]">（{amd.current.session} 盤）</span>
+                <span className="text-[9px] text-[#6b7a99]">（{amd.current.session} 盤）</span>
               </div>
               <div className="grid grid-cols-3 gap-2 mb-2 text-center">
                 {(["A", "M", "D"] as const).map(phase => {
@@ -558,7 +558,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
                   );
                 })}
               </div>
-              <div className="text-[9px] text-[#555] leading-relaxed">
+              <div className="text-[9px] text-[#6b7a99] leading-relaxed">
                 {amd.current.phase === "A" && "📌 累積階段：機構正在悄悄建倉，避免追漲殺跌，等待操縱訊號"}
                 {amd.current.phase === "M" && "⚠️ 操縱階段：機構正在清掃流動性（Turtle Soup），不要被假突破欺騙！等待 CSD 確認後才進場"}
                 {amd.current.phase === "D" && "🚀 派發階段：真實方向行情，此時進場勝率最高，可配合 iFVG 或 CRT Model 1 執行"}
@@ -570,7 +570,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
             </div>
           ) : (
             <div>
-              <div className="text-[10px] text-[#555] mb-2">當前不在主要交易時間窗口（{formatUtcTime(amd.utcMinutes)} UTC）</div>
+              <div className="text-[10px] text-[#6b7a99] mb-2">當前不在主要交易時間窗口（{formatUtcTime(amd.utcMinutes)} UTC）</div>
               <div className="grid grid-cols-3 gap-1 text-[9px]">
                 {AMD_WINDOWS.slice(0, 3).map(w => (
                   <div key={w.name} className="rounded p-1.5" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
@@ -580,7 +580,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
                 ))}
               </div>
               {amd.next && (
-                <div className="mt-2 text-[9px] text-[#555]">
+                <div className="mt-2 text-[9px] text-[#6b7a99]">
                   下一個窗口：<span style={{ color: amd.next.color }}>{amd.next.name}</span> @ {formatUtcTime(amd.next.start)} UTC
                 </div>
               )}
@@ -592,7 +592,7 @@ export function IctAnalysisPanel({ snapshot, currentPrice, isLoading, timeframe 
       {/* ── Section 6：ICT 進場條件總覽 ── */}
       <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
         <div className="px-3 py-2" style={{ background: "#111", borderBottom: "1px solid #1e1e1e" }}>
-          <span className="text-[11px] font-semibold text-[#888]">⑥ ICT 進場條件總覽</span>
+          <span className="text-[11px] font-semibold text-[#8896b0]">⑥ ICT 進場條件總覽</span>
         </div>
         <div className="p-3 space-y-1.5">
           {[

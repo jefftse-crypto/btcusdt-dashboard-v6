@@ -63,9 +63,9 @@ function MetricBox({ label, value, color, sub }: {
 }) {
   return (
     <div className="rounded p-3" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
-      <div className="text-[10px] text-[#666] mb-1">{label}</div>
+      <div className="text-[10px] text-[#7a8aaa] mb-1">{label}</div>
       <div className="text-sm font-mono font-bold" style={{ color: color ?? "#ccc" }}>{value}</div>
-      {sub && <div className="text-[10px] text-[#555] mt-0.5">{sub}</div>}
+      {sub && <div className="text-[10px] text-[#6b7a99] mt-0.5">{sub}</div>}
     </div>
   );
 }
@@ -81,7 +81,7 @@ function EntryChecklist({ checklist }: { checklist: StrategyChecklistItem[] }) {
   return (
     <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: `1px solid ${allPassed ? "#4caf5030" : passedCount >= total * 0.6 ? "#ffd74030" : "#ef535030"}` }}>
       <div className="px-3 py-2 border-b flex items-center justify-between" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
-        <span className="text-xs font-semibold text-[#ccc]">入場 Checklist</span>
+        <span className="text-xs font-semibold text-[#d0daea]">入場 Checklist</span>
         <div className="flex items-center gap-2">
           <div className="h-1.5 w-20 rounded-full overflow-hidden" style={{ background: "#1e1e1e" }}>
             <div className="h-full rounded-full transition-all" style={{
@@ -164,7 +164,7 @@ function RiskCalculator({ strategy, dirColor }: { strategy: EnhancedStrategyData
   return (
     <div className="rounded-lg overflow-hidden" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
       <div className="px-3 py-2 border-b flex items-center justify-between" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
-        <span className="text-xs font-semibold text-[#ccc]">倉位計算器</span>
+        <span className="text-xs font-semibold text-[#d0daea]">倉位計算器</span>
         {finalRR && (
           <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded" style={{ color: finalRR >= 2 ? "#4caf50" : "#ffd740", background: finalRR >= 2 ? "#4caf5015" : "#ffd74015" }}>
             最終 RR {finalRR.toFixed(2)}
@@ -175,20 +175,20 @@ function RiskCalculator({ strategy, dirColor }: { strategy: EnhancedStrategyData
         {/* 輸入區 */}
         <div className="grid grid-cols-3 gap-2">
           <div>
-            <div className="text-[10px] text-[#666] mb-1">總資金 (USDT)</div>
+            <div className="text-[10px] text-[#7a8aaa] mb-1">總資金 (USDT)</div>
             <input type="number" value={capital} onChange={e => setCapital(e.target.value)}
               className="w-full text-xs font-mono px-2 py-1.5 rounded outline-none"
               style={{ background: "#161616", border: "1px solid #2a2a2a", color: "#ccc" }} />
           </div>
           <div>
-            <div className="text-[10px] text-[#666] mb-1">風險比例 (%)</div>
+            <div className="text-[10px] text-[#7a8aaa] mb-1">風險比例 (%)</div>
             <input type="number" value={riskPctInput} onChange={e => setRiskPctInput(e.target.value)}
               step="0.5" min="0.1" max="10"
               className="w-full text-xs font-mono px-2 py-1.5 rounded outline-none"
               style={{ background: "#161616", border: "1px solid #2a2a2a", color: "#ccc" }} />
           </div>
           <div>
-            <div className="text-[10px] text-[#666] mb-1">手動槓桿 (空=自動)</div>
+            <div className="text-[10px] text-[#7a8aaa] mb-1">手動槓桿 (空=自動)</div>
             <input type="number" value={manualLeverage} onChange={e => setManualLeverage(e.target.value)}
               placeholder={autoLeverage ? autoLeverage.toFixed(1) : "自動"}
               min="1" max="125"
@@ -199,7 +199,7 @@ function RiskCalculator({ strategy, dirColor }: { strategy: EnhancedStrategyData
 
         {/* 快速槓桿按鈕 */}
         <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-[10px] text-[#555]">快選：</span>
+          <span className="text-[10px] text-[#6b7a99]">快選：</span>
           {[1, 2, 3, 5, 10, 20].map(lv => (
             <button key={lv} onClick={() => setManualLeverage(lv === parseFloat(manualLeverage) ? "" : String(lv))}
               className="text-[10px] font-mono px-2 py-0.5 rounded transition-colors"
@@ -216,23 +216,23 @@ function RiskCalculator({ strategy, dirColor }: { strategy: EnhancedStrategyData
         {/* 核心結果 */}
         <div className="grid grid-cols-2 gap-2">
           <div className="rounded p-2 text-center" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
-            <div className="text-[10px] text-[#666] mb-0.5">風險金額</div>
+            <div className="text-[10px] text-[#7a8aaa] mb-0.5">風險金額</div>
             <div className="text-sm font-mono font-bold text-[#ef5350]">${riskAmount.toFixed(2)}</div>
           </div>
           <div className="rounded p-2 text-center" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
-            <div className="text-[10px] text-[#666] mb-0.5">建議倉位</div>
+            <div className="text-[10px] text-[#7a8aaa] mb-0.5">建議倉位</div>
             <div className="text-sm font-mono font-bold" style={{ color: dirColor }}>
               {positionSize ? positionSize.toFixed(4) : "—"} 個
             </div>
           </div>
           <div className="rounded p-2 text-center" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
-            <div className="text-[10px] text-[#666] mb-0.5">倉位價值</div>
-            <div className="text-sm font-mono font-bold text-[#888]">
+            <div className="text-[10px] text-[#7a8aaa] mb-0.5">倉位價值</div>
+            <div className="text-sm font-mono font-bold text-[#8896b0]">
               ${positionValue ? positionValue.toFixed(2) : "—"}
             </div>
           </div>
           <div className="rounded p-2 text-center" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
-            <div className="text-[10px] text-[#666] mb-0.5">實際槓桿</div>
+            <div className="text-[10px] text-[#7a8aaa] mb-0.5">實際槓桿</div>
             <div className="text-sm font-mono font-bold" style={{ color: leverageColor }}>
               {leverage ? `${leverage.toFixed(1)}x` : "—"}
             </div>
@@ -244,7 +244,7 @@ function RiskCalculator({ strategy, dirColor }: { strategy: EnhancedStrategyData
           <div className="rounded p-2 flex items-center justify-between" style={{ background: "#ef535010", border: "1px solid #ef535030" }}>
             <div>
               <div className="text-[10px] text-[#ef5350] font-semibold">⚠ 預估爆倉價</div>
-              <div className="text-[10px] text-[#888] mt-0.5">維持保證金率 0.5%，僅供參考</div>
+              <div className="text-[10px] text-[#8896b0] mt-0.5">維持保證金率 0.5%，僅供參考</div>
             </div>
             <div className="text-sm font-mono font-bold text-[#ef5350]">
               ${liqPrice.toLocaleString("en-US", { maximumFractionDigits: 2 })}
@@ -255,43 +255,43 @@ function RiskCalculator({ strategy, dirColor }: { strategy: EnhancedStrategyData
         {/* 分批止盈設定 */}
         {(strategy.tp1 || strategy.tp2 || strategy.tp3) && (
           <div className="rounded-lg overflow-hidden" style={{ border: "1px solid #1e1e1e" }}>
-            <div className="px-3 py-1.5 border-b text-[10px] font-semibold text-[#888] uppercase tracking-wider" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
+            <div className="px-3 py-1.5 border-b text-[10px] font-semibold text-[#8896b0] uppercase tracking-wider" style={{ borderColor: "#1e1e1e", background: "#0d0d0d" }}>
               分批止盈設定（出場比例 %）
             </div>
             <div className="p-2 space-y-1.5">
               {strategy.tp1 && (
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-[#888] w-20 shrink-0">TP1 <span className="font-mono text-[#4caf50]">${strategy.tp1.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span></span>
+                  <span className="text-[10px] text-[#8896b0] w-20 shrink-0">TP1 <span className="font-mono text-[#4caf50]">${strategy.tp1.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span></span>
                   <input type="number" value={tp1Pct} onChange={e => setTp1Pct(e.target.value)} min="0" max="100"
                     className="w-14 text-xs font-mono px-2 py-1 rounded outline-none text-center"
                     style={{ background: "#161616", border: "1px solid #2a2a2a", color: "#ccc" }} />
-                  <span className="text-[10px] text-[#555]">%</span>
+                  <span className="text-[10px] text-[#6b7a99]">%</span>
                   {tp1Profit && <span className="text-[10px] font-mono font-bold text-[#4caf50] ml-auto">+${tp1Profit.toFixed(2)}</span>}
                 </div>
               )}
               {strategy.tp2 && (
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-[#888] w-20 shrink-0">TP2 <span className="font-mono text-[#00e676]">${strategy.tp2.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span></span>
+                  <span className="text-[10px] text-[#8896b0] w-20 shrink-0">TP2 <span className="font-mono text-[#00e676]">${strategy.tp2.toLocaleString("en-US", { maximumFractionDigits: 2 })}</span></span>
                   <input type="number" value={tp2Pct} onChange={e => setTp2Pct(e.target.value)} min="0" max="100"
                     className="w-14 text-xs font-mono px-2 py-1 rounded outline-none text-center"
                     style={{ background: "#161616", border: "1px solid #2a2a2a", color: "#ccc" }} />
-                  <span className="text-[10px] text-[#555]">%</span>
+                  <span className="text-[10px] text-[#6b7a99]">%</span>
                   {tp2Profit && <span className="text-[10px] font-mono font-bold text-[#00e676] ml-auto">+${tp2Profit.toFixed(2)}</span>}
                 </div>
               )}
               {strategyAny.tp3 && (
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] text-[#888] w-20 shrink-0">TP3 <span className="font-mono text-[#69f0ae]">${(strategyAny.tp3).toLocaleString("en-US", { maximumFractionDigits: 2 })}</span></span>
+                  <span className="text-[10px] text-[#8896b0] w-20 shrink-0">TP3 <span className="font-mono text-[#69f0ae]">${(strategyAny.tp3).toLocaleString("en-US", { maximumFractionDigits: 2 })}</span></span>
                   <input type="number" value={tp3Pct} onChange={e => setTp3Pct(e.target.value)} min="0" max="100"
                     className="w-14 text-xs font-mono px-2 py-1 rounded outline-none text-center"
                     style={{ background: "#161616", border: "1px solid #2a2a2a", color: "#ccc" }} />
-                  <span className="text-[10px] text-[#555]">%</span>
+                  <span className="text-[10px] text-[#6b7a99]">%</span>
                   {tp3Profit && <span className="text-[10px] font-mono font-bold text-[#69f0ae] ml-auto">+${tp3Profit.toFixed(2)}</span>}
                 </div>
               )}
               {totalMaxProfit > 0 && (
                 <div className="flex items-center justify-between pt-1 border-t" style={{ borderColor: "#1e1e1e" }}>
-                  <span className="text-[10px] text-[#888]">總預期獲利</span>
+                  <span className="text-[10px] text-[#8896b0]">總預期獲利</span>
                   <span className="text-sm font-mono font-bold text-[#4caf50]">+${totalMaxProfit.toFixed(2)}</span>
                 </div>
               )}
@@ -325,21 +325,21 @@ function SimilarPatternCard({ pattern }: {
   return (
     <div className="rounded p-2.5" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-[10px] text-[#555]">{pattern.date ?? "歷史形態"}</span>
+        <span className="text-[10px] text-[#6b7a99]">{pattern.date ?? "歷史形態"}</span>
         <div className="flex items-center gap-1.5">
-          <span className="text-[10px] text-[#666]">相似度</span>
+          <span className="text-[10px] text-[#7a8aaa]">相似度</span>
           <span className="text-[11px] font-mono font-bold" style={{ color: similarity >= 80 ? "#4caf50" : similarity >= 60 ? "#ffd740" : "#888" }}>
             {similarity}%
           </span>
         </div>
       </div>
-      <div className="text-[11px] text-[#aaa] leading-relaxed mb-1.5">{pattern.description}</div>
+      <div className="text-[11px] text-[#b0bcd4] leading-relaxed mb-1.5">{pattern.description}</div>
       {/* 勝率、平均回報、樣本數 */}
       {(pattern.win_rate != null || pattern.avg_return != null || pattern.sample_count != null) && (
         <div className="grid grid-cols-3 gap-1.5 mb-1.5">
           {pattern.win_rate != null && (
             <div className="rounded p-1.5 text-center" style={{ background: "#0d0d0d" }}>
-              <div className="text-[9px] text-[#555] mb-0.5">勝率</div>
+              <div className="text-[9px] text-[#6b7a99] mb-0.5">勝率</div>
               <div className="text-[11px] font-mono font-bold" style={{ color: pattern.win_rate >= 60 ? "#4caf50" : pattern.win_rate >= 50 ? "#ffd740" : "#ef5350" }}>
                 {pattern.win_rate}%
               </div>
@@ -347,7 +347,7 @@ function SimilarPatternCard({ pattern }: {
           )}
           {pattern.avg_return != null && (
             <div className="rounded p-1.5 text-center" style={{ background: "#0d0d0d" }}>
-              <div className="text-[9px] text-[#555] mb-0.5">平均回報</div>
+              <div className="text-[9px] text-[#6b7a99] mb-0.5">平均回報</div>
               <div className="text-[11px] font-mono font-bold" style={{ color: pattern.avg_return >= 0 ? "#4caf50" : "#ef5350" }}>
                 {pattern.avg_return >= 0 ? "+" : ""}{pattern.avg_return}%
               </div>
@@ -355,8 +355,8 @@ function SimilarPatternCard({ pattern }: {
           )}
           {pattern.sample_count != null && (
             <div className="rounded p-1.5 text-center" style={{ background: "#0d0d0d" }}>
-              <div className="text-[9px] text-[#555] mb-0.5">樣本數</div>
-              <div className="text-[11px] font-mono font-bold text-[#888]">{pattern.sample_count}</div>
+              <div className="text-[9px] text-[#6b7a99] mb-0.5">樣本數</div>
+              <div className="text-[11px] font-mono font-bold text-[#8896b0]">{pattern.sample_count}</div>
             </div>
           )}
         </div>
@@ -376,7 +376,7 @@ function SimilarPatternCard({ pattern }: {
 export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null, lastPriceUpdateTs = null, wsStatus = "disconnected" }: Props) {
   if (isLoading && !strategy) {
     return (
-      <div className="flex items-center justify-center py-16 text-[#555] text-sm">
+      <div className="flex items-center justify-center py-16 text-[#6b7a99] text-sm">
         正在計算策略建議...
       </div>
     );
@@ -386,7 +386,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center">
         <Target className="w-8 h-8 text-[#333] mb-3" />
-        <div className="text-sm text-[#555]">請點擊「分析」按鈕取得策略建議</div>
+        <div className="text-sm text-[#6b7a99]">請點擊「分析」按鈕取得策略建議</div>
       </div>
     );
   }
@@ -479,7 +479,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
             <DirIcon className="w-5 h-5" style={{ color: dirColor }} />
           </div>
           <div>
-            <div className="text-xs text-[#888] mb-0.5">{symbol.replace("USDT", "")} 策略方向</div>
+            <div className="text-xs text-[#8896b0] mb-0.5">{symbol.replace("USDT", "")} 策略方向</div>
             <div className="text-lg font-bold" style={{ color: dirColor }}>{dirLabel}</div>
             {/* [改良] 市場體制標籤 */}
             {enhancedStrategy.suggestion && (
@@ -499,7 +499,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
         </div>
         {enhancedStrategy.rr_ratio && (
           <div className="text-right">
-            <div className="text-[10px] text-[#666]">風險報酬比</div>
+            <div className="text-[10px] text-[#7a8aaa]">風險報酬比</div>
             <div className={`text-xl font-bold font-mono ${enhancedStrategy.rr_ratio >= 2 ? "text-[#4caf50]" : "text-[#ffd740]"}`}>
               1:{enhancedStrategy.rr_ratio.toFixed(1)}
             </div>
@@ -515,13 +515,13 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
                 <div className="text-[11px] font-semibold" style={{ color: isPriceStale || wsStatus === "error" || wsStatus === "disconnected" ? "#ffd740" : "#8ab4f8" }}>
                   價格一致性檢查
                 </div>
-                <div className="text-[11px] text-[#777] mt-0.5">
+                <div className="text-[11px] text-[#8896b0] mt-0.5">
                   {liveStatusLabel}{priceAgeMs != null ? ` · 最近更新 ${Math.max(0, Math.round(priceAgeMs / 1000))} 秒前` : " · 尚未收到最新 tick"}
                 </div>
               </div>
               {currentPrice != null && (
                 <div className="text-right">
-                  <div className="text-[10px] text-[#666]">即時市價</div>
+                  <div className="text-[10px] text-[#7a8aaa]">即時市價</div>
                   <div className="text-sm font-mono font-bold text-[#e6e6e6]">{currentPrice.toLocaleString("en-US", { maximumFractionDigits: 2 })}</div>
                 </div>
               )}
@@ -546,7 +546,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
       {/* Trade parameters */}
       {!isNeutral && effectiveStrategy.entry && effectiveStrategy.sl && (
         <div>
-          <div className="text-[11px] text-[#555] font-semibold uppercase tracking-wider mb-2">交易參數</div>
+          <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider mb-2">交易參數</div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <MetricBox label="入場價" value={effectiveStrategy.entry.toLocaleString("en-US", { maximumFractionDigits: 2 })} color={dirColor} sub={entryWasAdjusted ? "已依即時市價修正" : "建議入場"} />
             <MetricBox label="止損" value={effectiveStrategy.sl.toLocaleString("en-US", { maximumFractionDigits: 2 })} color="#ef5350" sub={riskPct ? `風險 ${riskPct.toFixed(2)}%` : undefined} />
@@ -566,7 +566,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
 
       {/* Risk metrics */}
       <div>
-        <div className="text-[11px] text-[#555] font-semibold uppercase tracking-wider mb-2">風險指標</div>
+        <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider mb-2">風險指標</div>
         <div className="grid grid-cols-3 gap-2">
           <MetricBox label="ATR 波動率" value={(enhancedStrategy.atr ?? 0).toFixed(2)} color="#888" sub="14 期 ATR" />
           {riskPct && <MetricBox label="止損幅度" value={`${riskPct.toFixed(2)}%`} color={riskPct > 3 ? "#ef5350" : "#ffd740"} sub={riskPct > 3 ? "風險偏高" : "風險合理"} />}
@@ -577,7 +577,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
       {/* Similar Pattern */}
       {similarPattern && (
         <div>
-          <div className="text-[11px] text-[#555] font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
+          <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
             <span>歷史形態比對</span>
             {similarPattern.is_real_history ? (
               <span className="text-[9px] px-1.5 py-0.5 rounded font-mono" style={{ background: "#4caf5020", color: "#4caf50", border: "1px solid #4caf5040" }}>
@@ -589,7 +589,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
               </span>
             )}
             {similarPattern.sample_count != null && similarPattern.sample_count > 0 && (
-              <span className="text-[9px] text-[#666]">{similarPattern.sample_count} 個樣本</span>
+              <span className="text-[9px] text-[#7a8aaa]">{similarPattern.sample_count} 個樣本</span>
             )}
           </div>
           <SimilarPatternCard pattern={similarPattern} />
@@ -599,7 +599,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
       {/* Twitter 情緒面板 */}
       {twitterSentiment && (
         <div>
-          <div className="text-[11px] text-[#555] font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
+          <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
             <span>Twitter 社群情緒</span>
             <span
               className="text-[9px] px-1.5 py-0.5 rounded font-mono"
@@ -617,30 +617,30 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
               <span className="text-[11px] font-semibold" style={{ color: twitterSentiment.score > 0.1 ? "#4caf50" : twitterSentiment.score < -0.1 ? "#ef5350" : "#ffd740" }}>
                 {twitterSentiment.label}
               </span>
-              <span className="text-[10px] font-mono text-[#666]">情緒分數: {twitterSentiment.score.toFixed(2)}</span>
+              <span className="text-[10px] font-mono text-[#7a8aaa]">情緒分數: {twitterSentiment.score.toFixed(2)}</span>
             </div>
             {/* 情緒比例条 */}
             <div className="space-y-1.5">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] text-[#4caf50] w-8">看多</span>
-                <div className="flex-1 bg-[#0d0d0d] rounded-full h-2 overflow-hidden">
+                <div className="flex-1 bg-[#0e1117] rounded-full h-2 overflow-hidden">
                   <div className="h-full rounded-full bg-[#4caf50]" style={{ width: `${twitterSentiment.bullish_pct}%` }} />
                 </div>
-                <span className="text-[10px] font-mono text-[#888] w-8 text-right">{twitterSentiment.bullish_pct}%</span>
+                <span className="text-[10px] font-mono text-[#8896b0] w-8 text-right">{twitterSentiment.bullish_pct}%</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] text-[#ef5350] w-8">看空</span>
-                <div className="flex-1 bg-[#0d0d0d] rounded-full h-2 overflow-hidden">
+                <div className="flex-1 bg-[#0e1117] rounded-full h-2 overflow-hidden">
                   <div className="h-full rounded-full bg-[#ef5350]" style={{ width: `${twitterSentiment.bearish_pct}%` }} />
                 </div>
-                <span className="text-[10px] font-mono text-[#888] w-8 text-right">{twitterSentiment.bearish_pct}%</span>
+                <span className="text-[10px] font-mono text-[#8896b0] w-8 text-right">{twitterSentiment.bearish_pct}%</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] text-[#888] w-8">中性</span>
-                <div className="flex-1 bg-[#0d0d0d] rounded-full h-2 overflow-hidden">
+                <span className="text-[10px] text-[#8896b0] w-8">中性</span>
+                <div className="flex-1 bg-[#0e1117] rounded-full h-2 overflow-hidden">
                   <div className="h-full rounded-full bg-[#888]" style={{ width: `${twitterSentiment.neutral_pct}%` }} />
                 </div>
-                <span className="text-[10px] font-mono text-[#888] w-8 text-right">{twitterSentiment.neutral_pct}%</span>
+                <span className="text-[10px] font-mono text-[#8896b0] w-8 text-right">{twitterSentiment.neutral_pct}%</span>
               </div>
             </div>
           </div>
@@ -654,25 +654,25 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
         const riskColor = kelly.max_risk_pct >= 1.5 ? "#4caf50" : kelly.max_risk_pct >= 0.5 ? "#ffd740" : "#ef5350";
         return (
           <div>
-            <div className="text-[11px] text-[#555] font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
+            <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
               <span>資金管理（Kelly Criterion）</span>
             </div>
             <div className="rounded p-3" style={{ background: "#161616", border: "1px solid #2a2a2a" }}>
               <div className="grid grid-cols-3 gap-3 mb-3">
                 <div className="text-center">
-                  <div className="text-[10px] text-[#666] mb-0.5">估算勝率</div>
+                  <div className="text-[10px] text-[#7a8aaa] mb-0.5">估算勝率</div>
                   <div className="text-sm font-bold font-mono" style={{ color: kelly.win_rate_est >= 60 ? "#4caf50" : "#ffd740" }}>{kelly.win_rate_est}%</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-[10px] text-[#666] mb-0.5">Half-Kelly 倉位</div>
+                  <div className="text-[10px] text-[#7a8aaa] mb-0.5">Half-Kelly 倉位</div>
                   <div className="text-sm font-bold font-mono" style={{ color: riskColor }}>{kelly.half_kelly_pct}%</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-[10px] text-[#666] mb-0.5">建議風險</div>
+                  <div className="text-[10px] text-[#7a8aaa] mb-0.5">建議風險</div>
                   <div className="text-sm font-bold font-mono" style={{ color: riskColor }}>≤{kelly.max_risk_pct}%</div>
                 </div>
               </div>
-              <div className="text-[11px] text-[#888] leading-relaxed">{kelly.suggestion}</div>
+              <div className="text-[11px] text-[#8896b0] leading-relaxed">{kelly.suggestion}</div>
             </div>
           </div>
         );
@@ -683,9 +683,9 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
         <div className="rounded-lg p-4" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle className="w-3.5 h-3.5 text-[#ffd740]" />
-            <span className="text-[11px] font-semibold text-[#888] uppercase tracking-wider">策略說明</span>
+            <span className="text-[11px] font-semibold text-[#8896b0] uppercase tracking-wider">策略說明</span>
           </div>
-          <div className="text-xs text-[#aaa] leading-relaxed">{enhancedStrategy.suggestion}</div>
+          <div className="text-xs text-[#b0bcd4] leading-relaxed">{enhancedStrategy.suggestion}</div>
         </div>
       )}
 
@@ -693,12 +693,12 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
       {!isNeutral && (
         <div className="rounded-lg overflow-hidden" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
           <div className="px-3 py-2 border-b" style={{ borderColor: "#1e1e1e", background: "#111" }}>
-            <span className="text-[11px] font-semibold text-[#888] uppercase tracking-wider">🎯 SMC 進場模式參考</span>
+            <span className="text-[11px] font-semibold text-[#8896b0] uppercase tracking-wider">🎯 SMC 進場模式參考</span>
           </div>
           <div className="p-3 grid grid-cols-2 gap-2">
             <div className="rounded p-2.5" style={{ background: "rgba(255,215,64,0.05)", border: "1px solid rgba(255,215,64,0.2)" }}>
               <div className="text-[10px] font-bold text-[#ffd740] mb-1">⚡ Risk Entry（激進）</div>
-              <div className="text-[9px] text-[#777] leading-relaxed space-y-0.5">
+              <div className="text-[9px] text-[#8896b0] leading-relaxed space-y-0.5">
                 <div>• 流動性清掃後直接在 OB 頂部進場</div>
                 <div>• 止損設在 OB 底部下方</div>
                 <div>• 風報比更高，但確認度較低</div>
@@ -707,7 +707,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
             </div>
             <div className="rounded p-2.5" style={{ background: "rgba(79,195,247,0.05)", border: "1px solid rgba(79,195,247,0.2)" }}>
               <div className="text-[10px] font-bold text-[#4fc3f7] mb-1">✓ Confirmation Entry（保守）</div>
-              <div className="text-[9px] text-[#777] leading-relaxed space-y-0.5">
+              <div className="text-[9px] text-[#8896b0] leading-relaxed space-y-0.5">
                 <div>• 等待 CHoCH 後在 OB 中點進場</div>
                 <div>• 止損設在 OB 底部下方（稍寬）</div>
                 <div>• 確認度高，勝率更穩定</div>
@@ -717,8 +717,8 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
           </div>
           <div className="px-3 pb-3">
             <div className="rounded p-2" style={{ background: "#111", border: "1px solid #1e1e1e" }}>
-              <div className="text-[9px] text-[#555] leading-relaxed">
-                <span className="text-[#888]">MTFA 流程（Photon Trading）：</span>
+              <div className="text-[9px] text-[#6b7a99] leading-relaxed">
+                <span className="text-[#8896b0]">MTFA 流程（Photon Trading）：</span>
                 4H/日線 確認大方向與流動性目標 → 15M 尋找流動性清掃訊號 → 5M/1M 尋找 CHoCH + OB 精確進場點
               </div>
             </div>
@@ -733,7 +733,7 @@ export function StrategyPanel({ strategy, symbol, isLoading, currentPrice = null
             <Minus className="w-3.5 h-3.5 text-[#ffd740]" />
             <span className="text-[11px] font-semibold text-[#ffd740]">觀望建議</span>
           </div>
-          <div className="text-xs text-[#888] leading-relaxed">
+          <div className="text-xs text-[#8896b0] leading-relaxed">
             目前市場訊號分歧，建議觀望等待更明確的方向訊號後再入場。
             留意關鍵支撐阻力位的突破情況，配合成交量確認方向。
           </div>

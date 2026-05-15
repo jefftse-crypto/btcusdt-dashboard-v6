@@ -79,11 +79,11 @@ function ScoreRing({ score }: { score: number }) {
     <div className="flex flex-col items-center">
       <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold"
         style={{ background: `conic-gradient(${color} ${score * 3.6}deg, #222 0deg)`, boxShadow: `0 0 8px ${color}40` }}>
-        <div className="w-9 h-9 rounded-full bg-[#0d0d0d] flex items-center justify-center">
+        <div className="w-9 h-9 rounded-full bg-[#0e1117] flex items-center justify-center">
           <span style={{ color }}>{score}</span>
         </div>
       </div>
-      <div className="text-[9px] text-[#555] mt-1">評分</div>
+      <div className="text-[9px] text-[#6b7a99] mt-1">評分</div>
     </div>
   );
 }
@@ -106,7 +106,7 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
               {setup.status === "active" ? "● 進場中" : setup.status === "waiting" ? "◐ 等待" : "✓ 已完成"}
             </span>
           </div>
-          <div className="flex items-center gap-2 text-[10px] text-[#666]">
+          <div className="flex items-center gap-2 text-[10px] text-[#7a8aaa]">
             {setup.htf_aligned && <span className="text-[#4fc3f7]">✓ 高時框對齊</span>}
             <span>RR: 1:{setup.rr_ratio}</span>
           </div>
@@ -116,7 +116,7 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
 
       {/* 三步確認流程 */}
       <div className="space-y-2">
-        <div className="text-[10px] text-[#666] font-semibold">三步確認流程（清掃 → FVG → OB）</div>
+        <div className="text-[10px] text-[#7a8aaa] font-semibold">三步確認流程（清掃 → FVG → OB）</div>
         {[
           {
             step: 1,
@@ -145,8 +145,8 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
               {step}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-xs font-semibold text-[#ccc]">{title}</div>
-              <div className="text-[10px] text-[#777] mt-0.5">{desc}</div>
+              <div className="text-xs font-semibold text-[#d0daea]">{title}</div>
+              <div className="text-[10px] text-[#8896b0] mt-0.5">{desc}</div>
               {note && <div className="text-[9px] mt-1" style={{ color: noteColor }}>{note}</div>}
             </div>
             <span className={`text-[10px] flex-shrink-0 ${done ? "text-[#00e676]" : "text-[#ffd740]"}`}>{done ? "✓" : "◐"}</span>
@@ -157,12 +157,12 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
       {setup.ob.tested && (
         <div className="rounded p-2" style={{ background: "rgba(255,215,64,0.05)", border: "1px solid rgba(255,215,64,0.2)" }}>
           <div className="text-[10px] text-[#ffd740] font-semibold">⚠️ LIT Inducement 注意</div>
-          <div className="text-[9px] text-[#888] mt-0.5">此 OB 已被測試，強度降低。根據 Waqar Asim LIT 理論，已測試的 OB 可能是機構誘騙散戶的 Inducement 陷阱。建議搭配更高時間框架確認後再入場。</div>
+          <div className="text-[9px] text-[#8896b0] mt-0.5">此 OB 已被測試，強度降低。根據 Waqar Asim LIT 理論，已測試的 OB 可能是機構誘騙散戶的 Inducement 陷阱。建議搭配更高時間框架確認後再入場。</div>
         </div>
       )}
 
       <div className="rounded-lg p-3" style={{ background: "#0a0a0a", border: "1px solid #1a1a1a" }}>
-        <div className="text-[10px] text-[#666] mb-2 font-semibold">進場參數</div>
+        <div className="text-[10px] text-[#7a8aaa] mb-2 font-semibold">進場參數</div>
         <div className="grid grid-cols-2 gap-2 text-[10px]">
           {[
             { label: "進場區間", val: `${setup.entry_zone.bottom.toFixed(2)} – ${setup.entry_zone.top.toFixed(2)}`, color: "#ccc" },
@@ -171,13 +171,13 @@ function SetupCard({ setup }: { setup: SmcConfirmationSetup }) {
             { label: "目標 2", val: setup.tp2.toFixed(2), color: "#4fc3f7" },
           ].map(({ label, val, color: c }) => (
             <div key={label}>
-              <div className="text-[#555]">{label}</div>
+              <div className="text-[#6b7a99]">{label}</div>
               <div className="font-mono" style={{ color: c }}>{val}</div>
             </div>
           ))}
         </div>
         <div className="mt-2 pt-2 border-t border-[#1a1a1a] flex items-center justify-between">
-          <span className="text-[10px] text-[#555]">風報比</span>
+          <span className="text-[10px] text-[#6b7a99]">風報比</span>
           <span className="text-xs font-bold text-[#ffd740]">1:{setup.rr_ratio}</span>
         </div>
       </div>
@@ -404,8 +404,8 @@ export function SmcUnifiedPanel({ smc, advanced, isLoading, currentPrice }: Prop
           {setups.length === 0 ? (
             <div className="text-center py-8 space-y-2">
               <div className="text-2xl">🔍</div>
-              <div className="text-sm text-[#888]">暫無確認模型</div>
-              <div className="text-xs text-[#555]">需要：流動性清掃 → FVG 位移 → OB 回踩 三步同時成立</div>
+              <div className="text-sm text-[#8896b0]">暫無確認模型</div>
+              <div className="text-xs text-[#6b7a99]">需要：流動性清掃 → FVG 位移 → OB 回踩 三步同時成立</div>
             </div>
           ) : (
             <>
