@@ -3,29 +3,46 @@
 
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
     <title>Crypto Analyst Dashboard</title>
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- PWA Theme -->
-    <meta name="theme-color" content="#f7931a" />
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0d1117" />
+    <meta name="msapplication-TileColor" content="#0d1117" />
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+
+    <!-- Android PWA -->
     <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- iOS PWA -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="CryptoAnalyst" />
+    <meta name="apple-mobile-web-app-title" content="CryptoDA" />
 
     <!-- App Icons -->
-    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
-    <link rel="apple-touch-icon" href="/icon-192.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512x512.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="96x96"  href="/icons/icon-96x96.png" />
 
-    <!-- SEO / Description -->
-    <meta name="description" content="BTCUSDT 即時加密貨幣分析 Dashboard，含 SMC、PA、ICT 策略信號與 Telegram 推送" />
+    <!-- iOS Touch Icons -->
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png" />
+
+    <!-- iOS Splash Screen -->
+    <link rel="apple-touch-startup-image" href="/splash-1080x1920.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Crypto Analyst Dashboard" />
+    <meta property="og:description" content="BTC/USDT 即時分析 · 策略回測 · SMC 結構 · 技術指標" />
+    <meta property="og:image" content="/splash-1080x1920.png" />
+    <meta property="og:type" content="website" />
+
+    <!-- SEO -->
+    <meta name="description" content="BTC/USDT 即時分析 · 策略回測 · SMC 結構 · 技術指標 · 纏論 · 新跡" />
   </head>
 
   <body>
@@ -37,7 +54,16 @@
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
-            .then((reg) => console.log('[PWA] Service Worker registered:', reg.scope))
+            .then((reg) => {
+              console.log('[PWA] Service Worker registered:', reg.scope);
+              reg.addEventListener('updatefound', () => {
+                const nw = reg.installing;
+                if (nw) nw.addEventListener('statechange', () => {
+                  if (nw.state === 'installed' && navigator.serviceWorker.controller)
+                    console.log('[PWA] New version available.');
+                });
+              });
+            })
             .catch((err) => console.warn('[PWA] Service Worker registration failed:', err));
         });
       }
