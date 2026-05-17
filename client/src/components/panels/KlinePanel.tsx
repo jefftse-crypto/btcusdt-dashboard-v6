@@ -625,7 +625,9 @@ export function KlinePanel({ symbol, timeframe, livePrice, height = 280, snapsho
               <div className="text-xs font-bold text-[#e2e8f0]">
                 {candlesError ? "K 線資料暫時無法載入" : candlesLoading ? "K 線資料載入中" : "尚無可顯示的 K 線資料"}
               </div>
-              <div className="text-[10px] text-[#8896b0]">系統會自動重試；你也可以切換週期或降低 K 線數量。</div>
+              <div className="text-[10px] text-[#8896b0] leading-relaxed">
+                系統正在依序嘗試交易所、CryptoCompare、Coinbase 與快取回退；首次部署或資料源限流時請等待 20–60 秒。
+              </div>
             </div>
           </div>
         )}

@@ -41,6 +41,8 @@ import {
   calcCmfArr,
 } from "./utils/indicators.js";
 import { serverCache } from "./utils/cache.js";
+import path from "node:path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 export type Candle = SharedCandle;
 
@@ -56,7 +58,11 @@ const FEAR_GREED_BASE = "https://api.alternative.me/fng/";
 const COINGECKO_COIN_BASE = "https://api.coingecko.com/api/v3/coins";
 const OKX_BASE = "https://www.okx.com/api/v5/market/history-candles";
 const CRYPTOCOMPARE_HISTO_BASE = "https://min-api.cryptocompare.com/data/v2";
+const COINBASE_BASE = "https://api.exchange.coinbase.com/products";
 const CANDLE_CACHE_TTL_MS = 30_000;
+const CANDLE_DISK_CACHE_DIR = process.env.CANDLE_DISK_CACHE_DIR
+  ? path.resolve(process.env.CANDLE_DISK_CACHE_DIR)
+  : path.resolve(process.cwd(), "runtime", "candle_cache");
 const SNAPSHOT_CACHE_TTL_MS = 45_000;
 
 const INTERVAL_MAP: Record<string, string> = {
@@ -106,6 +112,125 @@ function sanitizeCandles(candles: Candle[]): Candle[] {
     });
   }
   return Array.from(dedup.values()).sort((a, b) => a.time - b.time);
+}
+
+function candleCachePath(symbol: string, timeframe: string): string {
+  const safeSymbol = normalizeSymbol(symbol).replace(/[^A-Z0-9]/g, "_");
+  const safeTf = (INTERVAL_MAP[timeframe] ?? timeframe).replace(/[^A-Za-z0-9]/g, "_");
+  return path.join(CANDLE_DISK_CACHE_DIR, `${safeSymbol}_${safeTf}.json`);
+}
+
+function readDiskCandles(symbol: string, timeframe: string, limit: number): Candle[] {
+  try {
+    const file = candleCachePath(symbol, timeframe);
+    if (!existsSync(file)) return [];
+    const parsed = JSON.parse(readFileSync(file, "utf8")) as unknown;
+    const candles = Array.isArray(parsed) ? sanitizeCandles(parsed as Candle[]) : [];
+    return candles.slice(-Math.max(1, limit));
+  } catch (error) {
+    console.warn(`[fetchCandles] 讀取磁碟 K 線快取失敗：${error instanceof Error ? error.message : String(error)}`);
+    return [];
+  }
+}
+
+function writeDiskCandles(symbol: string, timeframe: string, candles: Candle[]): void {
+  try {
+    const cleaned = sanitizeCandles(candles).slice(-5000);
+    if (cleaned.length < 10) return;
+    if (!existsSync(CANDLE_DISK_CACHE_DIR)) mkdirSync(CANDLE_DISK_CACHE_DIR, { recursive: true });
+    writeFileSync(candleCachePath(symbol, timeframe), `${JSON.stringify(cleaned)}\n`, "utf8");
+  } catch (error) {
+    console.warn(`[fetchCandles] 寫入磁碟 K 線快取失敗：${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
+function mergeCandles(primary: Candle[], fallback: Candle[], limit: number): Candle[] {
+  return sanitizeCandles([...fallback, ...primary]).slice(-Math.max(1, limit));
+}
+
+const TIMEFRAME_MS: Record<string, number> = {
+  "5m": 5 * 60_000,
+  "15m": 15 * 60_000,
+  "1h": 60 * 60_000,
+  "1H": 60 * 60_000,
+  "4h": 4 * 60 * 60_000,
+  "4H": 4 * 60 * 60_000,
+  "1d": 24 * 60 * 60_000,
+  "1D": 24 * 60 * 60_000,
+};
+
+function aggregateCandlesToTimeframe(candles: Candle[], targetTimeframe: string, limit: number): Candle[] {
+  const targetMs = TIMEFRAME_MS[targetTimeframe];
+  if (!targetMs || candles.length === 0) return [];
+  const buckets = new Map<number, Candle>();
+  for (const c of sanitizeCandles(candles)) {
+    const bucketTime = Math.floor(c.time / targetMs) * targetMs;
+    const prev = buckets.get(bucketTime);
+    if (!prev) {
+      buckets.set(bucketTime, { ...c, time: bucketTime });
+      continue;
+    }
+    prev.high = Math.max(prev.high, c.high);
+    prev.low = Math.min(prev.low, c.low);
+    prev.close = c.close;
+    prev.volume += c.volume;
+  }
+  return sanitizeCandles(Array.from(buckets.values())).slice(-Math.max(1, limit));
+}
+
+function toCoinbaseProduct(symbol: string): string {
+  const s = normalizeSymbol(symbol);
+  const base = s.endsWith("USDT") ? s.slice(0, -4) : s;
+  return `${base}-USD`;
+}
+
+const COINBASE_GRANULARITY: Record<string, number> = {
+  "5m": 300,
+  "15m": 900,
+  "1h": 3600,
+  "1H": 3600,
+  "4h": 14400,
+  "4H": 14400,
+  "1d": 86400,
+  "1D": 86400,
+};
+
+async function fetchCoinbaseCandles(symbol: string, timeframe: string, limit: number): Promise<Candle[]> {
+  const granularity = COINBASE_GRANULARITY[timeframe] ?? 3600;
+  const product = toCoinbaseProduct(symbol);
+  const target = Math.max(1, Math.min(limit, 1000));
+  const all: Candle[] = [];
+  let end = Math.floor(Date.now() / 1000);
+
+  while (all.length < target) {
+    const batchLimit = Math.min(300, target - all.length);
+    const start = end - granularity * batchLimit;
+    const url = new URL(`${COINBASE_BASE}/${product}/candles`);
+    url.searchParams.set("granularity", String(granularity));
+    url.searchParams.set("start", new Date(start * 1000).toISOString());
+    url.searchParams.set("end", new Date(end * 1000).toISOString());
+
+    const res = await fetch(url, { headers: { "User-Agent": "btcusdt-dashboard/6" }, signal: AbortSignal.timeout(12_000) });
+    if (!res.ok) throw new Error(`Coinbase API ${res.status}`);
+    const rows = (await res.json()) as unknown[];
+    if (!Array.isArray(rows) || rows.length === 0) break;
+    const batch = rows.map((row) => {
+      const r = row as unknown[];
+      return {
+        time: Number(r[0]) * 1000,
+        low: Number(r[1]),
+        high: Number(r[2]),
+        open: Number(r[3]),
+        close: Number(r[4]),
+        volume: Number(r[5]),
+      } as Candle;
+    });
+    all.unshift(...batch);
+    end = start;
+    if (batch.length < batchLimit) break;
+  }
+
+  return sanitizeCandles(all).slice(-target);
 }
 
 async function fetchBinanceCandles(symbol: string, timeframe: string, limit: number): Promise<Candle[]> {
@@ -234,13 +359,23 @@ export async function fetchCandles(symbol: string, timeframe: string, limit = 20
   const cached = serverCache.get<Candle[]>(cacheKey);
   if (cached?.length) return cached;
 
+  const diskFallback = readDiskCandles(normalized, interval, safeLimit);
+  const persistAndReturn = (source: string, candles: Candle[]) => {
+    const merged = mergeCandles(candles, diskFallback, safeLimit);
+    if (merged.length > 0) {
+      serverCache.set(cacheKey, merged, CANDLE_CACHE_TTL_MS);
+      writeDiskCandles(normalized, interval, merged);
+      if (merged.length < Math.min(50, safeLimit)) {
+        console.warn(`[fetchCandles] ${source} 僅取得 ${merged.length}/${safeLimit} 根：${normalized} ${interval}`);
+      }
+    }
+    return merged;
+  };
+
   // 1st: Binance
   try {
     const candles = await fetchBinanceCandles(normalized, interval, safeLimit);
-    if (candles.length > 0) {
-      serverCache.set(cacheKey, candles, CANDLE_CACHE_TTL_MS);
-      return candles;
-    }
+    if (candles.length > 0) return persistAndReturn("Binance", candles);
     throw new Error("Binance returned empty candle set");
   } catch (binanceError) {
     console.warn(`[fetchCandles] Binance 失敗，嘗試 OKX：${binanceError instanceof Error ? binanceError.message : String(binanceError)}`);
@@ -249,10 +384,7 @@ export async function fetchCandles(symbol: string, timeframe: string, limit = 20
   // 2nd: OKX
   try {
     const candles = await fetchOkxCandles(normalized, interval, safeLimit);
-    if (candles.length > 0) {
-      serverCache.set(cacheKey, candles, CANDLE_CACHE_TTL_MS);
-      return candles;
-    }
+    if (candles.length > 0) return persistAndReturn("OKX", candles);
     throw new Error("OKX returned empty candle set");
   } catch (okxError) {
     console.warn(`[fetchCandles] OKX 失敗，嘗試 CryptoCompare：${okxError instanceof Error ? okxError.message : String(okxError)}`);
@@ -262,12 +394,28 @@ export async function fetchCandles(symbol: string, timeframe: string, limit = 20
   try {
     const candles = await fetchCryptoCompareCandles(normalized, interval, safeLimit);
     if (candles.length > 0) {
-      serverCache.set(cacheKey, candles, CANDLE_CACHE_TTL_MS);
       console.log(`[fetchCandles] CryptoCompare OHLCV 成功：${normalized} ${interval} ${candles.length} 根`);
-      return candles;
+      return persistAndReturn("CryptoCompare", candles);
     }
   } catch (ccError) {
-    console.error(`[fetchCandles] CryptoCompare 也失敗：${ccError instanceof Error ? ccError.message : String(ccError)}`);
+    console.warn(`[fetchCandles] CryptoCompare 失敗，嘗試 Coinbase：${ccError instanceof Error ? ccError.message : String(ccError)}`);
+  }
+
+  // 4th: Coinbase public candles (USD pair fallback; improves Render region reliability)
+  try {
+    const candles = await fetchCoinbaseCandles(normalized, interval, safeLimit);
+    if (candles.length > 0) {
+      console.log(`[fetchCandles] Coinbase OHLCV 成功：${normalized} ${interval} ${candles.length} 根`);
+      return persistAndReturn("Coinbase", candles);
+    }
+  } catch (coinbaseError) {
+    console.warn(`[fetchCandles] Coinbase 也失敗：${coinbaseError instanceof Error ? coinbaseError.message : String(coinbaseError)}`);
+  }
+
+  if (diskFallback.length > 0) {
+    console.warn(`[fetchCandles] 所有即時來源失敗，使用磁碟 K 線快取：${normalized} ${interval} ${diskFallback.length} 根`);
+    serverCache.set(cacheKey, diskFallback, CANDLE_CACHE_TTL_MS);
+    return diskFallback;
   }
 
   return [];
@@ -976,14 +1124,28 @@ async function fetchDerivativeData(symbol: string): Promise<CryptoSnapshot["onch
 
 async function buildSnapshot(symbol: string): Promise<CryptoSnapshot> {
   const normalized = normalizeSymbol(symbol);
-  const [kl4h, kl1h, kl15m, kl5m] = await Promise.all([
+  let [kl4h, kl1h, kl15m, kl5m] = await Promise.all([
     fetchCandles(normalized, "4h", 500),
     fetchCandles(normalized, "1h", 500),
     fetchCandles(normalized, "15m", 500),
     fetchCandles(normalized, "5m", 500),
   ]);
 
-  if (kl1h.length < 60) {
+  // 若某時間框架短暫失敗，使用低週期資料聚合補足，避免整個快照或圖表變成空白。
+  if (kl15m.length < 50 && kl5m.length >= 150) {
+    kl15m = aggregateCandlesToTimeframe(kl5m, "15m", 500);
+    console.warn(`[buildSnapshot] 15M K 線由 5M 聚合補足：${kl15m.length} 根`);
+  }
+  if (kl1h.length < 60 && kl15m.length >= 240) {
+    kl1h = aggregateCandlesToTimeframe(kl15m, "1h", 500);
+    console.warn(`[buildSnapshot] 1H K 線由 15M 聚合補足：${kl1h.length} 根`);
+  }
+  if (kl4h.length < 50 && kl1h.length >= 200) {
+    kl4h = aggregateCandlesToTimeframe(kl1h, "4h", 500);
+    console.warn(`[buildSnapshot] 4H K 線由 1H 聚合補足：${kl4h.length} 根`);
+  }
+
+  if (kl1h.length < 30) {
     throw new Error(`K 線資料不足（${kl1h.length} 根），請稍後重試或檢查交易所連線`);
   }
 
