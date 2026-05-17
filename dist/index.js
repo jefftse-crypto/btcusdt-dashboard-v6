@@ -1437,14 +1437,14 @@ function buildSmc(candles, ind) {
   };
 }
 function buildPa(timeframes, mtf) {
-  const tfPayload = Object.fromEntries(Object.keys(mtf).map((tf) => {
-    const ind = mtf[tf];
+  const tfPayload = Object.fromEntries(Object.keys(mtf).map((tf2) => {
+    const ind = mtf[tf2];
     const price = ind.close;
-    const candles = timeframes[tf] ?? [];
+    const candles = timeframes[tf2] ?? [];
     const highs = findSwingHighs(candles, 5);
     const lows = findSwingLows(candles, 5);
-    return [tf, {
-      timeframe: tf,
+    return [tf2, {
+      timeframe: tf2,
       trend: ind.trend,
       trend_context: ind.adx.adx >= 25 ? "trending" : "ranging",
       score: ind.trend === "bullish" ? 62 : ind.trend === "bearish" ? 38 : 50,
@@ -1497,10 +1497,10 @@ function buildPa(timeframes, mtf) {
 function buildChanMtfFromPa(pa, fallbackSuggestion, fallbackDetail) {
   const orderedTimeframes = ["4h", "1h", "15m", "5m"];
   const normalizeTrend = (trend) => trend === "bullish" || trend === "bearish" || trend === "ranging" ? trend : "ranging";
-  const timeframes = Object.fromEntries(orderedTimeframes.map((tf) => {
-    const source = pa.timeframes[tf]?.chan;
+  const timeframes = Object.fromEntries(orderedTimeframes.map((tf2) => {
+    const source = pa.timeframes[tf2]?.chan;
     const trend = normalizeTrend(source?.trend);
-    return [tf, {
+    return [tf2, {
       bis: Array.isArray(source?.bis) ? source.bis : [],
       duans: Array.isArray(source?.duans) ? source.duans : [],
       zhongshus: Array.isArray(source?.zhongshus) ? source.zhongshus : [],
@@ -1514,11 +1514,11 @@ function buildChanMtfFromPa(pa, fallbackSuggestion, fallbackDetail) {
       buy_sell_points: source?.buy_sell_points ?? []
     }];
   }));
-  const signals = Object.fromEntries(orderedTimeframes.map((tf) => {
-    const chan = timeframes[tf];
+  const signals = Object.fromEntries(orderedTimeframes.map((tf2) => {
+    const chan = timeframes[tf2];
     const signalType = chan.trend === "bullish" ? "buy" : chan.trend === "bearish" ? "sell" : chan.in_zhongshu ? "watch" : "neutral";
     const signal = chan.trend === "bullish" ? "\u504F\u591A\u7D50\u69CB\uFF0C\u7B49\u5F85\u56DE\u8E29\u6216\u4E09\u8CB7\u78BA\u8A8D" : chan.trend === "bearish" ? "\u504F\u7A7A\u7D50\u69CB\uFF0C\u7B49\u5F85\u53CD\u5F48\u627F\u58D3\u6216\u4E09\u8CE3\u78BA\u8A8D" : chan.in_zhongshu ? "\u4E2D\u6A1E\u9707\u76EA\uFF0C\u7B49\u5F85\u96E2\u958B\u4E2D\u6A1E\u5F8C\u78BA\u8A8D\u65B9\u5411" : "\u66AB\u7121\u660E\u78BA\u7E8F\u8AD6\u8A0A\u865F";
-    return [tf, {
+    return [tf2, {
       trend: chan.trend,
       bi_count: chan.bi_count,
       duan_count: chan.duan_count,
@@ -1533,11 +1533,11 @@ function buildChanMtfFromPa(pa, fallbackSuggestion, fallbackDetail) {
       buy_sell_points: chan.buy_sell_points
     }];
   }));
-  const bullishCount = orderedTimeframes.filter((tf) => timeframes[tf].trend === "bullish").length;
-  const bearishCount = orderedTimeframes.filter((tf) => timeframes[tf].trend === "bearish").length;
+  const bullishCount = orderedTimeframes.filter((tf2) => timeframes[tf2].trend === "bullish").length;
+  const bearishCount = orderedTimeframes.filter((tf2) => timeframes[tf2].trend === "bearish").length;
   const rangingCount = orderedTimeframes.length - bullishCount - bearishCount;
-  const inZhongshuCount = orderedTimeframes.filter((tf) => timeframes[tf].in_zhongshu).length;
-  const dominantTimeframe = orderedTimeframes.find((tf) => timeframes[tf].trend !== "ranging") ?? "1h";
+  const inZhongshuCount = orderedTimeframes.filter((tf2) => timeframes[tf2].in_zhongshu).length;
+  const dominantTimeframe = orderedTimeframes.find((tf2) => timeframes[tf2].trend !== "ranging") ?? "1h";
   const overallTrend = bullishCount > bearishCount ? "bullish" : bearishCount > bullishCount ? "bearish" : "ranging";
   return {
     timeframes,
@@ -1568,8 +1568,8 @@ function buildStrategy(symbol, ind, mtf) {
   const marketRegime = isTrending ? "trending" : isRanging ? "ranging" : "transitioning";
   const weights = { "4h": 0.4, "1h": 0.3, "15m": 0.2, "5m": 0.1 };
   let weightedScore = 0;
-  for (const [tf, weight] of Object.entries(weights)) {
-    const t2 = mtf[tf]?.trend;
+  for (const [tf2, weight] of Object.entries(weights)) {
+    const t2 = mtf[tf2]?.trend;
     if (t2 === "bullish") weightedScore += weight;
     else if (t2 === "bearish") weightedScore -= weight;
   }
@@ -3397,11 +3397,11 @@ function bayesianMtfFusion(signals) {
   }
   const tfOrder = ["4H", "1H", "15m", "5m"];
   let posterior = { long: 0.33, short: 0.33, neutral: 0.34 };
-  for (const tf of tfOrder) {
-    const signal = signals.find((s) => s.timeframe === tf);
+  for (const tf2 of tfOrder) {
+    const signal = signals.find((s) => s.timeframe === tf2);
     if (!signal) continue;
     const likelihood = directionToProbability(signal.direction, signal.strength);
-    const weight = dynamicWeights[tf] ?? 0.25;
+    const weight = dynamicWeights[tf2] ?? 0.25;
     const weightedLikelihood = {
       long: 1 + (likelihood.long - 0.33) * weight * 3,
       short: 1 + (likelihood.short - 0.33) * weight * 3,
@@ -4566,10 +4566,10 @@ async function runHighWinRateScan(symbol, fetchCandles2, invokeLLM2, engine = "l
   ];
   const candleMap = /* @__PURE__ */ new Map();
   await Promise.all(
-    TF_CONFIG.map(async (tf) => {
+    TF_CONFIG.map(async (tf2) => {
       try {
-        const candles = await fetchCandles2(symbol, tf.bar, tf.limit);
-        if (candles.length >= 50) candleMap.set(tf.bar, candles);
+        const candles = await fetchCandles2(symbol, tf2.bar, tf2.limit);
+        if (candles.length >= 50) candleMap.set(tf2.bar, candles);
       } catch {
       }
     })
@@ -4590,12 +4590,12 @@ async function runHighWinRateScan(symbol, fetchCandles2, invokeLLM2, engine = "l
   const isLowLiquidityPeriod = nowUtcHour >= 0 && nowUtcHour < 4;
   const tfAnalyses = [];
   const tfMap = /* @__PURE__ */ new Map();
-  for (const tf of TF_CONFIG) {
-    const candles = candleMap.get(tf.bar);
+  for (const tf2 of TF_CONFIG) {
+    const candles = candleMap.get(tf2.bar);
     if (!candles || candles.length < 50) continue;
-    const analysis = analyzeTf(candles, tf.bar, tf.label, htfTrend);
+    const analysis = analyzeTf(candles, tf2.bar, tf2.label, htfTrend);
     tfAnalyses.push(analysis);
-    tfMap.set(tf.bar, analysis);
+    tfMap.set(tf2.bar, analysis);
   }
   const models = buildModels(tfMap);
   const longCount = tfAnalyses.filter((t2) => t2.direction === "long").length;
@@ -8160,6 +8160,256 @@ var HwrScanResultSchema = z2.object({
 // server/routers.ts
 init_cache();
 import { readFile } from "node:fs/promises";
+
+// server/lstmPredictor.ts
+init_indicators();
+import { createRequire } from "module";
+var require2 = createRequire(import.meta.url);
+var tf;
+try {
+  tf = require2("@tensorflow/tfjs-node");
+} catch {
+  tf = null;
+}
+var LOOKBACK = 60;
+var FEATURE_COUNT = 14;
+var EPOCHS = 30;
+var BATCH_SIZE = 32;
+var HIDDEN_UNITS = 64;
+function extractFeatures(candles) {
+  const closes = candles.map((c) => c.close);
+  const highs = candles.map((c) => c.high);
+  const lows = candles.map((c) => c.low);
+  const opens = candles.map((c) => c.open);
+  const vols = candles.map((c) => c.volume);
+  const rsiArr = calcRsiArr(closes, 14);
+  const macdObj = calcMacdArr(closes);
+  const ema20 = calcEmaArr(closes, 20);
+  const ema50 = calcEmaArr(closes, 50);
+  const atrArr = calcAtrArr(candles, 14);
+  const adxObj = calcAdxArr(candles, 14);
+  const bbArr = calcBollingerArr(closes, 20, 2);
+  const cmfArr = calcCmfArr(candles, 20);
+  const stArr = calcSupertrend(candles, 10, 3);
+  const volMa20 = calcEmaArr(vols, 20);
+  const features = [];
+  for (let i = 0; i < candles.length; i++) {
+    const c = candles[i];
+    const prevClose = i > 0 ? candles[i - 1].close : c.close;
+    const ret = Math.max(-1, Math.min(1, (c.close - prevClose) / prevClose / 0.05));
+    const rsi = isFinite(rsiArr[i]) ? rsiArr[i] / 100 : 0.5;
+    const macd = macdObj.macd[i] ?? 0;
+    const atr = atrArr[i] > 0 ? atrArr[i] : 1;
+    const macdNorm = Math.max(-2, Math.min(2, macd / atr)) / 2;
+    const bb = bbArr[i];
+    const bbRange = bb ? bb.upper - bb.lower : 1;
+    const bbPos = bb && bbRange > 0 ? Math.max(0, Math.min(1, (c.close - bb.lower) / bbRange)) : 0.5;
+    const emaCross = ema20[i] && ema50[i] ? Math.max(-1, Math.min(1, (ema20[i] - ema50[i]) / (ema50[i] * 0.02))) : 0;
+    const atrNorm = Math.min(1, atr / c.close * 100);
+    const adx = adxObj.adx[i] ?? 25;
+    const adxNorm = Math.min(1, adx / 100);
+    const cmf = Math.max(-1, Math.min(1, cmfArr[i] ?? 0));
+    const stDir = stArr[i]?.direction === "up" ? 1 : -1;
+    const volNorm = Math.min(2, vols[i] / (volMa20[i] || vols[i] || 1));
+    const hlRange = Math.min(3, (c.high - c.low) / atr);
+    const bodyRatio = Math.abs(c.close - c.open) / (c.high - c.low || 1);
+    const upperShadow = (c.high - Math.max(c.open, c.close)) / (c.high - c.low || 1);
+    const lowerShadow = (Math.min(c.open, c.close) - c.low) / (c.high - c.low || 1);
+    features.push([
+      ret,
+      rsi,
+      macdNorm,
+      bbPos,
+      emaCross,
+      atrNorm,
+      adxNorm,
+      cmf,
+      stDir,
+      volNorm,
+      hlRange,
+      bodyRatio,
+      upperShadow,
+      lowerShadow
+    ]);
+  }
+  return features;
+}
+function buildDataset(candles) {
+  const features = extractFeatures(candles);
+  const xs = [];
+  const ys = [];
+  const THRESHOLD = 3e-3;
+  for (let i = LOOKBACK; i < candles.length - 1; i++) {
+    const seq = features.slice(i - LOOKBACK, i);
+    xs.push(seq);
+    const currClose = candles[i].close;
+    const nextClose = candles[i + 1].close;
+    const ret = (nextClose - currClose) / currClose;
+    if (ret > THRESHOLD) ys.push(2);
+    else if (ret < -THRESHOLD) ys.push(0);
+    else ys.push(1);
+  }
+  return { xs, ys };
+}
+function buildModel() {
+  const model = tf.sequential();
+  model.add(tf.layers.lstm({
+    units: HIDDEN_UNITS,
+    inputShape: [LOOKBACK, FEATURE_COUNT],
+    returnSequences: true,
+    dropout: 0.2,
+    recurrentDropout: 0.1
+  }));
+  model.add(tf.layers.lstm({
+    units: 32,
+    returnSequences: false,
+    dropout: 0.2
+  }));
+  model.add(tf.layers.dense({ units: 16, activation: "relu" }));
+  model.add(tf.layers.dropout({ rate: 0.3 }));
+  model.add(tf.layers.dense({ units: 3, activation: "softmax" }));
+  model.compile({
+    optimizer: tf.train.adam(1e-3),
+    loss: "sparseCategoricalCrossentropy",
+    metrics: ["accuracy"]
+  });
+  return model;
+}
+var modelCache = /* @__PURE__ */ new Map();
+var RETRAIN_INTERVAL = 2 * 60 * 60 * 1e3;
+async function trainLstm(symbol, timeframe, candles) {
+  if (!tf) throw new Error("TensorFlow.js \u672A\u5B89\u88DD");
+  if (candles.length < LOOKBACK + 50) {
+    throw new Error(`K \u7DDA\u6578\u91CF\u4E0D\u8DB3\uFF0C\u9700\u8981\u81F3\u5C11 ${LOOKBACK + 50} \u6839\uFF0C\u76EE\u524D ${candles.length} \u6839`);
+  }
+  const startTime = Date.now();
+  const { xs, ys } = buildDataset(candles);
+  const splitIdx = Math.floor(xs.length * 0.8);
+  const xTrain = xs.slice(0, splitIdx);
+  const yTrain = ys.slice(0, splitIdx);
+  const xVal = xs.slice(splitIdx);
+  const yVal = ys.slice(splitIdx);
+  const xTrainTensor = tf.tensor3d(xTrain);
+  const yTrainTensor = tf.tensor1d(yTrain, "int32");
+  const xValTensor = tf.tensor3d(xVal);
+  const yValTensor = tf.tensor1d(yVal, "int32");
+  const model = buildModel();
+  let finalAcc = 0;
+  let finalLoss = 0;
+  await model.fit(xTrainTensor, yTrainTensor, {
+    epochs: EPOCHS,
+    batchSize: BATCH_SIZE,
+    validationData: [xValTensor, yValTensor],
+    verbose: 0,
+    callbacks: {
+      onEpochEnd: (_epoch, logs) => {
+        finalAcc = logs?.val_acc ?? logs?.val_accuracy ?? 0;
+        finalLoss = logs?.val_loss ?? 0;
+      }
+    }
+  });
+  const predTensor = model.predict(xValTensor);
+  const predArray = predTensor.argMax(1).dataSync();
+  let correct = 0;
+  for (let i = 0; i < predArray.length; i++) {
+    if (predArray[i] === yVal[i]) correct++;
+  }
+  const accuracy = correct / predArray.length;
+  const allFeatures = extractFeatures(candles);
+  const lastFeatures = allFeatures.slice(-LOOKBACK);
+  xTrainTensor.dispose();
+  yTrainTensor.dispose();
+  xValTensor.dispose();
+  yValTensor.dispose();
+  const trainResult = {
+    accuracy,
+    loss: finalLoss,
+    epochs: EPOCHS,
+    trainSamples: xTrain.length,
+    durationMs: Date.now() - startTime
+  };
+  const cacheKey = `${symbol}_${timeframe}`;
+  modelCache.set(cacheKey, {
+    model,
+    trainResult,
+    features: lastFeatures,
+    lastCandles: candles.slice(-LOOKBACK - 1),
+    trainedAt: Date.now()
+  });
+  console.log(`[LSTM] ${cacheKey} \u8A13\u7DF4\u5B8C\u6210 | \u6E96\u78BA\u7387: ${(accuracy * 100).toFixed(1)}% | \u8017\u6642: ${trainResult.durationMs}ms`);
+  return trainResult;
+}
+async function predictLstm(symbol, timeframe, candles) {
+  if (!tf) throw new Error("TensorFlow.js \u672A\u5B89\u88DD");
+  const cacheKey = `${symbol}_${timeframe}`;
+  let cache = modelCache.get(cacheKey);
+  const needRetrain = !cache || Date.now() - cache.trainedAt > RETRAIN_INTERVAL;
+  if (needRetrain) {
+    await trainLstm(symbol, timeframe, candles);
+    cache = modelCache.get(cacheKey);
+  } else {
+    const allFeatures = extractFeatures(candles);
+    cache.features = allFeatures.slice(-LOOKBACK);
+    cache.lastCandles = candles.slice(-LOOKBACK - 1);
+  }
+  const { model, trainResult, features, lastCandles } = cache;
+  const inputTensor = tf.tensor3d([features]);
+  const predTensor = model.predict(inputTensor);
+  const probs = Array.from(predTensor.dataSync());
+  inputTensor.dispose();
+  const [bearProb, neutralProb, bullProb] = probs;
+  let direction;
+  if (bullProb > bearProb && bullProb > neutralProb) direction = "bullish";
+  else if (bearProb > bullProb && bearProb > neutralProb) direction = "bearish";
+  else direction = "neutral";
+  const sorted = [...probs].sort((a, b) => b - a);
+  const confidence = Math.round((sorted[0] - sorted[1]) * 100 + 50);
+  const lastClose = lastCandles[lastCandles.length - 1]?.close ?? 0;
+  const atrArr = calcAtrArr(lastCandles, 14);
+  const atr = atrArr[atrArr.length - 1] ?? lastClose * 5e-3;
+  let predictedClose;
+  if (direction === "bullish") predictedClose = lastClose + atr * bullProb * 1.5;
+  else if (direction === "bearish") predictedClose = lastClose - atr * bearProb * 1.5;
+  else predictedClose = lastClose + atr * (bullProb - bearProb) * 0.5;
+  const priceRangeLow = predictedClose - atr * 1;
+  const priceRangeHigh = predictedClose + atr * 1;
+  return {
+    symbol,
+    timeframe,
+    timestamp: Date.now(),
+    direction,
+    bullProb: parseFloat(bullProb.toFixed(4)),
+    bearProb: parseFloat(bearProb.toFixed(4)),
+    neutralProb: parseFloat(neutralProb.toFixed(4)),
+    predictedClose: parseFloat(predictedClose.toFixed(2)),
+    priceRangeLow: parseFloat(priceRangeLow.toFixed(2)),
+    priceRangeHigh: parseFloat(priceRangeHigh.toFixed(2)),
+    confidence: Math.max(0, Math.min(100, confidence)),
+    trainedOn: trainResult.trainSamples,
+    accuracy: parseFloat(trainResult.accuracy.toFixed(4)),
+    modelVersion: "LSTM-v1.0",
+    trainedAt: cache.trainedAt
+  };
+}
+function clearModelCache(symbol, timeframe) {
+  if (symbol && timeframe) {
+    modelCache.delete(`${symbol}_${timeframe}`);
+  } else {
+    modelCache.clear();
+  }
+}
+function getModelStatus(symbol, timeframe) {
+  const cache = modelCache.get(`${symbol}_${timeframe}`);
+  if (!cache) return { trained: false };
+  return {
+    trained: true,
+    trainedAt: cache.trainedAt,
+    accuracy: cache.trainResult.accuracy,
+    trainSamples: cache.trainResult.trainSamples
+  };
+}
+
+// server/routers.ts
 var SYMBOL_REGEX = /^[A-Z0-9]{2,20}(USDT|BTC|ETH|BNB|USDC)?$/;
 function normalizeSymbol2(raw) {
   const s = raw.toUpperCase().trim();
@@ -8328,12 +8578,12 @@ function createFallbackPaTimeframe(timeframe, price, direction) {
 }
 function createFallbackChanMtf(paTimeframes, direction, detail) {
   const orderedTimeframes = ["4h", "1h", "15m", "5m"];
-  const timeframes = Object.fromEntries(orderedTimeframes.map((tf) => [tf, paTimeframes[tf].chan]));
-  const signals = Object.fromEntries(orderedTimeframes.map((tf) => {
-    const chan = paTimeframes[tf].chan;
+  const timeframes = Object.fromEntries(orderedTimeframes.map((tf2) => [tf2, paTimeframes[tf2].chan]));
+  const signals = Object.fromEntries(orderedTimeframes.map((tf2) => {
+    const chan = paTimeframes[tf2].chan;
     const signalType = chan.trend === "bullish" ? "buy" : chan.trend === "bearish" ? "sell" : "neutral";
     const signal = chan.trend === "bullish" ? "\u56DE\u9000\u8CC7\u6599\u986F\u793A\u504F\u591A\u7D50\u69CB\uFF0C\u7B49\u5F85\u5B8C\u6574\u5206\u6790\u6062\u5FA9\u5F8C\u78BA\u8A8D" : chan.trend === "bearish" ? "\u56DE\u9000\u8CC7\u6599\u986F\u793A\u504F\u7A7A\u7D50\u69CB\uFF0C\u7B49\u5F85\u5B8C\u6574\u5206\u6790\u6062\u5FA9\u5F8C\u78BA\u8A8D" : "\u56DE\u9000\u8CC7\u6599\u986F\u793A\u9707\u76EA\u7D50\u69CB\uFF0C\u7B49\u5F85\u5B8C\u6574\u5206\u6790\u6062\u5FA9";
-    return [tf, {
+    return [tf2, {
       trend: chan.trend,
       bi_count: chan.bi_count,
       duan_count: chan.duan_count,
@@ -10068,7 +10318,7 @@ Rules:
         `VWAP: ${ind.vwap?.toFixed(1) ?? "\u2014"}`
       ].join("\n");
       const mtfSummary = Object.entries(mtf).map(
-        ([tf, d]) => `[${tf.toUpperCase()}] RSI=${d.rsi?.toFixed(1) ?? "\u2014"} MACD_hist=${d.macd_hist?.toFixed(3) ?? "\u2014"} EMA20=${d.ema20?.toFixed(1) ?? "\u2014"} \u8DA8\u52E2=${d.trend ?? "\u2014"}`
+        ([tf2, d]) => `[${tf2.toUpperCase()}] RSI=${d.rsi?.toFixed(1) ?? "\u2014"} MACD_hist=${d.macd_hist?.toFixed(3) ?? "\u2014"} EMA20=${d.ema20?.toFixed(1) ?? "\u2014"} \u8DA8\u52E2=${d.trend ?? "\u2014"}`
       ).join("\n");
       const smcSummary = [
         `\u5E02\u5834\u7D50\u69CB: ${smc.market_structure ?? "\u2014"}`,
@@ -10283,6 +10533,44 @@ ${strSummary}
         const msg = e instanceof Error ? e.message : String(e);
         throw new TRPCError3({ code: "INTERNAL_SERVER_ERROR", message: `CannonBall \u5206\u6790\u5931\u6557\uFF1A${msg}` });
       }
+    })
+  }),
+  ai: router({
+    predict: publicProcedure.input(z3.object({
+      symbol: z3.string().default("BTCUSDT"),
+      timeframe: z3.enum(["1h", "4h", "15m", "5m"]).default("1h"),
+      limit: z3.number().int().min(200).max(2e3).default(800),
+      forceRetrain: z3.boolean().default(false)
+    })).query(async ({ input }) => {
+      const symbol = normalizeSymbol2(input.symbol);
+      const barMap = { "5m": "5m", "15m": "15m", "1h": "1H", "4h": "4H" };
+      const bar = barMap[input.timeframe] ?? "1H";
+      const candles = await fetchCandles(symbol, bar, input.limit);
+      if (candles.length < 200) throw new TRPCError3({ code: "INTERNAL_SERVER_ERROR", message: `K \u7DDA\u6578\u91CF\u4E0D\u8DB3\uFF08${candles.length} \u6839\uFF09\uFF0C\u7121\u6CD5\u8A13\u7DF4\u6A21\u578B` });
+      if (input.forceRetrain) clearModelCache(symbol, input.timeframe);
+      const prediction = await predictLstm(symbol, input.timeframe, candles);
+      return prediction;
+    }),
+    train: publicProcedure.input(z3.object({
+      symbol: z3.string().default("BTCUSDT"),
+      timeframe: z3.enum(["1h", "4h", "15m", "5m"]).default("1h"),
+      limit: z3.number().int().min(200).max(2e3).default(800)
+    })).mutation(async ({ input }) => {
+      const symbol = normalizeSymbol2(input.symbol);
+      const barMap = { "5m": "5m", "15m": "15m", "1h": "1H", "4h": "4H" };
+      const bar = barMap[input.timeframe] ?? "1H";
+      const candles = await fetchCandles(symbol, bar, input.limit);
+      if (candles.length < 200) throw new TRPCError3({ code: "INTERNAL_SERVER_ERROR", message: `K \u7DDA\u6578\u91CF\u4E0D\u8DB3\uFF08${candles.length} \u6839\uFF09` });
+      clearModelCache(symbol, input.timeframe);
+      const result = await trainLstm(symbol, input.timeframe, candles);
+      return result;
+    }),
+    status: publicProcedure.input(z3.object({
+      symbol: z3.string().default("BTCUSDT"),
+      timeframe: z3.enum(["1h", "4h", "15m", "5m"]).default("1h")
+    })).query(({ input }) => {
+      const symbol = normalizeSymbol2(input.symbol);
+      return getModelStatus(symbol, input.timeframe);
     })
   }),
   combo: router({

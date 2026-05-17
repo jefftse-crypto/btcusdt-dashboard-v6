@@ -37,6 +37,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { invokeLLM } from "./_core/llm";
 import { serverCache, tweetSentimentKey, snapshotKey } from "./utils/cache";
 import { readFile } from "node:fs/promises";
+import { predictLstm, trainLstm, getModelStatus, clearModelCache } from "./lstmPredictor";
 
 // ─────────────────────────────────────────────
 // 內建分析引擎（無需 FastAPI）
@@ -2270,6 +2271,53 @@ ${strSummary}
         }
       }),
   }),
+  ai: router({
+    predict: publicProcedure
+      .input(z.object({
+        symbol:    z.string().default("BTCUSDT"),
+        timeframe: z.enum(["1h", "4h", "15m", "5m"]).default("1h"),
+        limit:     z.number().int().min(200).max(2000).default(800),
+        forceRetrain: z.boolean().default(false),
+      }))
+      .query(async ({ input }) => {
+        const symbol = normalizeSymbol(input.symbol);
+        const barMap: Record<string, string> = { "5m": "5m", "15m": "15m", "1h": "1H", "4h": "4H" };
+        const bar = barMap[input.timeframe] ?? "1H";
+        const candles = await fetchCandles(symbol, bar, input.limit);
+        if (candles.length < 200) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: `K 線數量不足（${candles.length} 根），無法訓練模型` });
+        if (input.forceRetrain) clearModelCache(symbol, input.timeframe);
+        const prediction = await predictLstm(symbol, input.timeframe, candles);
+        return prediction;
+      }),
+
+    train: publicProcedure
+      .input(z.object({
+        symbol:    z.string().default("BTCUSDT"),
+        timeframe: z.enum(["1h", "4h", "15m", "5m"]).default("1h"),
+        limit:     z.number().int().min(200).max(2000).default(800),
+      }))
+      .mutation(async ({ input }) => {
+        const symbol = normalizeSymbol(input.symbol);
+        const barMap: Record<string, string> = { "5m": "5m", "15m": "15m", "1h": "1H", "4h": "4H" };
+        const bar = barMap[input.timeframe] ?? "1H";
+        const candles = await fetchCandles(symbol, bar, input.limit);
+        if (candles.length < 200) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: `K 線數量不足（${candles.length} 根）` });
+        clearModelCache(symbol, input.timeframe);
+        const result = await trainLstm(symbol, input.timeframe, candles);
+        return result;
+      }),
+
+    status: publicProcedure
+      .input(z.object({
+        symbol:    z.string().default("BTCUSDT"),
+        timeframe: z.enum(["1h", "4h", "15m", "5m"]).default("1h"),
+      }))
+      .query(({ input }) => {
+        const symbol = normalizeSymbol(input.symbol);
+        return getModelStatus(symbol, input.timeframe);
+      }),
+  }),
+
   combo: router({
     liveSignal: publicProcedure
       .input(z.object({

@@ -25,6 +25,7 @@ const SmcPanel = lazy(() => import("@/components/panels/SmcPanel").then(m => ({ 
 const PaPanel = lazy(() => import("@/components/panels/PaPanel").then(m => ({ default: m.PaPanel })));
 const ChanPanel = lazy(() => import("@/components/panels/ChanPanel").then(m => ({ default: m.ChanPanel })));
 const NewsPanel = lazy(() => import("@/components/panels/NewsPanel").then(m => ({ default: m.NewsPanel })));
+const AIPredictionPanel = lazy(() => import("@/components/panels/AIPredictionPanel").then(m => ({ default: m.AIPredictionPanel })));
 
 // 常用幣種（頂部快速切換）
 const QUICK_SYMBOLS = [
@@ -81,6 +82,7 @@ export default function Dashboard() {
     { id: "strategy",  icon: <Brain size={17} />,      label: "策略" },
     { id: "backtest",  icon: <History size={17} />,    label: "回測" },
     { id: "news",      icon: <Newspaper size={17} />,  label: "新聞" },
+    { id: "ai",        icon: <Brain size={17} />,      label: "AI" },
   ];
 
   const [mobileActiveTab, setMobileActiveTab] = useState("chart");
@@ -304,6 +306,11 @@ export default function Dashboard() {
                       <NewsPanel symbol={symbol} />
                     </div>
                   )}
+                  {mobileActiveTab === "ai" && (
+                    <div className="h-full w-full overflow-y-auto p-4 custom-scrollbar" style={{ background: "#1c2030" }}>
+                      <AIPredictionPanel symbol={symbol} timeframe={timeframe as "1h" | "4h" | "15m" | "5m"} currentPrice={livePrice ?? null} />
+                    </div>
+                  )}
                 </Suspense>
               </div>
 
@@ -365,7 +372,7 @@ export default function Dashboard() {
               <ResizablePanel defaultSize={25} minSize={15}>
                 <div className="h-full w-full border-l flex flex-col" style={{ background: "#1c2030", borderColor: "#252b3a" }}>
                   <div className="flex h-10 items-center border-b px-1 overflow-x-auto custom-scrollbar" style={{ background: "#141820", borderColor: "#252b3a" }}>
-                    {["strategy", "indicators", "smc", "pa", "chan", "news"].map((tab) => (
+                    {["strategy", "indicators", "smc", "pa", "chan", "news", "ai"].map((tab) => (
                       <button
                         key={tab}
                         onClick={() => setRightPanelTab(tab)}
@@ -375,7 +382,7 @@ export default function Dashboard() {
                             : "text-[#8896b0] hover:text-[#e2e8f0]"
                         }`}
                       >
-                        {tab === "strategy" ? "策略" : tab === "indicators" ? "指標" : tab === "smc" ? "SMC" : tab === "pa" ? "PA" : tab === "chan" ? "纏論" : "新聞"}
+                        {tab === "strategy" ? "策略" : tab === "indicators" ? "指標" : tab === "smc" ? "SMC" : tab === "pa" ? "PA" : tab === "chan" ? "纏論" : tab === "news" ? "新聞" : "AI"}
                       </button>
                     ))}
                   </div>
@@ -399,6 +406,9 @@ export default function Dashboard() {
                       )}
                       {rightPanelTab === "news" && (
                         <NewsPanel symbol={symbol} />
+                      )}
+                      {rightPanelTab === "ai" && (
+                        <AIPredictionPanel symbol={symbol} timeframe={timeframe as "1h" | "4h" | "15m" | "5m"} currentPrice={livePrice ?? null} />
                       )}
                     </Suspense>
                   </div>
