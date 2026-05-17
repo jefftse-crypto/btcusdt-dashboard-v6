@@ -8215,7 +8215,7 @@ function extractFeatures(candles) {
     const bodyRatio = Math.abs(c.close - c.open) / (c.high - c.low || 1);
     const upperShadow = (c.high - Math.max(c.open, c.close)) / (c.high - c.low || 1);
     const lowerShadow = (Math.min(c.open, c.close) - c.low) / (c.high - c.low || 1);
-    features.push([
+    const row = [
       ret,
       rsi,
       macdNorm,
@@ -8230,7 +8230,8 @@ function extractFeatures(candles) {
       bodyRatio,
       upperShadow,
       lowerShadow
-    ]);
+    ];
+    features.push(row.map((v) => isFinite(v) && !isNaN(v) ? v : 0));
   }
   return features;
 }
@@ -8270,7 +8271,7 @@ function buildModel() {
   model.add(tf.layers.dense({ units: 3, activation: "softmax" }));
   model.compile({
     optimizer: tf.train.adam(1e-3),
-    loss: "sparseCategoricalCrossentropy",
+    loss: "categoricalCrossentropy",
     metrics: ["accuracy"]
   });
   return model;
@@ -8289,10 +8290,11 @@ async function trainLstm(symbol, timeframe, candles) {
   const yTrain = ys.slice(0, splitIdx);
   const xVal = xs.slice(splitIdx);
   const yVal = ys.slice(splitIdx);
-  const xTrainTensor = tf.tensor3d(xTrain);
-  const yTrainTensor = tf.tensor1d(yTrain, "int32");
-  const xValTensor = tf.tensor3d(xVal);
-  const yValTensor = tf.tensor1d(yVal, "int32");
+  const toOneHot = (labels) => labels.map((v) => [v === 0 ? 1 : 0, v === 1 ? 1 : 0, v === 2 ? 1 : 0]);
+  const xTrainTensor = tf.tensor3d(xTrain, [xTrain.length, LOOKBACK, FEATURE_COUNT], "float32");
+  const yTrainTensor = tf.tensor2d(toOneHot(yTrain), [yTrain.length, 3], "float32");
+  const xValTensor = tf.tensor3d(xVal, [xVal.length, LOOKBACK, FEATURE_COUNT], "float32");
+  const yValTensor = tf.tensor2d(toOneHot(yVal), [yVal.length, 3], "float32");
   const model = buildModel();
   let finalAcc = 0;
   let finalLoss = 0;

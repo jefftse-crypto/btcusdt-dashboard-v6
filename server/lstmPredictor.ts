@@ -140,11 +140,13 @@ function extractFeatures(candles: Candle[]): number[][] {
     // 14. 下影線比例
     const lowerShadow = (Math.min(c.open, c.close) - c.low) / (c.high - c.low || 1);
 
-    features.push([
+    const row = [
       ret, rsi, macdNorm, bbPos, emaCross,
       atrNorm, adxNorm, cmf, stDir, volNorm,
       hlRange, bodyRatio, upperShadow, lowerShadow,
-    ]);
+    ];
+    // 清理 NaN / Infinity，替換為 0
+    features.push(row.map(v => (isFinite(v) && !isNaN(v)) ? v : 0));
   }
 
   return features;
@@ -200,7 +202,7 @@ function buildModel(): unknown {
 
   model.compile({
     optimizer: tf.train.adam(0.001),
-    loss: "sparseCategoricalCrossentropy",
+    loss: "categoricalCrossentropy",
     metrics: ["accuracy"],
   });
 
@@ -240,10 +242,13 @@ export async function trainLstm(
   const xVal   = xs.slice(splitIdx);
   const yVal   = ys.slice(splitIdx);
 
-  const xTrainTensor = tf.tensor3d(xTrain);
-  const yTrainTensor = tf.tensor1d(yTrain, "int32");
-  const xValTensor   = tf.tensor3d(xVal);
-  const yValTensor   = tf.tensor1d(yVal, "int32");
+  // One-hot encode labels: 0=bearish, 1=neutral, 2=bullish
+  const toOneHot = (labels: number[]) =>
+    labels.map(v => [v === 0 ? 1 : 0, v === 1 ? 1 : 0, v === 2 ? 1 : 0]);
+  const xTrainTensor = tf.tensor3d(xTrain, [xTrain.length, LOOKBACK, FEATURE_COUNT], "float32");
+  const yTrainTensor = tf.tensor2d(toOneHot(yTrain), [yTrain.length, 3], "float32");
+  const xValTensor   = tf.tensor3d(xVal, [xVal.length, LOOKBACK, FEATURE_COUNT], "float32");
+  const yValTensor   = tf.tensor2d(toOneHot(yVal), [yVal.length, 3], "float32");
 
   const model = buildModel();
 
