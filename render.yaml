@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: btcusdt-dashboard-v6
+    env: node
+    plan: free
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TF_ENABLE_ONEDNN_OPTS
+        value: "0"

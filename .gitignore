@@ -1,0 +1,18 @@
+node_modules/
+.env
+.manus-logs/
+*.log
+
+# Build output
+dist/
+
+# Runtime/local process files
+*.pid
+runtime/models/
+runtime/*.state.json
+runtime/entry_forward_test_state.json
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/

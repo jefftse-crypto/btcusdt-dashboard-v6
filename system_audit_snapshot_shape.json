@@ -1,0 +1,61 @@
+{
+  "symbol": "BTCUSDT",
+  "generated_at": "2026-05-15T01:32:31.890Z",
+  "live_price_type": "int",
+  "top_level_keys_count": 15,
+  "top_level_keys": [
+    "advanced",
+    "chan_mtf",
+    "consensus",
+    "error",
+    "forecast_4h",
+    "generated_at",
+    "indicators",
+    "klines",
+    "live_price",
+    "mtf_indicators",
+    "onchain",
+    "pa",
+    "smc",
+    "strategy",
+    "symbol"
+  ],
+  "indicators_keys": [
+    "adx",
+    "atr",
+    "bollinger",
+    "close",
+    "cvd",
+    "ema",
+    "macd",
+    "momentum",
+    "rsi",
+    "stochastic",
+    "trend",
+    "vwap"
+  ],
+  "mtf_indicators_timeframes": [
+    "15m",
+    "1h",
+    "4h",
+    "5m"
+  ],
+  "pa_timeframes": [
+    "15m",
+    "1h",
+    "4h",
+    "5m"
+  ],
+  "chan_timeframes": [],
+  "has_combo_strategy": false,
+  "has_error": false,
+  "error": null,
+  "missing_mtf_indicators": [],
+  "missing_pa_timeframes": [],
+  "missing_chan_timeframes": [
+    "4h",
+    "1h",
+    "15m",
+    "5m"
+  ]
+}

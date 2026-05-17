@@ -1,0 +1,170 @@
+{
+  "script_results": {
+    "pnpm run check": {
+      "exit_code": 2,
+      "duration_seconds": 12
+    },
+    "pnpm run build": {
+      "exit_code": 0,
+      "duration_seconds": 26
+    },
+    "pnpm test": {
+      "exit_code": 1,
+      "duration_seconds": 2
+    },
+    "pnpm audit --audit-level moderate": {
+      "exit_code": 1,
+      "duration_seconds": 5
+    }
+  },
+  "ts_error_total": 47,
+  "ts_error_by_code": [
+    [
+      "TS2459",
+      15
+    ],
+    [
+      "TS2802",
+      14
+    ],
+    [
+      "TS2554",
+      5
+    ],
+    [
+      "TS2783",
+      5
+    ],
+    [
+      "TS2305",
+      3
+    ],
+    [
+      "TS2339",
+      2
+    ],
+    [
+      "TS2345",
+      1
+    ],
+    [
+      "TS7053",
+      1
+    ],
+    [
+      "TS2304",
+      1
+    ]
+  ],
+  "ts_top_files": [
+    [
+      "server/run_v4_five_strategy_live.ts",
+      6
+    ],
+    [
+      "server/backtest_expanded_sweep.ts",
+      4
+    ],
+    [
+      "server/verify_presets_backtest.ts",
+      3
+    ],
+    [
+      "server/backtest_htr_1d_daily.ts",
+      2
+    ],
+    [
+      "server/backtest_htr_v3_multisymbol.ts",
+      2
+    ],
+    [
+      "server/backtest_htr_v4_tpv_multisymbol.ts",
+      2
+    ],
+    [
+      "server/backtest_htr_v5_realdata_model.ts",
+      2
+    ],
+    [
+      "server/diagnostics_engine.ts",
+      2
+    ],
+    [
+      "server/run_adv_scan.ts",
+      2
+    ],
+    [
+      "client/src/components/panels/IndicatorsPanel.tsx",
+      1
+    ],
+    [
+      "server/backtest_manus_scalper.ts",
+      1
+    ],
+    [
+      "server/db.ts",
+      1
+    ],
+    [
+      "server/deep_backtest_180d.ts",
+      1
+    ],
+    [
+      "server/fetch_and_backtest.ts",
+      1
+    ],
+    [
+      "server/manus_scalper_strategy.ts",
+      1
+    ],
+    [
+      "server/run_1d_scan.ts",
+      1
+    ],
+    [
+      "server/run_all_strategy_binance.ts",
+      1
+    ],
+    [
+      "server/run_backtest_from_json.ts",
+      1
+    ],
+    [
+      "server/run_fast_search.ts",
+      1
+    ],
+    [
+      "server/run_filtered_backtest.ts",
+      1
+    ]
+  ],
+  "ts_first_errors": [
+    "client/src/components/panels/IndicatorsPanel.tsx(104,27): error TS2802: Type 'Set<number>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_expanded_sweep.ts(394,44): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_expanded_sweep.ts(395,44): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_expanded_sweep.ts(396,44): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_expanded_sweep.ts(405,45): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_htr_1d_daily.ts(111,45): error TS2554: Expected 3 arguments, but got 2.",
+    "server/backtest_htr_1d_daily.ts(120,46): error TS2554: Expected 3 arguments, but got 2.",
+    "server/backtest_htr_v3_multisymbol.ts(138,383): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_htr_v3_multisymbol.ts(141,24): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_htr_v4_tpv_multisymbol.ts(173,383): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_htr_v4_tpv_multisymbol.ts(176,24): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_htr_v5_realdata_model.ts(138,383): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_htr_v5_realdata_model.ts(141,24): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.",
+    "server/backtest_manus_scalper.ts(24,20): error TS2554: Expected 6 arguments, but got 3.",
+    "server/db.ts(99,23): error TS2345: Argument of type 'string | null' is not assignable to parameter of type 'string'."
+  ],
+  "audit_total": 24,
+  "audit_severity": "1 low | 17 moderate | 6 high",
+  "test_first_lines": [
+    "> crypto-dashboard@1.0.0 test /home/ubuntu/btcusdt_dashboard_v6",
+    "> vitest run",
+    " RUN  v2.1.9 /home/ubuntu/btcusdt_dashboard_v6/client",
+    "include: **/*.{test,spec}.?(c|m)[jt]s?(x)",
+    "exclude:  **/node_modules/**, **/dist/**, **/cypress/**, **/.{idea,git,cache,output,temp}/**, **/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,eslint,prettier}.config.*",
+    "No test files found, exiting with code 1",
+    " ELIFECYCLE  Test failed. See above for more details.",
+    "\\n(exit_code=1 duration_seconds=2)"
+  ]
+}

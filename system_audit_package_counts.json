@@ -1,0 +1,16 @@
+{
+  "tar_total_entries": 1100,
+  "tar_node_modules": 0,
+  "tar_.git": 0,
+  "tar_.env": 0,
+  "tar_.npmrc": 0,
+  "tar_logs": 4,
+  "tar_dist": 453,
+  "zip_total_entries": 1100,
+  "zip_node_modules": 0,
+  "zip_.git": 0,
+  "zip_.env": 0,
+  "zip_.npmrc": 0,
+  "zip_logs": 4,
+  "zip_dist": 453
+}

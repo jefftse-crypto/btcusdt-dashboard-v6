@@ -1,0 +1,100 @@
+[
+  {
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "ms": 10,
+    "bytes": 249,
+    "sample": "{\"status\":\"ok\",\"uptime\":6,\"timestamp\":\"2026-05-15T01:32:08.460Z\",\"version\":\"7.0\",\"model\":\"gpt-5.4\",\"ws\":{\"clients\":1,\"market_data_connected\":false,\"provider\":\"kraken_polling\",\"subscribed_symbols\":[\"BTCUSDT\"],\"last_update_ts\":null,\"last_error\":null}}",
+    "json_keys": [
+      "status",
+      "uptime",
+      "timestamp",
+      "version",
+      "model",
+      "ws"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/health",
+    "status": 200,
+    "ms": 2,
+    "bytes": 249,
+    "sample": "{\"status\":\"ok\",\"uptime\":6,\"timestamp\":\"2026-05-15T01:32:08.465Z\",\"version\":\"7.0\",\"model\":\"gpt-5.4\",\"ws\":{\"clients\":1,\"market_data_connected\":false,\"provider\":\"kraken_polling\",\"subscribed_symbols\":[\"BTCUSDT\"],\"last_update_ts\":null,\"last_error\":null}}",
+    "json_keys": [
+      "status",
+      "uptime",
+      "timestamp",
+      "version",
+      "model",
+      "ws"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/api/latest-live-snapshot",
+    "error": "HTTPError: HTTP Error 404: Not Found",
+    "ms": 2
+  },
+  {
+    "method": "GET",
+    "path": "/api/diagnostics-summary",
+    "error": "HTTPError: HTTP Error 404: Not Found",
+    "ms": 1
+  },
+  {
+    "method": "POST",
+    "path": "/api/trpc/crypto.getSnapshot?batch=1",
+    "payload": {
+      "0": {
+        "json": {
+          "symbol": "BTCUSDT"
+        }
+      }
+    },
+    "error": "HTTPError: HTTP Error 405: Method Not Allowed",
+    "ms": 32
+  },
+  {
+    "method": "POST",
+    "path": "/api/trpc/crypto.getKlines?batch=1",
+    "payload": {
+      "0": {
+        "json": {
+          "symbol": "BTCUSDT",
+          "interval": "15m",
+          "limit": 50
+        }
+      }
+    },
+    "error": "HTTPError: HTTP Error 405: Method Not Allowed",
+    "ms": 9
+  },
+  {
+    "method": "POST",
+    "path": "/api/trpc/news.getLatestNews?batch=1",
+    "payload": {
+      "0": {
+        "json": {
+          "limit": 5
+        }
+      }
+    },
+    "error": "HTTPError: HTTP Error 405: Method Not Allowed",
+    "ms": 3
+  },
+  {
+    "method": "POST",
+    "path": "/api/trpc/tweets.getLatestTweets?batch=1",
+    "payload": {
+      "0": {
+        "json": {
+          "limit": 5
+        }
+      }
+    },
+    "error": "HTTPError: HTTP Error 405: Method Not Allowed",
+    "ms": 4
+  }
+]

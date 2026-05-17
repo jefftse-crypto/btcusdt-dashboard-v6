@@ -1,0 +1,83 @@
+[
+  {
+    "procedure": "crypto.getSnapshot",
+    "input": {
+      "symbol": "BTCUSDT"
+    },
+    "status": 200,
+    "ms": 38,
+    "bytes": 263655,
+    "sample": "[{\"result\":{\"data\":{\"json\":{\"symbol\":\"BTCUSDT\",\"generated_at\":\"2026-05-15T01:32:31.890Z\",\"live_price\":81250,\"error\":null,\"indicators\":{\"rsi\":57.884259890583664,\"macd\":{\"macd\":399.68839416239643,\"signal\":354.362254040171,\"histogram\":45.32614012222541},\"adx\":{\"adx\":30.047632894111302,\"plus_di\":25.10238398913473,\"minus_di\":14.790260074159745},\"atr\":461.3551811578598,\"bollinger\":{\"upper\":82479.10893921723,\"middle\":80712.64450000001,\"lower\":78946.18006078279,\"bandwidth\":4.377169030107096,\"percent_b\":0.6520991558250986},\"vwap\":81163.3808827558,\"ema\":{\"ema20\":80881.65953445809,\"ema50\":80567.1884281653,\"ema200\":80425.03798926571},\"stochastic\":{\"k\":71.67562157980272,\"d\":72.96101241385179},\"cvd\":{\"current\":4120.322770000002,\"change\":805.0851099999995,\"trend\":\"rising\",\"series\":[-280.75336,-977.66002,-245.98503000000005,-867.0827800000001,-487.09076000000005,699.2698800000001,1278.6702300000002,425.7017500000002,-330.0234099999998,331.99692000000016,-193.0662699999998,-730.4310899999998,-1051.7466699999998,-801.1677199999998,-424.8717699999998,-747.5680999999997,-1025.8470599999996,-788.7587399999995,-359.1219299999995,-159.0430499999995,12.027250000000492,154.2493000000005,-120.9626099999995,",
+    "json_type": "list",
+    "first_keys": [
+      "result"
+    ]
+  },
+  {
+    "procedure": "crypto.getKlines",
+    "input": {
+      "symbol": "BTCUSDT",
+      "interval": "15m",
+      "limit": 50
+    },
+    "error": "HTTPError: HTTP Error 400: Bad Request",
+    "ms": 6
+  },
+  {
+    "procedure": "news.getLatestNews",
+    "input": {
+      "limit": 5
+    },
+    "status": 200,
+    "ms": 8034,
+    "bytes": 10804,
+    "sample": "[{\"result\":{\"data\":{\"json\":[{\"title\":\"Ethereum considers staking reward model change to boost ETH price outlook\",\"link\":\"https://cryptobriefing.com/ethereum-staking-reward-model-change/\",\"description\":\"A revised staking model could enhance Ethereum's value by controlling inflation, potentially reshaping its market position amid rising Layer 2 activity.\\nThe post Ethereum considers staking reward mode\",\"pubDate\":1778808284000,\"source\":\"Crypto Briefing\",\"sentiment\":\"bullish\"},{\"title\":\"Greg Abbott promotes Texas as refuge for NY billionaires fleeing Mamdani’s policies\",\"link\":\"https://cryptobriefing.com/greg-abbott-promotes-texas-as-refuge-for-billionaires/\",\"description\":\"Texas's appeal to wealthy individuals and crypto firms highlights a growing economic divide, influencing state competitiveness and innovation.\\nThe post Greg Abbott promotes Texas as refuge for NY bill\",\"pubDate\":1778808227000,\"source\":\"Crypto Briefing\",\"sentiment\":\"neutral\"},{\"title\":\"Fabio Panetta elected Chair of Bank for International Settlements Board\",\"link\":\"https://cryptobriefing.com/panetta-elected-bis-board-chair/\",\"description\":\"Panetta's leadership at BIS may steer global financial regulation towards st",
+    "json_type": "list",
+    "first_keys": [
+      "result"
+    ]
+  },
+  {
+    "procedure": "tweets.getLatestTweets",
+    "input": {
+      "limit": 5
+    },
+    "status": 200,
+    "ms": 2820,
+    "bytes": 33,
+    "sample": "[{\"result\":{\"data\":{\"json\":[]}}}]",
+    "json_type": "list",
+    "first_keys": [
+      "result"
+    ]
+  },
+  {
+    "procedure": "screener.scanAll",
+    "input": {
+      "symbols": [
+        "BTCUSDT",
+        "ETHUSDT"
+      ]
+    },
+    "status": 200,
+    "ms": 4070,
+    "bytes": 18080,
+    "sample": "[{\"result\":{\"data\":{\"json\":[{\"symbol\":\"BTCUSDT\",\"coin\":\"BTC\",\"close\":81276.3,\"change24h\":2.1000042711099574,\"rsi\":73.20038720387768,\"macd_hist\":321.01795157487504,\"adx\":66.06644608508827,\"ema20\":80884.21269449191,\"ema50\":80591.89519701722,\"bb_percent\":0.6590238656366978,\"bb_bandwidth\":4.381152836826482,\"smc_structure\":\"ranging\",\"liq_sweep_bsl\":true,\"liq_sweep_ssl\":false,\"chan_trend\":\"bullish\",\"score\":90,\"direction\":\"long\",\"volume_profile\":{\"poc\":79660.35699999999,\"vah\":81471.77100000001,\"val\":79331.00899999999,\"bins\":[{\"price\":78836.987,\"volume\":721.1333112113585,\"isBull\":true},{\"price\":79001.661,\"volume\":1112.9662320496227,\"isBull\":true},{\"price\":79166.33499999999,\"volume\":1414.2128014803839,\"isBull\":true},{\"price\":79331.00899999999,\"volume\":2281.594061743082,\"isBull\":false},{\"price\":79495.68299999999,\"volume\":3127.170157825572,\"isBull\":true},{\"price\":79660.35699999999,\"volume\":3718.0464891654137,\"isBull\":true},{\"price\":79825.031,\"volume\":3113.1125879087213,\"isBull\":false},{\"price\":79989.705,\"volume\":1451.7881989534444,\"isBull\":false},{\"price\":80154.379,\"volume\":736.2387384827408,\"isBull\":false},{\"price\":80319.053,\"volume\":648.5598891919878,\"isBull\":false},{\"price\":80483.727,\"volu",
+    "json_type": "list",
+    "first_keys": [
+      "result"
+    ]
+  },
+  {
+    "procedure": "heatmap.getMarketOverview",
+    "input": {},
+    "status": 200,
+    "ms": 1007,
+    "bytes": 2919,
+    "sample": "[{\"result\":{\"data\":{\"json\":{\"coins\":[{\"symbol\":\"BTCUSDT\",\"coin\":\"BTC\",\"close\":81273.86,\"rsi\":52.50263243063376,\"ema20\":80546.25887933654,\"ema50\":80395.92440685848,\"change1h\":0.22674808567616708,\"change24h\":0.6661835282670098,\"change7d\":2.129975489718681,\"vol_trend\":\"increasing\",\"score\":70,\"sentiment\":\"bull\"},{\"symbol\":\"ETHUSDT\",\"coin\":\"ETH\",\"close\":2282.3,\"rsi\":49.41448058761806,\"ema20\":2285.5760657937926,\"ema50\":2301.16224653735,\"change1h\":-0.0416073579327633,\"change24h\":-2.070746944940262,\"change7d\":0.1553476452105515,\"vol_trend\":\"neutral\",\"score\":20,\"sentiment\":\"strong_bear\"},{\"symbol\":\"SOLUSDT\",\"coin\":\"SOL\",\"close\":92.01,\"rsi\":39.524838012958945,\"ema20\":92.76034741258806,\"ema50\":92.00400314088067,\"change1h\":-0.15192620727075482,\"change24h\":-2.902068383284086,\"change7d\":4.296077986851062,\"vol_trend\":\"neutral\",\"score\":30,\"sentiment\":\"bear\"},{\"symbol\":\"BNBUSDT\",\"coin\":\"BNB\",\"close\":681,\"rsi\":63.28344939991108,\"ema20\":670.4319486501839,\"ema50\":659.0842415961527,\"change1h\":0.4024945818037091,\"change24h\":4.481504779146663,\"change7d\":6.49943700738145,\"vol_trend\":\"neutral\",\"score\":90,\"sentiment\":\"strong_bull\"},{\"symbol\":\"XRPUSDT\",\"coin\":\"XRP\",\"close\":1.4901,\"rsi\":60.689354275741714,\"em",
+    "json_type": "list",
+    "first_keys": [
+      "result"
+    ]
+  }
+]

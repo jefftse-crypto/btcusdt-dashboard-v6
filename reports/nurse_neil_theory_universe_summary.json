@@ -1,0 +1,69 @@
+{
+  "universe": [
+    "AVAXUSDT",
+    "BNBUSDT",
+    "BTCUSDT",
+    "DOGEUSDT",
+    "ETHUSDT",
+    "LINKUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "period_start_utc": "2025-05-01 00:00:00+00:00",
+  "period_end_utc": "2026-05-01 00:00:00+00:00",
+  "bar_timeframe": "4H derived from existing 15m Binance USD-M futures data",
+  "base_metrics_all": {
+    "trades": 153,
+    "symbols": 8,
+    "win_rate_pct": 44.44444444444444,
+    "mean_gross_r": 0.10028705775714551,
+    "median_gross_r": -0.24999999999999956,
+    "total_account_return_pct": 13.987195921679675,
+    "max_drawdown_pct": -23.666777842046837,
+    "profit_factor": 1.206567640892345,
+    "mean_score": 94.0,
+    "mean_net_notional_return_pct": 0.22981869301022861
+  },
+  "base_metrics_score_ge_70": {
+    "trades": 153,
+    "symbols": 8,
+    "win_rate_pct": 44.44444444444444,
+    "mean_gross_r": 0.10028705775714551,
+    "median_gross_r": -0.24999999999999956,
+    "total_account_return_pct": 13.987195921679675,
+    "max_drawdown_pct": -23.666777842046837,
+    "profit_factor": 1.206567640892345,
+    "mean_score": 94.0,
+    "mean_net_notional_return_pct": 0.22981869301022861
+  },
+  "base_metrics_score_ge_80": {
+    "trades": 153,
+    "symbols": 8,
+    "win_rate_pct": 44.44444444444444,
+    "mean_gross_r": 0.10028705775714551,
+    "median_gross_r": -0.24999999999999956,
+    "total_account_return_pct": 13.987195921679675,
+    "max_drawdown_pct": -23.666777842046837,
+    "profit_factor": 1.206567640892345,
+    "mean_score": 94.0,
+    "mean_net_notional_return_pct": 0.22981869301022861
+  },
+  "stress_metrics_score_ge_70": {
+    "trades": 153,
+    "symbols": 8,
+    "win_rate_pct": 44.44444444444444,
+    "mean_gross_r": 0.10028705775714551,
+    "median_gross_r": -0.24999999999999956,
+    "total_account_return_pct": 13.987195921679675,
+    "max_drawdown_pct": -23.666777842046837,
+    "profit_factor": 1.206567640892345,
+    "mean_score": 94.0,
+    "mean_net_notional_return_pct": 0.02981869301022885
+  },
+  "files": {
+    "trades": "nurse_neil_theory_universe_trades.csv",
+    "thresholds": "nurse_neil_theory_universe_thresholds.csv",
+    "by_symbol": "nurse_neil_theory_universe_by_symbol.csv",
+    "equity_chart": "nurse_neil_theory_universe_equity.png"
+  }
+}

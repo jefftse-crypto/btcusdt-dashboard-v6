@@ -1,0 +1,271 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-bull: var(--bull);
+  --color-bear: var(--bear);
+  /* 高對比護眼主題 */
+  --color-tv-bg: #0e1117;
+  --color-tv-panel: #161b27;
+  --color-tv-border: #2a3148;
+  --color-tv-text: #e2e8f0;
+  --color-tv-accent: #5b8af5;
+}
+
+:root {
+  --primary: #5b8af5;
+  --primary-foreground: #f0f4ff;
+  --radius: 0.5rem;
+
+  /* ── 高對比護眼深色主題 ──
+     背景更深（接近純黑），文字更亮（接近純白），
+     邊框更明顯，次要文字也有足夠對比度。
+     參考 Bloomberg Terminal / TradingView Dark 配色邏輯。
+  */
+  --background: #0e1117;          /* 最深底色 - 近純黑帶藍調 */
+  --foreground: #e2e8f0;          /* 主文字 - 明亮冷白，高對比 */
+  --card: #161b27;                /* 面板背景 - 深藍灰 */
+  --card-foreground: #e2e8f0;
+  --popover: #1a2035;
+  --popover-foreground: #e2e8f0;
+  --secondary: #1e2638;           /* 次要背景 */
+  --secondary-foreground: #b0bcd4; /* 次要文字 - 提亮 */
+  --muted: #161b27;
+  --muted-foreground: #8896b0;    /* 提示文字 - 從 #6b7385 提亮 */
+  --accent: #5b8af5;
+  --accent-foreground: #f0f4ff;
+  --destructive: #e05252;
+  --destructive-foreground: #fff0f0;
+  --border: #2a3148;              /* 邊框 - 更明顯 */
+  --input: #1e2638;
+  --ring: #5b8af5;
+
+  /* K 線顏色 - 鮮明易辨 */
+  --bull: #26d48a;                /* 多頭綠 - 更鮮亮 */
+  --bear: #f04f5e;                /* 空頭紅 - 更鮮亮 */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  /* 全域標籤文字提亮 */
+  label {
+    color: #b0bcd4;
+  }
+
+  /* select / option 深色背景 */
+  select {
+    background-color: #1e2638;
+    color: #e2e8f0;
+    border-color: #2a3148;
+  }
+  select option {
+    background-color: #161b27;
+    color: #e2e8f0;
+  }
+}
+
+@layer components {
+  .tv-panel {
+    @apply bg-tv-panel border border-tv-border;
+  }
+
+  .tv-sidebar-item {
+    @apply flex items-center justify-center w-12 h-12 text-muted-foreground hover:text-tv-text hover:bg-secondary transition-colors cursor-pointer;
+  }
+
+  .tv-sidebar-item.active {
+    @apply text-tv-accent border-r-2 border-tv-accent bg-tv-accent/10;
+  }
+
+  /* 高對比捲軸 */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0e1117;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a3148;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3d4f6e;
+  }
+
+  /* 面板樣式 - 更明顯的邊框和背景 */
+  .crypto-panel {
+    @apply bg-[#161b27] border border-[#2a3148] rounded-lg;
+  }
+  .crypto-panel-header {
+    @apply text-[11px] font-bold text-[#b0bcd4] uppercase tracking-wider px-3 py-2 border-b border-[#2a3148];
+  }
+
+  /* 數值卡片 */
+  .metric-card {
+    background: #1a2035;
+    border: 1px solid #2a3148;
+    border-radius: 6px;
+    padding: 8px 12px;
+  }
+  .metric-label {
+    color: #8896b0;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .metric-value {
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
+
+/* Tab Active State */
+.tv-tab-active {
+  color: #5b8af5 !important;
+  border-bottom: 2px solid #5b8af5 !important;
+}
+
+/* 價格閃爍動畫 */
+@keyframes priceFlashBull {
+  0%   { background: rgba(38, 212, 138, 0.2); }
+  100% { background: transparent; }
+}
+@keyframes priceFlashBear {
+  0%   { background: rgba(240, 79, 94, 0.2); }
+  100% { background: transparent; }
+}
+.price-flash-bull { animation: priceFlashBull 0.8s ease-out; }
+.price-flash-bear { animation: priceFlashBear 0.8s ease-out; }
+
+/* 等寬數字字體 */
+.font-numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* 手機觸控優化 */
+@media (max-width: 768px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  /* 手機上加大字體可讀性 */
+  .metric-value {
+    font-size: 14px;
+  }
+  .metric-label {
+    font-size: 11px;
+  }
+}
+
+/* 各面板通用文字對比度修正 */
+.text-muted-foreground {
+  color: #8896b0 !important;
+}
+
+/* 分隔線更明顯 */
+hr, .divider {
+  border-color: #2a3148;
+  opacity: 1;
+}
+
+/* 徽章/標籤 */
+.badge-neutral {
+  background: #1e2638;
+  color: #b0bcd4;
+  border: 1px solid #2a3148;
+}
+.badge-bull {
+  background: rgba(38, 212, 138, 0.15);
+  color: #26d48a;
+  border: 1px solid rgba(38, 212, 138, 0.3);
+}
+.badge-bear {
+  background: rgba(240, 79, 94, 0.15);
+  color: #f04f5e;
+  border: 1px solid rgba(240, 79, 94, 0.3);
+}
+
+/* 表格行 hover */
+tr:hover td {
+  background: rgba(91, 138, 245, 0.05);
+}
+
+/* 輸入框 focus */
+input:focus, select:focus, textarea:focus {
+  outline: 1px solid #5b8af5;
+  border-color: #5b8af5;
+}
+
+/* v6.3 手機版視窗與安全區修正 */
+html, #root {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  background: #0e1117;
+}
+
+@supports (height: 100dvh) {
+  .app-mobile-shell {
+    height: 100dvh;
+  }
+}
+
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
+}
+
+.mobile-bottom-nav {
+  min-height: calc(3.5rem + max(env(safe-area-inset-bottom, 0px), 0px));
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
+}
+
+@media (max-width: 768px) {
+  .app-mobile-shell {
+    height: 100dvh;
+    min-height: 100svh;
+  }
+}
+
