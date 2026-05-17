@@ -371,18 +371,18 @@ export default function Dashboard() {
 
               <ResizablePanel defaultSize={25} minSize={15}>
                 <div className="h-full w-full border-l flex flex-col" style={{ background: "#1c2030", borderColor: "#252b3a" }}>
-                  <div className="flex h-10 items-center border-b px-1 overflow-x-auto custom-scrollbar" style={{ background: "#141820", borderColor: "#252b3a" }}>
+                  <div className="flex h-10 items-center border-b" style={{ background: "#141820", borderColor: "#252b3a" }}>
                     {["strategy", "indicators", "smc", "pa", "chan", "news", "ai"].map((tab) => (
                       <button
                         key={tab}
                         onClick={() => setRightPanelTab(tab)}
-                        className={`min-w-[52px] flex-1 text-[10px] font-bold uppercase tracking-wider h-full transition-all ${
+                        className={`flex-1 text-[9px] font-bold uppercase tracking-tight h-full transition-all px-0.5 ${
                           rightPanelTab === tab
                             ? "text-[#e2e8f0] border-b-2 border-[#5b8af5]"
                             : "text-[#8896b0] hover:text-[#e2e8f0]"
                         }`}
                       >
-                        {tab === "strategy" ? "策略" : tab === "indicators" ? "指標" : tab === "smc" ? "SMC" : tab === "pa" ? "PA" : tab === "chan" ? "纏論" : tab === "news" ? "新聞" : "AI"}
+                        {tab === "strategy" ? "策略" : tab === "indicators" ? "指標" : tab === "smc" ? "SMC" : tab === "pa" ? "PA" : tab === "chan" ? "纏" : tab === "news" ? "新聞" : "AI"}
                       </button>
                     ))}
                   </div>

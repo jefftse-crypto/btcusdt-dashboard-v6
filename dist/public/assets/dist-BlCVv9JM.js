@@ -1,0 +1,1 @@
+import{O as e,T as t,w as n}from"./index-7oKe3loI.js";var r=e(t(),1);n();var i=r.createContext(void 0);function a(e){let t=r.useContext(i);return e||t||`ltr`}export{a as t};
