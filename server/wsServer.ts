@@ -175,20 +175,20 @@ function broadcastTicker(msg: WsTickerMsg) {
   });
 }
 
-// Binance REST API (primary) — free public endpoint, no API key required
-const BINANCE_TICKER_BASE = "https://api.binance.com/api/v3/ticker/24hr";
+// Binance.US REST API (primary) — api.binance.com returns HTTP 451 on Render US IPs
+const BINANCE_US_TICKER_BASE = "https://api.binance.us/api/v3/ticker/24hr";
 async function fetchBinanceTicker(symbol: string): Promise<WsTickerMsg> {
-  const url = `${BINANCE_TICKER_BASE}?symbol=${symbol.toUpperCase()}`;
+  const url = `${BINANCE_US_TICKER_BASE}?symbol=${symbol.toUpperCase()}`;
   const response = await fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
     signal: AbortSignal.timeout(12_000),
   });
   if (!response.ok) {
-    throw new Error(`Binance HTTP ${response.status} ${response.statusText}`);
+    throw new Error(`Binance.US HTTP ${response.status} ${response.statusText}`);
   }
   const d = (await response.json()) as BinanceTicker24h;
   const price = parseFloat(d.lastPrice);
-  if (!Number.isFinite(price) || price <= 0) throw new Error(`Binance 價格無效：${symbol}`);
+  if (!Number.isFinite(price) || price <= 0) throw new Error(`Binance.US 價格無效：${symbol}`);
   return {
     type: "ticker",
     symbol,
@@ -197,6 +197,75 @@ async function fetchBinanceTicker(symbol: string): Promise<WsTickerMsg> {
     high24h: parseFloat(d.highPrice) || price,
     low24h: parseFloat(d.lowPrice) || price,
     volume24h: parseFloat(d.quoteVolume) || 0,
+    ts: Date.now(),
+  };
+}
+
+// Kraken REST API (fallback 1) — no geo restrictions
+const KRAKEN_TICKER_BASE = "https://api.kraken.com/0/public/Ticker";
+const KRAKEN_PAIR_MAP: Record<string, string> = {
+  BTCUSDT: "XBTUSD", ETHUSDT: "ETHUSD", BNBUSDT: "BNBUSD",
+  SOLUSDT: "SOLUSD", XRPUSDT: "XRPUSD", ADAUSDT: "ADAUSD",
+  DOGEUSDT: "DOGEUSD", AVAXUSDT: "AVAXUSD", DOTUSDT: "DOTUSD",
+  LINKUSDT: "LINKUSD",
+};
+async function fetchKrakenTicker(symbol: string): Promise<WsTickerMsg> {
+  const pair = KRAKEN_PAIR_MAP[symbol.toUpperCase()] ?? "XBTUSD";
+  const url = `${KRAKEN_TICKER_BASE}?pair=${pair}`;
+  const response = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
+    signal: AbortSignal.timeout(12_000),
+  });
+  if (!response.ok) throw new Error(`Kraken HTTP ${response.status}`);
+  const data = (await response.json()) as { error: string[]; result: Record<string, { c: string[]; h: string[]; l: string[]; v: string[] }> };
+  if (data.error?.length) throw new Error(`Kraken error: ${data.error.join(", ")}`);
+  const result = Object.values(data.result)[0];
+  if (!result) throw new Error(`Kraken 無資料：${symbol}`);
+  const price = parseFloat(result.c[0]);
+  if (!Number.isFinite(price) || price <= 0) throw new Error(`Kraken 價格無效：${symbol}`);
+  return {
+    type: "ticker",
+    symbol,
+    price,
+    change24h: 0,
+    high24h: parseFloat(result.h[1]) || price,
+    low24h: parseFloat(result.l[1]) || price,
+    volume24h: parseFloat(result.v[1]) || 0,
+    ts: Date.now(),
+  };
+}
+
+// OKX REST API (fallback 2) — no geo restrictions on Render
+const OKX_TICKER_BASE = "https://www.okx.com/api/v5/market/ticker";
+const OKX_INST_MAP: Record<string, string> = {
+  BTCUSDT: "BTC-USDT", ETHUSDT: "ETH-USDT", BNBUSDT: "BNB-USDT",
+  SOLUSDT: "SOL-USDT", XRPUSDT: "XRP-USDT", ADAUSDT: "ADA-USDT",
+  DOGEUSDT: "DOGE-USDT", AVAXUSDT: "AVAX-USDT", DOTUSDT: "DOT-USDT",
+  LINKUSDT: "LINK-USDT",
+};
+async function fetchOKXTicker(symbol: string): Promise<WsTickerMsg> {
+  const instId = OKX_INST_MAP[symbol.toUpperCase()] ?? "BTC-USDT";
+  const url = `${OKX_TICKER_BASE}?instId=${instId}`;
+  const response = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
+    signal: AbortSignal.timeout(12_000),
+  });
+  if (!response.ok) throw new Error(`OKX HTTP ${response.status}`);
+  const data = (await response.json()) as { code: string; data: Array<{ last: string; open24h: string; high24h: string; low24h: string; volCcy24h: string }> };
+  if (data.code !== "0" || !data.data?.[0]) throw new Error(`OKX 無資料：${symbol}`);
+  const d = data.data[0];
+  const price = parseFloat(d.last);
+  if (!Number.isFinite(price) || price <= 0) throw new Error(`OKX 價格無效：${symbol}`);
+  const open24h = parseFloat(d.open24h) || price;
+  const change24h = open24h > 0 ? ((price - open24h) / open24h) * 100 : 0;
+  return {
+    type: "ticker",
+    symbol,
+    price,
+    change24h,
+    high24h: parseFloat(d.high24h) || price,
+    low24h: parseFloat(d.low24h) || price,
+    volume24h: parseFloat(d.volCcy24h) || 0,
     ts: Date.now(),
   };
 }
@@ -265,19 +334,21 @@ async function fetchCoinGeckoTicker(symbol: string): Promise<WsTickerMsg> {
 }
 
 async function fetchTickerWithFallback(symbol: string): Promise<WsTickerMsg> {
-  // Primary: Binance public REST API (no key required)
+  // Primary: Binance.US (HTTP 200 on Render US IPs; api.binance.com returns 451)
   try {
     return await fetchBinanceTicker(symbol);
   } catch (bnErr) {
-    console.warn(`[WS] Binance 失敗，嘗試 CryptoCompare：${bnErr instanceof Error ? bnErr.message : String(bnErr)}`);
+    console.warn(`[WS] Binance.US 失敗，嘗試 Kraken：${bnErr instanceof Error ? bnErr.message : String(bnErr)}`);
     try {
-      return await fetchCryptoCompareTicker(symbol);
-    } catch (ccErr) {
-      console.warn(`[WS] CryptoCompare 失敗，嘗試 CoinGecko：${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
+      // Fallback 1: Kraken (no geo restrictions)
+      return await fetchKrakenTicker(symbol);
+    } catch (krErr) {
+      console.warn(`[WS] Kraken 失敗，嘗試 OKX：${krErr instanceof Error ? krErr.message : String(krErr)}`);
       try {
-        return await fetchCoinGeckoTicker(symbol);
-      } catch (cgErr) {
-        throw new Error(`所有 ticker 來源均失敗 - BN: ${bnErr instanceof Error ? bnErr.message : bnErr} | CC: ${ccErr instanceof Error ? ccErr.message : ccErr} | CG: ${cgErr instanceof Error ? cgErr.message : cgErr}`);
+        // Fallback 2: OKX (no geo restrictions on Render)
+        return await fetchOKXTicker(symbol);
+      } catch (okxErr) {
+        throw new Error(`所有 ticker 來源均失敗 - BN: ${bnErr instanceof Error ? bnErr.message : bnErr} | KR: ${krErr instanceof Error ? krErr.message : krErr} | OKX: ${okxErr instanceof Error ? okxErr.message : okxErr}`);
       }
     }
   }
