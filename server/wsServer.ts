@@ -3,7 +3,7 @@
  *
  * 架構：
  * 1. 前端連接本伺服器 WebSocket（/ws），訂閱感興趣的幣種
- * 2. 後端以 CryptoCompare REST 輪詢多幣種 ticker（主）+ Binance REST fallback（備）
+ * 2. 後端以 Binance REST 輪詢多幣種 ticker（主）+ CryptoCompare（備）+ CoinGecko（末備）
  * 3. 後端將最新價格轉發給所有訂閱該幣種的前端客戶端
  * 4. 支援多幣種同時訂閱（最多 20 個）
  * 5. 支援狀態訊息、心跳與降級狀態回報
@@ -63,7 +63,13 @@ interface ClientState {
   lastPing: number;
 }
 
-// BinanceTicker24h interface removed — Binance REST blocked on Render
+interface BinanceTicker24h {
+  lastPrice: string;
+  priceChangePercent: string;
+  highPrice: string;
+  lowPrice: string;
+  quoteVolume: string;
+}
 
 interface CryptoCompareRaw {
   PRICE: number;
@@ -135,7 +141,7 @@ function createStatusMessage(clientState?: ClientState): WsStatusMsg {
     connected: true,
     subscribedSymbols: clientState ? Array.from(clientState.subscribedSymbols) : [],
     clientCount: clients.size,
-    provider: marketDataState.subscribedSymbols.size > 0 ? (marketDataState.provider === "binance_polling" ? "cryptocompare_polling" : marketDataState.provider) : "none",
+    provider: marketDataState.subscribedSymbols.size > 0 ? marketDataState.provider : "none",
     marketDataConnected: isMarketDataConnected(),
     lastUpdateTs: marketDataState.lastUpdateTs,
     message: isMarketDataConnected() ? null : marketDataState.lastError, // 連接中就不顯示錯誤，減少干擾
@@ -169,8 +175,31 @@ function broadcastTicker(msg: WsTickerMsg) {
   });
 }
 
-// Binance ticker removed — blocked on Render (HTTP 451/403)
-// Using CryptoCompare (primary) + CoinGecko (fallback) instead
+// Binance REST API (primary) — free public endpoint, no API key required
+const BINANCE_TICKER_BASE = "https://api.binance.com/api/v3/ticker/24hr";
+async function fetchBinanceTicker(symbol: string): Promise<WsTickerMsg> {
+  const url = `${BINANCE_TICKER_BASE}?symbol=${symbol.toUpperCase()}`;
+  const response = await fetch(url, {
+    headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
+    signal: AbortSignal.timeout(12_000),
+  });
+  if (!response.ok) {
+    throw new Error(`Binance HTTP ${response.status} ${response.statusText}`);
+  }
+  const d = (await response.json()) as BinanceTicker24h;
+  const price = parseFloat(d.lastPrice);
+  if (!Number.isFinite(price) || price <= 0) throw new Error(`Binance 價格無效：${symbol}`);
+  return {
+    type: "ticker",
+    symbol,
+    price,
+    change24h: parseFloat(d.priceChangePercent) || 0,
+    high24h: parseFloat(d.highPrice) || price,
+    low24h: parseFloat(d.lowPrice) || price,
+    volume24h: parseFloat(d.quoteVolume) || 0,
+    ts: Date.now(),
+  };
+}
 
 async function fetchCryptoCompareTicker(symbol: string): Promise<WsTickerMsg> {
   const fsym = toCryptoCompareSymbol(symbol);
@@ -236,14 +265,20 @@ async function fetchCoinGeckoTicker(symbol: string): Promise<WsTickerMsg> {
 }
 
 async function fetchTickerWithFallback(symbol: string): Promise<WsTickerMsg> {
+  // Primary: Binance public REST API (no key required)
   try {
-    return await fetchCryptoCompareTicker(symbol);
-  } catch (ccErr) {
-    console.warn(`[WS] CryptoCompare 失敗，嘗試 CoinGecko：${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
+    return await fetchBinanceTicker(symbol);
+  } catch (bnErr) {
+    console.warn(`[WS] Binance 失敗，嘗試 CryptoCompare：${bnErr instanceof Error ? bnErr.message : String(bnErr)}`);
     try {
-      return await fetchCoinGeckoTicker(symbol);
-    } catch (cgErr) {
-      throw new Error(`所有 ticker 來源均失敗 - CC: ${ccErr instanceof Error ? ccErr.message : ccErr} | CG: ${cgErr instanceof Error ? cgErr.message : cgErr}`);
+      return await fetchCryptoCompareTicker(symbol);
+    } catch (ccErr) {
+      console.warn(`[WS] CryptoCompare 失敗，嘗試 CoinGecko：${ccErr instanceof Error ? ccErr.message : String(ccErr)}`);
+      try {
+        return await fetchCoinGeckoTicker(symbol);
+      } catch (cgErr) {
+        throw new Error(`所有 ticker 來源均失敗 - BN: ${bnErr instanceof Error ? bnErr.message : bnErr} | CC: ${ccErr instanceof Error ? ccErr.message : ccErr} | CG: ${cgErr instanceof Error ? cgErr.message : cgErr}`);
+      }
     }
   }
 }
@@ -298,7 +333,7 @@ function startMarketPolling(symbols: string[]) {
     return;
   }
 
-  marketDataState.provider = "cryptocompare_polling" as any;
+  marketDataState.provider = "binance_polling";
   marketDataState.subscribedSymbols = new Set(symbols);
   void refreshMarketData(symbols);
   marketDataState.refreshTimer = setInterval(() => {
