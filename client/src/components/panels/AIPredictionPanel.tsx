@@ -178,6 +178,8 @@ export function AIPredictionPanel({ symbol, timeframe = "1h", currentPrice }: AI
       staleTime: 5 * 60 * 1000,
       refetchInterval: 10 * 60 * 1000,
       retry: 1,
+      // [優化] 只有當 modelStatus.trained 為 true 時才觸發預測請求，減少後端無效計算
+      enabled: !!modelStatus?.trained || forceRetrainOnce,
     }
   );
 
@@ -198,9 +200,10 @@ export function AIPredictionPanel({ symbol, timeframe = "1h", currentPrice }: AI
   } = trpc.ai.entryScore.useQuery(
     { symbol, timeframe: selectedTf, strategy: entryStrategy, limit: 3000, labelMode: entryLabelMode, forceRetrain: forceEntryRetrainOnce },
     {
-      staleTime: 2 * 60 * 1000,
-      refetchInterval: 5 * 60 * 1000,
+      staleTime: 5 * 60 * 1000,
+      refetchInterval: 10 * 60 * 1000,
       retry: 1,
+      // [優化] 延長過期時間，減少 Render 負荷
     }
   );
 

@@ -2511,19 +2511,9 @@ ${strSummary}
       .query(async ({ input }) => {
         const symbol = normalizeSymbol(input.symbol);
         const snapshot = await runAnalysis(symbol, input.timeframe);
-        let prediction: any = null;
-        try {
-          const status: any = getModelStatus(symbol, input.timeframe);
-          if (status?.trained) {
-            const barMap: Record<string, string> = { "5m": "5m", "15m": "15m", "1h": "1H", "4h": "4H" };
-            const bar = barMap[input.timeframe] ?? "1H";
-            const candles = await fetchCandles(symbol, bar, input.limit);
-            if (candles.length >= 200) prediction = await predictLstm(symbol, input.timeframe, candles);
-          }
-        } catch (e) {
-          console.warn("[AI Decision] LSTM prediction unavailable", e);
-        }
-        return buildAiSynthesis(symbol, input.timeframe, snapshot, prediction);
+        // [優化] decision 不再主動觸發 LSTM 預測，改由前端獨立請求 ai.predict 或使用快取。
+        // 這樣可以避免一次渲染觸發兩次昂貴的 AI 計算。
+        return buildAiSynthesis(symbol, input.timeframe, snapshot, null);
       }),
 
     entryScore: publicProcedure

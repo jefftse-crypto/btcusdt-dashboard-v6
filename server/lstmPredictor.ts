@@ -31,10 +31,10 @@ import {
 // ─── 常數 ──────────────────────────────────────────────────────────────────
 const LOOKBACK = 60;        // 用過去 60 根 K 線作為輸入序列
 const FEATURE_COUNT = 14;   // 每根 K 線的特徵數量
-const EPOCHS = 30;          // 訓練輪數
-const BATCH_SIZE = 32;
-const HIDDEN_UNITS = 64;
-const MODEL_VERSION = "LSTM-v1.1-persisted";
+const EPOCHS = 12;          // 減少輪數以加速 Render 訓練
+const BATCH_SIZE = 64;          // 增加 Batch Size 提高並行度
+const HIDDEN_UNITS = 32;        // 減少神經元數量以降低計算負荷
+const MODEL_VERSION = "LSTM-v1.2-optimized";
 const MODEL_ROOT = process.env.LSTM_MODEL_DIR
   ? path.resolve(process.env.LSTM_MODEL_DIR)
   : path.resolve(process.cwd(), "runtime", "lstm_models");
@@ -226,15 +226,8 @@ function buildModel(): unknown {
   model.add(tf.layers.lstm({
     units: HIDDEN_UNITS,
     inputShape: [LOOKBACK, FEATURE_COUNT],
-    returnSequences: true,
-    dropout: 0.2,
-    recurrentDropout: 0.1,
-  }));
-
-  model.add(tf.layers.lstm({
-    units: 32,
-    returnSequences: false,
-    dropout: 0.2,
+    returnSequences: false, // 簡化為單層 LSTM 以加速
+    dropout: 0.1,
   }));
 
   model.add(tf.layers.dense({ units: 16, activation: "relu" }));
@@ -260,7 +253,7 @@ interface ModelCache {
 }
 
 const modelCache = new Map<string, ModelCache>();
-const RETRAIN_INTERVAL = 2 * 60 * 60 * 1000; // 每 2 小時重新訓練
+const RETRAIN_INTERVAL = 4 * 60 * 60 * 1000; // 延長到 4 小時重新訓練以節省資源
 
 
 function getCacheKey(symbol: string, timeframe: string): string {

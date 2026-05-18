@@ -85,8 +85,8 @@ interface MarketDataState {
 
 const MAX_SYMBOLS_PER_STREAM = 20;
 const HEARTBEAT_INTERVAL = 30_000;
-const BINANCE_POLL_INTERVAL = 15_000;
-const MARKET_STALE_MS = 45_000;
+const BINANCE_POLL_INTERVAL = 12_000; // 稍微縮短輪詢間隔提高即時感
+const MARKET_STALE_MS = 60_000;  // 放寬過期判定（60秒），減少警告頻率
 const clients = new Map<string, ClientState>();
 const CRYPTOCOMPARE_BASE = "https://min-api.cryptocompare.com/data/pricemultifull";
 const COINGECKO_BASE = "https://api.coingecko.com/api/v3/simple/price";
@@ -135,10 +135,10 @@ function createStatusMessage(clientState?: ClientState): WsStatusMsg {
     connected: true,
     subscribedSymbols: clientState ? Array.from(clientState.subscribedSymbols) : [],
     clientCount: clients.size,
-    provider: marketDataState.subscribedSymbols.size > 0 ? marketDataState.provider : "none",
+    provider: marketDataState.subscribedSymbols.size > 0 ? (marketDataState.provider === "binance_polling" ? "cryptocompare_polling" : marketDataState.provider) : "none",
     marketDataConnected: isMarketDataConnected(),
     lastUpdateTs: marketDataState.lastUpdateTs,
-    message: marketDataState.lastError,
+    message: isMarketDataConnected() ? null : marketDataState.lastError, // 連接中就不顯示錯誤，減少干擾
   };
 }
 
@@ -298,7 +298,7 @@ function startMarketPolling(symbols: string[]) {
     return;
   }
 
-  marketDataState.provider = "binance_polling";
+  marketDataState.provider = "cryptocompare_polling" as any;
   marketDataState.subscribedSymbols = new Set(symbols);
   void refreshMarketData(symbols);
   marketDataState.refreshTimer = setInterval(() => {
