@@ -1,4 +1,5 @@
 import { useState, useMemo, lazy, Suspense } from "react";
+import { EntryAlertOverlay } from "@/components/EntryAlertOverlay";
 import { trpc } from "@/lib/trpc";
 import { useLiveTicker } from "@/hooks/useDashboardWebSocket";
 import { useIsMobile } from "@/hooks/useMobile";
@@ -434,6 +435,8 @@ export default function Dashboard() {
           )}
         </main>
       </div>
+      {/* 自動進場提示覆蓋層：三系統一致時自動彈出 */}
+      <EntryAlertOverlay symbol={symbol} timeframe={timeframe} />
     </div>
   );
 }
