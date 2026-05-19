@@ -52,8 +52,9 @@ export const ANALYSIS_THRESHOLDS = {
   SR_TOLERANCE_PCT: 0.003,
 } as const;
 
-const BINANCE_BASE = "https://api.binance.com/api/v3/klines";
-const BINANCE_FUTURES_BASE = "https://fapi.binance.com";
+const BINANCE_BASE = "https://api.binance.us/api/v3/klines"; // api.binance.com returns HTTP 451 on Render US IPs
+const BINANCE_FUTURES_BASE = "https://fapi.binance.com"; // kept for reference; replaced by OKX in fetchDerivativeData
+const OKX_FUTURES_BASE = "https://www.okx.com/api/v5";
 const FEAR_GREED_BASE = "https://api.alternative.me/fng/";
 const COINGECKO_COIN_BASE = "https://api.coingecko.com/api/v3/coins";
 const OKX_BASE = "https://www.okx.com/api/v5/market/history-candles";
@@ -1075,24 +1076,41 @@ function coingeckoId(symbol: string): string {
   return base;
 }
 
+// CoinGecko cache to avoid HTTP 429 rate limit (5-minute TTL)
+const _cgCache = new Map<string, { data: unknown; ts: number }>();
+const CG_CACHE_TTL_MS = 5 * 60 * 1000;
+async function fetchCoinGeckoCached(url: string): Promise<unknown> {
+  const hit = _cgCache.get(url);
+  if (hit && Date.now() - hit.ts < CG_CACHE_TTL_MS) return hit.data;
+  const data = await fetchJsonSafe(url);
+  if (data) _cgCache.set(url, { data, ts: Date.now() });
+  return data;
+}
+
 async function fetchDerivativeData(symbol: string): Promise<CryptoSnapshot["onchain"]> {
   const normalized = normalizeSymbol(symbol);
   const coinId = coingeckoId(normalized);
-  const fundingUrl = `${BINANCE_FUTURES_BASE}/fapi/v1/fundingRate?symbol=${normalized}&limit=1`;
-  const oiUrl = `${BINANCE_FUTURES_BASE}/fapi/v1/openInterest?symbol=${normalized}`;
-  const lsUrl = `${BINANCE_FUTURES_BASE}/futures/data/globalLongShortAccountRatio?symbol=${normalized}&period=5m&limit=1`;
+  // OKX Futures API (no geo restrictions on Render US IPs)
+  const base = normalized.replace(/USDT$/, "");
+  const okxInstId = `${base}-USDT-SWAP`;
+  const okxFundingUrl = `${OKX_FUTURES_BASE}/public/funding-rate?instId=${okxInstId}`;
+  const okxLsUrl = `${OKX_FUTURES_BASE}/rubik/stat/contracts/long-short-account-ratio?ccy=${base}&period=5m`;
   const cgUrl = `${COINGECKO_COIN_BASE}/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
 
-  const [fundingPayload, oiPayload, lsPayload, fearPayload, cgPayload] = await Promise.all([
-    fetchJsonSafe<Array<{ fundingRate?: string; fundingTime?: number }>>(fundingUrl),
-    fetchJsonSafe<{ openInterest?: string; time?: number }>(oiUrl),
-    fetchJsonSafe<Array<{ longAccount?: string; shortAccount?: string; longShortRatio?: string; timestamp?: string }>>(lsUrl),
+  const [okxFundingPayload, okxLsPayload, fearPayload, cgPayload] = await Promise.all([
+    fetchJsonSafe<{ code: string; data: Array<{ fundingRate?: string; fundingTime?: string }> }>(okxFundingUrl),
+    fetchJsonSafe<{ code: string; data: Array<[string, string, string]> }>(okxLsUrl),
     fetchJsonSafe<{ data?: Array<{ value?: string; value_classification?: string; timestamp?: string }> }>(FEAR_GREED_BASE),
-    fetchJsonSafe<{ market_data?: { market_cap?: Record<string, number>; total_volume?: Record<string, number>; price_change_percentage_24h?: number; price_change_percentage_7d?: number; ath?: Record<string, number>; ath_change_percentage?: Record<string, number> } }>(cgUrl),
+    fetchCoinGeckoCached(cgUrl) as Promise<{ market_data?: { market_cap?: Record<string, number>; total_volume?: Record<string, number>; price_change_percentage_24h?: number; price_change_percentage_7d?: number; ath?: Record<string, number>; ath_change_percentage?: Record<string, number> } } | null>,
   ]);
 
-  const funding = Array.isArray(fundingPayload) ? fundingPayload[fundingPayload.length - 1] : null;
-  const ls = Array.isArray(lsPayload) ? lsPayload[lsPayload.length - 1] : null;
+  // Parse OKX funding rate
+  const okxFundingRow = okxFundingPayload?.code === "0" ? okxFundingPayload.data?.[0] : null;
+  const funding = okxFundingRow ? { fundingRate: okxFundingRow.fundingRate ?? "0", fundingTime: Number(okxFundingRow.fundingTime ?? Date.now()) } : null;
+  // Parse OKX long/short ratio (data format: [timestamp, longRatio, shortRatio])
+  const okxLsRow = okxLsPayload?.code === "0" ? okxLsPayload.data?.[0] : null;
+  const ls = okxLsRow ? { longAccount: okxLsRow[1], shortAccount: okxLsRow[2], longShortRatio: String(Number(okxLsRow[1]) / Math.max(Number(okxLsRow[2]), 0.0001)) } : null;
+  const oiPayload: { openInterest?: string } | null = null; // OKX OI requires auth; skip
   const fear = fearPayload?.data?.[0] ?? null;
   const market = cgPayload?.market_data ?? null;
 
