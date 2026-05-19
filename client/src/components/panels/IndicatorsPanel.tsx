@@ -1,4 +1,5 @@
 import type { Candle, CryptoSnapshot, IndicatorData } from "@shared/cryptoTypes";
+import { MultiTimeframeStructurePanel } from "./MultiTimeframeStructureCard";
 
 interface Props {
   snap: CryptoSnapshot | null | undefined;
@@ -713,7 +714,9 @@ export function IndicatorsPanel({ snap, isAnalyzing }: Props) {
         ]}
       />
 
-      <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider">各時區詳細卡片</div>
+      {/* 多週期結構分析面板 */}
+      <MultiTimeframeStructurePanel snap={snap} />
+      <div className="text-[11px] text-[#6b7a99] font-semibold uppercase tracking-wider">各時區指標詳細卡片</div>
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-3">
         <TfColumn tf="4H" ind={snap.mtf_indicators?.["4h"] ?? ind} />
         <TfColumn tf="1H" ind={snap.mtf_indicators?.["1h"] ?? ind} />
