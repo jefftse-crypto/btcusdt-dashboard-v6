@@ -2215,10 +2215,20 @@ Respond with ONLY the numbered sentiment labels, nothing else.`;
           `VWAP: ${(ind.vwap as number)?.toFixed(1) ?? "—"}`,
         ].join("\n");
 
-        // MTF 多時間框架摘要
-        const mtfSummary = Object.entries(mtf).map(([tf, d]: [string, any]) =>
-          `[${tf.toUpperCase()}] RSI=${d.rsi?.toFixed(1) ?? "—"} MACD_hist=${d.macd_hist?.toFixed(3) ?? "—"} EMA20=${d.ema20?.toFixed(1) ?? "—"} 趨勢=${d.trend ?? "—"}`
-        ).join("\n");
+        // MTF 多時間框架完整摘要（含 CVD、Swing、Supertrend、Ichimoku）
+        const mtfSummary = Object.entries(mtf).map(([tf, d]: [string, any]) => {
+          const cvdTrend = d.cvd?.trend === "rising" ? "買盤推升" : d.cvd?.trend === "falling" ? "賣盤主導" : "中性";
+          const cvdChange = d.cvd?.change != null ? (d.cvd.change > 0 ? `+${d.cvd.change.toFixed(0)}` : d.cvd.change.toFixed(0)) : "—";
+          const stTrend = d.supertrend?.signal === "bullish" ? "多頭" : d.supertrend?.signal === "bearish" ? "空頭" : "—";
+          const ichiCloud = d.ichimoku?.price_vs_cloud === "above" ? "雲上（多）" : d.ichimoku?.price_vs_cloud === "below" ? "雲下（空）" : "雲中（震盪）";
+          return [
+            `[${tf.toUpperCase()}] 趨勢=${d.trend ?? "—"} 動能=${d.momentum ?? "—"}`,
+            `  RSI=${d.rsi?.toFixed(1) ?? "—"} MACD_hist=${d.macd?.histogram?.toFixed(3) ?? d.macd_hist?.toFixed(3) ?? "—"} ADX=${d.adx?.adx?.toFixed(1) ?? "—"}`,
+            `  EMA20=${d.ema?.ema20?.toFixed(1) ?? d.ema20?.toFixed(1) ?? "—"} EMA50=${d.ema?.ema50?.toFixed(1) ?? d.ema50?.toFixed(1) ?? "—"} VWAP=${d.vwap?.toFixed(1) ?? "—"}`,
+            `  CVD=${cvdTrend}(${cvdChange}) Supertrend=${stTrend} 一目雲=${ichiCloud}`,
+            `  布林帶=%B ${d.bollinger?.percent_b?.toFixed(2) ?? "—"} BW=${d.bollinger?.bandwidth?.toFixed(1) ?? "—"}%`,
+          ].join("\n");
+        }).join("\n");
 
         // SMC 結構摘要
         const smcSummary = [
@@ -2248,6 +2258,36 @@ Respond with ONLY the numbered sentiment labels, nothing else.`;
           `止盈1: ${str.take_profit_1?.toFixed(1) ?? "—"} / 止盈2: ${str.take_profit_2?.toFixed(1) ?? "—"}`,
           `信心: ${str.confidence ?? "—"}%`,
         ].join("\n");
+
+        // Onchain / 衍生品資料
+        const onchain = snapshot.onchain ?? {};
+        const fr = onchain.funding_rate;
+        const ls = onchain.long_short_ratio;
+        const fg = onchain.fear_greed;
+        const oi = onchain.open_interest;
+        const onchainSummary = [
+          `Funding Rate: ${fr?.rate != null ? `${(fr.rate * 100).toFixed(4)}%` : "—"} (${fr?.rate != null ? (fr.rate > 0 ? "多頭付費，市場偏多" : fr.rate < 0 ? "空頭付費，市場偏空" : "中性") : "—"})`,
+          `多空比 (L/S Ratio): ${ls?.ls_ratio?.toFixed(3) ?? "—"} | 多方: ${ls?.long_ratio != null ? (Number(ls.long_ratio) * 100).toFixed(1) + "%" : "—"} / 空方: ${ls?.short_ratio != null ? (Number(ls.short_ratio) * 100).toFixed(1) + "%" : "—"}`,
+          `恐懼貪婪指數: ${fg?.value ?? "—"} (${fg?.label ?? "—"})`,
+          `未平倉量 (OI): ${oi?.open_interest != null ? oi.open_interest.toLocaleString() : "—"}`,
+        ].join("\n");
+
+        // SMC 進階結構（等高等低位、流動性掃盪）
+        const adv = snapshot.advanced ?? {};
+        const advSummary = [
+          `等高位 (EQH): ${adv.equal_highs?.length > 0 ? adv.equal_highs.slice(-2).map((h: any) => h.price?.toFixed(1)).join(", ") : "無"}`,
+          `等低位 (EQL): ${adv.equal_lows?.length > 0 ? adv.equal_lows.slice(-2).map((l: any) => l.price?.toFixed(1)).join(", ") : "無"}`,
+          `最近流動性掃盪: ${adv.liquidity_sweeps?.length > 0 ? `${adv.liquidity_sweeps.slice(-1)[0]?.type ?? "—"} @ ${adv.liquidity_sweeps.slice(-1)[0]?.price?.toFixed(1) ?? "—"}` : "無"}`,
+          `Pivot 高點: ${adv.pivot_high?.toFixed(1) ?? "—"} / Pivot 低點: ${adv.pivot_low?.toFixed(1) ?? "—"}`,
+        ].join("\n");
+
+        // 各時區 Swing High/Low 摘要
+        const swingSummary = Object.entries(mtf).map(([tf, d]: [string, any]) => {
+          const sh = d.swing_high?.toFixed(1) ?? "—";
+          const sl2 = d.swing_low?.toFixed(1) ?? "—";
+          const structure = d.market_structure ?? d.trend ?? "—";
+          return `[${tf.toUpperCase()}] Swing High=${sh} / Swing Low=${sl2} | 結構=${structure}`;
+        }).join("\n");
 
         const systemPrompt = `你是 Champion Trader（Shi Hun）的交易分析助理，嚴格按照以下方法論框架進行分析：
 
@@ -2296,16 +2336,25 @@ Respond with ONLY the numbered sentiment labels, nothing else.`;
 
         const userPrompt = `請分析 ${symbol} 在 ${timeframe} 時間框架的當前市況：
 
-## 技術指標
+## 技術指標（1H 主要時區）
 ${indSummary}
 
-## 多時間框架
+## 多週期結構分析（4H / 1H / 15M / 5M）
 ${mtfSummary}
 
-## SMC 市場結構
+## 各時區 Swing High/Low 與市場結構
+${swingSummary}
+
+## SMC 市場結構（BOS/CHoCH/FVG/OB/流動性）
 ${smcSummary}
 
-## 價格行為
+## SMC 進階：等高等低位 / 流動性掃盪
+${advSummary}
+
+## 衍生品 / 市場情緒
+${onchainSummary}
+
+## 價格行為（PA）
 ${paSummary}
 
 ## 共識評分
@@ -2314,7 +2363,7 @@ ${conSummary}
 ## 現有策略建議
 ${strSummary}
 
-請嚴格按照 Champion Trader 方法論框架，輸出 JSON 格式分析結果。`;
+請嚴格按照 Champion Trader 方法論框架，結合多週期結構、CVD、流動性位、Funding Rate 等全面資料，輸出 JSON 格式分析結果。`;
 
         const cacheKey = `champion:${symbol}:${timeframe}:${Math.floor(Date.now() / 300000)}`;
         const cachedResult = serverCache.get<{ symbol: string; timeframe: string; timestamp: number; analysis: unknown; raw: string }>(cacheKey);

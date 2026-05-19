@@ -1107,9 +1107,25 @@ async function fetchDerivativeData(symbol: string): Promise<CryptoSnapshot["onch
   // Parse OKX funding rate
   const okxFundingRow = okxFundingPayload?.code === "0" ? okxFundingPayload.data?.[0] : null;
   const funding = okxFundingRow ? { fundingRate: okxFundingRow.fundingRate ?? "0", fundingTime: Number(okxFundingRow.fundingTime ?? Date.now()) } : null;
-  // Parse OKX long/short ratio (data format: [timestamp, longRatio, shortRatio])
+  // Parse OKX long/short ratio
+  // New format (2024+): [timestamp, longShortRatio] — only 2 elements, ratio is pre-computed
+  // Old format: [timestamp, longRatio, shortRatio] — 3 elements
   const okxLsRow = okxLsPayload?.code === "0" ? okxLsPayload.data?.[0] : null;
-  const ls = okxLsRow ? { longAccount: okxLsRow[1], shortAccount: okxLsRow[2], longShortRatio: String(Number(okxLsRow[1]) / Math.max(Number(okxLsRow[2]), 0.0001)) } : null;
+  let ls: { longAccount: string; shortAccount: string; longShortRatio: string } | null = null;
+  if (okxLsRow) {
+    if (okxLsRow.length >= 3) {
+      // Old 3-element format
+      ls = { longAccount: String(okxLsRow[1]), shortAccount: String(okxLsRow[2]), longShortRatio: String(Number(okxLsRow[1]) / Math.max(Number(okxLsRow[2]), 0.0001)) };
+    } else if (okxLsRow.length === 2) {
+      // New 2-element format: [ts, longShortRatio] — derive approximate long/short percentages
+      const ratio = Number(okxLsRow[1]);
+      if (Number.isFinite(ratio) && ratio > 0) {
+        const longPct = ratio / (1 + ratio);
+        const shortPct = 1 / (1 + ratio);
+        ls = { longAccount: longPct.toFixed(4), shortAccount: shortPct.toFixed(4), longShortRatio: String(ratio) };
+      }
+    }
+  }
   const oiPayload: { openInterest?: string } | null = null; // OKX OI requires auth; skip
   const fear = fearPayload?.data?.[0] ?? null;
   const market = cgPayload?.market_data ?? null;
