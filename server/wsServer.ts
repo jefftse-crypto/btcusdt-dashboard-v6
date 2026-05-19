@@ -175,14 +175,26 @@ function broadcastTicker(msg: WsTickerMsg) {
   });
 }
 
+// ─── 通用重試工具（解決 Render 環境偶發 DNS/連線超時）─────────────────────────
+async function withRetry<T>(fn: () => Promise<T>, maxRetries = 3, baseDelayMs = 400): Promise<T> {
+  let lastErr: unknown;
+  for (let i = 0; i < maxRetries; i++) {
+    try { return await fn(); } catch (err) {
+      lastErr = err;
+      if (i < maxRetries - 1) await new Promise(r => setTimeout(r, baseDelayMs * (i + 1)));
+    }
+  }
+  throw lastErr;
+}
+
 // Binance.US REST API (primary) — api.binance.com returns HTTP 451 on Render US IPs
 const BINANCE_US_TICKER_BASE = "https://api.binance.us/api/v3/ticker/24hr";
 async function fetchBinanceTicker(symbol: string): Promise<WsTickerMsg> {
   const url = `${BINANCE_US_TICKER_BASE}?symbol=${symbol.toUpperCase()}`;
-  const response = await fetch(url, {
+  const response = await withRetry(() => fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
     signal: AbortSignal.timeout(12_000),
-  });
+  }));
   if (!response.ok) {
     throw new Error(`Binance.US HTTP ${response.status} ${response.statusText}`);
   }
@@ -212,10 +224,10 @@ const KRAKEN_PAIR_MAP: Record<string, string> = {
 async function fetchKrakenTicker(symbol: string): Promise<WsTickerMsg> {
   const pair = KRAKEN_PAIR_MAP[symbol.toUpperCase()] ?? "XBTUSD";
   const url = `${KRAKEN_TICKER_BASE}?pair=${pair}`;
-  const response = await fetch(url, {
+  const response = await withRetry(() => fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
     signal: AbortSignal.timeout(12_000),
-  });
+  }));
   if (!response.ok) throw new Error(`Kraken HTTP ${response.status}`);
   const data = (await response.json()) as { error: string[]; result: Record<string, { c: string[]; h: string[]; l: string[]; v: string[] }> };
   if (data.error?.length) throw new Error(`Kraken error: ${data.error.join(", ")}`);
@@ -246,10 +258,10 @@ const OKX_INST_MAP: Record<string, string> = {
 async function fetchOKXTicker(symbol: string): Promise<WsTickerMsg> {
   const instId = OKX_INST_MAP[symbol.toUpperCase()] ?? "BTC-USDT";
   const url = `${OKX_TICKER_BASE}?instId=${instId}`;
-  const response = await fetch(url, {
+  const response = await withRetry(() => fetch(url, {
     headers: { "User-Agent": "Mozilla/5.0 CryptoDashboard/7.0" },
     signal: AbortSignal.timeout(12_000),
-  });
+  }));
   if (!response.ok) throw new Error(`OKX HTTP ${response.status}`);
   const data = (await response.json()) as { code: string; data: Array<{ last: string; open24h: string; high24h: string; low24h: string; volCcy24h: string }> };
   if (data.code !== "0" || !data.data?.[0]) throw new Error(`OKX 無資料：${symbol}`);

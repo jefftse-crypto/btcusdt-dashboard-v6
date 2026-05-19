@@ -27,6 +27,7 @@ const PaPanel = lazy(() => import("@/components/panels/PaPanel").then(m => ({ de
 const ChanPanel = lazy(() => import("@/components/panels/ChanPanel").then(m => ({ default: m.ChanPanel })));
 const NewsPanel = lazy(() => import("@/components/panels/NewsPanel").then(m => ({ default: m.NewsPanel })));
 const AIPredictionPanel = lazy(() => import("@/components/panels/AIPredictionPanel").then(m => ({ default: m.AIPredictionPanel })));
+const ChampionAnalysisPanel = lazy(() => import("@/components/panels/ChampionAnalysisPanel").then(m => ({ default: m.ChampionAnalysisPanel })));
 
 // 常用幣種（頂部快速切換）
 const QUICK_SYMBOLS = [
@@ -312,8 +313,15 @@ export default function Dashboard() {
                     </div>
                   )}
                   {mobileActiveTab === "ai" && (
-                    <div className="h-full w-full overflow-y-auto p-4 custom-scrollbar" style={{ background: "#1c2030" }}>
+                    <div className="h-full w-full overflow-y-auto p-4 custom-scrollbar space-y-4" style={{ background: "#1c2030" }}>
                       <AIPredictionPanel symbol={symbol} timeframe={timeframe as "1h" | "4h" | "15m" | "5m"} currentPrice={livePrice ?? null} />
+                      <div className="border-t pt-4" style={{ borderColor: "#252b3a" }}>
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-xs font-bold text-[#5b8af5] uppercase tracking-wider">AI 多週期技術指標分析策略</span>
+                          <span className="text-[9px] text-[#8896b0] bg-[#252b3a] px-1.5 py-0.5 rounded">Champion Trader 四層框架</span>
+                        </div>
+                        <ChampionAnalysisPanel snapshot={snapshot} currentPrice={livePrice ?? null} isLoading={isAnalyzing} symbol={symbol} />
+                      </div>
                     </div>
                   )}
                 </Suspense>
@@ -413,7 +421,16 @@ export default function Dashboard() {
                         <NewsPanel symbol={symbol} />
                       )}
                       {rightPanelTab === "ai" && (
-                        <AIPredictionPanel symbol={symbol} timeframe={timeframe as "1h" | "4h" | "15m" | "5m"} currentPrice={livePrice ?? null} />
+                        <div className="space-y-4">
+                          <AIPredictionPanel symbol={symbol} timeframe={timeframe as "1h" | "4h" | "15m" | "5m"} currentPrice={livePrice ?? null} />
+                          <div className="border-t pt-4" style={{ borderColor: "#252b3a" }}>
+                            <div className="flex items-center gap-2 mb-3">
+                              <span className="text-xs font-bold text-[#5b8af5] uppercase tracking-wider">AI 多週期技術指標分析策略</span>
+                              <span className="text-[9px] text-[#8896b0] bg-[#252b3a] px-1.5 py-0.5 rounded">Champion Trader 四層框架</span>
+                            </div>
+                            <ChampionAnalysisPanel snapshot={snapshot} currentPrice={livePrice ?? null} isLoading={isAnalyzing} symbol={symbol} />
+                          </div>
+                        </div>
                       )}
                     </Suspense>
                   </div>
